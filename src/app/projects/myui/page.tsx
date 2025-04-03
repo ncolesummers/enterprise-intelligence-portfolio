@@ -1,10 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { PlayIcon } from "@/components/icons/play-icon";
 import ContentCard from "@/components/ui/content-card";
+import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
+import CodeBlock from "@/components/ui/code-block";
+import Section from "@/components/ui/section";
 
 export default function MyUIPage() {
   return (
@@ -45,11 +48,7 @@ export default function MyUIPage() {
         </div>
 
         {/* Introduction */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Introduction</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
-          </div>
+        <Section title="Introduction">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4 text-lg text-gray-300">
@@ -67,38 +66,25 @@ export default function MyUIPage() {
             </div>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>
                   Modernized dashboard replacing legacy VandalWeb system
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Built on the Ellucian Experience platform
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>Built on the Ellucian Experience platform</ListItem>
+                <ListItem>
                   Customizable interface with card-based architecture
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Mobile-friendly responsive design
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>Mobile-friendly responsive design</ListItem>
+                <ListItem>
                   Single sign-on integration with university credentials
-                </li>
-              </ul>
+                </ListItem>
+              </BulletedList>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Project Overview */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Project Overview</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
-          </div>
+        <Section title="Project Overview">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4 text-lg text-gray-300">
@@ -156,14 +142,10 @@ export default function MyUIPage() {
               </div>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Key Features */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Key Features</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
-          </div>
+        <Section title="Key Features">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Centralized Access</h3>
@@ -202,7 +184,7 @@ export default function MyUIPage() {
               </p>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* My Role */}
         <section className="mb-16">
@@ -216,32 +198,27 @@ export default function MyUIPage() {
               my advanced skillset with React and deep understanding of user
               experience design principles. My responsibilities included:
             </p>
-            <ul className="mb-4 space-y-2 text-gray-300">
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+            <BulletedList className="mb-4">
+              <ListItem>
                 Designing and implementing custom React components for the
                 dashboard
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 Creating specialized cards for different university services
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 Ensuring seamless integration with the Ellucian Experience
                 platform
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 Collaborating with university departments to understand their
                 specific needs
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 Implementing responsive design principles for cross-device
                 compatibility
-              </li>
-            </ul>
+              </ListItem>
+            </BulletedList>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
@@ -253,24 +230,20 @@ export default function MyUIPage() {
                 One of my key contributions was the development of the Library
                 Card, which allows students to:
               </p>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>
                   Reserve study rooms directly from the dashboard
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Book time on 3D printers and other specialized equipment
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Check availability of library resources in real-time
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Access digital collections and research databases
-                </li>
-              </ul>
+                </ListItem>
+              </BulletedList>
             </ContentCard>
 
             <ContentCard>
@@ -281,25 +254,21 @@ export default function MyUIPage() {
                 Another significant component I developed was the Accounts and
                 Billings card, which leverages Ethos Business Process APIs to:
               </p>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>
                   Display real-time account balances and financial information
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Show detailed transaction history with filtering capabilities
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Integrate with payment providers through the Ethos serverless
                   API pipeline
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Provide notifications for upcoming payment deadlines
-                </li>
-              </ul>
+                </ListItem>
+              </BulletedList>
             </ContentCard>
           </div>
 
@@ -374,33 +343,28 @@ export default function MyUIPage() {
               The MyUI dashboard is built using a modular React component
               architecture, allowing for:
             </p>
-            <ul className="space-y-2 text-gray-300">
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+            <BulletedList>
+              <ListItem>
                 <strong>Reusable Components:</strong>{" "}
                 Core UI elements that maintain consistency across the platform
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 <strong>Service-Specific Cards:</strong>{" "}
                 Custom components for different university departments
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 <strong>API Integration:</strong>{" "}
                 Seamless connection to university data systems
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 <strong>State Management:</strong>{" "}
                 Efficient handling of user preferences and data
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 <strong>Responsive Design:</strong>{" "}
                 Adaptive layouts for all device sizes
-              </li>
-            </ul>
+              </ListItem>
+            </BulletedList>
           </ContentCard>
           <div className="mt-8 grid gap-8 md:grid-cols-2">
             <ContentCard>
@@ -411,22 +375,19 @@ export default function MyUIPage() {
                 Working with the Ellucian Experience platform presented several
                 integration challenges:
               </p>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>
                   Adapting to platform-specific APIs and authentication flows
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Ensuring consistent performance across different university
                   systems
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Managing data synchronization between legacy systems and the
                   new dashboard
-                </li>
-              </ul>
+                </ListItem>
+              </BulletedList>
             </ContentCard>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
@@ -436,24 +397,20 @@ export default function MyUIPage() {
                 To ensure a smooth user experience, several performance
                 optimizations were implemented:
               </p>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>
                   Lazy loading of card components to reduce initial load time
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Caching strategies for frequently accessed data
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Optimized rendering with React.memo and useCallback
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Efficient state management to minimize re-renders
-                </li>
-              </ul>
+                </ListItem>
+              </BulletedList>
             </ContentCard>
           </div>
         </section>

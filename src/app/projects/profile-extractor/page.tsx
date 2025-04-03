@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import { ProgressCircleIcon } from "@/components/icons/progress-circle-icon";
 import Link from "next/link";
 import ContentCard from "@/components/ui/content-card";
+import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
+import CodeBlock from "@/components/ui/code-block";
+import Section from "@/components/ui/section";
 
 export default function ProfileExtractorPage() {
   return (
@@ -33,11 +36,7 @@ export default function ProfileExtractorPage() {
         </div>
 
         {/* Introduction */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Introduction</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
-          </div>
+        <Section title="Introduction">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4 text-lg text-gray-300">
@@ -55,31 +54,22 @@ export default function ProfileExtractorPage() {
             </div>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>
                   92.79% success rate in extracting profile data
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Cost-effective solution at $0.0012 per profile
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Processed 901 URLs in under 2 hours
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>Processed 901 URLs in under 2 hours</ListItem>
+                <ListItem>
                   Used LangGraph state machine for orchestration
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Implemented ethical web crawling practices
-                </li>
-              </ul>
+                </ListItem>
+                <ListItem>Implemented ethical web crawling practices</ListItem>
+              </BulletedList>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Project Overview */}
         <section className="mb-16">
@@ -202,34 +192,29 @@ export default function ProfileExtractorPage() {
                 The core of the extraction process was implemented as a
                 LangGraph state machine with the following key nodes:
               </p>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>
                   <strong>fetch_page:</strong>{" "}
                   Retrieves HTML content respectfully (using configured delays)
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   <strong>preprocess_html:</strong>{" "}
                   Parses and cleans HTML using BeautifulSoup
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   <strong>extract_data:</strong>{" "}
                   Uses Gemini Flash to extract information into a Pydantic
                   schema
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   <strong>validate_data:</strong>{" "}
                   Employs an LLM-as-a-judge pattern to evaluate accuracy
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   <strong>handle_error:</strong>{" "}
                   Captures and logs errors at each step
-                </li>
-              </ul>
+                </ListItem>
+              </BulletedList>
             </ContentCard>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
@@ -239,28 +224,23 @@ export default function ProfileExtractorPage() {
                 The project implemented responsible web crawling practices to
                 ensure minimal impact on the university's web servers:
               </p>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>
                   Configured delays between requests to prevent server overload
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Respected robots.txt directives and crawl-delay settings
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Used proper user-agent identification
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Implemented error handling to back off on server errors
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Limited concurrent requests to maintain server health
-                </li>
-              </ul>
+                </ListItem>
+              </BulletedList>
             </ContentCard>
           </div>
         </section>
@@ -278,12 +258,8 @@ export default function ProfileExtractorPage() {
                 Pydantic models were used to define the structure of the
                 extracted data and validation results:
               </p>
-              <div className="rounded-lg bg-gray-900 p-4">
-                <h4 className="mb-2 text-sm font-medium text-gray-400">
-                  ProfileData Schema
-                </h4>
-                <pre className="overflow-x-auto text-sm text-gray-300">
-                  <code>{`class ProfileData(BaseModel):
+              <CodeBlock title="ProfileData Schema">
+                {`class ProfileData(BaseModel):
     name: str
     title: str
     email: Optional[str] = None
@@ -295,15 +271,11 @@ export default function ProfileExtractorPage() {
     research_interests: Optional[List[str]] = None
     courses_taught: Optional[List[str]] = None
     publications: Optional[List[str]] = None
-    website: Optional[str] = None`}</code>
-                </pre>
-              </div>
-              <div className="mt-4 rounded-lg bg-gray-900 p-4">
-                <h4 className="mb-2 text-sm font-medium text-gray-400">
-                  ValidationResult Schema
-                </h4>
-                <pre className="overflow-x-auto text-sm text-gray-300">
-                  <code>{`class FieldValidation(BaseModel):
+    website: Optional[str] = None`}
+              </CodeBlock>
+              <div className="mt-4">
+                <CodeBlock title="ValidationResult Schema">
+                  {`class FieldValidation(BaseModel):
     field: str
     status: Literal["Correct", "Incorrect", "Missing"]
     explanation: Optional[str] = None
@@ -311,8 +283,8 @@ export default function ProfileExtractorPage() {
 class ValidationResult(BaseModel):
     overall_accuracy: float
     field_validations: List[FieldValidation]
-    suggestions: Optional[List[str]] = None`}</code>
-                </pre>
+    suggestions: Optional[List[str]] = None`}
+                </CodeBlock>
               </div>
             </ContentCard>
             <ContentCard>
@@ -321,12 +293,8 @@ class ValidationResult(BaseModel):
                 The project leveraged Google's Gemini Flash model for both
                 extraction and validation:
               </p>
-              <div className="rounded-lg bg-gray-900 p-4">
-                <h4 className="mb-2 text-sm font-medium text-gray-400">
-                  Model Configuration
-                </h4>
-                <pre className="overflow-x-auto text-sm text-gray-300">
-                  <code>{`# Initialize the Gemini model
+              <CodeBlock title="Model Configuration">
+                {`# Initialize the Gemini model
 extraction_model = ChatGoogleGenerativeAI(
     model="gemini-flash",
     temperature=0.1,
@@ -350,9 +318,8 @@ validation_model = ChatGoogleGenerativeAI(
         HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
         HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
     }
-)`}</code>
-                </pre>
-              </div>
+)`}
+              </CodeBlock>
               <p className="mt-4 text-gray-300">
                 The extraction process used structured prompts to guide the
                 model in extracting specific fields from the HTML content, while
@@ -374,60 +341,50 @@ validation_model = ChatGoogleGenerativeAI(
                 <h4 className="mb-2 text-lg font-semibold">
                   LangSmith Features Used
                 </h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                <BulletedList>
+                  <ListItem>
                     Detailed tracing of each step in the LangGraph state machine
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     Token usage tracking for cost estimation
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     Latency measurement for performance analysis
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     Error logging and categorization
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     Prompt inspection and refinement
-                  </li>
-                </ul>
+                  </ListItem>
+                </BulletedList>
               </div>
               <div>
                 <h4 className="mb-2 text-lg font-semibold">
                   Metrics Collected
                 </h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                <BulletedList>
+                  <ListItem>
                     <strong>Accuracy:</strong>{" "}
                     Field-level correctness reported by the validation node
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     <strong>Token Usage:</strong>{" "}
                     Input, output, and total tokens per LLM call
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     <strong>Estimated Cost:</strong>{" "}
                     Calculated based on token usage and model pricing
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     <strong>Latency:</strong>{" "}
                     Processing time per profile and per node
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     <strong>Success Rate:</strong>{" "}
                     Percentage of URLs processed without errors
-                  </li>
-                </ul>
+                  </ListItem>
+                </BulletedList>
               </div>
             </div>
           </ContentCard>
@@ -509,60 +466,50 @@ validation_model = ChatGoogleGenerativeAI(
                 <h4 className="mb-2 text-lg font-semibold">
                   LangSmith Features Used
                 </h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                <BulletedList>
+                  <ListItem>
                     Detailed tracing of each step in the LangGraph state machine
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     Token usage tracking for cost estimation
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     Latency measurement for performance analysis
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     Error logging and categorization
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     Prompt inspection and refinement
-                  </li>
-                </ul>
+                  </ListItem>
+                </BulletedList>
               </div>
               <div>
                 <h4 className="mb-2 text-lg font-semibold">
                   Metrics Collected
                 </h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                <BulletedList>
+                  <ListItem>
                     <strong>Accuracy:</strong>{" "}
                     Field-level correctness reported by the validation node
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     <strong>Token Usage:</strong>{" "}
                     Input, output, and total tokens per LLM call
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     <strong>Estimated Cost:</strong>{" "}
                     Calculated based on token usage and model pricing
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     <strong>Latency:</strong>{" "}
                     Processing time per profile and per node
-                  </li>
-                  <li className="flex items-start">
-                    <span className="mr-2 text-primary">•</span>
+                  </ListItem>
+                  <ListItem>
                     <strong>Success Rate:</strong>{" "}
                     Percentage of URLs processed without errors
-                  </li>
-                </ul>
+                  </ListItem>
+                </BulletedList>
               </div>
             </div>
           </ContentCard>

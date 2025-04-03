@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import ContentCard from "@/components/ui/content-card";
+import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
+import Section from "@/components/ui/section";
 
 export default function AboutPage() {
   return (
@@ -114,11 +116,7 @@ export default function AboutPage() {
         </div>
 
         {/* Professional Experience */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Professional Journey</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
-          </div>
+        <Section title="Professional Journey">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4 text-lg text-gray-300">
@@ -192,37 +190,21 @@ export default function AboutPage() {
               </div>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Philosophy & Approach */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Philosophy & Approach</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
-          </div>
+        <Section title="Philosophy & Approach">
           <div className="grid gap-8 md:grid-cols-2">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Professional Certifications
               </h3>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Security+ Certification
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Advanced Certified Scrum Master
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Certified Scrum Developer
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Certified Scrum Product Owner
-                </li>
-              </ul>
+              <BulletedList>
+                <ListItem>Security+ Certification</ListItem>
+                <ListItem>Advanced Certified Scrum Master</ListItem>
+                <ListItem>Certified Scrum Developer</ListItem>
+                <ListItem>Certified Scrum Product Owner</ListItem>
+              </BulletedList>
             </ContentCard>
             <div>
               <p className="mb-4 text-lg text-gray-300">
@@ -243,14 +225,10 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Personal Interests */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Beyond the Code</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
-          </div>
+        <Section title="Beyond the Code">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <ContentCard>
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
@@ -294,11 +272,10 @@ export default function AboutPage() {
               </p>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Call to Action */}
-        <section className="text-center">
-          <h2 className="mb-6 text-3xl font-bold">Let's Connect</h2>
+        <Section title="Let's Connect" className="text-center">
           <p className="mb-8 text-lg text-gray-400 max-w-2xl mx-auto">
             Whether you're interested in discussing enterprise applications,
             microservice architecture, or just want to chat about the latest
@@ -319,7 +296,7 @@ export default function AboutPage() {
               </Button>
             </Link>
           </div>
-        </section>
+        </Section>
       </main>
 
       <footer className="border-t border-white/10 py-6 mt-16">

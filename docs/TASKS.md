@@ -16,14 +16,14 @@ This document outlines the tasks required to implement the reusable components i
 - [X] Create `src/components/ui/content-card.tsx` component.
 - [X] Refactor `about/page.tsx` to use `ContentCard`.
 - [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `ContentCard`.
-- [ ] Create `src/components/ui/bulleted-list.tsx` component (including `ListItem`).
-- [ ] Refactor `about/page.tsx` to use `BulletedList`.
-- [ ] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `BulletedList`.
-- [ ] Create `src/components/ui/code-block.tsx` component.
-- [ ] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `CodeBlock`.
-- [ ] Create `src/components/ui/section.tsx` component.
-- [ ] Refactor `about/page.tsx` to use `Section`.
-- [ ] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `Section`.
+- [X] Create `src/components/ui/bulleted-list.tsx` component (including `ListItem`).
+- [X] Refactor `about/page.tsx` to use `BulletedList`.
+- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `BulletedList`.
+- [X] Create `src/components/ui/code-block.tsx` component.
+- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `CodeBlock`.
+- [X] Create `src/components/ui/section.tsx` component.
+- [X] Refactor `about/page.tsx` to use `Section`.
+- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `Section`.
 
 ## Layout Components
 

@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { UploadIcon } from "@/components/icons/upload-icon";
 import ContentCard from "@/components/ui/content-card";
+import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
+import CodeBlock from "@/components/ui/code-block";
+import Section from "@/components/ui/section";
 
 export default function MikrotikConfigGenPage() {
   return (
@@ -43,11 +46,7 @@ export default function MikrotikConfigGenPage() {
         </div>
 
         {/* Introduction */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Introduction</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
-          </div>
+        <Section title="Introduction">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4 text-lg text-gray-300">
@@ -66,31 +65,20 @@ export default function MikrotikConfigGenPage() {
             </div>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Cross-platform desktop application
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Built with Go and Wails framework
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList>
+                <ListItem>Cross-platform desktop application</ListItem>
+                <ListItem>Built with Go and Wails framework</ListItem>
+                <ListItem>
                   Evolved through multiple iterations and technologies
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Simplified workflow for ISP technicians
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>Simplified workflow for ISP technicians</ListItem>
+                <ListItem>
                   Self-contained executable with embedded filesystem
-                </li>
-              </ul>
+                </ListItem>
+              </BulletedList>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Project Overview */}
         <section className="mb-16">
@@ -191,34 +179,29 @@ export default function MikrotikConfigGenPage() {
             <p className="mb-4 text-gray-300">
               Several frameworks were considered during development:
             </p>
-            <ul className="space-y-2 text-gray-300">
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+            <BulletedList>
+              <ListItem>
                 <strong>Flutter Desktop</strong>{" "}
                 - Too new and still in alpha at the time
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 <strong>Electron</strong>{" "}
                 - Memory footprint was too high for the target laptops
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 <strong>Winforms</strong>{" "}
                 - Well-documented and supported native solution
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 <strong>Fyne</strong>{" "}
                 - The GUI library written in Go with the most stars on Github
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 <strong>C# with .NET 5.0</strong>{" "}
                 - Single File Executables for Windows were pushed back to .NET
                 6.0
-              </li>
-            </ul>
+              </ListItem>
+            </BulletedList>
           </ContentCard>
         </section>
 
@@ -237,22 +220,16 @@ export default function MikrotikConfigGenPage() {
                 The initial version was a Python console application with a
                 text-based interface. While functional, it had limitations:
               </p>
-              <ul className="mb-4 space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList className="mb-4">
+                <ListItem>
                   Lots of duplicated code, particularly in string templates
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   TUI was difficult for entry-level technicians to learn
-                </li>
-              </ul>
-              <div className="rounded-lg bg-gray-900 p-4">
-                <h4 className="mb-2 text-sm font-medium text-gray-400">
-                  Example Python Function
-                </h4>
-                <pre className="overflow-x-auto text-sm text-gray-300">
-                  <code>{`def input_validation(x):
+                </ListItem>
+              </BulletedList>
+              <CodeBlock title="Example Python Function">
+                {`def input_validation(x):
     '''This function substitutes characters that will break
     Mikrotik Scripting Syntax with their
     corresponding hex code.'''
@@ -275,9 +252,8 @@ export default function MikrotikConfigGenPage() {
             if c == key:
                 x = x.replace(c, syntax_breakers.get(c))
                 syntax_breakers_list.remove(c)
-    return x`}</code>
-                </pre>
-              </div>
+    return x`}
+              </CodeBlock>
             </ContentCard>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
@@ -287,29 +263,22 @@ export default function MikrotikConfigGenPage() {
                 The final solution was built with Go and Wails, which offered
                 several advantages:
               </p>
-              <ul className="mb-4 space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+              <BulletedList className="mb-4">
+                <ListItem>
                   Go's Embed feature made it trivial to include an entire
                   filesystem in the binary
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   The templating engine in Go's standard library allowed reuse
                   of templates with minor changes
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
+                </ListItem>
+                <ListItem>
                   Wails provided a modern UI framework that met all project
                   requirements
-                </li>
-              </ul>
-              <div className="rounded-lg bg-gray-900 p-4">
-                <h4 className="mb-2 text-sm font-medium text-gray-400">
-                  Example Go Code
-                </h4>
-                <pre className="overflow-x-auto text-sm text-gray-300">
-                  <code>{`app := wails.CreateApp(&wails.AppConfig{
+                </ListItem>
+              </BulletedList>
+              <CodeBlock title="Example Go Code">
+                {`app := wails.CreateApp(&wails.AppConfig{
     Width:     576,
     Height:    576,
     Title:     "Mikrotik Configuration Generator v" + version,
@@ -323,9 +292,8 @@ app.Bind(builder.BuildFiber)
 app.Bind(builder.BuildeFiber)
 app.Bind(builder.BuildRadio)
 app.Bind(builder.BuildRouter)
-app.Run()`}</code>
-                </pre>
-              </div>
+app.Run()`}
+              </CodeBlock>
             </ContentCard>
           </div>
         </section>
@@ -363,31 +331,26 @@ app.Run()`}</code>
             <h3 className="mb-4 text-xl font-semibold">
               Technical Achievements
             </h3>
-            <ul className="space-y-2 text-gray-300">
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+            <BulletedList>
+              <ListItem>
                 Created a cross-platform desktop application that works offline
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 Developed a self-contained executable with an embedded
                 filesystem
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 Built a modern UI that's easy for entry-level technicians to use
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 Implemented a templating system for generating configuration
                 scripts
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
+              </ListItem>
+              <ListItem>
                 Successfully navigated through multiple technologies to find the
                 optimal solution
-              </li>
-            </ul>
+              </ListItem>
+            </BulletedList>
           </ContentCard>
         </section>
 
