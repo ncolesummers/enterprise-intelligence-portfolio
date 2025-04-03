@@ -4,26 +4,26 @@ This document outlines the tasks required to implement the reusable components i
 
 ## Icon Components
 
-- [X] Create `src/components/icons` directory if it doesn't exist.
-- [X] Create `src/components/icons/play-icon.tsx` based on existing inline SVG (found in `src/app/projects/myui/page.tsx` Lines 32, 612).
-- [X] Create `src/components/icons/upload-icon.tsx` based on existing inline SVG (found in `src/app/projects/mikrotik-config-gen/page.tsx` Lines 29, 381).
-- [X] Create `src/components/icons/progress-circle-icon.tsx` based on existing inline SVG (found in `src/app/projects/profile-extractor/page.tsx` Line 378).
-- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use the new Icon components.
+- [x] Create `src/components/icons` directory if it doesn't exist.
+- [x] Create `src/components/icons/play-icon.tsx` based on existing inline SVG (found in `src/app/projects/myui/page.tsx` Lines 32, 612).
+- [x] Create `src/components/icons/upload-icon.tsx` based on existing inline SVG (found in `src/app/projects/mikrotik-config-gen/page.tsx` Lines 29, 381).
+- [x] Create `src/components/icons/progress-circle-icon.tsx` based on existing inline SVG (found in `src/app/projects/profile-extractor/page.tsx` Line 378).
+- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use the new Icon components.
 
 ## UI Components
 
-- [X] Create `src/components/ui` directory if it doesn't exist.
-- [X] Create `src/components/ui/content-card.tsx` component.
-- [X] Refactor `about/page.tsx` to use `ContentCard`.
-- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `ContentCard`.
-- [X] Create `src/components/ui/bulleted-list.tsx` component (including `ListItem`).
-- [X] Refactor `about/page.tsx` to use `BulletedList`.
-- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `BulletedList`.
-- [X] Create `src/components/ui/code-block.tsx` component.
-- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `CodeBlock`.
-- [X] Create `src/components/ui/section.tsx` component.
-- [X] Refactor `about/page.tsx` to use `Section`.
-- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `Section`.
+- [x] Create `src/components/ui` directory if it doesn't exist.
+- [x] Create `src/components/ui/content-card.tsx` component.
+- [x] Refactor `about/page.tsx` to use `ContentCard`.
+- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `ContentCard`.
+- [x] Create `src/components/ui/bulleted-list.tsx` component (including `ListItem`).
+- [x] Refactor `about/page.tsx` to use `BulletedList`.
+- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `BulletedList`.
+- [x] Create `src/components/ui/code-block.tsx` component.
+- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `CodeBlock`.
+- [x] Create `src/components/ui/section.tsx` component.
+- [x] Refactor `about/page.tsx` to use `Section`.
+- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `Section`.
 
 ## Layout Components
 
@@ -49,4 +49,4 @@ This document outlines the tasks required to implement the reusable components i
 ## Final Review
 
 - [ ] Review all refactored pages for consistency and ensure no functionality was broken.
-- [ ] Perform final cleanup and remove any unused code or styles. 
+- [ ] Perform final cleanup and remove any unused code or styles.

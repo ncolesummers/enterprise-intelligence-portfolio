@@ -345,24 +345,24 @@ export default function MyUIPage() {
             </p>
             <BulletedList>
               <ListItem>
-                <strong>Reusable Components:</strong>{" "}
-                Core UI elements that maintain consistency across the platform
+                <strong>Reusable Components:</strong> Core UI elements that
+                maintain consistency across the platform
               </ListItem>
               <ListItem>
-                <strong>Service-Specific Cards:</strong>{" "}
-                Custom components for different university departments
+                <strong>Service-Specific Cards:</strong> Custom components for
+                different university departments
               </ListItem>
               <ListItem>
-                <strong>API Integration:</strong>{" "}
-                Seamless connection to university data systems
+                <strong>API Integration:</strong> Seamless connection to
+                university data systems
               </ListItem>
               <ListItem>
-                <strong>State Management:</strong>{" "}
-                Efficient handling of user preferences and data
+                <strong>State Management:</strong> Efficient handling of user
+                preferences and data
               </ListItem>
               <ListItem>
-                <strong>Responsive Design:</strong>{" "}
-                Adaptive layouts for all device sizes
+                <strong>Responsive Design:</strong> Adaptive layouts for all
+                device sizes
               </ListItem>
             </BulletedList>
           </ContentCard>
@@ -441,30 +441,29 @@ export default function MyUIPage() {
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Data Integration:</strong>{" "}
-                      Utilized Ethos's hub-and-spoke model to replace
-                      point-to-point integrations
+                      <strong>Data Integration:</strong> Utilized Ethos's
+                      hub-and-spoke model to replace point-to-point integrations
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>API Implementation:</strong>{" "}
-                      Leveraged pre-built APIs and the Ellucian Ethos Data Model
+                      <strong>API Implementation:</strong> Leveraged pre-built
+                      APIs and the Ellucian Ethos Data Model
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Identity Management:</strong>{" "}
-                      Implemented secure single sign-on using SAML2 protocols
+                      <strong>Identity Management:</strong> Implemented secure
+                      single sign-on using SAML2 protocols
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Workflow Automation:</strong>{" "}
-                      Created custom workflows using Ethos Business Process APIs
+                      <strong>Workflow Automation:</strong> Created custom
+                      workflows using Ethos Business Process APIs
                     </div>
                   </li>
                 </ul>
@@ -524,29 +523,29 @@ export default function MyUIPage() {
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Data Model Complexity:</strong>{" "}
-                      Navigating the extensive Ethos Data Model structure
+                      <strong>Data Model Complexity:</strong> Navigating the
+                      extensive Ethos Data Model structure
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>API Rate Limiting:</strong>{" "}
-                      Managing API call frequency to prevent throttling
+                      <strong>API Rate Limiting:</strong> Managing API call
+                      frequency to prevent throttling
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Real-time Updates:</strong>{" "}
-                      Ensuring timely data synchronization across systems
+                      <strong>Real-time Updates:</strong> Ensuring timely data
+                      synchronization across systems
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Authentication Flows:</strong>{" "}
-                      Implementing secure, seamless authentication
+                      <strong>Authentication Flows:</strong> Implementing
+                      secure, seamless authentication
                     </div>
                   </li>
                 </ul>
@@ -557,29 +556,29 @@ export default function MyUIPage() {
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Custom Data Adapters:</strong>{" "}
-                      Created adapters to transform and normalize data
+                      <strong>Custom Data Adapters:</strong> Created adapters to
+                      transform and normalize data
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Caching Strategy:</strong>{" "}
-                      Implemented intelligent caching to reduce API calls
+                      <strong>Caching Strategy:</strong> Implemented intelligent
+                      caching to reduce API calls
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Event-Driven Architecture:</strong>{" "}
-                      Used RabbitMQ for real-time messaging
+                      <strong>Event-Driven Architecture:</strong> Used RabbitMQ
+                      for real-time messaging
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Token Management:</strong>{" "}
-                      Developed a robust token refresh mechanism
+                      <strong>Token Management:</strong> Developed a robust
+                      token refresh mechanism
                     </div>
                   </li>
                 </ul>
@@ -615,30 +614,28 @@ export default function MyUIPage() {
             <ul className="mb-4 space-y-2 text-gray-300">
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Increased Efficiency:</strong>{" "}
-                Reduced time spent navigating between different university
-                systems
+                <strong>Increased Efficiency:</strong> Reduced time spent
+                navigating between different university systems
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Improved Accessibility:</strong>{" "}
-                Mobile-friendly design allows access from any device
+                <strong>Improved Accessibility:</strong> Mobile-friendly design
+                allows access from any device
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Enhanced User Satisfaction:</strong>{" "}
-                Positive feedback from students and faculty on the intuitive
-                interface
+                <strong>Enhanced User Satisfaction:</strong> Positive feedback
+                from students and faculty on the intuitive interface
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Streamlined Processes:</strong>{" "}
-                Simplified administrative tasks for both students and staff
+                <strong>Streamlined Processes:</strong> Simplified
+                administrative tasks for both students and staff
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Reduced Support Tickets:</strong>{" "}
-                Fewer technical issues compared to the legacy system
+                <strong>Reduced Support Tickets:</strong> Fewer technical issues
+                compared to the legacy system
               </li>
             </ul>
             <p className="text-lg text-gray-300">

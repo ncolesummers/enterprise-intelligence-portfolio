@@ -2,7 +2,7 @@ import React from "react";
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
-export const PlayIcon: React.FC<IconProps> = (props) => {
+export const PlayIcon: React.FC<IconProps> = props => {
   return (
     <svg
       viewBox="0 0 24 24"

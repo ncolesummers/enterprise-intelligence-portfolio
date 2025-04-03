@@ -181,25 +181,24 @@ export default function MikrotikConfigGenPage() {
             </p>
             <BulletedList>
               <ListItem>
-                <strong>Flutter Desktop</strong>{" "}
-                - Too new and still in alpha at the time
+                <strong>Flutter Desktop</strong> - Too new and still in alpha at
+                the time
               </ListItem>
               <ListItem>
-                <strong>Electron</strong>{" "}
-                - Memory footprint was too high for the target laptops
+                <strong>Electron</strong> - Memory footprint was too high for
+                the target laptops
               </ListItem>
               <ListItem>
-                <strong>Winforms</strong>{" "}
-                - Well-documented and supported native solution
+                <strong>Winforms</strong> - Well-documented and supported native
+                solution
               </ListItem>
               <ListItem>
-                <strong>Fyne</strong>{" "}
-                - The GUI library written in Go with the most stars on Github
+                <strong>Fyne</strong> - The GUI library written in Go with the
+                most stars on Github
               </ListItem>
               <ListItem>
-                <strong>C# with .NET 5.0</strong>{" "}
-                - Single File Executables for Windows were pushed back to .NET
-                6.0
+                <strong>C# with .NET 5.0</strong> - Single File Executables for
+                Windows were pushed back to .NET 6.0
               </ListItem>
             </BulletedList>
           </ContentCard>

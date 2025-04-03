@@ -5,13 +5,12 @@ interface ContentCardProps {
   className?: string;
 }
 
-const ContentCard: React.FC<ContentCardProps> = (
-  { children, className = "" },
-) => {
+const ContentCard: React.FC<ContentCardProps> = ({
+  children,
+  className = "",
+}) => {
   return (
-    <div className={`rounded-lg bg-gray-800 p-6 ${className}`}>
-      {children}
-    </div>
+    <div className={`rounded-lg bg-gray-800 p-6 ${className}`}>{children}</div>
   );
 };
 

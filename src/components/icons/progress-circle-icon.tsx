@@ -7,9 +7,10 @@ interface ProgressCircleIconProps extends IconProps {
 
 const CIRCUMFERENCE = 2 * Math.PI * 45; // 2 * PI * radius (45)
 
-export const ProgressCircleIcon: React.FC<ProgressCircleIconProps> = (
-  { percentage, ...props },
-) => {
+export const ProgressCircleIcon: React.FC<ProgressCircleIconProps> = ({
+  percentage,
+  ...props
+}) => {
   const offset = CIRCUMFERENCE * (1 - percentage / 100);
 
   return (

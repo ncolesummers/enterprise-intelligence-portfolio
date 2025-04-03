@@ -198,20 +198,18 @@ function ProjectCard({
         <div className="mt-4">
           <h3 className="text-2xl font-bold">{title}</h3>
           <p className="text-gray-400">{description}</p>
-          {comingSoon
-            ? (
-              <div className="mt-4 inline-flex h-10 items-center rounded-md border border-white/20 bg-black px-4 py-2 text-sm font-medium text-white">
-                Coming Soon
-              </div>
-            )
-            : (
-              <Button
-                variant="outline"
-                className="mt-4 border-white/20 text-white hover:bg-white/10"
-              >
-                {hasCase ? "View case study" : "View project"}
-              </Button>
-            )}
+          {comingSoon ? (
+            <div className="mt-4 inline-flex h-10 items-center rounded-md border border-white/20 bg-black px-4 py-2 text-sm font-medium text-white">
+              Coming Soon
+            </div>
+          ) : (
+            <Button
+              variant="outline"
+              className="mt-4 border-white/20 text-white hover:bg-white/10"
+            >
+              {hasCase ? "View case study" : "View project"}
+            </Button>
+          )}
         </div>
       </Link>
     </div>

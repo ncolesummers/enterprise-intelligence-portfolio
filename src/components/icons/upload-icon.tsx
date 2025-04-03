@@ -1,7 +1,7 @@
 import React from "react";
 import { IconProps } from "./play-icon"; // Assuming IconProps is defined here or in a shared file
 
-export const UploadIcon: React.FC<IconProps> = (props) => {
+export const UploadIcon: React.FC<IconProps> = props => {
   return (
     <svg
       viewBox="0 0 24 24"

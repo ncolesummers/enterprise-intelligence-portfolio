@@ -11,9 +11,13 @@ interface ProjectCardProps {
   tags: string[];
 }
 
-export default function ProjectCard(
-  { title, description, image, link, tags }: ProjectCardProps,
-) {
+export default function ProjectCard({
+  title,
+  description,
+  image,
+  link,
+  tags,
+}: ProjectCardProps) {
   return (
     <Card className="overflow-hidden">
       <div className="relative aspect-video">
@@ -28,7 +32,7 @@ export default function ProjectCard(
         <h3 className="font-semibold text-xl mb-2">{title}</h3>
         <p className="text-sm text-muted-foreground mb-4">{description}</p>
         <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
+          {tags.map(tag => (
             <span
               key={tag}
               className="inline-flex items-center rounded-md bg-muted px-2 py-1 text-xs font-medium ring-1 ring-inset ring-gray-500/10"
