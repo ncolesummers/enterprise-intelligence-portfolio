@@ -12,10 +12,10 @@ This document outlines the tasks required to implement the reusable components i
 
 ## UI Components
 
-- [ ] Create `src/components/ui` directory if it doesn't exist.
-- [ ] Create `src/components/ui/content-card.tsx` component.
-- [ ] Refactor `about/page.tsx` to use `ContentCard`.
-- [ ] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `ContentCard`.
+- [X] Create `src/components/ui` directory if it doesn't exist.
+- [X] Create `src/components/ui/content-card.tsx` component.
+- [X] Refactor `about/page.tsx` to use `ContentCard`.
+- [X] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `ContentCard`.
 - [ ] Create `src/components/ui/bulleted-list.tsx` component (including `ListItem`).
 - [ ] Refactor `about/page.tsx` to use `BulletedList`.
 - [ ] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `BulletedList`.

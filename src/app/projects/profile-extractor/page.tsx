@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { ProgressCircleIcon } from "@/components/icons/progress-circle-icon";
 import Link from "next/link";
+import ContentCard from "@/components/ui/content-card";
 
 export default function ProfileExtractorPage() {
   return (
@@ -52,7 +53,7 @@ export default function ProfileExtractorPage() {
                 for the university's website.
               </p>
             </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
               <ul className="space-y-2 text-gray-300">
                 <li className="flex items-start">
@@ -76,7 +77,7 @@ export default function ProfileExtractorPage() {
                   Implemented ethical web crawling practices
                 </li>
               </ul>
-            </div>
+            </ContentCard>
           </div>
         </section>
 
@@ -153,7 +154,7 @@ export default function ProfileExtractorPage() {
             <h2 className="text-3xl font-bold">Approach & Methodology</h2>
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
-          <div className="rounded-lg bg-gray-800 p-6 mb-8">
+          <ContentCard className="mb-8">
             <h3 className="mb-4 text-xl font-semibold">Three-Step Process</h3>
             <p className="mb-4 text-gray-300">
               The project followed a structured three-step approach to test the
@@ -190,10 +191,10 @@ export default function ProfileExtractorPage() {
                 </div>
               </li>
             </ol>
-          </div>
+          </ContentCard>
 
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 LangGraph State Machine
               </h3>
@@ -229,8 +230,8 @@ export default function ProfileExtractorPage() {
                   Captures and logs errors at each step
                 </li>
               </ul>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Ethical Crawling Practices
               </h3>
@@ -260,7 +261,7 @@ export default function ProfileExtractorPage() {
                   Limited concurrent requests to maintain server health
                 </li>
               </ul>
-            </div>
+            </ContentCard>
           </div>
         </section>
 
@@ -271,7 +272,7 @@ export default function ProfileExtractorPage() {
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Data Schemas</h3>
               <p className="mb-4 text-gray-300">
                 Pydantic models were used to define the structure of the
@@ -313,8 +314,8 @@ class ValidationResult(BaseModel):
     suggestions: Optional[List[str]] = None`}</code>
                 </pre>
               </div>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">LLM Integration</h3>
               <p className="mb-4 text-gray-300">
                 The project leveraged Google's Gemini Flash model for both
@@ -358,9 +359,9 @@ validation_model = ChatGoogleGenerativeAI(
                 the validation process employed an LLM-as-a-judge pattern to
                 evaluate the accuracy of the extracted data.
               </p>
-            </div>
+            </ContentCard>
           </div>
-          <div className="mt-8 rounded-lg bg-gray-800 p-6">
+          <ContentCard className="mt-8">
             <h3 className="mb-4 text-xl font-semibold">
               Monitoring and Debugging
             </h3>
@@ -429,7 +430,7 @@ validation_model = ChatGoogleGenerativeAI(
                 </ul>
               </div>
             </div>
-          </div>
+          </ContentCard>
         </section>
 
         {/* Results */}
@@ -439,8 +440,8 @@ validation_model = ChatGoogleGenerativeAI(
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
-            <div className="rounded-lg bg-gray-800 p-6">
-              <h3 className="mb-4 text-xl font-semibold">Accuracy</h3>
+            <ContentCard>
+              <h3 className="mb-4 text-xl font-semibold">High Accuracy</h3>
               <div className="mb-4 flex items-center justify-center">
                 <div className="relative h-32 w-32">
                   <ProgressCircleIcon percentage={92.8} className="h-32 w-32" />
@@ -459,9 +460,9 @@ validation_model = ChatGoogleGenerativeAI(
                 errors, indicating the URLs from the sitemap no longer exist on
                 the website.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
-              <h3 className="mb-4 text-xl font-semibold">Cost</h3>
+            </ContentCard>
+            <ContentCard>
+              <h3 className="mb-4 text-xl font-semibold">Cost-Effective</h3>
               <div className="mb-4 flex items-center justify-center">
                 <div className="text-center">
                   <span className="text-3xl font-bold">$0.0012</span>
@@ -477,9 +478,11 @@ validation_model = ChatGoogleGenerativeAI(
                 Average of 3,132 tokens per successful profile, with 2,618,463
                 tokens used across all profiles
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
-              <h3 className="mb-4 text-xl font-semibold">Performance</h3>
+            </ContentCard>
+            <ContentCard>
+              <h3 className="mb-4 text-xl font-semibold">
+                Efficient Processing
+              </h3>
               <div className="mb-4 flex items-center justify-center">
                 <div className="text-center">
                   <span className="text-3xl font-bold">6.6s</span>
@@ -495,10 +498,78 @@ validation_model = ChatGoogleGenerativeAI(
                 Most processing time was due to intentional delays between
                 requests to ensure ethical crawling of the university website.
               </p>
-            </div>
+            </ContentCard>
           </div>
-          <div className="mt-8 rounded-lg bg-gray-800 p-6">
-            <h3 className="mb-4 text-xl font-semibold">Known Issues</h3>
+          <ContentCard className="mt-8">
+            <h3 className="mb-4 text-xl font-semibold">
+              Detailed Performance Metrics
+            </h3>
+            <div className="grid gap-8 md:grid-cols-2">
+              <div>
+                <h4 className="mb-2 text-lg font-semibold">
+                  LangSmith Features Used
+                </h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Detailed tracing of each step in the LangGraph state machine
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Token usage tracking for cost estimation
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Latency measurement for performance analysis
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Error logging and categorization
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Prompt inspection and refinement
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="mb-2 text-lg font-semibold">
+                  Metrics Collected
+                </h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    <strong>Accuracy:</strong>{" "}
+                    Field-level correctness reported by the validation node
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    <strong>Token Usage:</strong>{" "}
+                    Input, output, and total tokens per LLM call
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    <strong>Estimated Cost:</strong>{" "}
+                    Calculated based on token usage and model pricing
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    <strong>Latency:</strong>{" "}
+                    Processing time per profile and per node
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    <strong>Success Rate:</strong>{" "}
+                    Percentage of URLs processed without errors
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ContentCard>
+          <ContentCard className="mt-8">
+            <h3 className="mb-4 text-xl font-semibold">
+              Limitations & Challenges
+            </h3>
             <div className="grid gap-8 md:grid-cols-3">
               <div>
                 <h4 className="mb-2 text-lg font-semibold">Sitemap 404s</h4>
@@ -530,7 +601,47 @@ validation_model = ChatGoogleGenerativeAI(
                 </p>
               </div>
             </div>
-          </div>
+          </ContentCard>
+          <ContentCard className="mt-8">
+            <h3 className="mb-4 text-xl font-semibold">
+              Future Recommendations
+            </h3>
+            <div className="grid gap-8 md:grid-cols-2">
+              <div>
+                <h4 className="mb-2 text-lg font-semibold">Model Choice</h4>
+                <p className="text-gray-300">
+                  Gemini Flash provided excellent accuracy at a low cost
+                  ($0.0012 per profile). Based on these results, evaluating more
+                  expensive models like Claude 3.7 Sonnet or GPT-4o is
+                  unnecessary.
+                </p>
+              </div>
+              <div>
+                <h4 className="mb-2 text-lg font-semibold">
+                  Process Improvements
+                </h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Develop a more reliable strategy for identifying profile
+                    URLs beyond the outdated sitemap
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Consider a special handler for pages with multiple profiles
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Split the nodes into files for better code organization
+                  </li>
+                  <li className="flex items-start">
+                    <span className="mr-2 text-primary">•</span>
+                    Move the prompts into the config file for easier maintenance
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ContentCard>
         </section>
 
         {/* Recommendations */}

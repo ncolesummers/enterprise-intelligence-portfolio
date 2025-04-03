@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { PlayIcon } from "@/components/icons/play-icon";
+import ContentCard from "@/components/ui/content-card";
 
 export default function MyUIPage() {
   return (
@@ -64,7 +65,7 @@ export default function MyUIPage() {
                 users with a unified and personalized experience.
               </p>
             </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
               <ul className="space-y-2 text-gray-300">
                 <li className="flex items-start">
@@ -88,7 +89,7 @@ export default function MyUIPage() {
                   Single sign-on integration with university credentials
                 </li>
               </ul>
-            </div>
+            </ContentCard>
           </div>
         </section>
 
@@ -164,15 +165,15 @@ export default function MyUIPage() {
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Centralized Access</h3>
               <p className="text-gray-300">
                 MyUI consolidates tools like financial aid management, course
                 registration, academic records, housing information, and faculty
                 advising into a single interface.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Customizable Dashboard
               </h3>
@@ -181,16 +182,16 @@ export default function MyUIPage() {
                 needs, such as class schedules, library resources, health and
                 wellness services, and more.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Single Sign-On</h3>
               <p className="text-gray-300">
                 It allows seamless login using University of Idaho credentials
                 for all integrated systems, eliminating the need for multiple
                 logins.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Mobile-Friendly Interface
               </h3>
@@ -199,7 +200,7 @@ export default function MyUIPage() {
                 ensuring students and faculty can access important information
                 from anywhere.
               </p>
-            </div>
+            </ContentCard>
           </div>
         </section>
 
@@ -244,7 +245,7 @@ export default function MyUIPage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Library Card Development
               </h3>
@@ -270,9 +271,9 @@ export default function MyUIPage() {
                   Access digital collections and research databases
                 </li>
               </ul>
-            </div>
+            </ContentCard>
 
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Accounts and Billings Card
               </h3>
@@ -299,7 +300,7 @@ export default function MyUIPage() {
                   Provide notifications for upcoming payment deadlines
                 </li>
               </ul>
-            </div>
+            </ContentCard>
           </div>
 
           <div className="mt-8 rounded-lg bg-gray-900 p-4">
@@ -331,7 +332,7 @@ export default function MyUIPage() {
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">For Students</h3>
               <p className="text-gray-300">
                 Simplifies workflows by integrating academic planning tools,
@@ -339,23 +340,23 @@ export default function MyUIPage() {
                 also displays important deadlines and notifications to help
                 students stay organized.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">For Faculty</h3>
               <p className="text-gray-300">
                 Provides tools for advising and course management, including
                 access to student GPAs, class loads, and the ability to manage
                 holds directly from the dashboard.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">For Administration</h3>
               <p className="text-gray-300">
                 Increases efficiency by reducing the need to navigate multiple
                 systems, centralizing all essential university functions into
                 one platform, and providing better data insights.
               </p>
-            </div>
+            </ContentCard>
           </div>
         </section>
 
@@ -365,7 +366,7 @@ export default function MyUIPage() {
             <h2 className="text-3xl font-bold">Technical Implementation</h2>
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
-          <div className="rounded-lg bg-gray-800 p-6">
+          <ContentCard>
             <h3 className="mb-4 text-xl font-semibold">
               React Component Architecture
             </h3>
@@ -400,9 +401,9 @@ export default function MyUIPage() {
                 Adaptive layouts for all device sizes
               </li>
             </ul>
-          </div>
+          </ContentCard>
           <div className="mt-8 grid gap-8 md:grid-cols-2">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Integration Challenges
               </h3>
@@ -426,8 +427,8 @@ export default function MyUIPage() {
                   new dashboard
                 </li>
               </ul>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Performance Optimization
               </h3>
@@ -453,7 +454,7 @@ export default function MyUIPage() {
                   Efficient state management to minimize re-renders
                 </li>
               </ul>
-            </div>
+            </ContentCard>
           </div>
         </section>
 
@@ -463,7 +464,7 @@ export default function MyUIPage() {
             <h2 className="text-3xl font-bold">Ethos Integration</h2>
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
-          <div className="rounded-lg bg-gray-800 p-6">
+          <ContentCard>
             <h3 className="mb-4 text-xl font-semibold">
               Leveraging Ellucian Ethos Platform
             </h3>
@@ -550,7 +551,7 @@ export default function MyUIPage() {
                 </ul>
               </div>
             </div>
-          </div>
+          </ContentCard>
           <div className="mt-8 rounded-lg bg-gray-800 p-6">
             <h3 className="mb-4 text-xl font-semibold">
               Technical Challenges and Solutions

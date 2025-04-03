@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { UploadIcon } from "@/components/icons/upload-icon";
+import ContentCard from "@/components/ui/content-card";
 
 export default function MikrotikConfigGenPage() {
   return (
@@ -63,7 +64,7 @@ export default function MikrotikConfigGenPage() {
                 routers.
               </p>
             </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
               <ul className="space-y-2 text-gray-300">
                 <li className="flex items-start">
@@ -87,7 +88,7 @@ export default function MikrotikConfigGenPage() {
                   Self-contained executable with embedded filesystem
                 </li>
               </ul>
-            </div>
+            </ContentCard>
           </div>
         </section>
 
@@ -155,7 +156,7 @@ export default function MikrotikConfigGenPage() {
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Technical Requirements
               </h3>
@@ -164,16 +165,16 @@ export default function MikrotikConfigGenPage() {
                 executable, which limited the choice of frameworks and
                 technologies.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">User Experience</h3>
               <p className="text-gray-300">
                 The initial TUI (Text User Interface) was easy to develop but
                 difficult for entry-level technicians to learn and use
                 efficiently.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Cross-Platform Compatibility
               </h3>
@@ -181,9 +182,9 @@ export default function MikrotikConfigGenPage() {
                 Finding a framework that could produce a lightweight,
                 cross-platform application with a modern UI proved challenging.
               </p>
-            </div>
+            </ContentCard>
           </div>
-          <div className="mt-8 rounded-lg bg-gray-800 p-6">
+          <ContentCard className="mt-8">
             <h3 className="mb-4 text-xl font-semibold">
               Framework Exploration
             </h3>
@@ -218,7 +219,7 @@ export default function MikrotikConfigGenPage() {
                 6.0
               </li>
             </ul>
-          </div>
+          </ContentCard>
         </section>
 
         {/* Solutions Implemented */}
@@ -228,7 +229,7 @@ export default function MikrotikConfigGenPage() {
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
-            <div>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Version 1.0: Python Console Program
               </h3>
@@ -277,8 +278,8 @@ export default function MikrotikConfigGenPage() {
     return x`}</code>
                 </pre>
               </div>
-            </div>
-            <div>
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Version 2.0: Go with Wails
               </h3>
@@ -325,7 +326,7 @@ app.Bind(builder.BuildRouter)
 app.Run()`}</code>
                 </pre>
               </div>
-            </div>
+            </ContentCard>
           </div>
         </section>
 
@@ -336,7 +337,7 @@ app.Run()`}</code>
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Standardized Configurations
               </h3>
@@ -346,8 +347,8 @@ app.Run()`}</code>
                 Technicians could now generate consistent configurations with
                 minimal training.
               </p>
-            </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            </ContentCard>
+            <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Improved Efficiency
               </h3>
@@ -356,9 +357,9 @@ app.Run()`}</code>
                 configure routers, allowing technicians to complete
                 installations more quickly and with fewer errors.
               </p>
-            </div>
+            </ContentCard>
           </div>
-          <div className="mt-8 rounded-lg bg-gray-800 p-6">
+          <ContentCard className="mt-8">
             <h3 className="mb-4 text-xl font-semibold">
               Technical Achievements
             </h3>
@@ -387,7 +388,7 @@ app.Run()`}</code>
                 optimal solution
               </li>
             </ul>
-          </div>
+          </ContentCard>
         </section>
 
         {/* Conclusion */}
@@ -396,7 +397,7 @@ app.Run()`}</code>
             <h2 className="text-3xl font-bold">Conclusion</h2>
             <div className="ml-4 h-px flex-1 bg-white/10"></div>
           </div>
-          <div className="rounded-lg bg-gray-800 p-6">
+          <ContentCard>
             <p className="mb-4 text-lg text-gray-300">
               The Mikrotik Configuration Generator project demonstrates the
               importance of selecting the right tools for specific requirements.
@@ -417,7 +418,7 @@ app.Run()`}</code>
               Headless UI and TailwindCSS, or potentially rebuilding with newer
               frameworks like .NET 6/MAUI or Tauri.
             </p>
-          </div>
+          </ContentCard>
         </section>
 
         {/* Call to Action */}
