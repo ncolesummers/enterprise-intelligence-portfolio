@@ -1,21 +1,24 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Linkedin, Instagram, Github } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Github, Instagram, Linkedin } from "lucide-react";
+import Link from "next/link";
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-black text-white">
       <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60">
-        <div className="container flex h-14 items-center justify-between">
+        <div className="container flex h-14 items-center justify-between px-16">
           <Link className="text-lg font-bold" href="/">
             n_cole_summers
           </Link>
           <nav className="flex items-center gap-4">
             <button
               onClick={() => {
-                document.getElementById("work")?.scrollIntoView({ behavior: "smooth", block: "start" })
+                document.getElementById("work")?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
               }}
               className="text-sm hover:text-gray-300 cursor-pointer"
             >
@@ -24,49 +27,80 @@ export default function Page() {
             <Link href="/about" className="text-sm hover:text-gray-300">
               About
             </Link>
-            <Link href="https://www.linkedin.com/in/n-cole-summers/" target="_blank">
-              <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
+            <Link
+              href="https://www.linkedin.com/in/n-cole-summers/"
+              target="_blank"
+            >
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:text-gray-300"
+              >
                 <Linkedin className="h-5 w-5" />
               </Button>
             </Link>
             <Link href="https://github.com/ncolesummers/" target="_blank">
-              <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:text-gray-300"
+              >
                 <Github className="h-5 w-5" />
               </Button>
             </Link>
-            <Link href="https://www.instagram.com/ncolesummers/" target="_blank">
-              <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
+            <Link
+              href="https://www.instagram.com/ncolesummers/"
+              target="_blank"
+            >
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-white hover:text-gray-300"
+              >
                 <Instagram className="h-5 w-5" />
               </Button>
             </Link>
             <Link href="mailto:n_cole_summers@icloud.com">
-              <Button className="bg-white text-black hover:bg-gray-200">Contact me</Button>
+              <Button className="bg-white text-black hover:bg-gray-200">
+                Contact me
+              </Button>
             </Link>
           </nav>
         </div>
       </header>
 
       <main>
-        <section className="flex min-h-[80vh] flex-col items-start justify-center px-4">
+        <section className="flex min-h-[80vh] flex-col items-start justify-center px-16">
           <div className="container">
-            <h1 className="text-6xl font-bold tracking-tighter md:text-8xl">
+            <h1 className="font-bold tracking-tighter text-6xl sm:text-6xl md:text-7xl lg:text-10xl">
               ENTERPRISE
               <br />
               INTELLIGENCE &
               <br />
               APPLICATIONS
             </h1>
-            <p className="mt-3 text-xl text-gray-400 max-w-2xl">Abstracting the knowledge from knowledge work.</p>
+            <p className="mt-3 text-xl text-gray-400 max-w-2xl">
+              Abstracting the knowledge from knowledge work.
+            </p>
+            <div className="mt-8 flex items-center">
+              <Button
+                variant="outline"
+                className="border-white/20 text-white hover:bg-white/10"
+                onClick={() => {
+                  document.getElementById("work")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
+              >
+                selected projects
+              </Button>
+            </div>
           </div>
         </section>
 
         <section id="work" className="py-20 pt-20">
-          <div className="container px-4">
-            <div className="mb-10 -mt-8 flex items-center">
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                selected projects
-              </Button>
-            </div>
+          <div className="container px-16">
             <div className="grid gap-8 md:grid-cols-2">
               <ProjectCard
                 title="University of Idaho Website"
@@ -104,7 +138,9 @@ export default function Page() {
               I'm open to new opportunities and would love to hear from you.
             </p>
             <Link href="mailto:n_cole_summers@icloud.com">
-              <Button className="bg-white text-black hover:bg-gray-200">Contact me</Button>
+              <Button className="bg-white text-black hover:bg-gray-200">
+                Contact me
+              </Button>
             </Link>
           </div>
         </section>
@@ -120,7 +156,11 @@ export default function Page() {
             >
               <Linkedin className="h-5 w-5" />
             </Link>
-            <Link href="https://github.com/ncolesummers/" target="_blank" className="text-white hover:text-gray-300">
+            <Link
+              href="https://github.com/ncolesummers/"
+              target="_blank"
+              className="text-white hover:text-gray-300"
+            >
               <Github className="h-5 w-5" />
             </Link>
             <Link
@@ -135,7 +175,7 @@ export default function Page() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
 function ProjectCard({
@@ -145,11 +185,11 @@ function ProjectCard({
   hasCase = false,
   comingSoon = false,
 }: {
-  title: string
-  description: string
-  link?: string
-  hasCase?: boolean
-  comingSoon?: boolean
+  title: string;
+  description: string;
+  link?: string;
+  hasCase?: boolean;
+  comingSoon?: boolean;
 }) {
   return (
     <div className="group relative overflow-hidden rounded-lg">
@@ -158,18 +198,22 @@ function ProjectCard({
         <div className="mt-4">
           <h3 className="text-2xl font-bold">{title}</h3>
           <p className="text-gray-400">{description}</p>
-          {comingSoon ? (
-            <div className="mt-4 inline-flex h-10 items-center rounded-md border border-white/20 bg-black px-4 py-2 text-sm font-medium text-white">
-              Coming Soon
-            </div>
-          ) : (
-            <Button variant="outline" className="mt-4 border-white/20 text-white hover:bg-white/10">
-              {hasCase ? "View case study" : "View project"}
-            </Button>
-          )}
+          {comingSoon
+            ? (
+              <div className="mt-4 inline-flex h-10 items-center rounded-md border border-white/20 bg-black px-4 py-2 text-sm font-medium text-white">
+                Coming Soon
+              </div>
+            )
+            : (
+              <Button
+                variant="outline"
+                className="mt-4 border-white/20 text-white hover:bg-white/10"
+              >
+                {hasCase ? "View case study" : "View project"}
+              </Button>
+            )}
         </div>
       </Link>
     </div>
-  )
+  );
 }
-
