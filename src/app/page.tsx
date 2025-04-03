@@ -1,103 +1,175 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { Button } from "@/components/ui/button"
+import { Linkedin, Instagram, Github } from "lucide-react"
+import Link from "next/link"
+
+export default function Page() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-black text-white">
+      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60">
+        <div className="container flex h-14 items-center justify-between">
+          <Link className="text-lg font-bold" href="/">
+            n_cole_summers
+          </Link>
+          <nav className="flex items-center gap-4">
+            <button
+              onClick={() => {
+                document.getElementById("work")?.scrollIntoView({ behavior: "smooth", block: "start" })
+              }}
+              className="text-sm hover:text-gray-300 cursor-pointer"
+            >
+              Work
+            </button>
+            <Link href="/about" className="text-sm hover:text-gray-300">
+              About
+            </Link>
+            <Link href="https://www.linkedin.com/in/n-cole-summers/" target="_blank">
+              <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
+                <Linkedin className="h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="https://github.com/ncolesummers/" target="_blank">
+              <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
+                <Github className="h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="https://www.instagram.com/ncolesummers/" target="_blank">
+              <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
+                <Instagram className="h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="mailto:n_cole_summers@icloud.com">
+              <Button className="bg-white text-black hover:bg-gray-200">Contact me</Button>
+            </Link>
+          </nav>
         </div>
+      </header>
+
+      <main>
+        <section className="flex min-h-[80vh] flex-col items-start justify-center px-4">
+          <div className="container">
+            <h1 className="text-6xl font-bold tracking-tighter md:text-8xl">
+              ENTERPRISE
+              <br />
+              INTELLIGENCE &
+              <br />
+              APPLICATIONS
+            </h1>
+            <p className="mt-3 text-xl text-gray-400 max-w-2xl">Abstracting the knowledge from knowledge work.</p>
+          </div>
+        </section>
+
+        <section id="work" className="py-20 pt-20">
+          <div className="container px-4">
+            <div className="mb-10 -mt-8 flex items-center">
+              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                selected projects
+              </Button>
+            </div>
+            <div className="grid gap-8 md:grid-cols-2">
+              <ProjectCard
+                title="University of Idaho Website"
+                description="A modern redesign of the University of Idaho website built with Sitecore, Next.js, TypeScript, Storybook, and C#."
+                comingSoon={true}
+              />
+              <ProjectCard
+                title="AI Data Extraction Research"
+                description="Research spike exploring the feasibility of using foundation models to extract faculty and staff profile data for the University of Idaho website."
+                link="/projects/profile-extractor"
+                hasCase={true}
+              />
+              <ProjectCard
+                title="MyUI"
+                description="Lead developer for University of Idaho's modernized dashboard, creating custom React components to streamline student access to university services."
+                link="/projects/myui"
+                hasCase={true}
+              />
+              <ProjectCard
+                title="Mikrotik Configuration Generator"
+                description="A cross-platform desktop application that standardizes router configurations for ISP technicians, built with Go and Wails."
+                link="/projects/mikrotik-config-gen"
+                hasCase={true}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="py-32">
+          <div className="container px-4 text-center">
+            <h2 className="mb-6 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap overflow-hidden text-ellipsis md:whitespace-normal">
+              GOT THAT COOL IDEA?
+            </h2>
+            <p className="mb-8 text-sm sm:text-base md:text-lg text-gray-400 whitespace-nowrap overflow-hidden text-ellipsis md:whitespace-normal">
+              I'm open to new opportunities and would love to hear from you.
+            </p>
+            <Link href="mailto:n_cole_summers@icloud.com">
+              <Button className="bg-white text-black hover:bg-gray-200">Contact me</Button>
+            </Link>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="border-t border-white/10 py-6">
+        <div className="container flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
+          <div className="flex items-center gap-6">
+            <Link
+              href="https://www.linkedin.com/in/n-cole-summers/"
+              target="_blank"
+              className="text-white hover:text-gray-300"
+            >
+              <Linkedin className="h-5 w-5" />
+            </Link>
+            <Link href="https://github.com/ncolesummers/" target="_blank" className="text-white hover:text-gray-300">
+              <Github className="h-5 w-5" />
+            </Link>
+            <Link
+              href="https://www.instagram.com/ncolesummers/"
+              target="_blank"
+              className="text-white hover:text-gray-300"
+            >
+              <Instagram className="h-5 w-5" />
+            </Link>
+          </div>
+          <p className="text-sm text-gray-400">all socials @ncolesummers</p>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
+
+function ProjectCard({
+  title,
+  description,
+  link = "#",
+  hasCase = false,
+  comingSoon = false,
+}: {
+  title: string
+  description: string
+  link?: string
+  hasCase?: boolean
+  comingSoon?: boolean
+}) {
+  return (
+    <div className="group relative overflow-hidden rounded-lg">
+      <Link href={comingSoon ? "#" : link} className="block">
+        <div className="aspect-video w-full bg-gray-800" />
+        <div className="mt-4">
+          <h3 className="text-2xl font-bold">{title}</h3>
+          <p className="text-gray-400">{description}</p>
+          {comingSoon ? (
+            <div className="mt-4 inline-flex h-10 items-center rounded-md border border-white/20 bg-black px-4 py-2 text-sm font-medium text-white">
+              Coming Soon
+            </div>
+          ) : (
+            <Button variant="outline" className="mt-4 border-white/20 text-white hover:bg-white/10">
+              {hasCase ? "View case study" : "View project"}
+            </Button>
+          )}
+        </div>
+      </Link>
+    </div>
+  )
+}
+
