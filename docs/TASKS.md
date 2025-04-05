@@ -4,26 +4,24 @@ This document outlines the tasks required to address the UI review feedback and 
 
 ## Header and Navigation
 
-- [ ] Ensure the name and "Work" elements are clearly separated with sufficient spacing for mobile and small screens.
-- [ ] Increase padding around social icons (LinkedIn, GitHub, etc.) to avoid them being too close to each other or the screen edge on mobile devices.
-- [ ] Add an accessible label or tooltip to the floating "N" button to clarify its purpose.
-- [ ] Confirm all interactive elements meet the minimum tap target size for mobile usability.
-
-## Typography and Content Hierarchy
-
-- [ ] Create a clear visual hierarchy in the headline text for small screens.
-- [ ] Break long headlines into multiple lines to improve readability and prevent overwhelming the user on mobile devices.
-- [ ] Adjust the font size and weight of the subtitle to ensure it complements the headline without being overshadowed.
-
-## Call-to-Action Elements
-
-- [ ] Redesign the "Selected Projects" button to have a higher contrast against the background for better visibility and accessibility on small screens.
-- [ ] Add clear visual cues (such as borders or shadows) to indicate button interactivity.
-
-## Layout and Spacing
-
-- [ ] Introduce consistent and responsive padding around the content to avoid elements touching the screen edges on mobile devices.
-- [ ] Ensure spacing adjustments maintain visual balance across different device sizes.
+- [ ] **Convert Header Navigation to a Hamburger Menu**
+  - **Desktop View**: Ensure the current navigation layout (links and buttons visible in a horizontal row) remains unchanged.
+  - **Mobile View**:
+    - Replace the navigation links with a hamburger menu icon.
+    - Clicking the icon should toggle a dropdown menu with the navigation links.
+  - **Implementation Steps**:
+    1. Add a state variable using React's `useState` to manage the open/closed state of the hamburger menu.
+    2. Add a hamburger menu button (`<button>`) that is visible only on smaller screens (`sm:hidden`).
+    3. Hide the navigation links on smaller screens (`hidden sm:flex`).
+    4. Create a dropdown menu (`<div>`) that appears when the hamburger menu is toggled.
+    5. Style the dropdown menu with TailwindCSS (`absolute`, `bg-black`, `rounded`, etc.).
+    6. Include all navigation links and buttons inside the dropdown.
+    7. Add accessibility features:
+       - Use `aria-expanded` on the hamburger button to indicate the menu state.
+       - Add `aria-label` to the button for screen readers.
+       - Ensure focus trapping within the dropdown when it is open.
+    8. Add animations for smooth opening/closing using TailwindCSS classes like `transition`, `ease-in-out`, and `duration-300`.
+    9. Ensure the dropdown menu closes when clicking outside of it.
 
 ## Final Review
 
