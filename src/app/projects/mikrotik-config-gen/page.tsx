@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { UploadIcon } from "@/components/icons/upload-icon";
 import ContentCard from "@/components/ui/content-card";
@@ -102,8 +102,8 @@ export default function MikrotikConfigGenPage() {
                 across all installations.
               </p>
               <p className="text-lg text-gray-300">
-                The project's evolution reflects a journey through different
-                technologies and approaches, each addressing specific
+                The project&apos;s evolution reflects a journey through
+                different technologies and approaches, each addressing specific
                 requirements and constraints.
               </p>
             </div>
@@ -181,24 +181,25 @@ export default function MikrotikConfigGenPage() {
             </p>
             <BulletedList>
               <ListItem>
-                <strong>Flutter Desktop</strong> - Too new and still in alpha at
-                the time
+                <strong>Flutter Desktop</strong>{" "}
+                - Too new and still in alpha at the time
               </ListItem>
               <ListItem>
-                <strong>Electron</strong> - Memory footprint was too high for
-                the target laptops
+                <strong>Electron</strong>{" "}
+                - Memory footprint was too high for the target laptops
               </ListItem>
               <ListItem>
-                <strong>Winforms</strong> - Well-documented and supported native
-                solution
+                <strong>Winforms</strong>{" "}
+                - Well-documented and supported native solution
               </ListItem>
               <ListItem>
-                <strong>Fyne</strong> - The GUI library written in Go with the
-                most stars on Github
+                <strong>Fyne</strong>{" "}
+                - The GUI library written in Go with the most stars on Github
               </ListItem>
               <ListItem>
-                <strong>C# with .NET 5.0</strong> - Single File Executables for
-                Windows were pushed back to .NET 6.0
+                <strong>C# with .NET 5.0</strong>{" "}
+                - Single File Executables for Windows were pushed back to .NET
+                6.0
               </ListItem>
             </BulletedList>
           </ContentCard>
@@ -264,12 +265,12 @@ export default function MikrotikConfigGenPage() {
               </p>
               <BulletedList className="mb-4">
                 <ListItem>
-                  Go's Embed feature made it trivial to include an entire
+                  Go&apos;s Embed feature made it trivial to include an entire
                   filesystem in the binary
                 </ListItem>
                 <ListItem>
-                  The templating engine in Go's standard library allowed reuse
-                  of templates with minor changes
+                  The templating engine in Go&apos;s standard library allowed
+                  reuse of templates with minor changes
                 </ListItem>
                 <ListItem>
                   Wails provided a modern UI framework that met all project
@@ -339,7 +340,8 @@ app.Run()`}
                 filesystem
               </ListItem>
               <ListItem>
-                Built a modern UI that's easy for entry-level technicians to use
+                Built a modern UI that&apos;s easy for entry-level technicians
+                to use
               </ListItem>
               <ListItem>
                 Implemented a templating system for generating configuration
@@ -370,9 +372,9 @@ app.Run()`}
             <p className="mb-4 text-lg text-gray-300">
               The journey from a text-based interface to a modern desktop
               application highlights the evolution of the project and the
-              developer's commitment to finding the optimal solution. The final
-              product not only met the technical requirements but also provided
-              a user-friendly experience for technicians.
+              developer&apos;s commitment to finding the optimal solution. The
+              final product not only met the technical requirements but also
+              provided a user-friendly experience for technicians.
             </p>
             <p className="text-lg text-gray-300">
               Looking forward, there are opportunities for further improvement,

@@ -120,7 +120,7 @@ export default function AboutPage() {
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4 text-lg text-gray-300">
-                I'm currently an Enterprise Applications Developer at the
+                I&apos;m currently an Enterprise Applications Developer at the
                 University of Idaho in Moscow, Idaho, where I leverage my 9
                 years of IT experience and 5 years of focused application
                 development to create innovative solutions.
@@ -214,9 +214,10 @@ export default function AboutPage() {
                 continuous learning and insatiable curiosity.
               </p>
               <p className="mb-4 text-lg text-gray-300">
-                I'm particularly energized by projects involving cutting-edge
-                technologies like artificial intelligence, where I can push the
-                boundaries of what's possible in enterprise applications.
+                I&apos;m particularly energized by projects involving
+                cutting-edge technologies like artificial intelligence, where I
+                can push the boundaries of what&apos;s possible in enterprise
+                applications.
               </p>
               <p className="text-lg text-gray-300">
                 I strongly believe in blameless postmortems as a way to build
@@ -247,8 +248,9 @@ export default function AboutPage() {
               </div>
               <h3 className="mb-2 text-xl font-semibold">Music</h3>
               <p className="text-gray-300">
-                Drawn to electronic and alternative music. Apple Music's lyrics
-                feature has been a game-changer for my listening experience.
+                Drawn to electronic and alternative music. Apple Music&apos;s
+                lyrics feature has been a game-changer for my listening
+                experience.
               </p>
             </ContentCard>
             <ContentCard>
@@ -275,11 +277,11 @@ export default function AboutPage() {
         </Section>
 
         {/* Call to Action */}
-        <Section title="Let's Connect" className="text-center">
+        <Section title="Let&apos;s Connect" className="text-center">
           <p className="mb-8 text-lg text-gray-400 max-w-2xl mx-auto">
-            Whether you're interested in discussing enterprise applications,
-            microservice architecture, or just want to chat about the latest
-            sci-fi novel, I'd love to hear from you.
+            Whether you&apos;re interested in discussing enterprise
+            applications, microservice architecture, or just want to chat about
+            the latest sci-fi novel, I&apos;d love to hear from you.
           </p>
           <div className="flex justify-center gap-4">
             <Link href="mailto:n_cole_summers@icloud.com">

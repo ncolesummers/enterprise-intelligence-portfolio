@@ -1,12 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { PlayIcon } from "@/components/icons/play-icon";
 import ContentCard from "@/components/ui/content-card";
 import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
-import CodeBlock from "@/components/ui/code-block";
 import Section from "@/components/ui/section";
 
 export default function MyUIPage() {
@@ -89,8 +88,9 @@ export default function MyUIPage() {
             <div>
               <p className="mb-4 text-lg text-gray-300">
                 MyUI offers a unified, personalized experience with features
-                organized into "cards," which categorize and integrate different
-                administrative and academic functions into one platform.
+                organized into &quot;cards,&quot; which categorize and integrate
+                different administrative and academic functions into one
+                platform.
               </p>
               <p className="mb-4 text-lg text-gray-300">
                 The dashboard consolidates tools like financial aid management,
@@ -279,8 +279,8 @@ export default function MyUIPage() {
             <p className="text-gray-300">
               The code for these components and other custom elements of the
               MyUI dashboard is proprietary and protected under the University
-              of Idaho's intellectual property policies. As such, the actual
-              implementation details cannot be shared publicly.
+              of Idaho&apos;s intellectual property policies. As such, the
+              actual implementation details cannot be shared publicly.
             </p>
             <p className="mt-2 text-gray-300">
               The component architecture follows React best practices with a
@@ -345,24 +345,24 @@ export default function MyUIPage() {
             </p>
             <BulletedList>
               <ListItem>
-                <strong>Reusable Components:</strong> Core UI elements that
-                maintain consistency across the platform
+                <strong>Reusable Components:</strong>{" "}
+                Core UI elements that maintain consistency across the platform
               </ListItem>
               <ListItem>
-                <strong>Service-Specific Cards:</strong> Custom components for
-                different university departments
+                <strong>Service-Specific Cards:</strong>{" "}
+                Custom components for different university departments
               </ListItem>
               <ListItem>
-                <strong>API Integration:</strong> Seamless connection to
-                university data systems
+                <strong>API Integration:</strong>{" "}
+                Seamless connection to university data systems
               </ListItem>
               <ListItem>
-                <strong>State Management:</strong> Efficient handling of user
-                preferences and data
+                <strong>State Management:</strong>{" "}
+                Efficient handling of user preferences and data
               </ListItem>
               <ListItem>
-                <strong>Responsive Design:</strong> Adaptive layouts for all
-                device sizes
+                <strong>Responsive Design:</strong>{" "}
+                Adaptive layouts for all device sizes
               </ListItem>
             </BulletedList>
           </ContentCard>
@@ -427,10 +427,10 @@ export default function MyUIPage() {
             </h3>
             <p className="mb-4 text-lg text-gray-300">
               A critical aspect of the MyUI project was its integration with
-              Ellucian's Ethos platform, a cloud-based integration solution
+              Ellucian&apos;s Ethos platform, a cloud-based integration solution
               designed specifically for higher education institutions. As lead
               developer, I worked extensively with Ethos Business Process APIs
-              to connect the dashboard with the university's core systems.
+              to connect the dashboard with the university&apos;s core systems.
             </p>
             <div className="grid gap-8 md:grid-cols-2">
               <div>
@@ -441,29 +441,30 @@ export default function MyUIPage() {
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Data Integration:</strong> Utilized Ethos's
-                      hub-and-spoke model to replace point-to-point integrations
+                      <strong>Data Integration:</strong>{" "}
+                      Utilized Ethos&apos;s hub-and-spoke model to replace
+                      point-to-point integrations
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>API Implementation:</strong> Leveraged pre-built
-                      APIs and the Ellucian Ethos Data Model
+                      <strong>API Implementation:</strong>{" "}
+                      Leveraged pre-built APIs and the Ellucian Ethos Data Model
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Identity Management:</strong> Implemented secure
-                      single sign-on using SAML2 protocols
+                      <strong>Identity Management:</strong>{" "}
+                      Implemented secure single sign-on using SAML2 protocols
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Workflow Automation:</strong> Created custom
-                      workflows using Ethos Business Process APIs
+                      <strong>Workflow Automation:</strong>{" "}
+                      Created custom workflows using Ethos Business Process APIs
                     </div>
                   </li>
                 </ul>
@@ -523,29 +524,29 @@ export default function MyUIPage() {
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Data Model Complexity:</strong> Navigating the
-                      extensive Ethos Data Model structure
+                      <strong>Data Model Complexity:</strong>{" "}
+                      Navigating the extensive Ethos Data Model structure
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>API Rate Limiting:</strong> Managing API call
-                      frequency to prevent throttling
+                      <strong>API Rate Limiting:</strong>{" "}
+                      Managing API call frequency to prevent throttling
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Real-time Updates:</strong> Ensuring timely data
-                      synchronization across systems
+                      <strong>Real-time Updates:</strong>{" "}
+                      Ensuring timely data synchronization across systems
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Authentication Flows:</strong> Implementing
-                      secure, seamless authentication
+                      <strong>Authentication Flows:</strong>{" "}
+                      Implementing secure, seamless authentication
                     </div>
                   </li>
                 </ul>
@@ -556,29 +557,29 @@ export default function MyUIPage() {
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Custom Data Adapters:</strong> Created adapters to
-                      transform and normalize data
+                      <strong>Custom Data Adapters:</strong>{" "}
+                      Created adapters to transform and normalize data
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Caching Strategy:</strong> Implemented intelligent
-                      caching to reduce API calls
+                      <strong>Caching Strategy:</strong>{" "}
+                      Implemented intelligent caching to reduce API calls
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Event-Driven Architecture:</strong> Used RabbitMQ
-                      for real-time messaging
+                      <strong>Event-Driven Architecture:</strong>{" "}
+                      Used RabbitMQ for real-time messaging
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
-                      <strong>Token Management:</strong> Developed a robust
-                      token refresh mechanism
+                      <strong>Token Management:</strong>{" "}
+                      Developed a robust token refresh mechanism
                     </div>
                   </li>
                 </ul>
@@ -590,7 +591,7 @@ export default function MyUIPage() {
               </h4>
               <p className="text-gray-300">
                 While the specific implementation details are proprietary, the
-                integration approach followed Ellucian's best practices for
+                integration approach followed Ellucian&apos;s best practices for
                 Ethos Integration. This included using the hub-and-spoke model
                 for data integration, implementing secure API calls, and
                 leveraging the Ethos Data Model for consistent data
@@ -614,28 +615,30 @@ export default function MyUIPage() {
             <ul className="mb-4 space-y-2 text-gray-300">
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Increased Efficiency:</strong> Reduced time spent
-                navigating between different university systems
+                <strong>Increased Efficiency:</strong>{" "}
+                Reduced time spent navigating between different university
+                systems
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Improved Accessibility:</strong> Mobile-friendly design
-                allows access from any device
+                <strong>Improved Accessibility:</strong>{" "}
+                Mobile-friendly design allows access from any device
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Enhanced User Satisfaction:</strong> Positive feedback
-                from students and faculty on the intuitive interface
+                <strong>Enhanced User Satisfaction:</strong>{" "}
+                Positive feedback from students and faculty on the intuitive
+                interface
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Streamlined Processes:</strong> Simplified
-                administrative tasks for both students and staff
+                <strong>Streamlined Processes:</strong>{" "}
+                Simplified administrative tasks for both students and staff
               </li>
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
-                <strong>Reduced Support Tickets:</strong> Fewer technical issues
-                compared to the legacy system
+                <strong>Reduced Support Tickets:</strong>{" "}
+                Fewer technical issues compared to the legacy system
               </li>
             </ul>
             <p className="text-lg text-gray-300">
@@ -655,16 +658,16 @@ export default function MyUIPage() {
           <div className="rounded-lg bg-gray-800 p-6">
             <p className="mb-4 text-lg text-gray-300">
               The MyUI project represents a significant modernization of the
-              University of Idaho's digital infrastructure. As lead developer, I
-              was able to leverage my React expertise to create a user-friendly,
-              efficient platform that serves the diverse needs of the university
-              community.
+              University of Idaho&apos;s digital infrastructure. As lead
+              developer, I was able to leverage my React expertise to create a
+              user-friendly, efficient platform that serves the diverse needs of
+              the university community.
             </p>
             <p className="mb-4 text-lg text-gray-300">
               The card-based architecture provides flexibility for future
               expansion, allowing new services to be integrated seamlessly as
-              the university's needs evolve. The successful implementation of
-              MyUI demonstrates the power of modern web technologies to
+              the university&apos;s needs evolve. The successful implementation
+              of MyUI demonstrates the power of modern web technologies to
               transform institutional systems.
             </p>
             <p className="text-lg text-gray-300">

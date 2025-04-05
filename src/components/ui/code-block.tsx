@@ -10,7 +10,6 @@ interface CodeBlockProps {
 const CodeBlock: React.FC<CodeBlockProps> = ({
   children,
   title,
-  language,
   className = "",
 }) => {
   return (

@@ -145,7 +145,8 @@ export default function Page() {
               GOT THAT COOL IDEA?
             </h2>
             <p className="mb-8 text-sm sm:text-base md:text-lg text-gray-400 whitespace-nowrap overflow-hidden text-ellipsis md:whitespace-normal">
-              I'm open to new opportunities and would love to hear from you.
+              I&apos;m open to new opportunities and would love to hear from
+              you.
             </p>
             <Link href="mailto:n_cole_summers@icloud.com">
               <Button className="bg-white text-black hover:bg-gray-200">
