@@ -1,12 +1,19 @@
 import React from "react";
-import { IconProps } from "./play-icon"; // Assuming IconProps is defined here or in a shared file
 
-export const UploadIcon: React.FC<IconProps> = props => {
+interface UploadIconProps {
+  className?: string; // Allow custom className
+}
+
+export const UploadIcon: React.FC<UploadIconProps> = ({
+  className,
+  ...props
+}) => {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className} // Apply custom className
       {...props}
     >
       <path

@@ -19,21 +19,18 @@ const ProjectGrid = () => {
             title="AI Data Extraction Research"
             description="Research spike exploring the feasibility of using foundation models to extract faculty and staff profile data for the University of Idaho website."
             link="/projects/profile-extractor"
-            hasCase={true}
             image={profileExtractorImage}
           />
           <ProjectCard
             title="MyUI"
             description="Lead developer for University of Idaho's modernized dashboard, creating custom React components to streamline student access to university services."
             link="/projects/myui"
-            hasCase={true}
             image={myuiImage}
           />
           <ProjectCard
             title="Mikrotik Configuration Generator"
             description="A cross-platform desktop application that standardizes router configurations for ISP technicians, built with Go and Wails."
             link="/projects/mikrotik-config-gen"
-            hasCase={true}
             image={mikrotikConfigGenImage}
           />
         </div>

@@ -1,20 +1,26 @@
 import React from "react";
-import { IconProps } from "./play-icon"; // Import from play-icon where it's defined
 
-interface ProgressCircleIconProps extends IconProps {
+interface ProgressCircleIconProps {
   percentage: number;
+  className?: string; // Allow custom className
 }
 
 const CIRCUMFERENCE = 2 * Math.PI * 45; // 2 * PI * radius (45)
 
 export const ProgressCircleIcon: React.FC<ProgressCircleIconProps> = ({
   percentage,
+  className,
   ...props
 }) => {
   const offset = CIRCUMFERENCE * (1 - percentage / 100);
 
   return (
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className} // Apply custom className
+      {...props}
+    >
       {/* Background circle */}
       <circle
         cx="50"
