@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Github, Instagram, Linkedin } from "lucide-react";
 import MobileNav from "./mobile-nav";
 import DesktopNav from "./desktop-nav";
 

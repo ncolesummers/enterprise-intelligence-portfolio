@@ -1,5 +1,4 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Github } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
@@ -21,7 +20,9 @@ export default function ProjectCard({
   comingSoon = false, // Default to false
 }: ProjectCardProps) {
   return (
-    <Card className="overflow-hidden p-0"> {/* Removed padding from the Card */}
+    <Card className="overflow-hidden p-0">
+      {" "}
+      {/* Removed padding from the Card */}
       <div className="relative aspect-video">
         <Image
           src={image || "/placeholder.svg"}
