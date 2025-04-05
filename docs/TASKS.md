@@ -1,52 +1,31 @@
 # Component Refactoring Tasks
 
-This document outlines the tasks required to implement the reusable components identified in `docs/PLANNING.md` and refactor the existing pages to use them.
+This document outlines the tasks required to address the UI review feedback and implement the necessary changes to improve the mobile and small screen portfolio experience.
 
-## Icon Components
+## Header and Navigation
 
-- [x] Create `src/components/icons` directory if it doesn't exist.
-- [x] Create `src/components/icons/play-icon.tsx` based on existing inline SVG (found in `src/app/projects/myui/page.tsx` Lines 32, 612).
-- [x] Create `src/components/icons/upload-icon.tsx` based on existing inline SVG (found in `src/app/projects/mikrotik-config-gen/page.tsx` Lines 29, 381).
-- [x] Create `src/components/icons/progress-circle-icon.tsx` based on existing inline SVG (found in `src/app/projects/profile-extractor/page.tsx` Line 378).
-- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use the new Icon components.
+- [ ] Ensure the name and "Work" elements are clearly separated with sufficient spacing for mobile and small screens.
+- [ ] Increase padding around social icons (LinkedIn, GitHub, etc.) to avoid them being too close to each other or the screen edge on mobile devices.
+- [ ] Add an accessible label or tooltip to the floating "N" button to clarify its purpose.
+- [ ] Confirm all interactive elements meet the minimum tap target size for mobile usability.
 
-## UI Components
+## Typography and Content Hierarchy
 
-- [x] Create `src/components/ui` directory if it doesn't exist.
-- [x] Create `src/components/ui/content-card.tsx` component.
-- [x] Refactor `about/page.tsx` to use `ContentCard`.
-- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `ContentCard`.
-- [x] Create `src/components/ui/bulleted-list.tsx` component (including `ListItem`).
-- [x] Refactor `about/page.tsx` to use `BulletedList`.
-- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `BulletedList`.
-- [x] Create `src/components/ui/code-block.tsx` component.
-- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `CodeBlock`.
-- [x] Create `src/components/ui/section.tsx` component.
-- [x] Refactor `about/page.tsx` to use `Section`.
-- [x] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `Section`.
+- [ ] Create a clear visual hierarchy in the headline text for small screens.
+- [ ] Break long headlines into multiple lines to improve readability and prevent overwhelming the user on mobile devices.
+- [ ] Adjust the font size and weight of the subtitle to ensure it complements the headline without being overshadowed.
 
-## Layout Components
+## Call-to-Action Elements
 
-- [ ] Create `src/components/layout` directory if it doesn't exist.
-- [ ] Create `src/components/layout/app-footer.tsx` component.
-- [ ] Refactor `src/app/page.tsx` to use `AppFooter`.
-- [ ] Refactor `about/page.tsx` to use `AppFooter`.
-- [ ] Create `src/components/layout/app-header.tsx` component (with variants for main and project pages).
-- [ ] Refactor `src/app/page.tsx` to use `AppHeader` (main variant).
-- [ ] Refactor `about/page.tsx` to use `AppHeader` (main variant).
-- [ ] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `AppHeader` (project variant).
-- [ ] Create `src/components/layout/app-layout.tsx` component.
-- [ ] Refactor `src/app/page.tsx` to use `AppLayout`.
-- [ ] Refactor `about/page.tsx` to use `AppLayout`.
-- [ ] Refactor project pages (`myui`, `profile-extractor`, `mikrotik-config-gen`) to use `AppLayout`.
+- [ ] Redesign the "Selected Projects" button to have a higher contrast against the background for better visibility and accessibility on small screens.
+- [ ] Add clear visual cues (such as borders or shadows) to indicate button interactivity.
 
-## Project Card Component
+## Layout and Spacing
 
-- [ ] Create `src/components/project-card.tsx`.
-- [ ] Move `ProjectCard` component implementation from `src/app/page.tsx` to `src/components/project-card.tsx`.
-- [ ] Update `src/app/page.tsx` to import and use the component from `src/components/project-card.tsx`.
+- [ ] Introduce consistent and responsive padding around the content to avoid elements touching the screen edges on mobile devices.
+- [ ] Ensure spacing adjustments maintain visual balance across different device sizes.
 
 ## Final Review
 
-- [ ] Review all refactored pages for consistency and ensure no functionality was broken.
+- [ ] Review all updated pages for consistency and ensure no functionality was broken.
 - [ ] Perform final cleanup and remove any unused code or styles.
