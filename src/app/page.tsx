@@ -1,8 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import profileExtractorImage from "@/assets/profile-extractor.png";
+import myuiImage from "@/assets/myui.png";
+import mikrotikConfigGenImage from "@/assets/mikrotik-config-gen.png";
+import uidahoWebsiteImage from "@/assets/uidaho-website.png";
 import { Github, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
+import { StaticImageData } from "next/image";
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -106,24 +112,28 @@ export default function Page() {
                 title="University of Idaho Website"
                 description="A modern redesign of the University of Idaho website built with Sitecore, Next.js, TypeScript, Storybook, and C#."
                 comingSoon={true}
+                image={uidahoWebsiteImage}
               />
               <ProjectCard
                 title="AI Data Extraction Research"
                 description="Research spike exploring the feasibility of using foundation models to extract faculty and staff profile data for the University of Idaho website."
                 link="/projects/profile-extractor"
                 hasCase={true}
+                image={profileExtractorImage}
               />
               <ProjectCard
                 title="MyUI"
                 description="Lead developer for University of Idaho's modernized dashboard, creating custom React components to streamline student access to university services."
                 link="/projects/myui"
                 hasCase={true}
+                image={myuiImage}
               />
               <ProjectCard
                 title="Mikrotik Configuration Generator"
                 description="A cross-platform desktop application that standardizes router configurations for ISP technicians, built with Go and Wails."
                 link="/projects/mikrotik-config-gen"
                 hasCase={true}
+                image={mikrotikConfigGenImage}
               />
             </div>
           </div>
@@ -184,32 +194,46 @@ function ProjectCard({
   link = "#",
   hasCase = false,
   comingSoon = false,
+  image,
 }: {
   title: string;
   description: string;
   link?: string;
   hasCase?: boolean;
   comingSoon?: boolean;
+  image?: StaticImageData;
 }) {
   return (
     <div className="group relative overflow-hidden rounded-lg">
       <Link href={comingSoon ? "#" : link} className="block">
-        <div className="aspect-video w-full bg-gray-800" />
+        {image && (
+          <div className="aspect-video w-full overflow-hidden">
+            <Image
+              src={image}
+              alt={`${title} project preview`}
+              className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+              placeholder="blur"
+            />
+          </div>
+        )}
+        {!image && <div className="aspect-video w-full bg-gray-800" />}
         <div className="mt-4">
           <h3 className="text-2xl font-bold">{title}</h3>
           <p className="text-gray-400">{description}</p>
-          {comingSoon ? (
-            <div className="mt-4 inline-flex h-10 items-center rounded-md border border-white/20 bg-black px-4 py-2 text-sm font-medium text-white">
-              Coming Soon
-            </div>
-          ) : (
-            <Button
-              variant="outline"
-              className="mt-4 border-white/20 text-white hover:bg-white/10"
-            >
-              {hasCase ? "View case study" : "View project"}
-            </Button>
-          )}
+          {comingSoon
+            ? (
+              <div className="mt-4 inline-flex h-10 items-center rounded-md border border-white/20 bg-black px-4 py-2 text-sm font-medium text-white">
+                Coming Soon
+              </div>
+            )
+            : (
+              <Button
+                variant="outline"
+                className="mt-4 border-white/20 text-white hover:bg-white/10"
+              >
+                {hasCase ? "View case study" : "View project"}
+              </Button>
+            )}
         </div>
       </Link>
     </div>
