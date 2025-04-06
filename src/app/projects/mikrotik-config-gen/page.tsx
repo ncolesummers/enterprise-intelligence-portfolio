@@ -6,6 +6,8 @@ import ContentCard from "@/components/ui/content-card";
 import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
 import CodeBlock from "@/components/ui/code-block";
 import Section from "@/components/ui/section";
+import Image from "next/image";
+import mcg2020 from "@/assets/mcg-2020.jpeg";
 
 export default function MikrotikConfigGenPage() {
   return (
@@ -109,9 +111,11 @@ export default function MikrotikConfigGenPage() {
             </div>
             <div className="overflow-hidden rounded-lg bg-gray-800">
               <div className="aspect-video w-full bg-gray-700 p-4 flex items-center justify-center">
-                <p className="text-center text-gray-400">
-                  Mikrotik Configuration Generator UI
-                </p>
+                <Image
+                  src={mcg2020}
+                  alt="Mikrotik Configuration Generator Screenshot"
+                  className="h-full w-full object-cover"
+                />
               </div>
               <div className="p-4">
                 <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
