@@ -46,14 +46,18 @@ export default function ProjectCard({
       </CardContent>
       <CardFooter className="p-4 pt-0">
         {comingSoon && (
-          <span className="inline-flex text-white text-sm font-medium py-1 rounded">
+          <Button
+            disabled={true}
+            variant="secondary"
+            className="mt-4 w-full inline-flex items-center gap-2 text-sm hover:underline"
+          >
             Coming Soon™
-          </span>
+          </Button>
         )}
         {link && (
           <Button
             asChild
-            variant="link"
+            variant="secondary"
             className="mt-4 w-full inline-flex items-center gap-2 text-sm hover:underline"
           >
             <Link href={link} target="_blank">

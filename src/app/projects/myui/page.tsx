@@ -11,13 +11,13 @@ import Section from "@/components/ui/section";
 export default function MyUIPage() {
   return (
     <div className="min-h-screen bg-black text-white">
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60">
-        <div className="container flex h-14 items-center">
+      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60 px-4">
+        <div className="container flex pl-2 h-14 items-center">
           <Link
             href="/"
             className="flex items-center gap-2 text-sm hover:text-gray-300"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className=" h-4 w-4" />
             Back to Home
           </Link>
         </div>

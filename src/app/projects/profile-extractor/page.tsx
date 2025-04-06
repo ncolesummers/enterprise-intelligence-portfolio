@@ -12,7 +12,7 @@ import Image from "next/image";
 export default function ProfileExtractorPage() {
   return (
     <div className="min-h-screen bg-black text-white">
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60">
+      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60 px-4">
         <div className="container flex h-14 items-center">
           <Link
             href="/"
