@@ -200,24 +200,24 @@ export default function ProfileExtractorPage() {
               </p>
               <BulletedList>
                 <ListItem>
-                  <strong>fetch_page:</strong> Retrieves HTML content
-                  respectfully (using configured delays)
+                  <strong className="mr-2">fetch_page:</strong> Retrieves HTML
+                  content respectfully (using configured delays)
                 </ListItem>
                 <ListItem>
-                  <strong>preprocess_html:</strong> Parses and cleans HTML using
-                  BeautifulSoup
+                  <strong className="mr-2">preprocess_html:</strong> Parses and
+                  cleans HTML using BeautifulSoup
                 </ListItem>
                 <ListItem>
-                  <strong>extract_data:</strong> Uses Gemini Flash to extract
-                  information into a Pydantic schema
+                  <strong className="mr-2">extract_data:</strong> Uses Gemini
+                  Flash to extract information into a Pydantic schema
                 </ListItem>
                 <ListItem>
-                  <strong>validate_data:</strong> Employs an LLM-as-a-judge
-                  pattern to evaluate accuracy
+                  <strong className="mr-2">validate_data:</strong> Employs an
+                  LLM-as-a-judge pattern to evaluate accuracy
                 </ListItem>
                 <ListItem>
-                  <strong>handle_error:</strong> Captures and logs errors at
-                  each step
+                  <strong className="mr-2">handle_error:</strong> Captures and
+                  logs errors at each step
                 </ListItem>
               </BulletedList>
             </ContentCard>
