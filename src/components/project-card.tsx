@@ -48,7 +48,7 @@ export default function ProjectCard({
         {comingSoon && (
           <Button
             disabled={true}
-            variant="secondary"
+            variant="link"
             className="mt-4 w-full inline-flex items-center gap-2 text-sm hover:underline"
           >
             Coming Soon™
@@ -57,7 +57,7 @@ export default function ProjectCard({
         {link && (
           <Button
             asChild
-            variant="secondary"
+            variant="link"
             className="mt-4 w-full inline-flex items-center gap-2 text-sm hover:underline"
           >
             <Link href={link} target="_blank">
