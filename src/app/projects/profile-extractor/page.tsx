@@ -337,13 +337,11 @@ validation_model = ChatGoogleGenerativeAI(
             </h3>
             <p className="mb-4 text-gray-300">
               LangSmith was used for comprehensive monitoring and debugging of
-              the extraction process:
+              the extraction process
             </p>
             <div className="grid gap-8 md:grid-cols-2">
               <div>
-                <h4 className="mb-2 text-lg font-semibold">
-                  LangSmith Features Used
-                </h4>
+                <h4 className="mb-2 text-lg font-semibold">Features Used</h4>
                 <BulletedList>
                   <ListItem>
                     Detailed tracing of each step in the LangGraph state machine
@@ -361,26 +359,11 @@ validation_model = ChatGoogleGenerativeAI(
                   Metrics Collected
                 </h4>
                 <BulletedList>
-                  <ListItem>
-                    <strong>Accuracy:</strong> Field-level correctness reported
-                    by the validation node
-                  </ListItem>
-                  <ListItem>
-                    <strong>Token Usage:</strong> Input, output, and total
-                    tokens per LLM call
-                  </ListItem>
-                  <ListItem>
-                    <strong>Estimated Cost:</strong> Calculated based on token
-                    usage and model pricing
-                  </ListItem>
-                  <ListItem>
-                    <strong>Latency:</strong> Processing time per profile and
-                    per node
-                  </ListItem>
-                  <ListItem>
-                    <strong>Success Rate:</strong> Percentage of URLs processed
-                    without errors
-                  </ListItem>
+                  <ListItem>Accuracy</ListItem>
+                  <ListItem>Token Usage</ListItem>
+                  <ListItem>Estimated Cost</ListItem>
+                  <ListItem>Latency</ListItem>
+                  <ListItem>Success Rate</ListItem>
                 </BulletedList>
               </div>
             </div>
@@ -457,47 +440,32 @@ validation_model = ChatGoogleGenerativeAI(
             <h3 className="mb-4 text-xl font-semibold">
               Detailed Performance Metrics
             </h3>
-            <div className="grid gap-8 md:grid-cols-2">
-              <div>
-                <h4 className="mb-2 text-lg font-semibold">
-                  LangSmith Features Used
-                </h4>
-                <BulletedList>
-                  <ListItem>
-                    Detailed tracing of each step in the LangGraph state machine
-                  </ListItem>
-                  <ListItem>Token usage tracking for cost estimation</ListItem>
-                  <ListItem>
-                    Latency measurement for performance analysis
-                  </ListItem>
-                  <ListItem>Error logging and categorization</ListItem>
-                  <ListItem>Prompt inspection and refinement</ListItem>
-                </BulletedList>
-              </div>
+            <div className="grid gap-8">
               <div>
                 <h4 className="mb-2 text-lg font-semibold">
                   Metrics Collected
                 </h4>
                 <BulletedList>
                   <ListItem>
-                    <strong>Accuracy:</strong> Field-level correctness reported
-                    by the validation node
+                    <strong className="mr-2">Accuracy:</strong> Field-level
+                    correctness reported by the validation node
                   </ListItem>
                   <ListItem>
-                    <strong>Token Usage:</strong> Input, output, and total
-                    tokens per LLM call
+                    <strong className="mr-2">Token Usage:</strong> Input,
+                    output, and total tokens per LLM call
                   </ListItem>
                   <ListItem>
-                    <strong>Estimated Cost:</strong> Calculated based on token
-                    usage and model pricing
+                    <strong className="mr-2">Estimated Cost:</strong> Calculated
+                    based on token usage and model pricing. Tiktoken was used to
+                    produce the estimates.
                   </ListItem>
                   <ListItem>
-                    <strong>Latency:</strong> Processing time per profile and
-                    per node
+                    <strong className="mr-2">Latency:</strong> Processing time
+                    per profile and per node
                   </ListItem>
                   <ListItem>
-                    <strong>Success Rate:</strong> Percentage of URLs processed
-                    without errors
+                    <strong className="mr-2">Success Rate:</strong> Percentage
+                    of URLs processed without errors
                   </ListItem>
                 </BulletedList>
               </div>

@@ -16,8 +16,8 @@ const Hero = () => {
         </p>
         <div className="mt-8 flex items-center">
           <Button
-            variant="outline"
-            className="border-white/20 text-white hover:bg-white/10"
+            variant="default"
+            className="border-white/20 text-black hover:bg-white/10"
             onClick={() => {
               document.getElementById("work")?.scrollIntoView({
                 behavior: "smooth",
@@ -26,7 +26,7 @@ const Hero = () => {
             }}
             aria-label="View Selected Projects"
           >
-            selected projects
+            Selected Projects
           </Button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "./ui/button";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
@@ -21,8 +22,6 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <Card className="overflow-hidden p-0">
-      {" "}
-      {/* Removed padding from the Card */}
       <div className="relative aspect-video">
         <Image
           src={image || "/placeholder.svg"}
@@ -52,13 +51,15 @@ export default function ProjectCard({
           </span>
         )}
         {link && (
-          <Link
-            href={link}
-            target="_blank"
-            className="inline-flex items-center gap-2 text-sm hover:underline"
+          <Button
+            asChild
+            variant="link"
+            className="mt-4 w-full inline-flex items-center gap-2 text-sm hover:underline"
           >
-            View Project
-          </Link>
+            <Link href={link} target="_blank">
+              View Project
+            </Link>
+          </Button>
         )}
       </CardFooter>
     </Card>
