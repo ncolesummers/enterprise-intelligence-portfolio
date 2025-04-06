@@ -7,6 +7,8 @@ import { PlayIcon } from "@/components/icons/play-icon";
 import ContentCard from "@/components/ui/content-card";
 import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
 import Section from "@/components/ui/section";
+import Image from "next/image";
+import EllucianImage from "@/assets/ellucian-experience.jpeg";
 
 export default function MyUIPage() {
   return (
@@ -107,9 +109,7 @@ export default function MyUIPage() {
             </div>
             <div className="overflow-hidden rounded-lg bg-gray-800">
               <div className="aspect-video w-full bg-gray-700 p-4 flex items-center justify-center">
-                <p className="text-center text-gray-400">
-                  MyUI Dashboard Interface
-                </p>
+                <Image src={EllucianImage} alt="Ellucian Experience" />
               </div>
               <div className="p-4">
                 <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
