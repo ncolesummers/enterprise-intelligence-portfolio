@@ -1,4 +1,5 @@
 import { Github, Instagram, Linkedin } from "lucide-react";
+import { Socials } from "@/lib/const";
 import Link from "next/link";
 
 const Footer = () => {
@@ -7,7 +8,7 @@ const Footer = () => {
       <div className="container flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
         <div className="flex items-center gap-6">
           <Link
-            href="https://www.linkedin.com/in/n-cole-summers/"
+            href={Socials[0].href}
             target="_blank"
             className="text-white hover:text-gray-300"
             aria-label="LinkedIn Profile"
@@ -15,7 +16,7 @@ const Footer = () => {
             <Linkedin className="h-5 w-5" />
           </Link>
           <Link
-            href="https://github.com/ncolesummers/"
+            href={Socials[1].href}
             target="_blank"
             className="text-white hover:text-gray-300"
             aria-label="GitHub Profile"
@@ -23,7 +24,7 @@ const Footer = () => {
             <Github className="h-5 w-5" />
           </Link>
           <Link
-            href="https://www.instagram.com/ncolesummers/"
+            href={Socials[2].href}
             target="_blank"
             className="text-white hover:text-gray-300"
             aria-label="Instagram Profile"
@@ -31,7 +32,6 @@ const Footer = () => {
             <Instagram className="h-5 w-5" />
           </Link>
         </div>
-        <p className="text-sm text-gray-400">all socials @ncolesummers</p>
       </div>
     </footer>
   );

@@ -1,30 +1,44 @@
 import React from "react";
+import Link from "next/link";
+import { Github, Instagram, Linkedin } from "lucide-react";
+import { Socials } from "@/lib/const";
 
 const DesktopNav = () => {
   return (
-    <div className="hidden sm:flex justify-between items-center">
-      <nav className="flex space-x-8">
-        <a href="#work" className="text-lg font-medium">
+    <div className="hidden sm:flex items-center">
+      <nav className="flex space-x-6 mr-auto">
+        <Link href="#work" className="text-lg font-medium">
           Work
-        </a>
-        <a href="#about" className="text-lg font-medium">
+        </Link>
+        <Link href="#about" className="text-lg font-medium">
           About
-        </a>
-        <a href="#contact" className="text-lg font-medium">
-          Contact Me
-        </a>
+        </Link>
       </nav>
-      <div className="flex space-x-4">
-        <a href="https://twitter.com" aria-label="Twitter" className="text-lg">
-          Twitter
-        </a>
-        <a
-          href="https://linkedin.com"
-          aria-label="LinkedIn"
-          className="text-lg"
+      <div className="flex space-x-4 ml-6">
+        <Link
+          href={Socials[0].href}
+          target="_blank"
+          className="text-white hover:text-gray-300"
+          aria-label="LinkedIn Profile"
         >
-          LinkedIn
-        </a>
+          <Linkedin className="h-5 w-5" />
+        </Link>
+        <Link
+          href={Socials[1].href}
+          target="_blank"
+          className="text-white hover:text-gray-300"
+          aria-label="GitHub Profile"
+        >
+          <Github className="h-5 w-5" />
+        </Link>
+        <Link
+          href={Socials[2].href}
+          target="_blank"
+          className="text-white hover:text-gray-300"
+          aria-label="Instagram Profile"
+        >
+          <Instagram className="h-5 w-5" />
+        </Link>
       </div>
     </div>
   );
