@@ -6,7 +6,7 @@ const MobileNav = () => {
   return (
     <div className="block sm:hidden">
       <nav className="flex justify-center items-center space-x-6">
-        <Link href="#about" className="text-lg font-medium">
+        <Link href="/about" className="text-lg font-medium">
           About
         </Link>
         <Link
