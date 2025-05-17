@@ -62,11 +62,11 @@ export default function AboutPage() {
                 <Instagram className="h-5 w-5" />
               </Button>
             </Link>
-            <Link href="mailto:n_cole_summers@icloud.com">
+            <a href="mailto:n_cole_summers@icloud.com">
               <Button className="bg-white text-black hover:bg-gray-200">
                 Contact me
               </Button>
-            </Link>
+            </a>
           </nav>
         </div>
       </header>
@@ -103,7 +103,7 @@ export default function AboutPage() {
                 GitHub
               </Button>
             </Link>
-            <Link href="mailto:n_cole_summers@icloud.com">
+            <a href="mailto:n_cole_summers@icloud.com">
               <Button
                 variant="outline"
                 className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
@@ -111,7 +111,7 @@ export default function AboutPage() {
                 <Mail className="h-4 w-4" />
                 Email
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -284,11 +284,11 @@ export default function AboutPage() {
             the latest sci-fi novel, I&apos;d love to hear from you.
           </p>
           <div className="flex justify-center gap-4">
-            <Link href="mailto:n_cole_summers@icloud.com">
+            <a href="mailto:n_cole_summers@icloud.com">
               <Button className="bg-white text-black hover:bg-gray-200">
                 Get in Touch
               </Button>
-            </Link>
+            </a>
             <Link href="/">
               <Button
                 variant="outline"

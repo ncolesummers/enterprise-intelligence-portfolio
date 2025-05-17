@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 const ContactSection = () => {
   return (
@@ -11,11 +10,11 @@ const ContactSection = () => {
         <p className="mb-8 text-sm sm:text-base md:text-lg text-gray-400">
           I&apos;m open to new opportunities and would love to hear from you.
         </p>
-        <Link href="mailto:n_cole_summers@icloud.com">
+        <a href="mailto:n_cole_summers@icloud.com">
           <Button className="bg-white text-black hover:bg-gray-200">
             Contact me
           </Button>
-        </Link>
+        </a>
       </div>
     </section>
   );
