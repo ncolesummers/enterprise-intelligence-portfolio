@@ -13,63 +13,12 @@ import Link from "next/link";
 import ContentCard from "@/components/ui/content-card";
 import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
 import Section from "@/components/ui/section";
+import Header from "@/components/header";
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-black text-white">
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60">
-        <div className="container flex h-14 items-center justify-between">
-          <Link className="text-lg font-bold" href="/">
-            n_cole_summers
-          </Link>
-          <nav className="flex items-center gap-4">
-            <Link href="/" className="text-sm hover:text-gray-300">
-              Work
-            </Link>
-            <Link href="/about" className="text-sm hover:text-gray-300">
-              About
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/n-cole-summers/"
-              target="_blank"
-            >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white hover:text-gray-300"
-              >
-                <Linkedin className="h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="https://github.com/ncolesummers/" target="_blank">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white hover:text-gray-300"
-              >
-                <Github className="h-5 w-5" />
-              </Button>
-            </Link>
-            <Link
-              href="https://www.instagram.com/ncolesummers/"
-              target="_blank"
-            >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white hover:text-gray-300"
-              >
-                <Instagram className="h-5 w-5" />
-              </Button>
-            </Link>
-            <a href="mailto:n_cole_summers@icloud.com">
-              <Button className="bg-white text-black hover:bg-gray-200">
-                Contact me
-              </Button>
-            </a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <main className="container py-12 px-4">
         {/* Hero Section */}
