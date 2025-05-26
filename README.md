@@ -48,9 +48,20 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 - `pnpm format` - Format code with Prettier
 
 ### Testing
-- `pnpm test:e2e` - Run Playwright E2E tests
+- `pnpm test:e2e` - Run Playwright E2E tests (UI behavior + mocked integration)
 - `pnpm test:e2e:ui` - Run tests with interactive UI
 - `pnpm test:contact-form` - Run contact form specific tests
+- `TEST_INTEGRATION=true pnpm test:e2e` - Run full integration tests (use sparingly due to rate limits)
+
+#### Testing Strategy
+
+This project uses a comprehensive three-tier testing approach:
+
+1. **UI Behavior Tests**: Fast, reliable tests with mocked API responses for immediate feedback
+2. **Integration Health Checks**: API availability and endpoint configuration verification
+3. **Full Integration Tests**: Real API testing with FormSpree (manual trigger due to rate limits)
+
+For detailed testing documentation and CI/CD strategies, see [`docs/TEST_PLAN.md`](./docs/TEST_PLAN.md).
 
 ## Architecture
 
