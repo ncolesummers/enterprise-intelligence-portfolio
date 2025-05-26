@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -9,6 +7,13 @@ import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
 import Section from "@/components/ui/section";
 import Image from "next/image";
 import EllucianImage from "@/assets/ellucian-experience.jpeg";
+import { generatePageMetadata } from "@/lib/metadata";
+
+export const metadata = generatePageMetadata({
+  title: "MyUI Dashboard - University of Idaho",
+  description: "Lead developer for University of Idaho's modernized dashboard built on Ellucian Experience platform. Created custom React components streamlining student access to university services.",
+  path: "/projects/myui"
+});
 
 export default function MyUIPage() {
   return (
