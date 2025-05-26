@@ -10,15 +10,27 @@ import { submitContactForm } from "@/lib/actions";
 export default function ContactForm() {
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   async function handleSubmit(formData: FormData) {
     setPending(true);
+    setMessage("");
+    setIsSuccess(false);
+    
     try {
       const response = await submitContactForm(formData);
       setMessage(response.message);
+      setIsSuccess(response.success);
+      
+      // Reset form on success
+      if (response.success) {
+        const form = document.getElementById("contact-form") as HTMLFormElement;
+        form?.reset();
+      }
     } catch (error) {
       console.error(error);
       setMessage("Something went wrong. Please try again.");
+      setIsSuccess(false);
     } finally {
       setPending(false);
     }
@@ -26,7 +38,7 @@ export default function ContactForm() {
 
   return (
     <Card className="p-6">
-      <form action={handleSubmit} className="space-y-4">
+      <form id="contact-form" action={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium mb-2">
             Name
@@ -49,7 +61,9 @@ export default function ContactForm() {
           {pending ? "Sending..." : "Send Message"}
         </Button>
         {message && (
-          <p className="text-sm text-center mt-4 text-muted-foreground">
+          <p className={`text-sm text-center mt-4 ${
+            isSuccess ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
+          }`}>
             {message}
           </p>
         )}
