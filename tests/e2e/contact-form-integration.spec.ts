@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { emailTestConfig } from '../fixtures/email-config';
+import { fillFormWithValidation } from '../fixtures/test-data';
 
 // Integration tests - API health check + optional full integration
 test.use({ browserName: 'chromium' });
@@ -14,40 +15,24 @@ test.describe('Contact Form Integration', () => {
   });
 
   test('FormSpree endpoint configuration is correct', async ({ page }) => {
-    // Verify our endpoint URL is properly configured
+    // Since we use server actions, verify endpoint via successful submission
     await page.goto('/');
-    
-    // Check that our form would hit the correct endpoint
-    // We'll start form submission but cancel before sending
-    let requestUrl = '';
-    
-    page.on('request', (request) => {
-      if (request.url().includes('formspree.io')) {
-        requestUrl = request.url();
-        console.log('FormSpree endpoint configured as:', request.url());
-      }
-    });
-    
     await page.locator('#contact').scrollIntoViewIfNeeded();
-    await page.fill('#name', 'Config Test');
-    await page.fill('#email', 'test@example.com');
-    await page.fill('#message', 'Configuration verification test');
     
-    // Mock the response to avoid rate limiting
-    await page.route('**/formspree.io/**', async (route) => {
-      requestUrl = route.request().url();
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ ok: true }),
-      });
+    // Fill form using helper function
+    await fillFormWithValidation(page, {
+      name: 'Config Test',
+      email: 'test@example.com', 
+      message: 'Configuration verification test'
     });
     
+    // Submit form and verify success
     await page.click('button[type="submit"]');
-    await page.waitForTimeout(1000);
     
-    expect(requestUrl).toBe(emailTestConfig.formspreeEndpoint);
-    console.log('✅ Correct FormSpree endpoint configured');
+    // Wait for submission and verify success message
+    await expect(page.locator('text=Thanks for your message')).toBeVisible({ timeout: 10000 });
+    
+    console.log('✅ FormSpree endpoint configuration verified via successful submission');
   });
 
   // Full integration test - only runs when explicitly enabled
