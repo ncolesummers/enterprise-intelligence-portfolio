@@ -2,8 +2,22 @@ import { test, expect } from '@playwright/test';
 import { emailTestConfig } from '../fixtures/email-config';
 import { validFormData, invalidFormData } from '../fixtures/test-data';
 
-test.describe('Contact Form', () => {
+test.describe('Contact Form - UI Behavior', () => {
   test.beforeEach(async ({ page }) => {
+    // Mock FormSpree API for consistent multi-browser testing
+    await page.route('**/formspree.io/**', async (route) => {
+      // Simulate successful FormSpree response
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ 
+          ok: true,
+          next: 'https://formspree.io/thanks',
+          submissionText: 'Thank you!'
+        }),
+      });
+    });
+
     await page.goto('/');
     // Scroll to contact section
     await page.locator('#contact').scrollIntoViewIfNeeded();
@@ -14,27 +28,26 @@ test.describe('Contact Form', () => {
       // Track network requests to FormSpree
       const formspreeRequests: any[] = [];
       
-      if (emailTestConfig.enableNetworkInterception) {
-        await page.route(emailTestConfig.formspreeEndpoint, async (route, request) => {
-          const postData = request.postData();
-          if (postData) {
-            try {
-              const submittedData = JSON.parse(postData);
-              formspreeRequests.push(submittedData);
-            } catch (e) {
-              // If not JSON, store raw data
-              formspreeRequests.push({ raw: postData });
-            }
+      // Override the global mock to capture request data
+      await page.route(emailTestConfig.formspreeEndpoint, async (route, request) => {
+        const postData = request.postData();
+        if (postData) {
+          try {
+            const submittedData = JSON.parse(postData);
+            formspreeRequests.push(submittedData);
+          } catch (e) {
+            // If not JSON, store raw data
+            formspreeRequests.push({ raw: postData });
           }
-          
-          // Mock successful response to avoid actual email sending during tests
-          await route.fulfill({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify({ ok: true }),
-          });
+        }
+        
+        // Return successful response
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({ ok: true }),
         });
-      }
+      });
 
       // Fill out and submit the form
       await page.fill('#name', emailTestConfig.testSenderName);
@@ -47,20 +60,18 @@ test.describe('Contact Form', () => {
       // Wait for loading state to complete
       await expect(page.locator('button[type="submit"]')).not.toContainText('Sending...');
       
-      if (emailTestConfig.enableNetworkInterception) {
-        // Verify request was made
-        expect(formspreeRequests).toHaveLength(1);
-        
-        const submittedData = formspreeRequests[0];
-        
-        // Verify the correct data was submitted
-        expect(submittedData.name).toBe(emailTestConfig.testSenderName);
-        expect(submittedData.email).toBe(emailTestConfig.testSenderEmail);
-        expect(submittedData.message).toBe(emailTestConfig.testMessage);
-        
-        // Log the submitted data for debugging email issues
-        console.log('FormSpree submission data:', submittedData);
-      }
+      // Verify request was made
+      expect(formspreeRequests).toHaveLength(1);
+      
+      const submittedData = formspreeRequests[0];
+      
+      // Verify the correct data was submitted
+      expect(submittedData.name).toBe(emailTestConfig.testSenderName);
+      expect(submittedData.email).toBe(emailTestConfig.testSenderEmail);
+      expect(submittedData.message).toBe(emailTestConfig.testMessage);
+      
+      // Log the submitted data for debugging email issues
+      console.log('FormSpree submission data:', submittedData);
       
       // Verify success message appears
       await expect(page.locator('text=Thanks for your message')).toBeVisible();
@@ -69,12 +80,10 @@ test.describe('Contact Form', () => {
     test('should verify FormSpree endpoint configuration', async ({ page }) => {
       // Check that the form action points to the correct endpoint
       const expectedEndpoint = emailTestConfig.formspreeEndpoint;
-      
-      // This test verifies the endpoint is configured correctly in the code
-      // We'll check the network request destination
       let requestUrl = '';
       
-      await page.route('https://formspree.io/**', async (route, request) => {
+      // Override global mock to capture URL
+      await page.route('**/formspree.io/**', async (route, request) => {
         requestUrl = request.url();
         await route.fulfill({
           status: 200,
@@ -88,6 +97,9 @@ test.describe('Contact Form', () => {
       await page.fill('#email', 'test@example.com');
       await page.fill('#message', 'Test message for endpoint verification');
       await page.click('button[type="submit"]');
+      
+      // Wait for form submission
+      await expect(page.locator('button[type="submit"]')).not.toContainText('Sending...');
       
       // Verify correct endpoint was called
       expect(requestUrl).toBe(expectedEndpoint);
@@ -154,8 +166,8 @@ test.describe('Contact Form', () => {
 
   test.describe('Form State Management', () => {
     test('should show loading state during submission', async ({ page }) => {
-      // Mock slow response to see loading state
-      await page.route(emailTestConfig.formspreeEndpoint, async (route) => {
+      // Override global mock with slow response to see loading state
+      await page.route('**/formspree.io/**', async (route) => {
         // Delay response to simulate slow network
         await new Promise(resolve => setTimeout(resolve, 1000));
         await route.fulfill({
@@ -180,13 +192,7 @@ test.describe('Contact Form', () => {
     });
 
     test('should reset form after successful submission', async ({ page }) => {
-      await page.route(emailTestConfig.formspreeEndpoint, async (route) => {
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify({ ok: true }),
-        });
-      });
+      // Use the global mock (no need to override for this test)
       
       // Fill and submit form
       await page.fill('#name', validFormData.name);
