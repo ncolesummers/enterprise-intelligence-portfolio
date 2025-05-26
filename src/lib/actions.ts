@@ -1,13 +1,7 @@
 "use server";
 
 import { z } from "zod";
-
-// Form validation schema
-const contactFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters").max(100, "Name too long"),
-  email: z.string().email("Please enter a valid email address"),
-  message: z.string().min(10, "Message must be at least 10 characters").max(1000, "Message too long"),
-});
+import { contactFormSchema } from "./validation";
 
 export async function submitContactForm(formData: FormData) {
   try {
@@ -20,8 +14,11 @@ export async function submitContactForm(formData: FormData) {
 
     const validatedData = contactFormSchema.parse(rawData);
 
-    // Submit to FormSpree
-    const formspreeEndpoint = "https://formspree.io/f/xeogbrzn";
+    // Use mock endpoint during testing
+    const isTestMode = process.env.NODE_ENV === 'test' || process.env.PLAYWRIGHT_TEST_MODE === 'true';
+    const formspreeEndpoint = isTestMode 
+      ? "http://localhost:3001/api/test/formspree-mock"
+      : "https://formspree.io/f/xeogbrzn";
     
     const response = await fetch(formspreeEndpoint, {
       method: "POST",

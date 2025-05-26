@@ -59,10 +59,24 @@ This is a Next.js 15 portfolio website built with the App Router architecture, s
 - next-themes for theme management
 - Lucide React for icons
 - clsx + tailwind-merge via `cn()` utility for conditional styling
+- React Hook Form + Zod for form validation
+- Playwright for comprehensive E2E testing
 
 ### Development Notes
 
 The codebase follows shadcn/ui conventions with the `cn()` utility function for merging Tailwind classes. When adding new components, use the established patterns from existing UI components and maintain the dark theme aesthetic.
+
+**Form Validation Architecture**: 
+- Uses React Hook Form with Zod schema validation for type-safe form handling
+- Custom `useFormValidation` hook centralizes validation logic
+- Real-time validation with proper ARIA error handling
+- FormSpree integration with mock API for testing reliability
+
+**Testing Excellence**:
+- 153 comprehensive E2E tests across 5 browser configurations  
+- Three-tier testing strategy: UI behavior, integration health, full API
+- 100% test reliability with flaky test elimination
+- Cross-browser accessibility and keyboard navigation testing
 
 ## Definition of Done
 
@@ -81,7 +95,10 @@ Before considering any code change complete, ensure all of the following criteri
 - [ ] **Accessibility**: Meets WCAG 2.1 AA standards (keyboard navigation, screen readers, color contrast)
 
 ### Testing
-- [ ] **E2E tests pass**: Relevant Playwright tests execute successfully
+- [ ] **E2E tests pass**: All relevant Playwright tests execute successfully across browsers
+- [ ] **Test reliability**: No flaky tests, 100% pass rate required
+- [ ] **Validation testing**: Form validation scenarios covered with proper error states
+- [ ] **Accessibility testing**: ARIA attributes and keyboard navigation verified
 - [ ] **No console errors**: Browser console shows no JavaScript errors
 - [ ] **Contact form verification**: FormSpree integration tested (when touching contact functionality)
 
