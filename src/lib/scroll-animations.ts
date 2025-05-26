@@ -112,7 +112,7 @@ export class ScrollAnimations {
 import { useEffect, useRef } from 'react';
 
 export function useScrollAnimation(animation: string = 'fadeInUp') {
-  const elementRef = useRef<HTMLElement>(null);
+  const elementRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<ScrollAnimations | null>(null);
 
   useEffect(() => {
