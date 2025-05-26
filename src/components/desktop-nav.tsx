@@ -13,6 +13,9 @@ const DesktopNav = () => {
         <Link href="/about" className="text-lg font-medium">
           About
         </Link>
+        <Link href="#contact" className="text-lg font-medium">
+          Contact
+        </Link>
       </nav>
       <div className="flex space-x-4 ml-6">
         <Link

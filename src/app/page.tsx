@@ -1,7 +1,6 @@
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import ProjectGrid from "@/components/project-grid";
-import ContactSection from "@/components/contact-section";
 import ContactForm from "@/components/contact-form";
 import Footer from "@/components/footer";
 
@@ -12,7 +11,6 @@ export default function Page() {
       <main id="main-content">
         <Hero />
         <ProjectGrid />
-        <ContactSection />
         <section id="contact" className="py-32">
           <div className="container px-4">
             <div className="max-w-2xl mx-auto">
