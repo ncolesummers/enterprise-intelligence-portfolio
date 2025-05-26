@@ -12,7 +12,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm format` - Format code with Prettier
 
 ### Testing
-No test framework is currently configured.
+- `pnpm test:e2e` - Run Playwright E2E tests
+- `pnpm test:e2e:ui` - Run tests with interactive UI
+- `pnpm test:contact-form` - Run contact form specific tests
 
 ## Architecture
 
@@ -51,3 +53,45 @@ This is a Next.js 15 portfolio website built with the App Router architecture, s
 ### Development Notes
 
 The codebase follows shadcn/ui conventions with the `cn()` utility function for merging Tailwind classes. When adding new components, use the established patterns from existing UI components and maintain the dark theme aesthetic.
+
+## Definition of Done
+
+Before considering any code change complete, ensure all of the following criteria are met:
+
+### Code Quality
+- [ ] **Linting passes**: Run `pnpm lint` with zero errors or warnings
+- [ ] **Build succeeds**: Run `pnpm build` successfully without TypeScript errors
+- [ ] **Type safety**: All TypeScript types are properly defined and used
+- [ ] **Code formatting**: Code follows Prettier formatting standards
+
+### Functionality
+- [ ] **Feature works as intended**: Manual testing confirms expected behavior
+- [ ] **Cross-browser compatibility**: Tested in Chrome, Firefox, and Safari (when applicable)
+- [ ] **Responsive design**: Works on mobile, tablet, and desktop viewports
+- [ ] **Accessibility**: Meets WCAG 2.1 AA standards (keyboard navigation, screen readers, color contrast)
+
+### Testing
+- [ ] **E2E tests pass**: Relevant Playwright tests execute successfully
+- [ ] **No console errors**: Browser console shows no JavaScript errors
+- [ ] **Contact form verification**: FormSpree integration tested (when touching contact functionality)
+
+### Performance & UX
+- [ ] **Reduced motion respected**: Animations honor `prefers-reduced-motion` setting
+- [ ] **Theme compatibility**: Works correctly in both light and dark themes
+- [ ] **Loading states**: Appropriate loading indicators for async operations
+- [ ] **Error handling**: Graceful error states with user-friendly messages
+
+### Documentation
+- [ ] **Code is self-documenting**: Clear component and function names
+- [ ] **Complex logic explained**: Comments added for non-obvious implementations
+- [ ] **CLAUDE.md updated**: Architecture notes updated if patterns change
+
+### Git Standards
+- [ ] **Atomic commits**: Each commit represents one logical change
+- [ ] **Clear commit messages**: Descriptive messages explaining "why" not just "what"
+- [ ] **No sensitive data**: No API keys, secrets, or personal data committed
+
+### Production Readiness
+- [ ] **Vercel deployment succeeds**: Build and deployment pipeline completes
+- [ ] **Analytics working**: Vercel Analytics tracking page views (when applicable)
+- [ ] **SEO optimized**: Meta tags, Open Graph, and structured data present
