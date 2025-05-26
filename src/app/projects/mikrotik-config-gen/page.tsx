@@ -8,6 +8,13 @@ import CodeBlock from "@/components/ui/code-block";
 import Section from "@/components/ui/section";
 import Image from "next/image";
 import mcg2020 from "@/assets/mcg-2020.jpeg";
+import { generatePageMetadata } from "@/lib/metadata";
+
+export const metadata = generatePageMetadata({
+  title: "Mikrotik Configuration Generator",
+  description: "A cross-platform desktop application that standardizes router configurations for ISP technicians, built with Go and Wails. Evolved from Python console application to modern desktop UI.",
+  path: "/projects/mikrotik-config-gen"
+});
 
 export default function MikrotikConfigGenPage() {
   return (

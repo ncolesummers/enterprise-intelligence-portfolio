@@ -14,6 +14,13 @@ import ContentCard from "@/components/ui/content-card";
 import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
 import Section from "@/components/ui/section";
 import Header from "@/components/header";
+import { generatePageMetadata } from "@/lib/metadata";
+
+export const metadata = generatePageMetadata({
+  title: "About Nathan Cole Summers",
+  description: "Enterprise Applications Developer with 9 years of IT experience and 5 years of focused application development. Specializing in microservice architecture, TypeScript, Python, Go, C#, and Rust.",
+  path: "/about"
+});
 
 export default function AboutPage() {
   return (

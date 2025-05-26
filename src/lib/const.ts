@@ -2,7 +2,7 @@
 // It includes the site metadata, navigation links, and social media links.
 // Site metadata
 export const siteMetadata = {
-  title: "Cole Summers",
+  title: "N. Cole Summers",
   description: "Welcome to my personal website where I share my projects and thoughts.",
   author: "Nathan Cole Summers",
 };
