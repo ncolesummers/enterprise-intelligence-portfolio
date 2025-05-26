@@ -116,7 +116,35 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* Focus outline for accessibility */
+  .focus-visible-outline:focus-visible {
+    @apply outline-2 outline-ring outline-offset-2;
+  }
+  
+  /* Skip to content link for screen readers */
+  .skip-to-content {
+    @apply absolute -top-10 left-6 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md transition-all duration-200;
+  }
+  .skip-to-content:focus {
+    @apply top-6;
   }
 }
