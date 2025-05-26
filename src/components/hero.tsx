@@ -25,7 +25,7 @@ const Hero = () => {
             <Link href="#work">
               <Button
                 variant="default"
-                className="border-border/20 hover:bg-muted/10"
+                className="border-border/20"
                 aria-label="View Selected Projects"
               >
                 Selected Projects
