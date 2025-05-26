@@ -16,7 +16,7 @@ const MobileNav = () => {
           href={Socials[0].href}
           target="_blank"
           aria-label="LinkedIn Profile"
-          className="text-lg"
+          className="text-foreground hover:text-muted-foreground transition-colors"
         >
           <Linkedin className="h-5 w-5" />
         </Link>
@@ -24,7 +24,7 @@ const MobileNav = () => {
           href={Socials[1].href}
           target="_blank"
           aria-label="GitHub Profile"
-          className="text-lg"
+          className="text-foreground hover:text-muted-foreground transition-colors"
         >
           <Github className="h-5 w-5" />
         </Link>
@@ -32,7 +32,7 @@ const MobileNav = () => {
           href={Socials[2].href}
           target="_blank"
           aria-label="Instagram Profile"
-          className="text-lg"
+          className="text-foreground hover:text-muted-foreground transition-colors"
         >
           <Instagram className="h-5 w-5" />
         </Link>
