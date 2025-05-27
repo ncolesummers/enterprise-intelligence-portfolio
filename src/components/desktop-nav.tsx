@@ -21,7 +21,8 @@ const DesktopNav = () => {
         <Link
           href={Socials[0].href}
           target="_blank"
-          className="text-white hover:text-gray-300"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors"
           aria-label="LinkedIn Profile"
         >
           <Linkedin className="h-5 w-5" />
@@ -29,7 +30,8 @@ const DesktopNav = () => {
         <Link
           href={Socials[1].href}
           target="_blank"
-          className="text-white hover:text-gray-300"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors"
           aria-label="GitHub Profile"
         >
           <Github className="h-5 w-5" />
@@ -37,7 +39,8 @@ const DesktopNav = () => {
         <Link
           href={Socials[2].href}
           target="_blank"
-          className="text-white hover:text-gray-300"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors"
           aria-label="Instagram Profile"
         >
           <Instagram className="h-5 w-5" />
