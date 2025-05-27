@@ -15,24 +15,27 @@ const MobileNav = () => {
         <Link
           href={Socials[0].href}
           target="_blank"
+          rel="noopener noreferrer"
           aria-label="LinkedIn Profile"
-          className="text-lg"
+          className="text-muted-foreground hover:text-foreground transition-colors"
         >
           <Linkedin className="h-5 w-5" />
         </Link>
         <Link
           href={Socials[1].href}
           target="_blank"
+          rel="noopener noreferrer"
           aria-label="GitHub Profile"
-          className="text-lg"
+          className="text-muted-foreground hover:text-foreground transition-colors"
         >
           <Github className="h-5 w-5" />
         </Link>
         <Link
           href={Socials[2].href}
           target="_blank"
+          rel="noopener noreferrer"
           aria-label="Instagram Profile"
-          className="text-lg"
+          className="text-muted-foreground hover:text-foreground transition-colors"
         >
           <Instagram className="h-5 w-5" />
         </Link>
