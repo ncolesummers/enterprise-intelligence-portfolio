@@ -22,7 +22,7 @@ export const navigation = [
   },
   {
     name: "Blog",
-    href: "https://blog.ncolesummers.com",
+    href: "/blog",
   },
 ];
 export const Socials = [
