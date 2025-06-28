@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ### Development
-- `pnpm dev` - Start development server with Turbopack (preferred)
+- `pnpm dev` - Start development server with Turbopack on port 3000 (preferred)
 - `pnpm build` - Build production version
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
@@ -14,17 +14,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Testing
 - `pnpm test:e2e` - Run Playwright E2E tests (UI behavior + mocked integration)
 - `pnpm test:e2e:ui` - Run tests with interactive UI
+- `pnpm test:e2e:debug` - Debug tests with headed browser
+- `pnpm test:e2e:headed` - Run tests in headed mode
 - `pnpm test:contact-form` - Run contact form specific tests
-- `TEST_INTEGRATION=true pnpm test:e2e` - Run full integration tests (use sparingly due to rate limits)
+- `pnpm test:integration` - Run integration health checks (quick)
+- `TEST_INTEGRATION=true pnpm test:e2e` - Run full integration tests (use sparingly due to FormSpree rate limits)
+- `pnpm test:ui-only` - Run only UI tests (excludes integration tests)
 
-#### Testing Strategy
-This project uses a three-tier testing approach documented in `docs/TEST_PLAN.md`:
-
-1. **UI Behavior Tests**: Fast, reliable tests with mocked API responses
-2. **Integration Health Checks**: API availability and endpoint configuration verification
-3. **Full Integration Tests**: Real API testing (manual trigger due to FormSpree rate limits)
-
-For detailed testing documentation, see `docs/TEST_PLAN.md`.
+### Running Specific Tests
+- `pnpm test:e2e tests/e2e/navigation.spec.ts` - Run a specific test file
+- `pnpm test:e2e --grep "form validation"` - Run tests matching a pattern
+- `PLAYWRIGHT_TEST_MODE=true pnpm dev --port 3001` - Start server in test mode (used by Playwright)
 
 ## Architecture
 
@@ -32,27 +32,38 @@ This is a Next.js 15 portfolio website built with the App Router architecture, s
 
 ### Key Architecture Patterns
 
-**Project Structure**: Uses Next.js App Router with `src/app/` containing pages and layouts. The main homepage (`src/app/page.tsx`) is a client component that composes major sections: Header, Hero, ProjectGrid, ContactSection, and Footer.
+**Project Structure**: 
+- Uses Next.js App Router with `src/app/` containing pages and layouts
+- The main homepage (`src/app/page.tsx`) is a client component that composes major sections: Header, Hero, ProjectGrid, ContactSection, and Footer
+- Project pages follow the pattern `src/app/projects/[project-name]/page.tsx`
 
 **Component Organization**: 
 - `src/components/` contains reusable components
 - `src/components/ui/` contains shadcn/ui components following the "new-york" style
+- `src/components/icons/` contains custom SVG icon components
 - Uses component composition pattern with dedicated components for each major section
 
 **Styling**: 
-- Tailwind CSS with CSS variables for theming
+- Tailwind CSS with CSS variables for theming (defined in `globals.css`)
 - Dark mode enabled by default (set in root layout)
 - shadcn/ui components with class-variance-authority for variant styling
 - Custom design system with consistent spacing and color tokens
+- Uses `cn()` utility from `lib/utils.ts` for merging Tailwind classes
 
 **State & Data**: 
 - Site configuration centralized in `src/lib/const.ts` (navigation, social links, metadata)
 - Client-side rendering for interactive elements
-- No external data fetching currently implemented
+- Theme state managed by next-themes
+- Form state handled by React Hook Form
+
+**API Routes**:
+- Mock FormSpree endpoint at `/api/test/formspree-mock` for testing
+- Returns appropriate responses based on PLAYWRIGHT_TEST_MODE environment variable
 
 **TypeScript Configuration**: 
 - Strict mode enabled with path aliases (`@/*` maps to `src/*`)
 - All components properly typed with React.ComponentProps patterns
+- Form validation types generated from Zod schemas
 
 **Key Dependencies**:
 - shadcn/ui + Radix UI for accessible components
@@ -61,22 +72,42 @@ This is a Next.js 15 portfolio website built with the App Router architecture, s
 - clsx + tailwind-merge via `cn()` utility for conditional styling
 - React Hook Form + Zod for form validation
 - Playwright for comprehensive E2E testing
+- Vercel Analytics for production insights
 
 ### Development Notes
 
-The codebase follows shadcn/ui conventions with the `cn()` utility function for merging Tailwind classes. When adding new components, use the established patterns from existing UI components and maintain the dark theme aesthetic.
+**Component Patterns**:
+- All components use the shadcn/ui pattern with `cn()` for class merging
+- Prefer composition over prop drilling
+- Use `forwardRef` for components that need ref forwarding
+- Maintain consistent prop interfaces across similar components
 
 **Form Validation Architecture**: 
 - Uses React Hook Form with Zod schema validation for type-safe form handling
-- Custom `useFormValidation` hook centralizes validation logic
+- Validation schemas defined in `src/lib/validation.ts`
 - Real-time validation with proper ARIA error handling
 - FormSpree integration with mock API for testing reliability
+- Custom error messaging with field-specific feedback
 
 **Testing Excellence**:
-- 153 comprehensive E2E tests across 5 browser configurations  
+- 153 comprehensive E2E tests across 5 browser configurations (Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari)
 - Three-tier testing strategy: UI behavior, integration health, full API
 - 100% test reliability with flaky test elimination
 - Cross-browser accessibility and keyboard navigation testing
+- Tests run on port 3001 to avoid conflicts with development server
+- Firefox and mobile browsers skip integration tests due to compatibility
+
+**Animation & Performance**:
+- Intersection Observer-based scroll animations (see `src/lib/scroll-animations.ts`)
+- Respects `prefers-reduced-motion` user preference
+- Lazy loading for images and heavy components
+- Optimized bundle splitting with dynamic imports
+
+**Error Handling**:
+- ErrorBoundary component wraps the entire application
+- Form-specific error states with user-friendly messages
+- Network error handling with retry logic
+- Graceful degradation for JavaScript-disabled environments
 
 ## Definition of Done
 
