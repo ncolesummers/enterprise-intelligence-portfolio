@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
+import rehypeHighlight from "rehype-highlight";
+import rehypeSlug from "rehype-slug";
 
 const nextConfig: NextConfig = {
   images: {
@@ -10,6 +13,18 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react'],
   },
   compress: true,
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypeHighlight, { detect: true }],
+    ],
+  },
+});
+
+export default withMDX(nextConfig);
