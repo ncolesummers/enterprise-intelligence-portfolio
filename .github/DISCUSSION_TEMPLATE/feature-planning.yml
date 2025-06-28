@@ -1,0 +1,294 @@
+title: "Feature Planning: [Feature Name]"
+labels: ["planning", "needs-analysis"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # 🎯 Multi-Role Feature Planning
+        
+        This discussion template follows our enterprise-grade planning methodology with five specialized perspectives:
+        - **Product Manager**: User stories, acceptance criteria, business value
+        - **UI/UX Engineer**: User experience design, interface patterns, accessibility
+        - **Frontend Architect**: Technical design, component architecture, integration
+        - **TypeScript Quality Engineer**: Type safety, validation, coding standards
+        - **Senior SDET**: Testing strategy, quality gates, automation
+        
+        Complete each section before marking as `ready-for-implementation`.
+        
+  - type: input
+    id: feature-name
+    attributes:
+      label: "Feature Name"
+      description: "Brief, descriptive name for this feature"
+      placeholder: "e.g., User Authentication System"
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: "Complexity Level"
+      description: "Initial complexity assessment"
+      options:
+        - Simple (1-2 days)
+        - Medium (3-5 days)
+        - Complex (1-2 weeks)
+        - Epic (Multiple weeks)
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📊 Product Manager Analysis
+        
+  - type: textarea
+    id: user-stories
+    attributes:
+      label: "User Stories & Acceptance Criteria"
+      description: "Define user needs and success criteria"
+      placeholder: |
+        **Epic**: [Brief description]
+        
+        **Primary User Stories**:
+        - As a [user type], I want [goal] so that [benefit]
+        - As a [user type], I want [goal] so that [benefit]
+        
+        **Acceptance Criteria**:
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        
+        **MVP vs Full Feature Scope**:
+        - MVP: [Essential features]
+        - Full: [Enhanced features]
+      render: markdown
+    validations:
+      required: true
+      
+  - type: textarea
+    id: success-metrics
+    attributes:
+      label: "Success Metrics & KPIs"
+      description: "Measurable outcomes and business value"
+      placeholder: |
+        **Primary Metrics**:
+        - Metric 1: Target value
+        - Metric 2: Target value
+        
+        **Secondary Metrics**:
+        - User engagement metrics
+        - Performance metrics
+        
+        **Business Value**:
+        - Revenue impact
+        - User experience improvement
+        - Competitive advantage
+      render: markdown
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎨 UI/UX Engineer Analysis
+        
+  - type: textarea
+    id: user-experience
+    attributes:
+      label: "User Experience Design & Interface Patterns"
+      description: "User flows, interface design, and accessibility considerations"
+      placeholder: |
+        **User Journey & Flow**:
+        ```
+        Entry Point → Step 1 → Step 2 → Success State
+                               ↓
+                           Error Handling
+        ```
+        
+        **Interface Design Patterns**:
+        - Layout structure and hierarchy
+        - Component patterns and interactions
+        - Visual design consistency
+        - Responsive behavior across devices
+        
+        **Accessibility Requirements**:
+        - WCAG 2.1 AA compliance
+        - Keyboard navigation patterns
+        - Screen reader optimization
+        - Color contrast and visual indicators
+        
+        **Interaction Design**:
+        - Loading states and transitions
+        - Error states and recovery flows
+        - Feedback mechanisms
+        - Animation and motion preferences
+        
+        **Mobile Experience**:
+        - Touch target sizing
+        - Gesture support
+        - Progressive enhancement
+        - Performance on mobile devices
+      render: markdown
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 🏗️ Frontend Architecture Analysis
+        
+  - type: textarea
+    id: technical-architecture
+    attributes:
+      label: "Technical Architecture & Component Design"
+      description: "System design, component structure, and integration points"
+      placeholder: |
+        **Route Structure**:
+        ```
+        /feature
+        ├── /sub-route
+        └── /api/endpoints
+        ```
+        
+        **Component Architecture**:
+        - Layout components
+        - Feature components
+        - Shared utilities
+        
+        **State Management**:
+        - Local state strategy
+        - Server state handling
+        - Integration points
+        
+        **Key Dependencies**:
+        - External libraries
+        - API integrations
+        - Performance considerations
+      render: markdown
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 🔧 TypeScript Quality Engineering
+        
+  - type: textarea
+    id: type-safety
+    attributes:
+      label: "Type Interfaces & Safety Patterns"
+      description: "Type definitions, validation schemas, and error handling"
+      placeholder: |
+        **Core Type Interfaces**:
+        ```typescript
+        interface FeatureData {
+          id: string;
+          // Define core types
+        }
+        ```
+        
+        **Validation Schemas**:
+        ```typescript
+        const featureSchema = z.object({
+          // Zod validation
+        });
+        ```
+        
+        **Error Handling Patterns**:
+        - Error types and boundaries
+        - Validation strategies
+        - Type safety patterns
+      render: markdown
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 🧪 Senior SDET Testing Strategy
+        
+  - type: textarea
+    id: testing-strategy
+    attributes:
+      label: "Comprehensive Testing Plan"
+      description: "Test pyramid, quality gates, and automation strategy"
+      placeholder: |
+        **Test Pyramid**:
+        - Unit Tests (40%): Core logic, utilities, components
+        - Integration Tests (35%): API integration, data flow
+        - E2E Tests (25%): User journeys, cross-browser
+        
+        **Quality Gates**:
+        - Code coverage: ≥85%
+        - E2E pass rate: 100%
+        - Performance thresholds
+        - Accessibility compliance
+        
+        **Critical Test Scenarios**:
+        1. Happy path user journey
+        2. Error scenarios and edge cases
+        3. Performance under load
+        4. Mobile and accessibility
+        
+        **CI/CD Integration**:
+        - Pre-commit hooks
+        - Pipeline quality checks
+        - Automated testing strategy
+      render: markdown
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📋 Implementation Planning
+        
+  - type: textarea
+    id: implementation-phases
+    attributes:
+      label: "Development Phases & Timeline"
+      description: "Break down implementation into manageable phases"
+      placeholder: |
+        **Phase 1: Foundation** (Week 1)
+        - [ ] Core infrastructure
+        - [ ] Basic components
+        - [ ] Type definitions
+        
+        **Phase 2: Features** (Week 2)
+        - [ ] Main functionality
+        - [ ] User interface
+        - [ ] Integration points
+        
+        **Phase 3: Quality & Polish** (Week 3)
+        - [ ] Testing implementation
+        - [ ] Performance optimization
+        - [ ] Documentation
+        
+        **Dependencies & Risks**:
+        - External dependencies
+        - Technical risks
+        - Mitigation strategies
+      render: markdown
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: ready-checklist
+    attributes:
+      label: "Ready for Implementation Checklist"
+      description: "All sections must be complete before implementation"
+      options:
+        - label: "Product Manager analysis complete with user stories and success metrics"
+          required: true
+        - label: "UI/UX design patterns and accessibility requirements defined"
+          required: true
+        - label: "Frontend architecture designed with component structure and integrations"
+          required: true
+        - label: "TypeScript interfaces and validation schemas defined"
+          required: true
+        - label: "Testing strategy covers unit, integration, and E2E requirements"
+          required: true
+        - label: "Implementation phases broken down with realistic timeline"
+          required: true
+        - label: "Dependencies identified and risks assessed"
+          required: true

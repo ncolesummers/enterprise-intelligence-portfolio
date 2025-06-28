@@ -1,0 +1,284 @@
+name: "Convert Planning Discussion to Implementation Issues"
+
+on:
+  discussion:
+    types: [labeled]
+
+jobs:
+  create-implementation-issues:
+    if: contains(github.event.label.name, 'ready-for-implementation')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      discussions: read
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Parse Discussion Content
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const discussion = context.payload.discussion;
+            const body = discussion.body;
+            
+            // Extract feature name from title
+            const featureName = discussion.title.replace('Feature Planning: ', '');
+            
+            // Parse sections from discussion body
+            const sections = {
+              userStories: body.match(/## 📊 Product Manager Analysis[\s\S]*?(?=## |$)/)?.[0] || '',
+              uxDesign: body.match(/## 🎨 UI\/UX Engineer Analysis[\s\S]*?(?=## |$)/)?.[0] || '',
+              architecture: body.match(/## 🏗️ Frontend Architecture Analysis[\s\S]*?(?=## |$)/)?.[0] || '',
+              typescript: body.match(/## 🔧 TypeScript Quality Engineering[\s\S]*?(?=## |$)/)?.[0] || '',
+              testing: body.match(/## 🧪 Senior SDET Testing Strategy[\s\S]*?(?=## |$)/)?.[0] || '',
+              phases: body.match(/## 📋 Implementation Planning[\s\S]*?(?=## |$)/)?.[0] || ''
+            };
+            
+            return {
+              featureName: featureName,
+              discussionUrl: discussion.html_url,
+              sections: sections
+            };
+            
+      - name: Create Epic Issue
+        id: epic
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { featureName, discussionUrl, sections } = ${{ steps.parse.outputs.result }};
+            
+            const epicBody = `
+            # 🎯 Epic: ${featureName}
+            
+            **Planning Discussion**: ${discussionUrl}
+            
+            ## Overview
+            This epic tracks the complete implementation of ${featureName} following our enterprise-grade development process.
+            
+            ## User Stories & Success Metrics
+            ${sections.userStories}
+            
+            ## Implementation Phases
+            ${sections.phases}
+            
+            ## Related Issues
+            This epic will be broken down into the following implementation issues:
+            - [ ] #TBD - UI/UX Implementation
+            - [ ] #TBD - Frontend Architecture Setup
+            - [ ] #TBD - TypeScript Integration
+            - [ ] #TBD - Testing Implementation
+            
+            ## Definition of Done
+            - [ ] All implementation issues completed
+            - [ ] Code review passed
+            - [ ] All tests passing (≥85% coverage)
+            - [ ] Accessibility compliance verified
+            - [ ] Performance benchmarks met
+            - [ ] Documentation updated
+            `;
+            
+            const epicIssue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Epic: ${featureName}`,
+              body: epicBody,
+              labels: ['epic', 'planning', featureName.toLowerCase().replace(/\s+/g, '-')]
+            });
+            
+            return epicIssue.data;
+            
+      - name: Create UI/UX Implementation Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { featureName, sections } = ${{ steps.parse.outputs.result }};
+            const epic = ${{ steps.epic.outputs.result }};
+            
+            const uiBody = `
+            # 🎨 UI/UX Implementation: ${featureName}
+            
+            **Epic**: #${epic.number}
+            
+            ## User Experience Requirements
+            ${sections.uxDesign}
+            
+            ## Implementation Tasks
+            - [ ] Create user flow wireframes
+            - [ ] Design component layouts
+            - [ ] Implement responsive design patterns
+            - [ ] Add accessibility features (WCAG 2.1 AA)
+            - [ ] Create interaction states (loading, error, success)
+            - [ ] Mobile optimization
+            - [ ] Animation and transition implementation
+            
+            ## Acceptance Criteria
+            - [ ] User flows tested with real users
+            - [ ] Responsive design works on all viewport sizes
+            - [ ] Accessibility compliance verified
+            - [ ] Performance optimized for mobile
+            - [ ] Cross-browser compatibility confirmed
+            `;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `UI/UX: ${featureName}`,
+              body: uiBody,
+              labels: ['ui/ux', 'implementation', featureName.toLowerCase().replace(/\s+/g, '-')]
+            });
+            
+      - name: Create Frontend Architecture Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { featureName, sections } = ${{ steps.parse.outputs.result }};
+            const epic = ${{ steps.epic.outputs.result }};
+            
+            const frontendBody = `
+            # 🏗️ Frontend Architecture: ${featureName}
+            
+            **Epic**: #${epic.number}
+            
+            ## Technical Architecture
+            ${sections.architecture}
+            
+            ## Implementation Tasks
+            - [ ] Set up route structure
+            - [ ] Create base components
+            - [ ] Implement state management
+            - [ ] Add API integration points
+            - [ ] Configure build optimization
+            - [ ] Set up error boundaries
+            
+            ## Technical Requirements
+            - [ ] Components follow existing patterns
+            - [ ] Performance optimized (< 1.5s load time)
+            - [ ] Bundle size optimized
+            - [ ] Server-side rendering configured
+            - [ ] Proper error handling implemented
+            `;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Frontend: ${featureName}`,
+              body: frontendBody,
+              labels: ['frontend', 'architecture', featureName.toLowerCase().replace(/\s+/g, '-')]
+            });
+            
+      - name: Create TypeScript Integration Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { featureName, sections } = ${{ steps.parse.outputs.result }};
+            const epic = ${{ steps.epic.outputs.result }};
+            
+            const tsBody = `
+            # 🔧 TypeScript Integration: ${featureName}
+            
+            **Epic**: #${epic.number}
+            
+            ## Type Safety Requirements
+            ${sections.typescript}
+            
+            ## Implementation Tasks
+            - [ ] Define core type interfaces
+            - [ ] Create validation schemas with Zod
+            - [ ] Implement error handling patterns
+            - [ ] Add type guards and utilities
+            - [ ] Configure strict TypeScript settings
+            - [ ] Add comprehensive type tests
+            
+            ## Quality Gates
+            - [ ] 100% TypeScript compilation success
+            - [ ] No 'any' types used
+            - [ ] Comprehensive error handling
+            - [ ] Validation schemas cover all inputs
+            - [ ] Type safety verified in tests
+            `;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `TypeScript: ${featureName}`,
+              body: tsBody,
+              labels: ['typescript', 'quality', featureName.toLowerCase().replace(/\s+/g, '-')]
+            });
+            
+      - name: Create Testing Implementation Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { featureName, sections } = ${{ steps.parse.outputs.result }};
+            const epic = ${{ steps.epic.outputs.result }};
+            
+            const testBody = `
+            # 🧪 Testing Implementation: ${featureName}
+            
+            **Epic**: #${epic.number}
+            
+            ## Testing Strategy
+            ${sections.testing}
+            
+            ## Implementation Tasks
+            - [ ] Write unit tests for core logic
+            - [ ] Create integration tests for API calls
+            - [ ] Implement E2E tests for user journeys
+            - [ ] Add accessibility testing
+            - [ ] Performance testing setup
+            - [ ] Cross-browser testing configuration
+            
+            ## Quality Gates
+            - [ ] ≥85% code coverage achieved
+            - [ ] 100% E2E test pass rate
+            - [ ] Accessibility compliance verified
+            - [ ] Performance thresholds met
+            - [ ] Cross-browser compatibility confirmed
+            `;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Testing: ${featureName}`,
+              body: testBody,
+              labels: ['testing', 'quality-assurance', featureName.toLowerCase().replace(/\s+/g, '-')]
+            });
+            
+      - name: Update Epic with Issue Links
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const epic = ${{ steps.epic.outputs.result }};
+            
+            // Get all issues created for this feature
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: epic.labels.find(l => l.name.includes('-')).name,
+              state: 'open'
+            });
+            
+            const featureIssues = issues.data.filter(issue => 
+              issue.number !== epic.number && 
+              issue.title.includes(epic.title.replace('Epic: ', ''))
+            );
+            
+            // Update epic body with actual issue numbers
+            let updatedBody = epic.body;
+            featureIssues.forEach(issue => {
+              const issueType = issue.title.split(':')[0];
+              updatedBody = updatedBody.replace(
+                `- [ ] #TBD - ${issueType}`,
+                `- [ ] #${issue.number} - ${issue.title}`
+              );
+            });
+            
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: epic.number,
+              body: updatedBody
+            });

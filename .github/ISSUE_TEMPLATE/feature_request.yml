@@ -1,0 +1,116 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement
+title: "✨ [Feature]: "
+labels: ["enhancement", "needs-planning"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🚀 Feature Request
+        
+        Thank you for suggesting a new feature! This template will help gather the necessary information for planning.
+        
+        **Note**: Complex features should use our [Feature Planning Discussion Template](../../discussions/new?category=ideas) for detailed analysis.
+
+  - type: input
+    id: feature-title
+    attributes:
+      label: "Feature Title"
+      description: "Brief, descriptive name for this feature"
+      placeholder: "e.g., Dark Mode Toggle"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: "Feature Type"
+      description: "What type of feature is this?"
+      options:
+        - New functionality
+        - Enhancement to existing feature
+        - UI/UX improvement
+        - Performance optimization
+        - Developer experience
+        - Accessibility improvement
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: "Problem Statement"
+      description: "What problem does this feature solve?"
+      placeholder: "Users currently cannot..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: "Proposed Solution"
+      description: "How would you like this feature to work?"
+      placeholder: "I would like to be able to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-benefit
+    attributes:
+      label: "User Benefit"
+      description: "How will this benefit users?"
+      placeholder: "This would help users by..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Priority Level"
+      description: "How important is this feature?"
+      options:
+        - Low - Nice to have
+        - Medium - Would improve experience
+        - High - Important for user satisfaction
+        - Critical - Essential functionality
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternative Solutions"
+      description: "Have you considered any alternative approaches?"
+      placeholder: "Alternative approaches could include..."
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: "Additional Context"
+      description: "Any additional information, mockups, or examples"
+      placeholder: "Screenshots, mockups, links to examples, etc."
+
+  - type: checkboxes
+    id: complexity-assessment
+    attributes:
+      label: "Complexity Assessment"
+      description: "Help us understand the scope (check all that apply):"
+      options:
+        - label: "This might require new dependencies"
+        - label: "This could affect existing functionality"
+        - label: "This involves UI/UX changes"
+        - label: "This requires backend/API changes"
+        - label: "This needs accessibility considerations"
+        - label: "This should be tested across browsers/devices"
+
+  - type: checkboxes
+    id: next-steps
+    attributes:
+      label: "Recommended Next Steps"
+      description: "For complex features, we recommend:"
+      options:
+        - label: "This feature is simple enough for direct implementation"
+        - label: "This feature should go through our planning discussion process"
+          required: false
