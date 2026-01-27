@@ -5,18 +5,21 @@ Master Claude Code from installation to advanced workflows in this comprehensive
 ## Learning Path
 
 ### 🏁 **Quick Start** (15 minutes)
+
 Perfect if you want to get up and running immediately.
 
 1. [Getting Started](01-getting-started.md) - Installation & first commands
 2. [Basic Commands](02-basic-commands.md) - Essential daily operations
 
 ### 🎯 **Core Skills** (45 minutes)
+
 Build the skills you'll use every day.
 
 3. [Custom Commands](03-custom-commands.md) - Create your own slash commands
 4. [Advanced Workflows](04-advanced-workflows.md) - Complex automation patterns
 
 ### 🚀 **Mastery** (60 minutes)
+
 Become a power user with advanced techniques.
 
 5. [Best Practices](05-best-practices.md) - Community standards and optimization
@@ -24,13 +27,14 @@ Become a power user with advanced techniques.
 
 ## Tutorial Navigation
 
-| Previous | Current | Next |
-|----------|---------|------|
+| Previous                        | Current               | Next                                       |
+| ------------------------------- | --------------------- | ------------------------------------------ |
 | [← All Tutorials](../README.md) | **Claude Code Usage** | [Getting Started →](01-getting-started.md) |
 
 ## What You'll Build
 
 By the end of this tutorial, you'll have:
+
 - ✅ A fully configured Claude Code environment
 - ✅ Custom slash commands for your workflow
 - ✅ Automated code review and optimization workflows
@@ -41,7 +45,7 @@ By the end of this tutorial, you'll have:
 
 - **Technical Level:** Beginner-friendly
 - **Time Commitment:** 2-3 hours (can be done in sections)
-- **Requirements:** 
+- **Requirements:**
   - Node.js 16+ or modern terminal environment
   - Basic command line knowledge
   - Text editor or IDE

@@ -12,8 +12,9 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata = generatePageMetadata({
   title: "Mikrotik Configuration Generator",
-  description: "A cross-platform desktop application that standardizes router configurations for ISP technicians, built with Go and Wails. Evolved from Python console application to modern desktop UI.",
-  path: "/projects/mikrotik-config-gen"
+  description:
+    "A cross-platform desktop application that standardizes router configurations for ISP technicians, built with Go and Wails. Evolved from Python console application to modern desktop UI.",
+  path: "/projects/mikrotik-config-gen",
 });
 
 export default function MikrotikConfigGenPage() {

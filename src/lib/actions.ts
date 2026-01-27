@@ -15,11 +15,13 @@ export async function submitContactForm(formData: FormData) {
     const validatedData = contactFormSchema.parse(rawData);
 
     // Use mock endpoint during testing
-    const isTestMode = process.env.NODE_ENV === 'test' || process.env.PLAYWRIGHT_TEST_MODE === 'true';
-    const formspreeEndpoint = isTestMode 
+    const isTestMode =
+      process.env.NODE_ENV === "test" ||
+      process.env.PLAYWRIGHT_TEST_MODE === "true";
+    const formspreeEndpoint = isTestMode
       ? "http://localhost:3001/api/test/formspree-mock"
       : "https://formspree.io/f/xeogbrzn";
-    
+
     const response = await fetch(formspreeEndpoint, {
       method: "POST",
       headers: {

@@ -1,29 +1,29 @@
 "use client";
 
-import { useScrollAnimation } from '@/lib/scroll-animations';
-import { cn } from '@/lib/utils';
+import { useScrollAnimation } from "@/lib/scroll-animations";
+import { cn } from "@/lib/utils";
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
-  animation?: 'fadeInUp' | 'fadeInLeft' | 'fadeInRight' | 'scaleIn';
+  animation?: "fadeInUp" | "fadeInLeft" | "fadeInRight" | "scaleIn";
   className?: string;
   delay?: number;
 }
 
-export function AnimatedSection({ 
-  children, 
-  animation = 'fadeInUp', 
+export function AnimatedSection({
+  children,
+  animation = "fadeInUp",
   className,
-  delay = 0 
+  delay = 0,
 }: AnimatedSectionProps) {
   const ref = useScrollAnimation(animation);
 
   return (
-    <div 
-      ref={ref} 
+    <div
+      ref={ref}
       className={cn(className)}
-      style={{ 
-        animationDelay: delay ? `${delay}ms` : undefined 
+      style={{
+        animationDelay: delay ? `${delay}ms` : undefined,
       }}
     >
       {children}
@@ -31,41 +31,33 @@ export function AnimatedSection({
   );
 }
 
-export function AnimatedCard({ 
-  children, 
+export function AnimatedCard({
+  children,
   className,
-  delay = 0 
-}: { 
-  children: React.ReactNode; 
+  delay = 0,
+}: {
+  children: React.ReactNode;
   className?: string;
   delay?: number;
 }) {
   return (
-    <AnimatedSection 
-      animation="scaleIn" 
-      className={className}
-      delay={delay}
-    >
+    <AnimatedSection animation="scaleIn" className={className} delay={delay}>
       {children}
     </AnimatedSection>
   );
 }
 
-export function AnimatedText({ 
-  children, 
+export function AnimatedText({
+  children,
   className,
-  delay = 0 
-}: { 
-  children: React.ReactNode; 
+  delay = 0,
+}: {
+  children: React.ReactNode;
   className?: string;
   delay?: number;
 }) {
   return (
-    <AnimatedSection 
-      animation="fadeInUp" 
-      className={className}
-      delay={delay}
-    >
+    <AnimatedSection animation="fadeInUp" className={className} delay={delay}>
       {children}
     </AnimatedSection>
   );

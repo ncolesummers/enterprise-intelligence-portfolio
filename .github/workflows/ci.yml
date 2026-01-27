@@ -2,12 +2,12 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
     # Weekly integration tests on Sundays at 2 AM UTC to conserve FormSpree rate limits
-    - cron: '0 2 * * 0'
+    - cron: "0 2 * * 0"
 
 jobs:
   # Fast feedback for PRs - UI tests with mocked integration
@@ -15,164 +15,164 @@ jobs:
     name: PR Quality Checks
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'pnpm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "pnpm"
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 8
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
 
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-    - name: Type checking
-      run: pnpm tsc --noEmit
+      - name: Type checking
+        run: pnpm tsc --noEmit
 
-    - name: Linting
-      run: pnpm lint
+      - name: Linting
+        run: pnpm lint
 
-    - name: Build application
-      run: pnpm build
+      - name: Build application
+        run: pnpm build
 
-    - name: Install Playwright browsers
-      run: pnpm exec playwright install --with-deps
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
 
-    - name: Run UI behavior tests (fast)
-      run: pnpm test:e2e
-      env:
-        # Skip integration tests for PRs to avoid rate limits
-        CI: true
+      - name: Run UI behavior tests (fast)
+        run: pnpm test:e2e
+        env:
+          # Skip integration tests for PRs to avoid rate limits
+          CI: true
 
-    - name: Upload test results
-      uses: actions/upload-artifact@v4
-      if: failure()
-      with:
-        name: pr-test-results
-        path: test-results/
-        retention-days: 7
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: pr-test-results
+          path: test-results/
+          retention-days: 7
 
   # Comprehensive testing for main branch deployments
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'pnpm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "pnpm"
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 8
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
 
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-    - name: Type checking
-      run: pnpm tsc --noEmit
+      - name: Type checking
+        run: pnpm tsc --noEmit
 
-    - name: Linting
-      run: pnpm lint
+      - name: Linting
+        run: pnpm lint
 
-    - name: Build application
-      run: pnpm build
+      - name: Build application
+        run: pnpm build
 
-    - name: Install Playwright browsers
-      run: pnpm exec playwright install --with-deps
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
 
-    - name: Run comprehensive E2E tests
-      run: pnpm test:e2e
-      env:
-        CI: true
+      - name: Run comprehensive E2E tests
+        run: pnpm test:e2e
+        env:
+          CI: true
 
-    - name: Upload test results
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: test-results-${{ github.sha }}
-        path: test-results/
-        retention-days: 30
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ github.sha }}
+          path: test-results/
+          retention-days: 30
 
   # Weekly integration tests with real FormSpree API
   weekly-integration:
     name: Weekly Integration Tests
     runs-on: ubuntu-latest
     if: github.event_name == 'schedule'
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'pnpm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "pnpm"
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 8
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
 
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-    - name: Install Playwright browsers
-      run: pnpm exec playwright install --with-deps
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
 
-    - name: Run full integration tests
-      run: pnpm test:e2e
-      env:
-        # Enable real FormSpree integration for weekly tests
-        TEST_INTEGRATION: true
-        CI: true
+      - name: Run full integration tests
+        run: pnpm test:e2e
+        env:
+          # Enable real FormSpree integration for weekly tests
+          TEST_INTEGRATION: true
+          CI: true
 
-    - name: Upload integration test results
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: weekly-integration-results-${{ github.run_number }}
-        path: test-results/
-        retention-days: 90
+      - name: Upload integration test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: weekly-integration-results-${{ github.run_number }}
+          path: test-results/
+          retention-days: 90
 
-    - name: Notify on failure
-      if: failure()
-      uses: actions/github-script@v7
-      with:
-        script: |
-          github.rest.issues.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            title: 'Weekly Integration Tests Failed',
-            body: `Weekly integration tests failed on ${new Date().toISOString()}. Please check the test results and FormSpree API status.
-            
-            **Run ID**: ${{ github.run_id }}
-            **Commit**: ${{ github.sha }}
-            
-            This may indicate:
-            - FormSpree API issues
-            - Rate limiting problems
-            - Integration breaking changes
-            
-            Please investigate and resolve the issues.`,
-            labels: ['bug', 'integration', 'ci']
-          })
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Weekly Integration Tests Failed',
+              body: `Weekly integration tests failed on ${new Date().toISOString()}. Please check the test results and FormSpree API status.
+              
+              **Run ID**: ${{ github.run_id }}
+              **Commit**: ${{ github.sha }}
+              
+              This may indicate:
+              - FormSpree API issues
+              - Rate limiting problems
+              - Integration breaking changes
+              
+              Please investigate and resolve the issues.`,
+              labels: ['bug', 'integration', 'ci']
+            })
 
   # Post-deployment verification for production
   post-deploy-verification:
@@ -180,50 +180,50 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: [build-and-test]
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'pnpm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "pnpm"
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 8
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
 
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-    - name: Install Playwright browsers
-      run: pnpm exec playwright install --with-deps
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
 
-    - name: Wait for deployment
-      run: sleep 60  # Wait for Vercel deployment to complete
+      - name: Wait for deployment
+        run: sleep 60 # Wait for Vercel deployment to complete
 
-    - name: Run production smoke tests
-      run: |
-        # Run basic smoke tests against production
-        # This would test the deployed version on Vercel
-        echo "Production smoke tests would run here"
-        # pnpm test:e2e --config=playwright.prod.config.ts
-      env:
-        # Test against production URL
-        BASE_URL: https://enterprise-intelligence-portfolio.vercel.app
-        CI: true
+      - name: Run production smoke tests
+        run: |
+          # Run basic smoke tests against production
+          # This would test the deployed version on Vercel
+          echo "Production smoke tests would run here"
+          # pnpm test:e2e --config=playwright.prod.config.ts
+        env:
+          # Test against production URL
+          BASE_URL: https://enterprise-intelligence-portfolio.vercel.app
+          CI: true
 
-    - name: Verify analytics
-      run: |
-        # Verify Vercel Analytics is working
-        echo "Analytics verification would run here"
-        # This could check that analytics events are being tracked
+      - name: Verify analytics
+        run: |
+          # Verify Vercel Analytics is working
+          echo "Analytics verification would run here"
+          # This could check that analytics events are being tracked
 
-    - name: Health check
-      run: |
-        # Basic health check of the deployed application
-        curl -f https://enterprise-intelligence-portfolio.vercel.app/api/health || exit 1
-      continue-on-error: true
+      - name: Health check
+        run: |
+          # Basic health check of the deployed application
+          curl -f https://enterprise-intelligence-portfolio.vercel.app/api/health || exit 1
+        continue-on-error: true

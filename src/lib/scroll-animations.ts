@@ -6,18 +6,20 @@ export class ScrollAnimations {
   private prefersReducedMotion: boolean = false;
 
   constructor() {
-    if (typeof window !== 'undefined') {
-      this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (typeof window !== "undefined") {
+      this.prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       this.initializeObserver();
     }
   }
 
   private initializeObserver() {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     this.observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             this.animateElement(entry.target as HTMLElement);
           }
@@ -25,41 +27,41 @@ export class ScrollAnimations {
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      }
+        rootMargin: "0px 0px -50px 0px",
+      },
     );
   }
 
   private animateElement(element: HTMLElement) {
     if (this.prefersReducedMotion) {
       // Just make visible without animation for reduced motion
-      element.style.opacity = '1';
-      element.style.transform = 'none';
+      element.style.opacity = "1";
+      element.style.transform = "none";
       return;
     }
 
-    const animationType = element.dataset.animation || 'fadeInUp';
-    
+    const animationType = element.dataset.animation || "fadeInUp";
+
     switch (animationType) {
-      case 'fadeInUp':
-        element.style.opacity = '1';
-        element.style.transform = 'translateY(0)';
+      case "fadeInUp":
+        element.style.opacity = "1";
+        element.style.transform = "translateY(0)";
         break;
-      case 'fadeInLeft':
-        element.style.opacity = '1';
-        element.style.transform = 'translateX(0)';
+      case "fadeInLeft":
+        element.style.opacity = "1";
+        element.style.transform = "translateX(0)";
         break;
-      case 'fadeInRight':
-        element.style.opacity = '1';
-        element.style.transform = 'translateX(0)';
+      case "fadeInRight":
+        element.style.opacity = "1";
+        element.style.transform = "translateX(0)";
         break;
-      case 'scaleIn':
-        element.style.opacity = '1';
-        element.style.transform = 'scale(1)';
+      case "scaleIn":
+        element.style.opacity = "1";
+        element.style.transform = "scale(1)";
         break;
       default:
-        element.style.opacity = '1';
-        element.style.transform = 'none';
+        element.style.opacity = "1";
+        element.style.transform = "none";
     }
   }
 
@@ -68,30 +70,31 @@ export class ScrollAnimations {
 
     // Set initial state
     if (!this.prefersReducedMotion) {
-      const animationType = element.dataset.animation || 'fadeInUp';
-      
+      const animationType = element.dataset.animation || "fadeInUp";
+
       switch (animationType) {
-        case 'fadeInUp':
-          element.style.opacity = '0';
-          element.style.transform = 'translateY(30px)';
+        case "fadeInUp":
+          element.style.opacity = "0";
+          element.style.transform = "translateY(30px)";
           break;
-        case 'fadeInLeft':
-          element.style.opacity = '0';
-          element.style.transform = 'translateX(-30px)';
+        case "fadeInLeft":
+          element.style.opacity = "0";
+          element.style.transform = "translateX(-30px)";
           break;
-        case 'fadeInRight':
-          element.style.opacity = '0';
-          element.style.transform = 'translateX(30px)';
+        case "fadeInRight":
+          element.style.opacity = "0";
+          element.style.transform = "translateX(30px)";
           break;
-        case 'scaleIn':
-          element.style.opacity = '0';
-          element.style.transform = 'scale(0.8)';
+        case "scaleIn":
+          element.style.opacity = "0";
+          element.style.transform = "scale(0.8)";
           break;
         default:
-          element.style.opacity = '0';
+          element.style.opacity = "0";
       }
 
-      element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      element.style.transition =
+        "opacity 0.6s ease-out, transform 0.6s ease-out";
     }
 
     this.observer.observe(element);
@@ -109,9 +112,9 @@ export class ScrollAnimations {
 }
 
 // React hook for scroll animations
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-export function useScrollAnimation(animation: string = 'fadeInUp') {
+export function useScrollAnimation(animation: string = "fadeInUp") {
   const elementRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<ScrollAnimations | null>(null);
 

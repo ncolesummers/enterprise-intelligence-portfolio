@@ -5,15 +5,18 @@ Explore practical, tested examples of Claude Code usage in real development scen
 ## Example Projects
 
 ### 💻 [Simple Project Setup](simple-project/)
+
 **Skill Level:** Beginner | **Time:** 30 minutes
 
 Learn the basics with a simple Node.js project setup, including:
+
 - Initial Claude Code configuration
 - Basic file analysis and review
 - Simple custom commands
 - Git integration workflow
 
 **What you'll learn:**
+
 - Project initialization with Claude Code
 - File reading and analysis
 - Basic prompt patterns
@@ -22,15 +25,18 @@ Learn the basics with a simple Node.js project setup, including:
 ---
 
 ### 🌐 [Web Application Development](web-app/)
+
 **Skill Level:** Intermediate | **Time:** 1-2 hours
 
 Advanced workflow with a Next.js application, featuring:
+
 - Multi-role expert analysis
 - Automated code review workflows
 - Performance optimization
 - Testing strategy implementation
 
 **What you'll learn:**
+
 - Complex project memory management
 - Role-based command systems
 - CI/CD integration patterns
@@ -39,15 +45,18 @@ Advanced workflow with a Next.js application, featuring:
 ---
 
 ### 🚀 [Open Source Contribution](open-source/)
+
 **Skill Level:** Advanced | **Time:** 2+ hours
 
 Contribute to open source projects using Claude Code:
+
 - External project analysis
 - Contribution workflow automation
 - Documentation generation
 - Community standards compliance
 
 **What you'll learn:**
+
 - External codebase analysis
 - Contribution quality standards
 - Documentation automation
@@ -60,6 +69,7 @@ Contribute to open source projects using Claude Code:
 ### Daily Development Tasks
 
 #### Morning Standup Preparation
+
 ```bash
 # Review yesterday's changes
 git log --since="yesterday" --oneline | claude -p "Summarize yesterday's development progress for standup"
@@ -69,6 +79,7 @@ claude -p "Analyze recent commits for potential issues or blockers"
 ```
 
 #### Code Review Before Commit
+
 ```bash
 # Review staged changes
 git diff --staged | claude -p "Review these changes for:
@@ -79,6 +90,7 @@ git diff --staged | claude -p "Review these changes for:
 ```
 
 #### Bug Investigation
+
 ```bash
 # Analyze error logs
 claude -p "Help debug this error: [paste error message]
@@ -91,6 +103,7 @@ claude
 ```
 
 #### Documentation Generation
+
 ```bash
 # Generate API documentation
 claude -p "Create comprehensive API documentation for src/app/api/contact/route.ts"
@@ -102,6 +115,7 @@ claude -p "Update the README.md to reflect recent changes to the project structu
 ### Team Collaboration
 
 #### Pull Request Review
+
 ```bash
 # Comprehensive PR analysis
 gh pr diff 42 | claude -p "Provide detailed code review focusing on:
@@ -113,6 +127,7 @@ gh pr diff 42 | claude -p "Provide detailed code review focusing on:
 ```
 
 #### Knowledge Transfer
+
 ```bash
 # Document component for handoff
 claude -p "Create detailed documentation for the ContactForm component to help new team members understand:
@@ -124,6 +139,7 @@ claude -p "Create detailed documentation for the ContactForm component to help n
 ```
 
 #### Onboarding Support
+
 ```bash
 # Generate onboarding checklist
 claude -p "Create an onboarding checklist for new developers joining this Next.js project"
@@ -135,6 +151,7 @@ claude -p "Explain the overall architecture of this portfolio website to a new s
 ### Performance Optimization
 
 #### Bundle Analysis
+
 ```bash
 # Analyze bundle composition
 claude -p "Analyze the package.json dependencies and suggest optimizations for:
@@ -145,6 +162,7 @@ claude -p "Analyze the package.json dependencies and suggest optimizations for:
 ```
 
 #### Component Optimization
+
 ```bash
 # Optimize React component
 claude -p "Optimize src/components/ProjectGrid.tsx for performance:
@@ -157,6 +175,7 @@ claude -p "Optimize src/components/ProjectGrid.tsx for performance:
 ### Testing and Quality Assurance
 
 #### Test Generation
+
 ```bash
 # Generate comprehensive tests
 claude -p "Create Playwright E2E tests for the contact form with scenarios:
@@ -168,6 +187,7 @@ claude -p "Create Playwright E2E tests for the contact form with scenarios:
 ```
 
 #### Test Analysis
+
 ```bash
 # Analyze test failures
 claude -p "Analyze these test failures and suggest fixes: [paste test output]"
@@ -277,18 +297,21 @@ jobs:
 ## Learning Path Recommendations
 
 ### For Beginners
+
 1. Start with [Simple Project Setup](simple-project/)
 2. Practice basic commands with your own code
 3. Create your first custom commands
 4. Integrate with Git workflow
 
 ### For Intermediate Users
+
 1. Explore [Web Application Development](web-app/)
 2. Implement role-based command system
 3. Set up automated workflows
 4. Integrate with CI/CD pipeline
 
 ### For Advanced Users
+
 1. Study [Open Source Contribution](open-source/)
 2. Create complex multi-role workflows
 3. Develop team standards and practices
@@ -303,8 +326,8 @@ jobs:
 
 ## Tutorial Navigation
 
-| Previous | Current | Next |
-|----------|---------|------|
+| Previous                                    | Current      | Next                                |
+| ------------------------------------------- | ------------ | ----------------------------------- |
 | [← Best Practices](../05-best-practices.md) | **Examples** | [Simple Project →](simple-project/) |
 
 ---

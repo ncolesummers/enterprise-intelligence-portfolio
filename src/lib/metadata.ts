@@ -17,11 +17,11 @@ export function generatePageMetadata(page: PageMetadata): Metadata {
     description: page.description,
     keywords: [
       "N. Cole Summers",
-      "Nathan Cole Summers", 
+      "Nathan Cole Summers",
       "Enterprise Intelligence",
       "Software Engineer",
       "Portfolio",
-      "Projects"
+      "Projects",
     ],
     authors: [{ name: "Nathan Cole Summers" }],
     creator: "Nathan Cole Summers",
@@ -31,21 +31,23 @@ export function generatePageMetadata(page: PageMetadata): Metadata {
       description: page.description,
       url: fullUrl,
       siteName: "N. Cole Summers",
-      images: page.image ? [
-        {
-          url: page.image,
-          width: 1200,
-          height: 630,
-          alt: page.title,
-        }
-      ] : [
-        {
-          url: `${siteUrl}/og-default.png`,
-          width: 1200,
-          height: 630,
-          alt: "N. Cole Summers - Enterprise Intelligence",
-        }
-      ],
+      images: page.image
+        ? [
+            {
+              url: page.image,
+              width: 1200,
+              height: 630,
+              alt: page.title,
+            },
+          ]
+        : [
+            {
+              url: `${siteUrl}/og-default.png`,
+              width: 1200,
+              height: 630,
+              alt: "N. Cole Summers - Enterprise Intelligence",
+            },
+          ],
     },
     twitter: {
       card: "summary_large_image",
@@ -76,10 +78,10 @@ export const defaultMetadata: Metadata = {
   keywords: [
     "N. Cole Summers",
     "Nathan Cole Summers",
-    "Enterprise Intelligence", 
+    "Enterprise Intelligence",
     "Software Engineer",
     "Portfolio",
-    "Projects"
+    "Projects",
   ],
   authors: [{ name: "Nathan Cole Summers" }],
   creator: "Nathan Cole Summers",
@@ -96,7 +98,7 @@ export const defaultMetadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "N. Cole Summers - Enterprise Intelligence",
-      }
+      },
     ],
   },
   twitter: {

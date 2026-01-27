@@ -8,7 +8,7 @@ interface SpinnerProps {
 export function Spinner({ size = "md", className }: SpinnerProps) {
   const sizeClasses = {
     sm: "w-4 h-4",
-    md: "w-6 h-6", 
+    md: "w-6 h-6",
     lg: "w-8 h-8",
   };
 
@@ -17,7 +17,7 @@ export function Spinner({ size = "md", className }: SpinnerProps) {
       className={cn(
         "animate-spin rounded-full border-2 border-muted border-t-foreground",
         sizeClasses[size],
-        className
+        className,
       )}
       aria-label="Loading"
     />
@@ -42,7 +42,11 @@ interface LoadingButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   isLoading: boolean;
 }
 
-export function LoadingButton({ children, isLoading, ...props }: LoadingButtonProps) {
+export function LoadingButton({
+  children,
+  isLoading,
+  ...props
+}: LoadingButtonProps) {
   return (
     <button {...props} disabled={isLoading || props.disabled}>
       {isLoading ? (

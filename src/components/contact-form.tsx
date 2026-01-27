@@ -31,17 +31,17 @@ export default function ContactForm() {
     setPending(true);
     setMessage("");
     setIsSuccess(false);
-    
+
     try {
       const formData = new FormData();
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("message", data.message);
-      
+
       const response = await submitContactForm(formData);
       setMessage(response.message);
       setIsSuccess(response.success);
-      
+
       if (response.success) {
         reset();
       }
@@ -95,17 +95,17 @@ export default function ContactForm() {
             })}
           />
         </div>
-        <Button 
-          type="submit" 
-          className="w-full" 
-          disabled={pending || !isValid}
-        >
+        <Button type="submit" className="w-full" disabled={pending || !isValid}>
           {pending ? "Sending..." : "Send Message"}
         </Button>
         {message && (
-          <p className={`text-sm text-center mt-4 ${
-            isSuccess ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
-          }`}>
+          <p
+            className={`text-sm text-center mt-4 ${
+              isSuccess
+                ? "text-green-600 dark:text-green-400"
+                : "text-red-600 dark:text-red-400"
+            }`}
+          >
             {message}
           </p>
         )}

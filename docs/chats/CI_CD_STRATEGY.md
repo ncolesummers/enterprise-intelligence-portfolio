@@ -13,6 +13,7 @@ This document outlines the Continuous Integration and Continuous Deployment stra
 **Purpose**: Fast feedback for code quality and UI functionality
 
 **Steps**:
+
 - Type checking with TypeScript
 - ESLint code quality checks
 - Production build verification
@@ -28,6 +29,7 @@ This document outlines the Continuous Integration and Continuous Deployment stra
 **Purpose**: Comprehensive testing for deployment-ready code
 
 **Steps**:
+
 - Full type checking and linting
 - Production build
 - Complete E2E test suite
@@ -43,6 +45,7 @@ This document outlines the Continuous Integration and Continuous Deployment stra
 **Purpose**: Full FormSpree API integration verification
 
 **Features**:
+
 - Real FormSpree API testing with `TEST_INTEGRATION=true`
 - Email delivery verification
 - Rate limit detection and handling
@@ -58,6 +61,7 @@ This document outlines the Continuous Integration and Continuous Deployment stra
 **Purpose**: Production environment validation
 
 **Checks**:
+
 - Deployment completion verification
 - Production smoke tests
 - Vercel Analytics integration
@@ -66,6 +70,7 @@ This document outlines the Continuous Integration and Continuous Deployment stra
 ## Environment Variables
 
 ### Required for CI
+
 ```bash
 # GitHub Actions automatically provides these
 GITHUB_TOKEN=<automatic>
@@ -76,6 +81,7 @@ TEST_INTEGRATION=true  # Set only for scheduled runs
 ```
 
 ### Production Environment
+
 ```bash
 # Vercel deployment variables
 NEXT_PUBLIC_VERCEL_ANALYTICS_ID=<automatic>
@@ -85,6 +91,7 @@ BASE_URL=https://enterprise-intelligence-portfolio.vercel.app
 ## Test Strategy Mapping
 
 ### PR Development Cycle
+
 ```
 1. Developer creates PR
 2. pr-checks runs (3-5 min)
@@ -98,6 +105,7 @@ BASE_URL=https://enterprise-intelligence-portfolio.vercel.app
 ```
 
 ### Main Branch Deployment
+
 ```
 1. Code merged to main
 2. build-and-test runs (5-8 min)
@@ -112,6 +120,7 @@ BASE_URL=https://enterprise-intelligence-portfolio.vercel.app
 ```
 
 ### Weekly Monitoring
+
 ```
 1. Scheduled 2 AM UTC Sundays
 2. weekly-integration runs (10-15 min)
@@ -125,6 +134,7 @@ BASE_URL=https://enterprise-intelligence-portfolio.vercel.app
 ## Failure Handling
 
 ### PR Check Failures
+
 - **Type Errors**: Block merge until fixed
 - **Lint Issues**: Block merge until fixed
 - **Build Failures**: Block merge until fixed
@@ -132,11 +142,13 @@ BASE_URL=https://enterprise-intelligence-portfolio.vercel.app
 - **API Health Check**: Warning only, may indicate FormSpree issues
 
 ### Integration Test Failures
+
 - **Weekly Test Failure**: Automatically creates GitHub issue
 - **Rate Limit Hit**: Expected behavior, logged for monitoring
 - **Real API Failures**: Indicates FormSpree service issues
 
 ### Production Deployment Issues
+
 - **Smoke Test Failures**: Manual investigation required
 - **Analytics Issues**: Non-blocking warning
 - **Health Check Failures**: May indicate deployment problems
@@ -144,13 +156,16 @@ BASE_URL=https://enterprise-intelligence-portfolio.vercel.app
 ## Monitoring and Alerts
 
 ### Automated Issue Creation
+
 Weekly integration failures automatically create GitHub issues with:
+
 - Failure timestamp and run ID
 - Commit hash for debugging
 - Suggested investigation steps
 - Relevant labels for triage
 
 ### Test Result Artifacts
+
 - **PR Results**: 7-day retention for quick debugging
 - **Main Branch Results**: 30-day retention for release validation
 - **Weekly Integration**: 90-day retention for trend analysis
@@ -158,11 +173,13 @@ Weekly integration failures automatically create GitHub issues with:
 ## Rate Limit Management
 
 ### FormSpree Free Tier Limits
+
 - **50 submissions/month**: Approximately 12 requests/week
 - **Strategy**: Weekly integration tests only
 - **Mitigation**: Mocked responses for development
 
 ### Rate Limit Monitoring
+
 ```bash
 # Weekly budget calculation
 Monthly Limit: 50 requests
@@ -172,7 +189,9 @@ Buffer: 11 requests for manual testing and development
 ```
 
 ### Escalation Plan
+
 If rate limits are exceeded:
+
 1. **Immediate**: Switch to mocked-only testing
 2. **Short-term**: Reduce weekly test frequency or skip integration tests
 3. **Long-term**: Consider FormSpree paid plan or alternative service
@@ -180,12 +199,14 @@ If rate limits are exceeded:
 ## Performance Benchmarks
 
 ### CI Pipeline Performance
+
 - **PR Checks**: Target < 5 minutes
 - **Full Build**: Target < 8 minutes
 - **Weekly Integration**: Target < 15 minutes
 - **Post-Deploy**: Target < 3 minutes
 
 ### Test Execution Times
+
 - **UI Behavior Tests**: ~2-3 minutes
 - **Integration Health**: ~30 seconds
 - **Cross-Browser**: ~4-5 minutes
@@ -194,12 +215,14 @@ If rate limits are exceeded:
 ## Future Enhancements
 
 ### Planned Improvements
+
 - [ ] **Unit Test Integration**: Add Jest/RTL tests to PR checks
 - [ ] **Visual Regression**: Implement screenshot comparison
 - [ ] **Performance Testing**: Lighthouse CI integration
 - [ ] **Security Scanning**: SAST/dependency vulnerability checks
 
 ### Advanced Features
+
 - [ ] **Multi-Environment**: Staging environment testing
 - [ ] **Load Testing**: Stress testing for high traffic
 - [ ] **A11y Testing**: Automated accessibility validation
@@ -208,17 +231,20 @@ If rate limits are exceeded:
 ## Maintenance Schedule
 
 ### Weekly
+
 - [ ] Review test execution times
 - [ ] Check artifact storage usage
 - [ ] Monitor FormSpree rate limit consumption
 
-### Monthly  
+### Monthly
+
 - [ ] Update dependencies in workflow
 - [ ] Review and optimize CI performance
 - [ ] Analyze test failure patterns
 - [ ] FormSpree usage audit
 
 ### Quarterly
+
 - [ ] Evaluate CI/CD tool alternatives
 - [ ] Review and update testing strategy
 - [ ] Performance benchmark review

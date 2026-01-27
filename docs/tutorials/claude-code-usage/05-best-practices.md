@@ -14,6 +14,7 @@ Create comprehensive project memory that helps Claude understand your codebase:
 This is a Next.js 15 portfolio website showcasing enterprise intelligence projects.
 
 ## Architecture
+
 - **Frontend**: Next.js 15 with App Router
 - **Styling**: Tailwind CSS with CSS variables for theming
 - **UI Components**: shadcn/ui following "new-york" style
@@ -21,6 +22,7 @@ This is a Next.js 15 portfolio website showcasing enterprise intelligence projec
 - **Type Safety**: TypeScript with strict mode
 
 ## Development Commands
+
 - `pnpm dev` - Start development server with Turbopack
 - `pnpm build` - Build production version
 - `pnpm test:e2e` - Run Playwright E2E tests
@@ -28,6 +30,7 @@ This is a Next.js 15 portfolio website showcasing enterprise intelligence projec
 - `pnpm format` - Format code with Prettier
 
 ## Coding Standards
+
 - Use TypeScript strict mode with proper type definitions
 - Components are client-side by default (use 'use client')
 - Follow shadcn/ui patterns with `cn()` utility for styling
@@ -35,6 +38,7 @@ This is a Next.js 15 portfolio website showcasing enterprise intelligence projec
 - Maintain 100% test reliability with no flaky tests
 
 ## File Organization
+
 - `src/app/` - Next.js App Router pages and layouts
 - `src/components/` - Reusable React components
 - `src/components/ui/` - shadcn/ui components
@@ -42,6 +46,7 @@ This is a Next.js 15 portfolio website showcasing enterprise intelligence projec
 - `tests/e2e/` - Playwright E2E tests
 
 ## Definition of Done
+
 All code changes must meet the criteria in CLAUDE.md before completion.
 ```
 
@@ -53,24 +58,28 @@ Define personal preferences and coding standards:
 # Personal Claude Code Preferences
 
 ## Coding Style
+
 - Prefer functional components with hooks
 - Use TypeScript strict mode always
 - Implement comprehensive error handling
 - Write self-documenting code with clear naming
 
 ## Code Review Focus
+
 - Type safety and proper TypeScript usage
 - Performance implications and optimizations
 - Accessibility compliance (WCAG 2.1 AA)
 - Security best practices
 
 ## Communication Style
+
 - Provide specific, actionable feedback
 - Include code examples with explanations
 - Explain the "why" behind recommendations
 - Prioritize suggestions by impact and effort
 
 ## Tool Preferences
+
 - Use pnpm for package management
 - Prefer Playwright for E2E testing
 - Use ESLint and Prettier for code quality
@@ -209,14 +218,17 @@ claude -p "Review src/components/ContactForm.tsx for:
 # Team Command Naming Convention
 
 ## Format
+
 /project:[category]:[action]
 
 Examples:
+
 - /project:review:component
 - /project:generate:test
 - /project:optimize:performance
 
 ## Categories
+
 - review: Code review and analysis
 - generate: Code and documentation generation
 - optimize: Performance and quality improvements
@@ -229,20 +241,25 @@ Examples:
 # Command Documentation Template
 
 ## Purpose
+
 Clear description of what the command does
 
 ## Usage
+
 /project:command:name "description of input"
 
 ## Examples
+
 /project:review:component "src/components/Button.tsx"
 
 ## Expected Output
+
 - Specific feedback format
 - Key areas of analysis
 - Actionable recommendations
 
 ## Related Commands
+
 - List complementary commands
 - Workflow connections
 ```
@@ -291,6 +308,7 @@ Security-focused code review with data protection.
 Review: $ARGUMENTS
 
 ## Security Analysis (excluding sensitive data)
+
 1. Authentication/authorization patterns
 2. Input validation and sanitization
 3. Error handling and information disclosure
@@ -342,24 +360,28 @@ Verify code changes meet all Definition of Done criteria.
 Check these changes against our Definition of Done: $ARGUMENTS
 
 ## Code Quality Checklist
+
 - [ ] Linting passes (`pnpm lint`)
 - [ ] Build succeeds (`pnpm build`)
 - [ ] TypeScript types properly defined
 - [ ] Code follows Prettier formatting
 
 ## Functionality Checklist
+
 - [ ] Feature works as intended
 - [ ] Cross-browser compatibility verified
 - [ ] Responsive design implemented
 - [ ] Accessibility standards met (WCAG 2.1 AA)
 
 ## Testing Checklist
+
 - [ ] E2E tests pass (`pnpm test:e2e`)
 - [ ] Test reliability confirmed (100% pass rate)
 - [ ] Edge cases covered
 - [ ] No console errors
 
 ## Performance & UX Checklist
+
 - [ ] Reduced motion respected
 - [ ] Theme compatibility verified
 - [ ] Loading states implemented
@@ -447,19 +469,23 @@ Systematic daily review of recent changes.
 Daily review for: $ARGUMENTS
 
 ## Morning Review
+
 1. **Recent Changes**: Review commits from last 24 hours
 2. **Test Status**: Check test suite health
 3. **Performance**: Monitor build and runtime performance
 4. **Security**: Scan for potential security issues
 
 ## Quality Gates
+
 - All tests passing
 - No linting errors
 - Build successful
 - No security vulnerabilities
 
 ## Action Items
+
 Generate prioritized list of:
+
 - Critical issues requiring immediate attention
 - Important improvements for today
 - Long-term optimizations to plan
@@ -483,12 +509,14 @@ echo "$(date): Response quality: 4/5 stars" >> ~/.claude/quality.log
 # When contributing to open source projects:
 
 ## Code Quality
+
 - Follow project's existing patterns
 - Include comprehensive tests
 - Document public APIs
 - Consider backward compatibility
 
 ## Claude Code Usage
+
 - Use project-specific CLAUDE.md if available
 - Respect project's coding standards
 - Generate appropriate commit messages
@@ -515,16 +543,19 @@ git commit -m "Add useful Claude Code commands for team"
 # Weekly Claude Code Review
 
 ## What's Working Well?
+
 - Which commands are most valuable?
 - What workflows save the most time?
 - Which responses are highest quality?
 
 ## What Needs Improvement?
+
 - Which commands need refinement?
 - What workflows are inefficient?
 - Where are response quality issues?
 
 ## Action Items
+
 - Update command definitions
 - Refine project memory
 - Optimize workflows
@@ -554,8 +585,8 @@ You now have comprehensive best practices:
 
 ## Tutorial Navigation
 
-| Previous | Current | Next |
-|----------|---------|------|
+| Previous                                         | Current            | Next                    |
+| ------------------------------------------------ | ------------------ | ----------------------- |
 | [← Advanced Workflows](04-advanced-workflows.md) | **Best Practices** | [Examples →](examples/) |
 
 ---

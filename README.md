@@ -22,7 +22,7 @@ A modern, enterprise-grade portfolio website showcasing enterprise intelligence 
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm
 
 ### Installation
@@ -44,6 +44,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 ## Available Scripts
 
 ### Development
+
 - `pnpm dev` - Start development server with Turbopack
 - `pnpm build` - Build production version
 - `pnpm start` - Start production server
@@ -51,6 +52,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 - `pnpm format` - Format code with Prettier
 
 ### Testing
+
 - `pnpm test:e2e` - Run Playwright E2E tests (UI behavior + mocked integration)
 - `pnpm test:e2e:ui` - Run tests with interactive UI
 - `pnpm test:contact-form` - Run contact form specific tests
@@ -61,12 +63,14 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 This project achieves **testing excellence** through comprehensive automation:
 
 **📊 Test Metrics:**
+
 - **153 E2E tests** across 5 browser configurations (Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari)
 - **100% test reliability** with flaky test elimination and browser-specific optimizations
 - **Three-tier strategy**: UI behavior tests, integration health checks, full API testing
 - **WCAG 2.1 AA compliance** with accessibility and keyboard navigation testing
 
 **🎯 Quality Achievements:**
+
 - Zero ESLint violations with strict TypeScript
 - Cross-browser form validation and error handling
 - Performance testing with <3s load time requirements
@@ -106,39 +110,46 @@ Please follow our Definition of Done for all contributions:
 Before considering any code change complete, ensure all criteria are met:
 
 #### Code Quality
+
 - [ ] **Linting passes**: Run `pnpm lint` with zero errors or warnings
 - [ ] **Build succeeds**: Run `pnpm build` successfully without TypeScript errors
 - [ ] **Type safety**: All TypeScript types are properly defined and used
 - [ ] **Code formatting**: Code follows Prettier formatting standards
 
 #### Functionality
+
 - [ ] **Feature works as intended**: Manual testing confirms expected behavior
 - [ ] **Cross-browser compatibility**: Tested in Chrome, Firefox, and Safari (when applicable)
 - [ ] **Responsive design**: Works on mobile, tablet, and desktop viewports
 - [ ] **Accessibility**: Meets WCAG 2.1 AA standards (keyboard navigation, screen readers, color contrast)
 
 #### Testing
+
 - [ ] **E2E tests pass**: Relevant Playwright tests execute successfully
 - [ ] **No console errors**: Browser console shows no JavaScript errors
 - [ ] **Contact form verification**: FormSpree integration tested (when touching contact functionality)
 
 #### Performance & UX
+
 - [ ] **Reduced motion respected**: Animations honor `prefers-reduced-motion` setting
 - [ ] **Theme compatibility**: Works correctly in both light and dark themes
 - [ ] **Loading states**: Appropriate loading indicators for async operations
 - [ ] **Error handling**: Graceful error states with user-friendly messages
 
 #### Documentation
+
 - [ ] **Code is self-documenting**: Clear component and function names
 - [ ] **Complex logic explained**: Comments added for non-obvious implementations
 - [ ] **CLAUDE.md updated**: Architecture notes updated if patterns change
 
 #### Git Standards
+
 - [ ] **Atomic commits**: Each commit represents one logical change
 - [ ] **Clear commit messages**: Descriptive messages explaining "why" not just "what"
 - [ ] **No sensitive data**: No API keys, secrets, or personal data committed
 
 #### Production Readiness
+
 - [ ] **Vercel deployment succeeds**: Build and deployment pipeline completes
 - [ ] **Analytics working**: Vercel Analytics tracking page views (when applicable)
 - [ ] **SEO optimized**: Meta tags, Open Graph, and structured data present
@@ -187,4 +198,4 @@ This project is for portfolio purposes. All rights reserved.
 
 **Built with ❤️ by N. Cole Summers**
 
-*Showcasing the future of AI-assisted development: enterprise-grade quality through intelligent automation and specialized expert prompts.*
+_Showcasing the future of AI-assisted development: enterprise-grade quality through intelligent automation and specialized expert prompts._

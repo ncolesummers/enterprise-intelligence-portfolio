@@ -11,8 +11,9 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata = generatePageMetadata({
   title: "MyUI Dashboard - University of Idaho",
-  description: "Lead developer for University of Idaho's modernized dashboard built on Ellucian Experience platform. Created custom React components streamlining student access to university services.",
-  path: "/projects/myui"
+  description:
+    "Lead developer for University of Idaho's modernized dashboard built on Ellucian Experience platform. Created custom React components streamlining student access to university services.",
+  path: "/projects/myui",
 });
 
 export default function MyUIPage() {

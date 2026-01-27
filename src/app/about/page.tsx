@@ -18,8 +18,9 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata = generatePageMetadata({
   title: "About Nathan Cole Summers",
-  description: "Enterprise Applications Developer with 9 years of IT experience and 5 years of focused application development. Specializing in microservice architecture, TypeScript, Python, Go, C#, and Rust.",
-  path: "/about"
+  description:
+    "Enterprise Applications Developer with 9 years of IT experience and 5 years of focused application development. Specializing in microservice architecture, TypeScript, Python, Go, C#, and Rust.",
+  path: "/about",
 });
 
 export default function AboutPage() {
@@ -233,7 +234,7 @@ export default function AboutPage() {
         </Section>
 
         {/* Call to Action */}
-        <Section title="Let&apos;s Connect" className="text-center">
+        <Section title="Let's Connect" className="text-center">
           <p className="mb-8 text-lg text-gray-400 max-w-2xl mx-auto">
             Whether you&apos;re interested in discussing enterprise
             applications, microservice architecture, or just want to chat about
