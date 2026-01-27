@@ -3,7 +3,7 @@ import { AnimatedCard } from "@/components/ui/animated-section";
 import profileExtractorImage from "@/assets/profile-extractor.png";
 import myuiImage from "@/assets/myui.png";
 import mikrotikConfigGenImage from "@/assets/mikrotik-config-gen.png";
-import uidahoWebsiteImage from "@/assets/uidaho-website.png";
+import uidahoWebsiteImage from "@/assets/uidaho-explore-hero.webp";
 
 const ProjectGrid = () => {
   return (
@@ -13,8 +13,8 @@ const ProjectGrid = () => {
           <AnimatedCard delay={0}>
             <ProjectCard
               title="University of Idaho Website"
-              description="A modern redesign of the University of Idaho website built with Sitecore, Next.js, TypeScript, Storybook, and C#."
-              comingSoon={true}
+              description="A modern redesign of the University of Idaho website built with Sitecore, Next.js, TypeScript, Storybook, and Azure services."
+              link="/projects/uidaho-website"
               image={uidahoWebsiteImage}
             />
           </AnimatedCard>
