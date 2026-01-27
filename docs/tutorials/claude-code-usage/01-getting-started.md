@@ -13,14 +13,17 @@ Learn how to install and configure Claude Code for your development workflow.
 ## Installation
 
 ### Method 1: NPM (Recommended)
+
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
 ### Method 2: Direct Download
+
 Visit [claude.ai/code](https://claude.ai/code) for platform-specific installers.
 
 ### Verify Installation
+
 ```bash
 claude --version
 # Should display: claude-code v1.x.x
@@ -29,6 +32,7 @@ claude --version
 ## Initial Setup
 
 ### 1. Authentication
+
 ```bash
 claude auth
 # This will open your browser for authentication
@@ -36,26 +40,30 @@ claude auth
 ```
 
 **Expected Output:**
+
 ```
 ✅ Successfully authenticated!
 Welcome to Claude Code 👋
 ```
 
 ### 2. First Interactive Session
+
 ```bash
 claude
 # Starts interactive mode
 ```
 
 You should see:
+
 ```
 Claude Code v1.x.x
 Type /help for commands, or start chatting!
 
-> 
+>
 ```
 
 ### 3. Test Basic Functionality
+
 Try these commands in the interactive session:
 
 ```
@@ -72,6 +80,7 @@ Try these commands in the interactive session:
 ## Project Setup
 
 ### Initialize a Project
+
 ```bash
 # Navigate to your project directory
 cd your-project
@@ -81,10 +90,12 @@ claude init
 ```
 
 This creates:
+
 - `.claude/` directory with project configuration
 - `CLAUDE.md` file for project-specific instructions
 
 ### Configure Project Memory
+
 Edit the `CLAUDE.md` file to include project context:
 
 ```markdown
@@ -93,17 +104,20 @@ Edit the `CLAUDE.md` file to include project context:
 This is a Next.js application with TypeScript.
 
 ## Architecture
+
 - Frontend: Next.js 15 with App Router
 - Styling: Tailwind CSS
 - UI Components: shadcn/ui
 - Testing: Playwright for E2E
 
 ## Commands
+
 - `pnpm dev` - Start development server
 - `pnpm build` - Build for production
 - `pnpm test:e2e` - Run E2E tests
 
 ## Coding Standards
+
 - Use TypeScript strict mode
 - Follow ESLint configuration
 - Components should be client-side by default
@@ -113,17 +127,20 @@ This is a Next.js application with TypeScript.
 ## Your First Commands
 
 ### Interactive Mode
+
 ```bash
 claude
 ```
 
 **Common slash commands:**
+
 - `/help` - Show available commands
 - `/clear` - Clear conversation history
 - `/memory` - Edit project memory (CLAUDE.md)
 - `/exit` - Exit interactive mode
 
 ### One-Shot Mode
+
 ```bash
 # Quick questions
 claude -p "What's the best way to handle forms in React?"
@@ -138,6 +155,7 @@ claude -p "Create a TypeScript interface for a user profile"
 ## Essential Workflows
 
 ### Code Review
+
 ```bash
 # Review specific file
 claude -p "Please review src/app/page.tsx for best practices"
@@ -147,6 +165,7 @@ git diff HEAD~1 | claude -p "Review these changes"
 ```
 
 ### Bug Fixing
+
 ```bash
 # Interactive debugging
 claude
@@ -154,6 +173,7 @@ claude
 ```
 
 ### Documentation
+
 ```bash
 # Generate documentation
 claude -p "Create README documentation for the utils/validation.ts file"
@@ -162,6 +182,7 @@ claude -p "Create README documentation for the utils/validation.ts file"
 ## Configuration Options
 
 ### User Settings
+
 Edit `~/.claude/settings.json`:
 
 ```json
@@ -174,6 +195,7 @@ Edit `~/.claude/settings.json`:
 ```
 
 ### Project Settings
+
 Edit `.claude/settings.json`:
 
 ```json
@@ -193,6 +215,7 @@ Edit `.claude/settings.json`:
 ## Troubleshooting
 
 ### Command Not Found
+
 ```bash
 # Check installation
 which claude
@@ -204,6 +227,7 @@ npm install -g @anthropic-ai/claude-code
 ```
 
 ### Authentication Issues
+
 ```bash
 # Clear and re-authenticate
 claude auth --logout
@@ -211,6 +235,7 @@ claude auth
 ```
 
 ### Permission Errors
+
 ```bash
 # Check and fix permissions
 ls -la ~/.claude/
@@ -222,6 +247,7 @@ claude auth
 ```
 
 ### Project Not Recognized
+
 ```bash
 # Verify .claude directory exists
 ls -la .claude/
@@ -240,8 +266,8 @@ Now that Claude Code is set up:
 
 ## Tutorial Navigation
 
-| Previous | Current | Next |
-|----------|---------|------|
+| Previous                         | Current             | Next                                     |
+| -------------------------------- | ------------------- | ---------------------------------------- |
 | [← Tutorial Overview](README.md) | **Getting Started** | [Basic Commands →](02-basic-commands.md) |
 
 ---

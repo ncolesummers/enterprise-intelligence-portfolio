@@ -5,6 +5,7 @@ A beginner-friendly example showing Claude Code basics with a simple Node.js pro
 ## Overview
 
 This example demonstrates:
+
 - Setting up Claude Code for a new project
 - Basic file analysis and code review
 - Creating simple custom commands
@@ -52,16 +53,19 @@ Edit `CLAUDE.md`:
 A basic Node.js application for learning Claude Code.
 
 ## Technology Stack
+
 - Node.js
 - ES6+ JavaScript
 - NPM for package management
 
 ## Project Goals
+
 - Learn Claude Code basics
 - Practice code review workflows
 - Implement simple utilities
 
 ## Coding Standards
+
 - Use ES6+ features
 - Write clear, documented code
 - Follow Node.js best practices
@@ -72,21 +76,21 @@ A basic Node.js application for learning Claude Code.
 Create `src/index.js`:
 
 ```javascript
-const { greet, calculateSum } = require('./utils');
+const { greet, calculateSum } = require("./utils");
 
-console.log(greet('World'));
-console.log('Sum:', calculateSum([1, 2, 3, 4, 5]));
+console.log(greet("World"));
+console.log("Sum:", calculateSum([1, 2, 3, 4, 5]));
 ```
 
 Create `src/utils.js`:
 
 ```javascript
 function greet(name) {
-    return `Hello, ${name}!`;
+  return `Hello, ${name}!`;
 }
 
 function calculateSum(numbers) {
-    return numbers.reduce((sum, num) => sum + num, 0);
+  return numbers.reduce((sum, num) => sum + num, 0);
 }
 
 module.exports = { greet, calculateSum };
@@ -119,6 +123,7 @@ Review a JavaScript file for Node.js best practices.
 Please review this Node.js file: $ARGUMENTS
 
 Focus on:
+
 1. Code quality and readability
 2. Error handling
 3. Performance considerations
@@ -129,6 +134,7 @@ Provide specific suggestions with code examples.
 ```
 
 Usage:
+
 ```bash
 claude
 > /project:review-file "src/utils.js"
@@ -158,7 +164,7 @@ After completing this example, you'll understand:
 ✅ **File Analysis**: How to get code reviews and suggestions  
 ✅ **Custom Commands**: How to create reusable command templates  
 ✅ **Git Integration**: How to use Claude Code in your Git workflow  
-✅ **Project Memory**: How to provide context for better results  
+✅ **Project Memory**: How to provide context for better results
 
 ## Next Steps
 
@@ -169,6 +175,7 @@ After completing this example, you'll understand:
 ## Common Patterns
 
 ### Code Review
+
 ```bash
 # Review specific concerns
 claude -p "Check src/utils.js for potential security issues"
@@ -178,6 +185,7 @@ claude -p "Compare these two functions and suggest the better approach: [paste c
 ```
 
 ### Code Generation
+
 ```bash
 # Generate tests
 claude -p "Create Jest tests for the functions in src/utils.js"
@@ -187,6 +195,7 @@ claude -p "Create a README.md for this simple Node.js project"
 ```
 
 ### Debugging
+
 ```bash
 # Debug issues
 claude -p "I'm getting this error: [paste error]. Help me debug it."

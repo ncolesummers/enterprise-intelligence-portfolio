@@ -45,19 +45,24 @@ Get simultaneous expert perspectives on code changes.
 **Code to Review**: $ARGUMENTS
 
 ## Security Perspective
+
 As a Cybersecurity Engineer, analyze: $ARGUMENTS
 Focus on security vulnerabilities, authentication patterns, and data protection.
 
-## Architecture Perspective  
+## Architecture Perspective
+
 As a Senior Frontend Architect, analyze: $ARGUMENTS
 Focus on component design, performance, and scalability.
 
 ## Quality Perspective
+
 As a TypeScript Quality Engineer, analyze: $ARGUMENTS
 Focus on type safety, code quality, and maintainability.
 
 ## Synthesis
+
 Combine all three perspectives into unified recommendations with:
+
 1. Priority rankings for identified issues
 2. Conflicting recommendations resolved
 3. Implementation roadmap
@@ -78,20 +83,24 @@ Transfer analysis context from one role to another.
 **Previous Analysis**: $ARGUMENTS
 
 ## Context Summary
+
 Based on the previous analysis: $ARGUMENTS
 
 ### Key Decisions Made
+
 - Technical decisions and rationale
 - Business constraints identified
 - Quality requirements established
 - Risk assessments completed
 
 ### Open Questions for Next Role
+
 - Implementation specifics needed
 - Trade-off evaluations required
 - Validation approaches to consider
 
 ### Constraints to Maintain
+
 - Technical limitations to respect
 - Business requirements to preserve
 - Quality standards to uphold
@@ -114,14 +123,14 @@ STAGED_CHANGES=$(git diff --staged --name-only)
 
 if [ -n "$STAGED_CHANGES" ]; then
     echo "Reviewing staged changes with Claude Code..."
-    
+
     # Review changes
     git diff --staged | claude -p "Review these changes for:
     1. Code quality and best practices
     2. Potential bugs or issues
     3. Security vulnerabilities
     4. Performance implications
-    
+
     Provide specific feedback with line numbers."
 fi
 ```
@@ -186,39 +195,39 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      
+          node-version: "18"
+
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
-      
+
       - name: Authenticate Claude
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: claude auth --api-key $ANTHROPIC_API_KEY
-      
+
       - name: Review PR Changes
         run: |
           git diff origin/main...HEAD | claude -p "Review this PR:
-          
+
           Focus on:
           1. Breaking changes
           2. Security vulnerabilities  
           3. Performance regressions
           4. Test coverage gaps
-          
+
           Provide actionable feedback." > review-output.md
-      
+
       - name: Comment PR
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const review = fs.readFileSync('review-output.md', 'utf8');
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -245,37 +254,44 @@ Analyze the following changes: $ARGUMENTS
 ## Quality Criteria
 
 ### Code Quality (Weight: 30%)
+
 - TypeScript usage and type safety
 - Code complexity and maintainability
 - Design patterns and architecture
 - Error handling and edge cases
 
 ### Security (Weight: 25%)
+
 - Vulnerability scanning
 - Authentication/authorization
 - Data validation and sanitization
 - Dependency security
 
 ### Performance (Weight: 20%)
+
 - Runtime performance impact
 - Bundle size implications
 - Memory usage patterns
 - Database query efficiency
 
 ### Testing (Weight: 15%)
+
 - Test coverage for new code
 - Test quality and reliability
 - Integration test scenarios
 - Edge case coverage
 
 ### Documentation (Weight: 10%)
+
 - Code documentation
 - API documentation updates
 - README and setup instructions
 - Changelog updates
 
 ## Quality Score
+
 Provide a quality score (0-100) with:
+
 - Overall assessment
 - Category-specific scores
 - Blocking issues (if any)
@@ -301,6 +317,7 @@ Generate comprehensive onboarding materials for new team members.
 Create onboarding materials for: $ARGUMENTS
 
 ## Welcome Package
+
 1. **Project Overview**
    - Architecture summary
    - Technology stack explanation
@@ -344,30 +361,35 @@ Create knowledge transfer documentation for: $ARGUMENTS
 ## Transfer Structure
 
 ### Context and Background
+
 - Problem domain explanation
 - Historical decisions and rationale
 - Current state assessment
 - Known limitations and constraints
 
 ### Technical Deep Dive
+
 - Architecture and design patterns
 - Key components and their interactions
 - Data flow and state management
 - Integration points and dependencies
 
 ### Operational Knowledge
+
 - Deployment procedures
 - Monitoring and alerting
 - Troubleshooting guides
 - Performance optimization tips
 
 ### Handoff Checklist
+
 - Code repositories and access
 - Documentation and resources
 - Contacts and escalation paths
 - Outstanding tasks and priorities
 
 ### Q&A Session Planning
+
 - Common questions and answers
 - Areas requiring clarification
 - Follow-up session scheduling
@@ -393,6 +415,7 @@ Perform performance audit on: $ARGUMENTS
 ## Audit Areas
 
 ### Frontend Performance
+
 1. **Bundle Analysis**
    - Bundle size and composition
    - Code splitting opportunities
@@ -412,6 +435,7 @@ Perform performance audit on: $ARGUMENTS
    - CDN utilization
 
 ### Backend Performance
+
 1. **Database Performance**
    - Query optimization
    - Index effectiveness
@@ -425,7 +449,9 @@ Perform performance audit on: $ARGUMENTS
    - Error handling efficiency
 
 ## Optimization Roadmap
+
 Provide prioritized recommendations with:
+
 - Performance impact estimates
 - Implementation effort assessments
 - Risk evaluations
@@ -452,6 +478,7 @@ Security review for: $ARGUMENTS
 ## Security Analysis Framework
 
 ### OWASP Top 10 Assessment
+
 1. Injection vulnerabilities
 2. Broken authentication
 3. Sensitive data exposure
@@ -464,19 +491,23 @@ Security review for: $ARGUMENTS
 10. Insufficient logging/monitoring
 
 ### Threat Modeling
+
 - Attack surface analysis
 - Data flow security
 - Trust boundary evaluation
 - Privilege escalation risks
 
 ### Compliance Check
+
 - GDPR compliance
 - SOX requirements
 - Industry-specific standards
 - Internal security policies
 
 ## Security Recommendations
+
 Provide:
+
 - Risk severity ratings
 - Mitigation strategies
 - Implementation guidance
@@ -486,8 +517,10 @@ Provide:
 ## Best Practices for Advanced Workflows
 
 ### 1. Workflow Documentation
+
 ```markdown
 # Document each workflow with:
+
 - Purpose and use cases
 - Prerequisites and setup
 - Step-by-step execution
@@ -496,6 +529,7 @@ Provide:
 ```
 
 ### 2. Error Handling
+
 ```bash
 # Add error handling to scripts
 set -e  # Exit on error
@@ -512,6 +546,7 @@ fi
 ```
 
 ### 3. Logging and Monitoring
+
 ```bash
 # Log workflow executions
 LOG_FILE="~/.claude/workflow.log"
@@ -526,6 +561,7 @@ echo "Workflow completed in ${DURATION}s" >> $LOG_FILE
 ```
 
 ### 4. Version Control for Workflows
+
 ```bash
 # Include workflows in version control
 git add .claude/commands/
@@ -546,8 +582,8 @@ You now have advanced workflow capabilities:
 
 ## Tutorial Navigation
 
-| Previous | Current | Next |
-|----------|---------|------|
+| Previous                                   | Current                | Next                                     |
+| ------------------------------------------ | ---------------------- | ---------------------------------------- |
 | [← Custom Commands](03-custom-commands.md) | **Advanced Workflows** | [Best Practices →](05-best-practices.md) |
 
 ---

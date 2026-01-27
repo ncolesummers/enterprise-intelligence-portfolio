@@ -14,7 +14,9 @@ export default function Page() {
         <section id="contact" className="py-32">
           <div className="container px-4">
             <div className="max-w-2xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8">Get In Touch</h2>
+              <h2 className="text-3xl font-bold text-center mb-8">
+                Get In Touch
+              </h2>
               <ContactForm />
             </div>
           </div>

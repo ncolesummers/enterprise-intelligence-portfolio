@@ -3,7 +3,8 @@
 // Site metadata
 export const siteMetadata = {
   title: "N. Cole Summers",
-  description: "Welcome to my personal website where I share my projects and thoughts.",
+  description:
+    "Welcome to my personal website where I share my projects and thoughts.",
   author: "Nathan Cole Summers",
 };
 // Navigation links

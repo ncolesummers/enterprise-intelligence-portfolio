@@ -12,8 +12,9 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata = generatePageMetadata({
   title: "AI Data Extraction Research",
-  description: "Research spike exploring foundation models to extract faculty and staff profile data. Achieved 92.79% success rate at $0.0012 per profile using LangGraph and Google Gemini.",
-  path: "/projects/profile-extractor"
+  description:
+    "Research spike exploring foundation models to extract faculty and staff profile data. Achieved 92.79% success rate at $0.0012 per profile using LangGraph and Google Gemini.",
+  path: "/projects/profile-extractor",
 });
 
 export default function ProfileExtractorPage() {

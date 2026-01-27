@@ -7,24 +7,30 @@ Master the essential Claude Code commands you'll use every day.
 Claude Code operates in two primary modes:
 
 ### Interactive Mode
+
 Start a conversation session:
+
 ```bash
 claude
 ```
 
 **Best for:**
+
 - Complex problem-solving
 - Back-and-forth discussions
 - Multi-step tasks
 - Learning and exploration
 
 ### One-Shot Mode
+
 Get quick answers:
+
 ```bash
 claude -p "your question here"
 ```
 
 **Best for:**
+
 - Quick questions
 - Code reviews
 - Simple code generation
@@ -33,6 +39,7 @@ claude -p "your question here"
 ## Essential CLI Flags
 
 ### Core Flags
+
 ```bash
 # Print mode (one-shot)
 claude --print "question"
@@ -53,6 +60,7 @@ claude --output-format stream-json
 ```
 
 ### Model Selection
+
 ```bash
 # Use specific model
 claude --model claude-3-5-sonnet-20241022
@@ -66,6 +74,7 @@ claude models list
 Once in interactive mode (`claude`), use these slash commands:
 
 ### Essential Slash Commands
+
 ```bash
 # Get help
 /help
@@ -87,6 +96,7 @@ Once in interactive mode (`claude`), use these slash commands:
 ```
 
 ### Memory Management
+
 ```bash
 # Quick memory addition (start message with #)
 # This is a quick way to add to project memory
@@ -101,6 +111,7 @@ Once in interactive mode (`claude`), use these slash commands:
 ### 1. Code Review
 
 **Single File Review:**
+
 ```bash
 # One-shot review
 claude -p "Review src/components/Button.tsx for best practices"
@@ -112,6 +123,7 @@ claude
 ```
 
 **Git Changes Review:**
+
 ```bash
 # Review staged changes
 git diff --staged | claude -p "Review these changes before I commit"
@@ -126,16 +138,19 @@ gh pr diff 123 | claude -p "Review this PR for security and performance"
 ### 2. Code Generation
 
 **Component Creation:**
+
 ```bash
 claude -p "Create a TypeScript React component for a loading spinner with Tailwind CSS"
 ```
 
 **Utility Functions:**
+
 ```bash
 claude -p "Create a utility function to validate email addresses with proper TypeScript types"
 ```
 
 **Configuration Files:**
+
 ```bash
 claude -p "Generate a Playwright configuration for testing a Next.js app"
 ```
@@ -143,12 +158,14 @@ claude -p "Generate a Playwright configuration for testing a Next.js app"
 ### 3. Debugging
 
 **Error Analysis:**
+
 ```bash
 # Copy error message and get help
 claude -p "I'm getting this TypeScript error: [paste error]. How do I fix it?"
 ```
 
 **Interactive Debugging:**
+
 ```bash
 claude
 > I have a bug in my React component where the state isn't updating properly.
@@ -159,16 +176,19 @@ claude
 ### 4. Documentation
 
 **README Generation:**
+
 ```bash
 claude -p "Create a README.md for my Next.js portfolio project"
 ```
 
 **Code Documentation:**
+
 ```bash
 claude -p "Add JSDoc comments to this function: [paste function]"
 ```
 
 **API Documentation:**
+
 ```bash
 claude -p "Document the API endpoints in src/app/api/ directory"
 ```
@@ -176,11 +196,13 @@ claude -p "Document the API endpoints in src/app/api/ directory"
 ### 5. Testing
 
 **Test Generation:**
+
 ```bash
 claude -p "Create Playwright tests for the contact form component"
 ```
 
 **Test Analysis:**
+
 ```bash
 claude -p "Analyze my test failures and suggest improvements: [paste test output]"
 ```
@@ -188,6 +210,7 @@ claude -p "Analyze my test failures and suggest improvements: [paste test output
 ## Advanced Input Techniques
 
 ### Multiline Input
+
 ```bash
 # In interactive mode, use \ for multiline
 > This is a long question that spans \
@@ -198,6 +221,7 @@ claude -p "Analyze my test failures and suggest improvements: [paste test output
 ```
 
 ### File References
+
 ```bash
 # Claude automatically reads files when mentioned
 claude -p "Optimize the performance of src/components/Dashboard.tsx"
@@ -207,6 +231,7 @@ claude -p "Compare src/utils/auth.ts and src/utils/validation.ts for consistency
 ```
 
 ### Context Preservation
+
 ```bash
 # Continue previous conversation
 claude --continue
@@ -218,6 +243,7 @@ claude --resume
 ## Configuration Management
 
 ### Project Configuration
+
 ```bash
 # View current settings
 claude config list
@@ -231,6 +257,7 @@ cat .claude/settings.json
 ```
 
 ### User Configuration
+
 ```bash
 # Global user settings
 claude config set --user theme dark
@@ -256,6 +283,7 @@ claude
 ## Practical Examples
 
 ### Daily Development Workflow
+
 ```bash
 # Morning setup
 claude --continue  # Resume yesterday's conversation
@@ -272,6 +300,7 @@ claude -p "Summarize the changes I made today and update the CHANGELOG"
 ```
 
 ### Team Collaboration
+
 ```bash
 # Explain code to teammates
 claude -p "Explain how the authentication system works in src/lib/auth.ts"
@@ -286,6 +315,7 @@ claude -p "Create onboarding instructions for new developers joining this projec
 ## Best Practices
 
 ### 1. Be Specific
+
 ```bash
 # ❌ Vague
 claude -p "Fix my code"
@@ -295,6 +325,7 @@ claude -p "Fix the TypeScript error in src/components/Button.tsx line 23"
 ```
 
 ### 2. Provide Context
+
 ```bash
 # ❌ No context
 claude -p "How do I handle forms?"
@@ -304,6 +335,7 @@ claude -p "How do I handle forms in a Next.js 15 app with TypeScript and React H
 ```
 
 ### 3. Use Project Memory
+
 ```bash
 # Add project-specific information to CLAUDE.md
 # This helps Claude understand your project context
@@ -311,6 +343,7 @@ claude -p "How do I handle forms in a Next.js 15 app with TypeScript and React H
 ```
 
 ### 4. Leverage Conversation History
+
 ```bash
 # Continue conversations for related tasks
 claude --continue
@@ -321,6 +354,7 @@ claude --continue
 ## Keyboard Shortcuts
 
 **Interactive Mode:**
+
 - `Ctrl+C` - Cancel current operation
 - `Ctrl+D` - Exit (alternative to `/exit`)
 - `Option+Enter` (Mac) / `Shift+Enter` (Windows/Linux) - Multiline input
@@ -336,8 +370,8 @@ Now that you understand basic commands:
 
 ## Tutorial Navigation
 
-| Previous | Current | Next |
-|----------|---------|------|
+| Previous                                   | Current            | Next                                       |
+| ------------------------------------------ | ------------------ | ------------------------------------------ |
 | [← Getting Started](01-getting-started.md) | **Basic Commands** | [Custom Commands →](03-custom-commands.md) |
 
 ---

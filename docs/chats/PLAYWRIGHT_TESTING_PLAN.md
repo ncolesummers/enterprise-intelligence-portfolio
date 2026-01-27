@@ -9,6 +9,7 @@ The testing plan focuses on verifying core functionality, user interactions, and
 ## Test Structure
 
 ### Test Organization
+
 ```
 tests/
 ├── e2e/
@@ -24,9 +25,11 @@ tests/
 ## Priority 1: Contact Form Testing
 
 ### Email Address Verification
+
 **Primary Goal**: Verify the correct email address is submitted to FormSpree, bypassing any iCloud+ interference.
 
 #### Test Cases
+
 1. **Form Submission Data Integrity**
    - Intercept network requests to FormSpree endpoint
    - Verify submitted email matches expected recipient
@@ -50,12 +53,13 @@ tests/
    - Verify no browser-specific email rewriting occurs
 
 ### Configuration Options
+
 ```typescript
 // Environment variables for test configuration
 interface EmailTestConfig {
-  expectedRecipient: string;      // nate@ncolesummers.com
-  formspreeEndpoint: string;      // https://formspree.io/f/xeogbrzn
-  testSenderEmail: string;        // test email for form submission
+  expectedRecipient: string; // nate@ncolesummers.com
+  formspreeEndpoint: string; // https://formspree.io/f/xeogbrzn
+  testSenderEmail: string; // test email for form submission
   enableNetworkInterception: boolean; // capture actual requests
 }
 ```
@@ -63,6 +67,7 @@ interface EmailTestConfig {
 ## Priority 2: Core Navigation Testing
 
 ### Page Loading and Routing
+
 1. **Homepage Components**
    - Header renders correctly
    - Hero section loads
@@ -80,6 +85,7 @@ interface EmailTestConfig {
    - Header component functions consistently
 
 ### Focus Management & Accessibility
+
 1. **Skip to Content**
    - Skip link appears on focus
    - Skip link navigates to main content
@@ -93,6 +99,7 @@ interface EmailTestConfig {
 ## Priority 3: Error Boundary Testing
 
 ### Error Handling
+
 1. **Component Error Recovery**
    - Trigger JavaScript errors in components
    - Verify error boundary catches errors
@@ -107,6 +114,7 @@ interface EmailTestConfig {
 ## Priority 4: Performance Testing
 
 ### Core Web Vitals
+
 1. **Loading Performance**
    - Measure Largest Contentful Paint (LCP)
    - Measure First Input Delay (FID)
@@ -120,11 +128,13 @@ interface EmailTestConfig {
 ## Test Configuration
 
 ### Browser Matrix
+
 - **Desktop**: Chrome, Firefox, Safari
 - **Mobile**: iOS Safari, Chrome Mobile
 - **Environments**: Development, Production build
 
 ### Environment Variables
+
 ```bash
 # .env.test
 PLAYWRIGHT_BASE_URL=http://localhost:3000
@@ -135,6 +145,7 @@ ENABLE_EMAIL_VERIFICATION=true
 ```
 
 ### Test Scripts (package.json)
+
 ```json
 {
   "scripts": {
@@ -150,21 +161,23 @@ ENABLE_EMAIL_VERIFICATION=true
 ## Network Interception Strategy
 
 ### FormSpree Request Monitoring
+
 ```typescript
 // Intercept and verify FormSpree submissions
-await page.route('https://formspree.io/f/xeogbrzn', async (route, request) => {
+await page.route("https://formspree.io/f/xeogbrzn", async (route, request) => {
   const postData = request.postData();
   const submittedData = JSON.parse(postData);
-  
+
   // Verify email recipient is correct
   expect(submittedData.email).toBe(expectedEmail);
-  
+
   // Allow request to continue or mock response
   await route.continue();
 });
 ```
 
 ### Email Verification Flow
+
 1. **Setup**: Configure expected email recipient
 2. **Intercept**: Capture FormSpree API requests
 3. **Verify**: Check submitted data matches expectations
@@ -174,23 +187,27 @@ await page.route('https://formspree.io/f/xeogbrzn', async (route, request) => {
 ## Success Criteria
 
 ### Contact Form
+
 - ✅ Correct email address submitted to FormSpree (no iCloud+ interference)
 - ✅ Form validation works across all browsers
 - ✅ Success/error states function properly
 - ✅ Form resets after successful submission
 
 ### Navigation & Accessibility
+
 - ✅ All pages load within 2 seconds
 - ✅ Keyboard navigation works throughout site
 - ✅ Skip to content link functions properly
 - ✅ Reduced motion preferences respected
 
 ### Error Handling
+
 - ✅ Error boundaries catch and display friendly messages
 - ✅ Network errors handled gracefully
 - ✅ Users can recover from error states
 
 ### Performance
+
 - ✅ LCP < 2.5 seconds
 - ✅ FID < 100ms
 - ✅ CLS < 0.1
@@ -198,24 +215,26 @@ await page.route('https://formspree.io/f/xeogbrzn', async (route, request) => {
 ## Implementation Timeline
 
 1. **Phase 1** (Priority): Contact form email verification tests
-2. **Phase 2**: Navigation and accessibility tests  
+2. **Phase 2**: Navigation and accessibility tests
 3. **Phase 3**: Error boundary and performance tests
 4. **Phase 4**: Comprehensive cross-browser testing
 
 ## Debugging Features
 
 ### Visual Testing
+
 - Screenshot comparison for UI regression testing
 - Video recording of failed tests
 - Trace viewer for debugging complex interactions
 
 ### Network Debugging
+
 - HAR file generation for network analysis
 - Request/response logging
 - FormSpree API response validation
 
 ---
 
-*Plan created: 5/25/2025*  
-*Status: Ready for implementation*  
-*Next: Create test directory structure and implement Priority 1 tests*
+_Plan created: 5/25/2025_  
+_Status: Ready for implementation_  
+_Next: Create test directory structure and implement Priority 1 tests_

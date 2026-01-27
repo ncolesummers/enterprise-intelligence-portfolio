@@ -5,6 +5,7 @@ Learn to create powerful custom slash commands that transform Claude into specia
 ## Understanding Custom Commands
 
 Custom commands let you:
+
 - Create reusable prompts with parameters
 - Build specialized expert roles
 - Standardize team workflows
@@ -58,6 +59,7 @@ Provide specific suggestions with code examples where applicable.
 ```
 
 **Usage:**
+
 ```bash
 claude
 > /project:review-component src/components/Button.tsx
@@ -77,6 +79,7 @@ Help diagnose and fix a specific issue.
 I need help debugging this issue: $ARGUMENTS
 
 Please:
+
 1. Analyze the problem and identify potential root causes
 2. Suggest debugging steps to isolate the issue
 3. Provide specific solutions with code examples
@@ -86,6 +89,7 @@ Focus on practical, actionable solutions.
 ```
 
 **Usage:**
+
 ```bash
 claude
 > /project:debug-issue "React component not re-rendering when props change"
@@ -109,6 +113,7 @@ Create `~/.claude/commands/roles/frontend-architect.md`:
 You are a Senior Frontend Architect with 15+ years of experience specializing in enterprise-scale applications. You have deep expertise in React, TypeScript, Next.js, and modern web architecture patterns.
 
 **Your Responsibilities:**
+
 - Design scalable component architectures
 - Evaluate technical design decisions
 - Ensure performance and maintainability
@@ -118,6 +123,7 @@ You are a Senior Frontend Architect with 15+ years of experience specializing in
 **Specific Task**: $ARGUMENTS
 
 Please analyze this from an architectural perspective, considering:
+
 1. Component structure and reusability patterns
 2. State management architecture (React Query, Zustand, Context)
 3. Performance implications and optimization strategies
@@ -138,6 +144,7 @@ Create `~/.claude/commands/roles/typescript-engineer.md`:
 You are a TypeScript Quality Engineer with 10+ years of experience in type-safe development and code quality assurance. You specialize in creating robust, maintainable TypeScript codebases.
 
 **Your Responsibilities:**
+
 - Ensure type safety and proper TypeScript usage
 - Define coding standards and best practices
 - Design error handling and validation strategies
@@ -147,6 +154,7 @@ You are a TypeScript Quality Engineer with 10+ years of experience in type-safe 
 **Specific Task**: $ARGUMENTS
 
 Please analyze this from a code quality perspective, considering:
+
 1. Type safety and interface design
 2. Error handling and validation patterns
 3. Code maintainability and readability
@@ -173,21 +181,27 @@ Guide a feature through multiple expert perspectives sequentially.
 **Feature Description**: $ARGUMENTS
 
 ## Phase 1: Architecture Review
+
 First, analyze this as a Senior Frontend Architect:
+
 - Design technical architecture
 - Define component structure
 - Plan state management
 - Consider performance implications
 
 ## Phase 2: Implementation Quality
+
 Then, as a TypeScript Quality Engineer:
+
 - Define type interfaces
 - Plan error handling
 - Ensure code quality standards
 - Design testing approach
 
 ## Phase 3: Synthesis
+
 Finally, provide a unified implementation plan with:
+
 - Prioritized development steps
 - Technical specifications
 - Quality checkpoints
@@ -250,6 +264,7 @@ Analyze multiple files for consistency.
 Please compare these files: $ARGUMENTS
 
 Look for:
+
 - Inconsistent patterns
 - Code duplication
 - Different approaches to similar problems
@@ -285,17 +300,22 @@ Perform comprehensive analysis in stages.
 **Target**: $ARGUMENTS
 
 ## Stage 1: Initial Assessment
+
 First, provide a high-level overview of $ARGUMENTS
 
 ## Stage 2: Deep Dive
+
 Then, analyze specific aspects:
+
 - Architecture and design
 - Code quality and patterns
 - Performance considerations
 - Security implications
 
 ## Stage 3: Recommendations
+
 Finally, provide:
+
 - Immediate action items
 - Long-term improvements
 - Risk assessment
@@ -305,6 +325,7 @@ Finally, provide:
 ## Best Practices
 
 ### 1. Clear Naming Conventions
+
 ```bash
 # ✅ Good names
 /project:review:component
@@ -317,39 +338,49 @@ Finally, provide:
 ```
 
 ### 2. Detailed Instructions
+
 ```markdown
 # ✅ Specific instructions
+
 Analyze the React component for performance issues, focusing on:
+
 1. Unnecessary re-renders
 2. Missing memoization opportunities
 3. Inefficient state updates
 4. Heavy computation in render
 
 # ❌ Vague instructions
+
 Make this component better
 ```
 
 ### 3. Structured Output
+
 ```markdown
 Provide analysis in this format:
 
 ## Summary
+
 [High-level assessment]
 
 ## Issues Found
+
 1. **Issue Name**: Description and impact
 2. **Issue Name**: Description and impact
 
 ## Recommendations
+
 1. **Priority 1**: Critical fixes
 2. **Priority 2**: Important improvements
 3. **Priority 3**: Nice-to-have enhancements
 
 ## Code Examples
+
 [Specific code improvements]
 ```
 
 ### 4. Version Control
+
 ```bash
 # Include commands in git for team sharing
 git add .claude/commands/
@@ -377,22 +408,26 @@ Review this pull request: $ARGUMENTS
 Evaluate against our team standards:
 
 ## Code Quality
+
 - TypeScript usage and type safety
 - Component patterns and architecture
 - Error handling and edge cases
 - Performance considerations
 
 ## Testing
+
 - Test coverage for new features
 - Test quality and maintainability
 - Edge case coverage
 
 ## Documentation
+
 - Code comments and JSDoc
 - README updates if needed
 - API documentation
 
 ## Security
+
 - Input validation
 - Authentication/authorization
 - Data protection
@@ -414,12 +449,14 @@ Analyze and optimize application performance.
 Optimize the performance of: $ARGUMENTS
 
 ## Analysis Areas
+
 1. **Bundle Size**: Code splitting and tree shaking opportunities
 2. **Runtime Performance**: Component rendering and state updates
 3. **Network**: API calls, caching, and data fetching
 4. **Memory**: Memory leaks and efficient data structures
 
 ## Deliverables
+
 - Specific performance bottlenecks identified
 - Concrete optimization recommendations
 - Before/after performance metrics to track
@@ -431,6 +468,7 @@ Focus on high-impact, low-effort optimizations first.
 ## Testing Your Commands
 
 ### Command Validation
+
 ```bash
 # Test command exists and loads
 claude
@@ -441,6 +479,7 @@ claude
 ```
 
 ### Iterative Improvement
+
 1. **Start Simple**: Basic prompt template
 2. **Test and Refine**: Use with real code
 3. **Add Structure**: Improve output format
@@ -457,8 +496,8 @@ Now you can create powerful custom commands:
 
 ## Tutorial Navigation
 
-| Previous | Current | Next |
-|----------|---------|------|
+| Previous                                 | Current             | Next                                             |
+| ---------------------------------------- | ------------------- | ------------------------------------------------ |
 | [← Basic Commands](02-basic-commands.md) | **Custom Commands** | [Advanced Workflows →](04-advanced-workflows.md) |
 
 ---
