@@ -15,15 +15,11 @@ export const navigation = [
   },
   {
     name: "About",
-    href: "#about",
+    href: "/about",
   },
   {
     name: "Contact",
     href: "#contact",
-  },
-  {
-    name: "Blog",
-    href: "https://blog.ncolesummers.com",
   },
 ];
 export const Socials = [
