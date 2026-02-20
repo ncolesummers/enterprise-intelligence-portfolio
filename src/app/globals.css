@@ -57,8 +57,8 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.45 0.2 240);
+  --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -91,7 +91,7 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
+  --accent: oklch(0.62 0.22 240);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
@@ -148,6 +148,23 @@
   }
   .skip-to-content:focus {
     @apply top-6;
+  }
+}
+
+@layer base {
+  .hero-bg {
+    background: radial-gradient(
+      ellipse 80% 50% at 50% 0%,
+      oklch(0.92 0.03 240) 0%,
+      oklch(1 0 0) 70%
+    );
+  }
+  .dark .hero-bg {
+    background: radial-gradient(
+      ellipse 80% 50% at 50% 0%,
+      oklch(0.22 0.04 240) 0%,
+      oklch(0.145 0 0) 70%
+    );
   }
 }
 

@@ -1,21 +1,23 @@
-import React from "react";
 import Link from "next/link";
 import { Github, Instagram, Linkedin } from "lucide-react";
-import { Socials } from "@/lib/const";
+import { Socials, navigation } from "@/lib/const";
 
 const DesktopNav = () => {
   return (
     <div className="hidden sm:flex items-center">
       <nav className="flex space-x-6 mr-auto">
-        <Link href="#work" className="text-lg font-medium">
-          Work
-        </Link>
-        <Link href="/about" className="text-lg font-medium">
-          About
-        </Link>
-        <Link href="#contact" className="text-lg font-medium">
-          Contact
-        </Link>
+        {navigation.map(item => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className="text-lg font-medium hover:text-accent transition-colors"
+            {...(item.href.startsWith("http")
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            {item.name}
+          </Link>
+        ))}
       </nav>
       <div className="flex space-x-4 ml-6">
         <Link

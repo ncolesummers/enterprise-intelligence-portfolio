@@ -11,19 +11,15 @@ export const siteMetadata = {
 export const navigation = [
   {
     name: "Work",
-    href: "#work",
+    href: "/#work",
   },
   {
     name: "About",
-    href: "#about",
+    href: "/about",
   },
   {
     name: "Contact",
-    href: "#contact",
-  },
-  {
-    name: "Blog",
-    href: "https://blog.ncolesummers.com",
+    href: "/#contact",
   },
 ];
 export const Socials = [

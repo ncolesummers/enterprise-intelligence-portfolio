@@ -25,50 +25,58 @@ export const metadata = generatePageMetadata({
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="container py-12 px-4">
+      <main id="main-content" className="container py-12 px-4">
         {/* Hero Section */}
         <div className="mb-16 flex flex-col items-center text-center">
           <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
             Nathan Cole Summers
           </h1>
-          <p className="mb-8 max-w-2xl text-xl text-gray-400">
+          <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
             Enterprise Applications Developer with a passion for microservice
             architecture and continuous learning
           </p>
           <div className="flex gap-4 flex-wrap justify-center">
-            <Link
-              href="https://www.linkedin.com/in/n-cole-summers/"
-              target="_blank"
+            <Button
+              asChild
+              variant="outline"
+              className="flex items-center gap-2"
             >
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+              <Link
+                href="https://www.linkedin.com/in/n-cole-summers/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
-              </Button>
-            </Link>
-            <Link href="https://github.com/ncolesummers/" target="_blank">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              <Link
+                href="https://github.com/ncolesummers/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Github className="h-4 w-4" />
                 GitHub
-              </Button>
-            </Link>
-            <a href="mailto:n_cole_summers@icloud.com">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
-              >
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              <a href="mailto:n_cole_summers@icloud.com">
                 <Mail className="h-4 w-4" />
                 Email
-              </Button>
-            </a>
+              </a>
+            </Button>
           </div>
         </div>
 
@@ -76,13 +84,13 @@ export default function AboutPage() {
         <Section title="Professional Journey">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 I&apos;m currently an Enterprise Applications Developer at the
                 University of Idaho in Moscow, Idaho, where I leverage my 9
                 years of IT experience and 5 years of focused application
                 development to create innovative solutions.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 As a polyglot programmer, I work confidently across multiple
                 programming languages including TypeScript, Python, Go, C#, and
                 Rust. This versatility allows me to select the perfect tool for
@@ -96,7 +104,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <h4 className="font-medium mb-2">Languages</h4>
-                  <ul className="space-y-1 text-gray-300">
+                  <ul className="space-y-1 text-muted-foreground">
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-primary"></span>
                       TypeScript
@@ -121,7 +129,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <h4 className="font-medium mb-2">Specialties</h4>
-                  <ul className="space-y-1 text-gray-300">
+                  <ul className="space-y-1 text-muted-foreground">
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-primary"></span>
                       Microservice Architecture
@@ -164,19 +172,19 @@ export default function AboutPage() {
               </BulletedList>
             </ContentCard>
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 My passion lies in microservice architecture—finding the perfect
                 programming language for each specific component of a larger
                 system. This approach reflects my broader philosophy of
                 continuous learning and insatiable curiosity.
               </p>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 I&apos;m particularly energized by projects involving
                 cutting-edge technologies like artificial intelligence, where I
                 can push the boundaries of what&apos;s possible in enterprise
                 applications.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 I strongly believe in blameless postmortems as a way to build
                 stronger teams and better systems. This approach fosters a
                 culture of learning and improvement rather than finger-pointing.
@@ -189,43 +197,43 @@ export default function AboutPage() {
         <Section title="Beyond the Code">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <ContentCard>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
                 <BookOpen className="h-6 w-6 text-primary" />
               </div>
               <h3 className="mb-2 text-xl font-semibold">Reading</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Lost in the pages of fantasy or sci-fi novels, though my reading
                 interests span from self-development to history, politics, and
                 science.
               </p>
             </ContentCard>
             <ContentCard>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
                 <Music className="h-6 w-6 text-primary" />
               </div>
               <h3 className="mb-2 text-xl font-semibold">Music</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Drawn to electronic and alternative music. Apple Music&apos;s
                 lyrics feature has been a game-changer for my listening
                 experience.
               </p>
             </ContentCard>
             <ContentCard>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
                 <Code className="h-6 w-6 text-primary" />
               </div>
               <h3 className="mb-2 text-xl font-semibold">Gaming</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Occasionally dive into video games as a way to unwind and
                 explore interactive storytelling and creative problem-solving.
               </p>
             </ContentCard>
             <ContentCard>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
                 <Utensils className="h-6 w-6 text-primary" />
               </div>
               <h3 className="mb-2 text-xl font-semibold">Food & Music</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Can always be tempted away from work with the promise of good
                 food and live music—the perfect combination for recharging.
               </p>
@@ -235,55 +243,53 @@ export default function AboutPage() {
 
         {/* Call to Action */}
         <Section title="Let's Connect" className="text-center">
-          <p className="mb-8 text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
             Whether you&apos;re interested in discussing enterprise
             applications, microservice architecture, or just want to chat about
             the latest sci-fi novel, I&apos;d love to hear from you.
           </p>
           <div className="flex justify-center gap-4">
-            <a href="mailto:n_cole_summers@icloud.com">
-              <Button className="bg-white text-black hover:bg-gray-200">
-                Get in Touch
-              </Button>
-            </a>
-            <Link href="/">
-              <Button
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10"
-              >
-                View My Work
-              </Button>
-            </Link>
+            <Button asChild variant="accent">
+              <a href="mailto:n_cole_summers@icloud.com">Get in Touch</a>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/">View My Work</Link>
+            </Button>
           </div>
         </Section>
       </main>
 
-      <footer className="border-t border-white/10 py-6 mt-16">
+      <footer className="border-t border-border py-6 mt-16">
         <div className="container flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
           <div className="flex items-center gap-6">
             <Link
               href="https://www.linkedin.com/in/n-cole-summers/"
               target="_blank"
-              className="text-white hover:text-gray-300"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <Linkedin className="h-5 w-5" />
             </Link>
             <Link
               href="https://github.com/ncolesummers/"
               target="_blank"
-              className="text-white hover:text-gray-300"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <Github className="h-5 w-5" />
             </Link>
             <Link
               href="https://www.instagram.com/ncolesummers/"
               target="_blank"
-              className="text-white hover:text-gray-300"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <Instagram className="h-5 w-5" />
             </Link>
           </div>
-          <p className="text-sm text-gray-400">all socials @ncolesummers</p>
+          <p className="text-sm text-muted-foreground">
+            all socials @ncolesummers
+          </p>
         </div>
       </footer>
     </div>

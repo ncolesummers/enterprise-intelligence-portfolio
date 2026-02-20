@@ -1,17 +1,23 @@
-import React from "react";
 import Link from "next/link";
 import { Github, Instagram, Linkedin } from "lucide-react";
-import { Socials } from "@/lib/const";
+import { Socials, navigation } from "@/lib/const";
+
 const MobileNav = () => {
   return (
     <div className="block sm:hidden">
       <nav className="flex justify-center items-center space-x-6">
-        <Link href="/about" className="text-lg font-medium">
-          About
-        </Link>
-        <Link href="#contact" className="text-lg font-medium">
-          Contact
-        </Link>
+        {navigation.map(item => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className="text-lg font-medium hover:text-accent transition-colors"
+            {...(item.href.startsWith("http")
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            {item.name}
+          </Link>
+        ))}
         <Link
           href={Socials[0].href}
           target="_blank"
