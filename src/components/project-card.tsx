@@ -60,9 +60,7 @@ export default function ProjectCard({
             variant="link"
             className="mt-4 w-full inline-flex items-center gap-2 text-sm hover:underline"
           >
-            <Link href={link} target="_blank">
-              View Project
-            </Link>
+            <Link href={link}>View Project</Link>
           </Button>
         )}
       </CardFooter>
