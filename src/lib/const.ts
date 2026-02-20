@@ -11,7 +11,7 @@ export const siteMetadata = {
 export const navigation = [
   {
     name: "Work",
-    href: "#work",
+    href: "/#work",
   },
   {
     name: "About",
@@ -19,7 +19,7 @@ export const navigation = [
   },
   {
     name: "Contact",
-    href: "#contact",
+    href: "/#contact",
   },
 ];
 export const Socials = [

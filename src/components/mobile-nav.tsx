@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { Github, Instagram, Linkedin } from "lucide-react";
 import { Socials, navigation } from "@/lib/const";

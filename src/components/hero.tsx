@@ -22,15 +22,14 @@ const Hero = () => {
         </AnimatedText>
         <AnimatedText delay={400}>
           <div className="mt-8 flex items-center">
-            <Link href="#work">
-              <Button
-                variant="accent"
-                className="border-border/20"
-                aria-label="View Selected Projects"
-              >
-                Selected Projects
-              </Button>
-            </Link>
+            <Button
+              asChild
+              variant="accent"
+              className="border-border/20"
+              aria-label="View Selected Projects"
+            >
+              <Link href="/#work">Selected Projects</Link>
+            </Button>
           </div>
         </AnimatedText>
       </div>

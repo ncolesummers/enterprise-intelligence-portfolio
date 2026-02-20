@@ -28,7 +28,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
 
-      <main className="container py-12 px-4">
+      <main id="main-content" className="container py-12 px-4">
         {/* Hero Section */}
         <div className="mb-16 flex flex-col items-center text-center">
           <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
@@ -39,27 +39,44 @@ export default function AboutPage() {
             architecture and continuous learning
           </p>
           <div className="flex gap-4 flex-wrap justify-center">
-            <Link
-              href="https://www.linkedin.com/in/n-cole-summers/"
-              target="_blank"
+            <Button
+              asChild
+              variant="outline"
+              className="flex items-center gap-2"
             >
-              <Button variant="outline" className="flex items-center gap-2">
+              <Link
+                href="https://www.linkedin.com/in/n-cole-summers/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
-              </Button>
-            </Link>
-            <Link href="https://github.com/ncolesummers/" target="_blank">
-              <Button variant="outline" className="flex items-center gap-2">
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              <Link
+                href="https://github.com/ncolesummers/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Github className="h-4 w-4" />
                 GitHub
-              </Button>
-            </Link>
-            <a href="mailto:n_cole_summers@icloud.com">
-              <Button variant="outline" className="flex items-center gap-2">
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              <a href="mailto:n_cole_summers@icloud.com">
                 <Mail className="h-4 w-4" />
                 Email
-              </Button>
-            </a>
+              </a>
+            </Button>
           </div>
         </div>
 
@@ -232,12 +249,12 @@ export default function AboutPage() {
             the latest sci-fi novel, I&apos;d love to hear from you.
           </p>
           <div className="flex justify-center gap-4">
-            <a href="mailto:n_cole_summers@icloud.com">
-              <Button variant="accent">Get in Touch</Button>
-            </a>
-            <Link href="/">
-              <Button variant="outline">View My Work</Button>
-            </Link>
+            <Button asChild variant="accent">
+              <a href="mailto:n_cole_summers@icloud.com">Get in Touch</a>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/">View My Work</Link>
+            </Button>
           </div>
         </Section>
       </main>
@@ -248,6 +265,7 @@ export default function AboutPage() {
             <Link
               href="https://www.linkedin.com/in/n-cole-summers/"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <Linkedin className="h-5 w-5" />
@@ -255,6 +273,7 @@ export default function AboutPage() {
             <Link
               href="https://github.com/ncolesummers/"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <Github className="h-5 w-5" />
@@ -262,6 +281,7 @@ export default function AboutPage() {
             <Link
               href="https://www.instagram.com/ncolesummers/"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <Instagram className="h-5 w-5" />
