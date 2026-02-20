@@ -72,7 +72,7 @@ export default function AboutPage() {
               variant="outline"
               className="flex items-center gap-2"
             >
-              <a href="mailto:n_cole_summers@icloud.com">
+              <a href="mailto:nate@ncolesummers.com">
                 <Mail className="h-4 w-4" />
                 Email
               </a>
@@ -250,7 +250,7 @@ export default function AboutPage() {
           </p>
           <div className="flex justify-center gap-4">
             <Button asChild variant="accent">
-              <a href="mailto:n_cole_summers@icloud.com">Get in Touch</a>
+              <a href="mailto:nate@ncolesummers.com">Get in Touch</a>
             </Button>
             <Button asChild variant="outline">
               <Link href="/">View My Work</Link>
