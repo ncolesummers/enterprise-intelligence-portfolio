@@ -10,7 +10,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`rounded-lg bg-gray-800 p-6 ${className}`}>{children}</div>
+    <div className={`rounded-lg bg-card p-6 ${className}`}>{children}</div>
   );
 };
 
