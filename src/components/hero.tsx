@@ -4,13 +4,13 @@ import { AnimatedText } from "@/components/ui/animated-section";
 
 const Hero = () => {
   return (
-    <section className="flex min-h-[80vh] flex-col items-start justify-center px-4 sm:px-8 md:px-16">
+    <section className="hero-bg flex min-h-[80vh] flex-col items-start justify-center px-4 sm:px-8 md:px-16">
       <div className="container">
         <AnimatedText delay={0}>
           <h1 className="font-bold tracking-tighter text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
             ENTERPRISE
             <br />
-            INTELLIGENCE &
+            <span className="text-accent">INTELLIGENCE &</span>
             <br />
             APPLICATIONS
           </h1>
@@ -24,7 +24,7 @@ const Hero = () => {
           <div className="mt-8 flex items-center">
             <Link href="#work">
               <Button
-                variant="default"
+                variant="accent"
                 className="border-border/20"
                 aria-label="View Selected Projects"
               >
