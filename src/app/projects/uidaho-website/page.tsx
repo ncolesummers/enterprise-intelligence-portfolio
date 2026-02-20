@@ -179,9 +179,8 @@ export default function UIdahoWebsitePage() {
                   </ListItem>
                   <ListItem>
                     <strong className="mr-1">Azure Integration:</strong>
-                    Implemented Azure Blob Storage for Anonymized Poll Data
-                    management and created serverless functions for storage and
-                    analytics.
+                    Implemented Azure Blob Storage for anonymized poll data and
+                    created serverless functions for dynamic content delivery.
                   </ListItem>
                   <ListItem>
                     <strong className="mr-1">Performance Optimization:</strong>
