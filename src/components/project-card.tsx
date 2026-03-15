@@ -1,5 +1,4 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "./ui/button";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
@@ -7,9 +6,9 @@ interface ProjectCardProps {
   title: string;
   description: string;
   image: StaticImageData;
-  link?: string; // Made optional to handle `comingSoon`
-  tags?: string[]; // Made optional as it's not used in the current implementation
-  comingSoon?: boolean; // New prop to indicate if the project is coming soon
+  link?: string;
+  tags?: string[];
+  comingSoon?: boolean;
 }
 
 export default function ProjectCard({
@@ -17,54 +16,59 @@ export default function ProjectCard({
   description,
   image,
   link,
-  tags = [], // Default to an empty array
-  comingSoon = false, // Default to false
+  tags = [],
+  comingSoon = false,
 }: ProjectCardProps) {
-  return (
-    <Card className="overflow-hidden p-0 motion-safe:transition-all motion-safe:duration-300 hover:border-accent/30">
-      <div className="relative aspect-video">
+  const cardContent = (
+    <>
+      <div className="relative aspect-video overflow-hidden">
         <Image
           src={image || "/placeholder.svg"}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:hover:scale-105"
+          className="object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out group-hover:scale-105"
         />
       </div>
       <CardContent className="p-4 pt-0">
         <h3 className="font-semibold text-xl mb-2">{title}</h3>
         <p className="text-sm text-muted-foreground mb-4">{description}</p>
-        <div className="flex flex-wrap gap-2 mt-2">
-          {tags.map(tag => (
-            <span
-              key={tag}
-              className="inline-flex items-center rounded-md bg-muted px-2 py-1 text-xs font-medium ring-1 ring-inset ring-border"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {tags.map(tag => (
+              <span
+                key={tag}
+                className="inline-flex items-center rounded-md bg-muted px-2 py-1 text-xs font-medium ring-1 ring-inset ring-border"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </CardContent>
-      <CardFooter className="p-4 pt-0">
-        {comingSoon && (
-          <Button
-            disabled={true}
-            variant="link"
-            className="mt-4 w-full inline-flex items-center gap-2 text-sm hover:underline"
-          >
-            Coming Soon™
-          </Button>
-        )}
-        {link && (
-          <Button
-            asChild
-            variant="link"
-            className="mt-4 w-full inline-flex items-center gap-2 text-sm hover:underline"
-          >
-            <Link href={link}>View Project</Link>
-          </Button>
-        )}
-      </CardFooter>
+      {comingSoon && (
+        <CardFooter className="p-4 pt-0">
+          <span className="mt-4 w-full text-center text-sm text-muted-foreground">
+            Coming Soon
+          </span>
+        </CardFooter>
+      )}
+    </>
+  );
+
+  if (link) {
+    return (
+      <Link href={link} className="group block">
+        <Card className="overflow-hidden p-0 motion-safe:transition-all motion-safe:duration-300 hover:border-accent/30">
+          {cardContent}
+        </Card>
+      </Link>
+    );
+  }
+
+  return (
+    <Card className="overflow-hidden p-0 opacity-75">
+      {cardContent}
     </Card>
   );
 }
