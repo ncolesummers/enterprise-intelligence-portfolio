@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-white/10 py-6">
+    <footer className="border-t border-border py-6">
       <div className="container flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
         <span className="text-sm text-muted-foreground">
-          © 2025 N. Cole Summers
+          © {new Date().getFullYear()} N. Cole Summers
         </span>
         <div className="flex items-center gap-6">
           <Link

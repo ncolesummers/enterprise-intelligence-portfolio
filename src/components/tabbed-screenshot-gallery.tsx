@@ -26,8 +26,8 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
 
   if (pages.length === 0) {
     return (
-      <div className="rounded-lg border border-white/10 bg-gray-900 p-8 text-center">
-        <p className="text-white/60">No screenshots available</p>
+      <div className="rounded-lg border border-border bg-card p-8 text-center">
+        <p className="text-muted-foreground">No screenshots available</p>
       </div>
     );
   }
@@ -39,17 +39,20 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
     <div className={className}>
       {/* Page Tabs */}
       <div className="mb-4 overflow-x-auto">
-        <div className="flex gap-2 border-b border-white/10 pb-2">
+        <div className="flex gap-2 border-b border-border pb-2" role="tablist">
           {pages.map((page, index) => (
             <button
               key={index}
+              role="tab"
+              id={`tab-${index}`}
+              aria-selected={activePage === index}
+              aria-controls={`tabpanel-${index}`}
               onClick={() => setActivePage(index)}
-              className={`whitespace-nowrap rounded-t-lg px-4 py-2 text-sm font-medium transition-colors ${
+              className={`whitespace-nowrap rounded-t-lg px-4 py-2.5 min-h-[44px] text-sm font-medium transition-colors ${
                 activePage === index
-                  ? "bg-gray-800 text-white"
-                  : "text-white/60 hover:bg-gray-900 hover:text-white/80"
+                  ? "bg-muted text-foreground"
+                  : "text-muted-foreground hover:bg-card hover:text-foreground/80"
               }`}
-              aria-current={activePage === index ? "page" : undefined}
             >
               {page.label}
             </button>
@@ -57,16 +60,24 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
         </div>
       </div>
 
+      {/* Tab Panel */}
+      <div
+        role="tabpanel"
+        id={`tabpanel-${activePage}`}
+        aria-labelledby={`tab-${activePage}`}
+      >
       {/* Page Description */}
       {currentPage.description && (
         <div className="mb-4">
-          <p className="text-sm text-white/60">{currentPage.description}</p>
+          <p className="text-sm text-muted-foreground">
+            {currentPage.description}
+          </p>
         </div>
       )}
 
       {/* Screenshot Display */}
       <div
-        className={`relative overflow-hidden rounded-lg border border-white/10 bg-gray-900 ${
+        className={`relative overflow-hidden rounded-lg border border-border bg-card ${
           isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"
         }`}
         onClick={() => setIsZoomed(!isZoomed)}
@@ -93,15 +104,16 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
 
         {/* Zoom Hint */}
         {!isZoomed && (
-          <div className="absolute bottom-4 right-4 rounded-lg bg-black/80 px-3 py-2 text-xs text-white/80 backdrop-blur">
+          <div className="absolute bottom-4 right-4 rounded-lg bg-background/80 px-3 py-2 text-xs text-foreground/80 backdrop-blur">
             Click to zoom
           </div>
         )}
       </div>
 
       {/* Image Info */}
-      <div className="mt-2 text-center text-xs text-white/40">
+      <div className="mt-2 text-center text-xs text-muted-foreground">
         <span>Click image to zoom</span>
+      </div>
       </div>
     </div>
   );

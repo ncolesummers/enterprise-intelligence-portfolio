@@ -9,6 +9,7 @@ import Section from "@/components/ui/section";
 import WorkflowDiagram from "@/assets/profile-extractor-workflow.svg";
 import Image from "next/image";
 import { generatePageMetadata } from "@/lib/metadata";
+import Footer from "@/components/footer";
 
 export const metadata = generatePageMetadata({
   title: "AI Data Extraction Research",
@@ -19,12 +20,12 @@ export const metadata = generatePageMetadata({
 
 export default function ProfileExtractorPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60 px-4">
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
         <div className="container flex h-14 items-center">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm hover:text-gray-300"
+            className="flex items-center gap-2 text-sm hover:text-muted-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
@@ -38,7 +39,7 @@ export default function ProfileExtractorPage() {
           <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
             AI Data Extraction Research
           </h1>
-          <p className="mb-8 max-w-2xl text-xl text-gray-400">
+          <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
             A research spike exploring the feasibility of using foundation
             models to extract faculty and staff profile data for the University
             of Idaho website
@@ -49,13 +50,13 @@ export default function ProfileExtractorPage() {
         <Section title="Introduction">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 The Person Profile Data Extraction Spike was a feasibility study
                 conducted to evaluate the potential of using foundation models
                 to extract structured data from faculty and staff profile pages
                 on the University of Idaho website.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 Rather than relying on a poorly documented legacy database, this
                 approach aimed to directly extract key information from public
                 profile pages, creating a more reliable and maintainable dataset
@@ -85,11 +86,11 @@ export default function ProfileExtractorPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Project Overview</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-[2fr_1fr] lg:grid-cols-2 xl:grid-cols-[3fr_1fr]">
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 The goal of this spike was to determine if foundation models
                 could reliably extract structured data from faculty and staff
                 profile pages on the University of Idaho website. The extracted
@@ -97,20 +98,20 @@ export default function ProfileExtractorPage() {
                 Degrees, and other information defined in the project&apos;s
                 user story.
               </p>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 By leveraging AI models instead of relying on direct database
                 access, the project aimed to create a more maintainable and
                 flexible approach to keeping the university&apos;s website
                 profile information up-to-date.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 The spike focused on evaluating the accuracy, cost, and
                 performance of this approach to determine its feasibility for
                 full-scale implementation.
               </p>
             </div>
-            <div className="overflow-hidden rounded-lg bg-gray-800">
-              <div className="relative w-full h-64 md:h-80 lg:h-96 bg-gray-700">
+            <div className="overflow-hidden rounded-lg bg-card">
+              <div className="relative w-full h-64 md:h-80 lg:h-96 bg-card">
                 <Image
                   src={WorkflowDiagram}
                   alt="Workflow Diagram illustrating the data extraction process"
@@ -122,28 +123,28 @@ export default function ProfileExtractorPage() {
               <div className="p-4">
                 <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Python
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     LangGraph
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     LangChain
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Google Gemini
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     BeautifulSoup4
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Pydantic
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     LangSmith
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Pandas
                   </span>
                 </div>
@@ -156,16 +157,16 @@ export default function ProfileExtractorPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Approach & Methodology</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <ContentCard className="mb-8">
             <h3 className="mb-4 text-xl font-semibold">Three-Step Process</h3>
-            <p className="mb-4 text-gray-300">
+            <p className="mb-4 text-muted-foreground">
               The project followed a structured three-step approach to test the
               feasibility of using foundation models for profile data
               extraction:
             </p>
-            <ol className="space-y-4 text-gray-300">
+            <ol className="space-y-4 text-muted-foreground">
               <li className="flex items-start">
                 <span className="mr-2 font-bold">1.</span>
                 <div>
@@ -202,7 +203,7 @@ export default function ProfileExtractorPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 LangGraph State Machine
               </h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 The core of the extraction process was implemented as a
                 LangGraph state machine with the following key nodes:
               </p>
@@ -233,7 +234,7 @@ export default function ProfileExtractorPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Ethical Crawling Practices
               </h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 The project implemented responsible web crawling practices to
                 ensure minimal impact on the university&apos;s web servers:
               </p>
@@ -260,12 +261,12 @@ export default function ProfileExtractorPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Technical Implementation</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Data Schemas</h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 Pydantic models were used to define the structure of the
                 extracted data and validation results:
               </p>
@@ -300,7 +301,7 @@ class ValidationResult(BaseModel):
             </ContentCard>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">LLM Integration</h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 The project leveraged Google&apos;s Gemini Flash model for both
                 extraction and validation:
               </p>
@@ -331,7 +332,7 @@ validation_model = ChatGoogleGenerativeAI(
     }
 )`}
               </CodeBlock>
-              <p className="mt-4 text-gray-300">
+              <p className="mt-4 text-muted-foreground">
                 The extraction process used structured prompts to guide the
                 model in extracting specific fields from the HTML content, while
                 the validation process employed an LLM-as-a-judge pattern to
@@ -343,7 +344,7 @@ validation_model = ChatGoogleGenerativeAI(
             <h3 className="mb-4 text-xl font-semibold">
               Monitoring and Debugging
             </h3>
-            <p className="mb-4 text-gray-300">
+            <p className="mb-4 text-muted-foreground">
               LangSmith was used for comprehensive monitoring and debugging of
               the extraction process
             </p>
@@ -382,7 +383,7 @@ validation_model = ChatGoogleGenerativeAI(
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Results</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             <ContentCard>
@@ -395,11 +396,11 @@ validation_model = ChatGoogleGenerativeAI(
                   </div>
                 </div>
               </div>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 <strong>Success Rate:</strong> 92.79% (836 successful
                 extractions out of 901 URLs)
               </p>
-              <p className="mt-2 text-gray-300">
+              <p className="mt-2 text-muted-foreground">
                 <strong>Error Analysis:</strong> Of the 65 failed extractions,
                 64 (98.5%) were due to HTTP 404 errors, indicating the URLs from
                 the sitemap no longer exist on the website.
@@ -410,14 +411,14 @@ validation_model = ChatGoogleGenerativeAI(
               <div className="mb-4 flex items-center justify-center">
                 <div className="text-center">
                   <span className="text-3xl font-bold">$0.0012</span>
-                  <p className="text-sm text-gray-400">per profile</p>
+                  <p className="text-sm text-muted-foreground">per profile</p>
                 </div>
               </div>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 <strong>Total Cost:</strong> $1.0254 for processing all 901
                 profiles
               </p>
-              <p className="mt-2 text-gray-300">
+              <p className="mt-2 text-muted-foreground">
                 <strong>Token Usage:</strong> Average of 3,132 tokens per
                 successful profile, with 2,618,463 tokens used across all
                 profiles
@@ -430,14 +431,14 @@ validation_model = ChatGoogleGenerativeAI(
               <div className="mb-4 flex items-center justify-center">
                 <div className="text-center">
                   <span className="text-3xl font-bold">6.6s</span>
-                  <p className="text-sm text-gray-400">per profile</p>
+                  <p className="text-sm text-muted-foreground">per profile</p>
                 </div>
               </div>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 <strong>Total Time:</strong> 1h 32m 27s for processing all 901
                 profiles
               </p>
-              <p className="mt-2 text-gray-300">
+              <p className="mt-2 text-muted-foreground">
                 <strong>Note:</strong> Most processing time was due to
                 intentional delays between requests to ensure ethical crawling
                 of the university website.
@@ -486,7 +487,7 @@ validation_model = ChatGoogleGenerativeAI(
             <div className="grid gap-8 md:grid-cols-3">
               <div>
                 <h4 className="mb-2 text-lg font-semibold">Sitemap 404s</h4>
-                <p className="text-gray-300">
+                <p className="text-muted-foreground">
                   The <code>uidaho.edu</code> sitemap contains URLs that return
                   404 errors, indicating it&apos;s outdated. Relying solely on
                   the sitemap for comprehensive coverage is not viable.
@@ -494,7 +495,7 @@ validation_model = ChatGoogleGenerativeAI(
               </div>
               <div>
                 <h4 className="mb-2 text-lg font-semibold">HTML Variability</h4>
-                <p className="text-gray-300">
+                <p className="text-muted-foreground">
                   The HTML structure of different faculty profile pages varies
                   (e.g., different class names, layouts). The{" "}
                   <code>preprocess_html</code> step handled these variations
@@ -505,7 +506,7 @@ validation_model = ChatGoogleGenerativeAI(
                 <h4 className="mb-2 text-lg font-semibold">
                   Multiple Profiles Page
                 </h4>
-                <p className="text-gray-300">
+                <p className="text-muted-foreground">
                   One failure occurred on a page listing multiple faculty
                   profiles (<code>/people/adjuncts</code>), which didn&apos;t
                   conform to the single-profile schema our extraction currently
@@ -521,7 +522,7 @@ validation_model = ChatGoogleGenerativeAI(
             <div className="grid gap-8 md:grid-cols-2">
               <div>
                 <h4 className="mb-2 text-lg font-semibold">Model Choice</h4>
-                <p className="text-gray-300">
+                <p className="text-muted-foreground">
                   Gemini Flash provided excellent accuracy at a low cost
                   ($0.0012 per profile). Based on these results, evaluating more
                   expensive models like Claude 3.7 Sonnet or GPT-4o is
@@ -532,7 +533,7 @@ validation_model = ChatGoogleGenerativeAI(
                 <h4 className="mb-2 text-lg font-semibold">
                   Process Improvements
                 </h4>
-                <ul className="space-y-2 text-gray-300">
+                <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start">
                     <span className="mr-2 text-primary">•</span>
                     Develop a more reliable strategy for identifying profile
@@ -560,13 +561,13 @@ validation_model = ChatGoogleGenerativeAI(
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Recommendations</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
-          <div className="rounded-lg bg-gray-800 p-6">
+          <div className="rounded-lg bg-card p-6">
             <h3 className="mb-4 text-xl font-semibold">
               Feasibility Assessment
             </h3>
-            <p className="mb-4 text-lg text-gray-300">
+            <p className="mb-4 text-lg text-muted-foreground">
               The foundation model approach has proven highly feasible for
               extracting the required profile data, with a 92.79% success rate.
               Based on the results of this spike, I recommend proceeding with
@@ -575,7 +576,7 @@ validation_model = ChatGoogleGenerativeAI(
             <div className="grid gap-8 md:grid-cols-2">
               <div>
                 <h4 className="mb-2 text-lg font-semibold">Model Choice</h4>
-                <p className="text-gray-300">
+                <p className="text-muted-foreground">
                   Gemini Flash provided excellent accuracy at a low cost
                   ($0.0012 per profile). Based on these results, evaluating more
                   expensive models like Claude 3.7 Sonnet or GPT-4o is
@@ -586,7 +587,7 @@ validation_model = ChatGoogleGenerativeAI(
                 <h4 className="mb-2 text-lg font-semibold">
                   Process Improvements
                 </h4>
-                <ul className="space-y-2 text-gray-300">
+                <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start">
                     <span className="mr-2 text-primary">•</span>
                     Develop a more reliable strategy for identifying profile
@@ -614,12 +615,12 @@ validation_model = ChatGoogleGenerativeAI(
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Next Steps</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-lg bg-gray-800 p-6">
+            <div className="rounded-lg bg-card p-6">
               <h3 className="mb-4 text-xl font-semibold">Short-Term Actions</h3>
-              <ol className="space-y-2 text-gray-300 list-decimal pl-5">
+              <ol className="space-y-2 text-muted-foreground list-decimal pl-5">
                 <li>
                   <strong>Refine URL Discovery:</strong> Develop a more reliable
                   strategy for identifying profile URLs beyond the outdated
@@ -639,14 +640,14 @@ validation_model = ChatGoogleGenerativeAI(
                 </li>
               </ol>
             </div>
-            <div className="rounded-lg bg-gray-800 p-6">
+            <div className="rounded-lg bg-card p-6">
               <h3 className="mb-4 text-xl font-semibold">Long-Term Vision</h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 This spike demonstrates the potential for using foundation
                 models in other data extraction and integration scenarios at the
                 university:
               </p>
-              <ul className="space-y-2 text-gray-300">
+              <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start">
                   <span className="mr-2 text-primary">•</span>
                   Expand to other types of university content (courses, events,
@@ -675,22 +676,22 @@ validation_model = ChatGoogleGenerativeAI(
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Conclusion</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
-          <div className="rounded-lg bg-gray-800 p-6">
-            <p className="mb-4 text-lg text-gray-300">
+          <div className="rounded-lg bg-card p-6">
+            <p className="mb-4 text-lg text-muted-foreground">
               The Person Profile Data Extraction Spike has successfully
               demonstrated the feasibility of using foundation models to extract
               structured data from faculty and staff profile pages on the
               University of Idaho website.
             </p>
-            <p className="mb-4 text-lg text-gray-300">
+            <p className="mb-4 text-lg text-muted-foreground">
               With a 92.79% success rate, low cost per profile ($0.0012), and
               reasonable processing time (6.6 seconds per profile), this
               approach has proven to be a viable solution for extracting faculty
               and staff profile data.
             </p>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-muted-foreground">
               The use of foundation models for this task not only eliminates the
               need to rely on poorly documented legacy databases but also
               provides a more flexible and maintainable approach to keeping the
@@ -708,13 +709,14 @@ validation_model = ChatGoogleGenerativeAI(
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/">
-              <Button className="bg-white text-black hover:bg-gray-200">
+              <Button variant="accent">
                 Back to Portfolio
               </Button>
             </Link>
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

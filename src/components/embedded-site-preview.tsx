@@ -32,32 +32,32 @@ const EmbeddedSitePreview: React.FC<EmbeddedSitePreviewProps> = ({
 
   return (
     <div
-      className={`relative w-full overflow-hidden rounded-lg border border-white/10 bg-gray-900 ${className}`}
+      className={`relative w-full overflow-hidden rounded-lg border border-border bg-card ${className}`}
     >
       {isLoading && (
         <div
-          className="absolute inset-0 flex items-center justify-center bg-gray-900"
+          className="absolute inset-0 flex items-center justify-center bg-card"
           style={{ minHeight: height }}
         >
           <div className="flex flex-col items-center gap-4">
-            <Loader2 className="h-8 w-8 animate-spin text-white/60" />
-            <p className="text-sm text-white/60">Loading preview...</p>
+            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">Loading preview...</p>
           </div>
         </div>
       )}
 
       {hasError ? (
         <div
-          className="flex items-center justify-center bg-gray-900 p-8"
+          className="flex items-center justify-center bg-card p-8"
           style={{ minHeight: height }}
         >
           <div className="text-center">
-            <p className="mb-2 text-white/80">Unable to load preview</p>
+            <p className="mb-2 text-foreground/80">Unable to load preview</p>
             <a
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-blue-400 hover:text-blue-300 underline"
+              className="text-sm text-accent hover:text-accent/80 underline"
             >
               Visit site directly →
             </a>

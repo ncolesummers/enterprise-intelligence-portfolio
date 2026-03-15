@@ -29,7 +29,7 @@ const BulletedList: React.FC<BulletedListProps> = ({
   items,
 }) => {
   return (
-    <ul className={`space-y-3 text-gray-300 ${className}`}>
+    <ul className={`space-y-3 text-muted-foreground ${className}`}>
       {items
         ? items.map((item, index) => <ListItem key={index}>{item}</ListItem>)
         : children}

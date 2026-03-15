@@ -9,6 +9,7 @@ import Section from "@/components/ui/section";
 import Image from "next/image";
 import mcg2020 from "@/assets/mcg-2020.jpeg";
 import { generatePageMetadata } from "@/lib/metadata";
+import Footer from "@/components/footer";
 
 export const metadata = generatePageMetadata({
   title: "Mikrotik Configuration Generator",
@@ -19,12 +20,12 @@ export const metadata = generatePageMetadata({
 
 export default function MikrotikConfigGenPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="sticky top-0 left-2 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60 px-4">
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 left-2 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
         <div className="container flex h-14 items-center">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm hover:text-gray-300"
+            className="flex items-center gap-2 text-sm hover:text-muted-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
@@ -38,7 +39,7 @@ export default function MikrotikConfigGenPage() {
           <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
             Mikrotik Configuration Generator
           </h1>
-          <p className="mb-8 max-w-2xl text-xl text-gray-400">
+          <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
             A desktop application that standardizes router configurations for
             ISP technicians
           </p>
@@ -46,7 +47,7 @@ export default function MikrotikConfigGenPage() {
             <Link href="https://presentation.ncolesummers.com" target="_blank">
               <Button
                 variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+                className="flex items-center gap-2"
               >
                 <UploadIcon className="h-4 w-4" />
                 View Presentation
@@ -59,14 +60,14 @@ export default function MikrotikConfigGenPage() {
         <Section title="Introduction">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 The Mikrotik Configuration Generator was developed for First
                 Step Internet to address the lack of standardization in home
                 router installations. Without standards, each router was
                 configured uniquely, increasing the complexity of
                 troubleshooting and maintenance.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 As the developer, I needed to create a solution that would work
                 offline, be self-contained, and provide a simple interface for
                 technicians to generate standardized configurations for Mikrotik
@@ -94,31 +95,31 @@ export default function MikrotikConfigGenPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Project Overview</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 The Mikrotik Configuration Generator went through several
                 iterations, starting as a Python console application and
                 eventually evolving into a modern desktop application built with
                 Go and Wails.
               </p>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 The application allows technicians to input customer and network
                 details through a simple interface, then generates standardized
                 configuration scripts for Mikrotik routers. These scripts can be
                 directly applied to the routers, ensuring consistent setup
                 across all installations.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 The project&apos;s evolution reflects a journey through
                 different technologies and approaches, each addressing specific
                 requirements and constraints.
               </p>
             </div>
-            <div className="overflow-hidden rounded-lg bg-gray-800">
-              <div className="aspect-video w-full bg-gray-700 p-4 flex items-center justify-center">
+            <div className="overflow-hidden rounded-lg bg-card">
+              <div className="aspect-video w-full bg-card p-4 flex items-center justify-center">
                 <Image
                   src={mcg2020}
                   alt="Mikrotik Configuration Generator Screenshot"
@@ -128,19 +129,19 @@ export default function MikrotikConfigGenPage() {
               <div className="p-4">
                 <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Go
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Wails
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     ReactJS
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Material UI
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     HTML Templates
                   </span>
                 </div>
@@ -153,14 +154,14 @@ export default function MikrotikConfigGenPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Challenges Faced</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Technical Requirements
               </h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 The application needed to work offline and be a self-contained
                 executable, which limited the choice of frameworks and
                 technologies.
@@ -168,7 +169,7 @@ export default function MikrotikConfigGenPage() {
             </ContentCard>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">User Experience</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 The initial TUI (Text User Interface) was easy to develop but
                 difficult for entry-level technicians to learn and use
                 efficiently.
@@ -178,7 +179,7 @@ export default function MikrotikConfigGenPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Cross-Platform Compatibility
               </h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Finding a framework that could produce a lightweight,
                 cross-platform application with a modern UI proved challenging.
               </p>
@@ -188,7 +189,7 @@ export default function MikrotikConfigGenPage() {
             <h3 className="mb-4 text-xl font-semibold">
               Framework Exploration
             </h3>
-            <p className="mb-4 text-gray-300">
+            <p className="mb-4 text-muted-foreground">
               Several frameworks were considered during development:
             </p>
             <BulletedList>
@@ -220,14 +221,14 @@ export default function MikrotikConfigGenPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Solutions Implemented</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Version 1.0: Python Console Program
               </h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 The initial version was a Python console application with a
                 text-based interface. While functional, it had limitations:
               </p>
@@ -270,7 +271,7 @@ export default function MikrotikConfigGenPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Version 2.0: Go with Wails
               </h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 The final solution was built with Go and Wails, which offered
                 several advantages:
               </p>
@@ -313,14 +314,14 @@ app.Run()`}
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Results Achieved</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
                 Standardized Configurations
               </h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 The application successfully standardized router configurations,
                 reducing the complexity of troubleshooting and maintenance.
                 Technicians could now generate consistent configurations with
@@ -331,7 +332,7 @@ app.Run()`}
               <h3 className="mb-4 text-xl font-semibold">
                 Improved Efficiency
               </h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 The intuitive UI significantly reduced the time required to
                 configure routers, allowing technicians to complete
                 installations more quickly and with fewer errors.
@@ -370,24 +371,24 @@ app.Run()`}
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Conclusion</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <ContentCard>
-            <p className="mb-4 text-lg text-gray-300">
+            <p className="mb-4 text-lg text-muted-foreground">
               The Mikrotik Configuration Generator project demonstrates the
               importance of selecting the right tools for specific requirements.
               Through multiple iterations and technology explorations, the final
               solution successfully addressed the need for standardized router
               configurations.
             </p>
-            <p className="mb-4 text-lg text-gray-300">
+            <p className="mb-4 text-lg text-muted-foreground">
               The journey from a text-based interface to a modern desktop
               application highlights the evolution of the project and the
               developer&apos;s commitment to finding the optimal solution. The
               final product not only met the technical requirements but also
               provided a user-friendly experience for technicians.
             </p>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-muted-foreground">
               Looking forward, there are opportunities for further improvement,
               such as adding animations, swapping Material UI components for
               Headless UI and TailwindCSS, or potentially rebuilding with newer
@@ -405,20 +406,21 @@ app.Run()`}
             <Link href="https://presentation.ncolesummers.com" target="_blank">
               <Button
                 variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+                className="flex items-center gap-2"
               >
                 <UploadIcon className="h-4 w-4" />
                 View Presentation
               </Button>
             </Link>
             <Link href="/">
-              <Button className="bg-white text-black hover:bg-gray-200">
+              <Button variant="accent">
                 Back to Portfolio
               </Button>
             </Link>
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

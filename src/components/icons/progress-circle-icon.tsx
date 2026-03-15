@@ -27,7 +27,8 @@ export const ProgressCircleIcon: React.FC<ProgressCircleIconProps> = ({
         cy="50"
         r="45"
         fill="none"
-        stroke="#1f2937" // background color
+        stroke="currentColor"
+        opacity={0.2} // background circle opacity
         strokeWidth="10"
       />
       {/* Progress circle */}

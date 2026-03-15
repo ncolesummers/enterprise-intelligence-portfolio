@@ -8,6 +8,7 @@ import Section from "@/components/ui/section";
 import Image from "next/image";
 import EllucianImage from "@/assets/ellucian-experience.jpeg";
 import { generatePageMetadata } from "@/lib/metadata";
+import Footer from "@/components/footer";
 
 export const metadata = generatePageMetadata({
   title: "MyUI Dashboard - University of Idaho",
@@ -18,12 +19,12 @@ export const metadata = generatePageMetadata({
 
 export default function MyUIPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60 px-4">
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
         <div className="container flex pl-2 h-14 items-center">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm hover:text-gray-300"
+            className="flex items-center gap-2 text-sm hover:text-muted-foreground"
           >
             <ArrowLeft className=" h-4 w-4" />
             Back to Home
@@ -37,7 +38,7 @@ export default function MyUIPage() {
           <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
             MyUI Dashboard
           </h1>
-          <p className="mb-8 max-w-2xl text-xl text-gray-400">
+          <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
             A modernized online dashboard streamlining access to university
             services for the University of Idaho community
           </p>
@@ -45,7 +46,7 @@ export default function MyUIPage() {
             <Link href="https://my.uidaho.edu" target="_blank">
               <Button
                 variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+                className="flex items-center gap-2"
               >
                 <PlayIcon className="h-4 w-4" />
                 Visit MyUI
@@ -58,13 +59,13 @@ export default function MyUIPage() {
         <Section title="Introduction">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 MyUI at the University of Idaho is a modernized online dashboard
                 designed to streamline access to various university services for
                 students, faculty, and staff. It replaced the older VandalWeb
                 system on September 9, 2024.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 As the lead developer on this project, I was responsible for
                 creating custom React components and cards that integrate
                 seamlessly with the Ellucian Experience platform, providing
@@ -94,54 +95,54 @@ export default function MyUIPage() {
         <Section title="Project Overview">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 MyUI offers a unified, personalized experience with features
                 organized into &quot;cards,&quot; which categorize and integrate
                 different administrative and academic functions into one
                 platform.
               </p>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 The dashboard consolidates tools like financial aid management,
                 course registration, academic records, housing information, and
                 faculty advising into a single interface, significantly
                 improving the user experience for the entire university
                 community.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 Users can configure their dashboard with cards relevant to their
                 needs, creating a personalized experience that prioritizes the
                 information and tools most important to them.
               </p>
             </div>
-            <div className="overflow-hidden rounded-lg bg-gray-800">
-              <div className="aspect-video w-full bg-gray-700 p-4 flex items-center justify-center">
+            <div className="overflow-hidden rounded-lg bg-card">
+              <div className="aspect-video w-full bg-card p-4 flex items-center justify-center">
                 <Image src={EllucianImage} alt="Ellucian Experience" />
               </div>
               <div className="p-4">
                 <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     React
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     JavaScript
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     CSS
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Ellucian Experience API
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Ethos Integration
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     Ethos BP APIs
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     RabbitMQ
                   </span>
-                  <span className="rounded-md bg-white/10 px-2 py-1 text-sm">
+                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
                     RESTful APIs
                   </span>
                 </div>
@@ -155,7 +156,7 @@ export default function MyUIPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Centralized Access</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 MyUI consolidates tools like financial aid management, course
                 registration, academic records, housing information, and faculty
                 advising into a single interface.
@@ -165,7 +166,7 @@ export default function MyUIPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Customizable Dashboard
               </h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Users can configure their dashboard with cards relevant to their
                 needs, such as class schedules, library resources, health and
                 wellness services, and more.
@@ -173,7 +174,7 @@ export default function MyUIPage() {
             </ContentCard>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Single Sign-On</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 It allows seamless login using University of Idaho credentials
                 for all integrated systems, eliminating the need for multiple
                 logins.
@@ -183,7 +184,7 @@ export default function MyUIPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Mobile-Friendly Interface
               </h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Designed for accessibility on both desktop and mobile devices,
                 ensuring students and faculty can access important information
                 from anywhere.
@@ -196,10 +197,10 @@ export default function MyUIPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">My Role as Lead Developer</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="mb-8">
-            <p className="mb-4 text-lg text-gray-300">
+            <p className="mb-4 text-lg text-muted-foreground">
               I was chosen as the lead developer for the MyUI dashboard due to
               my advanced skillset with React and deep understanding of user
               experience design principles. My responsibilities included:
@@ -232,7 +233,7 @@ export default function MyUIPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Library Card Development
               </h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 One of my key contributions was the development of the Library
                 Card, which allows students to:
               </p>
@@ -256,7 +257,7 @@ export default function MyUIPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Accounts and Billings Card
               </h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 Another significant component I developed was the Accounts and
                 Billings card, which leverages Ethos Business Process APIs to:
               </p>
@@ -278,17 +279,17 @@ export default function MyUIPage() {
             </ContentCard>
           </div>
 
-          <div className="mt-8 rounded-lg bg-gray-900 p-4">
-            <h4 className="mb-2 text-sm font-medium text-gray-400">
+          <div className="mt-8 rounded-lg bg-card p-4">
+            <h4 className="mb-2 text-sm font-medium text-muted-foreground">
               Code Availability Notice
             </h4>
-            <p className="text-gray-300">
+            <p className="text-muted-foreground">
               The code for these components and other custom elements of the
               MyUI dashboard is proprietary and protected under the University
               of Idaho&apos;s intellectual property policies. As such, the
               actual implementation details cannot be shared publicly.
             </p>
-            <p className="mt-2 text-gray-300">
+            <p className="mt-2 text-muted-foreground">
               The component architecture follows React best practices with a
               focus on modularity, reusability, and performance optimization.
               The implementation includes custom hooks for resource fetching,
@@ -304,12 +305,12 @@ export default function MyUIPage() {
             <h2 className="text-3xl font-bold">
               Benefits for the University Community
             </h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">For Students</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Simplifies workflows by integrating academic planning tools,
                 assignment tracking, and registration processes in one place. It
                 also displays important deadlines and notifications to help
@@ -318,7 +319,7 @@ export default function MyUIPage() {
             </ContentCard>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">For Faculty</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Provides tools for advising and course management, including
                 access to student GPAs, class loads, and the ability to manage
                 holds directly from the dashboard.
@@ -326,7 +327,7 @@ export default function MyUIPage() {
             </ContentCard>
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">For Administration</h3>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 Increases efficiency by reducing the need to navigate multiple
                 systems, centralizing all essential university functions into
                 one platform, and providing better data insights.
@@ -339,13 +340,13 @@ export default function MyUIPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Technical Implementation</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <ContentCard>
             <h3 className="mb-4 text-xl font-semibold">
               React Component Architecture
             </h3>
-            <p className="mb-4 text-gray-300">
+            <p className="mb-4 text-muted-foreground">
               The MyUI dashboard is built using a modular React component
               architecture, allowing for:
             </p>
@@ -377,7 +378,7 @@ export default function MyUIPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Integration Challenges
               </h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 Working with the Ellucian Experience platform presented several
                 integration challenges:
               </p>
@@ -399,7 +400,7 @@ export default function MyUIPage() {
               <h3 className="mb-4 text-xl font-semibold">
                 Performance Optimization
               </h3>
-              <p className="mb-4 text-gray-300">
+              <p className="mb-4 text-muted-foreground">
                 To ensure a smooth user experience, several performance
                 optimizations were implemented:
               </p>
@@ -425,13 +426,13 @@ export default function MyUIPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Ethos Integration</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
           <ContentCard>
             <h3 className="mb-4 text-xl font-semibold">
               Leveraging Ellucian Ethos Platform
             </h3>
-            <p className="mb-4 text-lg text-gray-300">
+            <p className="mb-4 text-lg text-muted-foreground">
               A critical aspect of the MyUI project was its integration with
               Ellucian&apos;s Ethos platform, a cloud-based integration solution
               designed specifically for higher education institutions. As lead
@@ -443,7 +444,7 @@ export default function MyUIPage() {
                 <h4 className="mb-2 text-lg font-semibold">
                   Ethos Integration Approach
                 </h4>
-                <ul className="space-y-2 text-gray-300">
+                <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
@@ -478,11 +479,11 @@ export default function MyUIPage() {
                 <h4 className="mb-2 text-lg font-semibold">
                   Business Process API Implementation
                 </h4>
-                <p className="mb-4 text-gray-300">
+                <p className="mb-4 text-muted-foreground">
                   For the Library Card component and other key features, I
                   implemented Ethos Business Process APIs to:
                 </p>
-                <ul className="space-y-2 text-gray-300">
+                <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
@@ -514,18 +515,18 @@ export default function MyUIPage() {
               </div>
             </div>
           </ContentCard>
-          <div className="mt-8 rounded-lg bg-gray-800 p-6">
+          <div className="mt-8 rounded-lg bg-card p-6">
             <h3 className="mb-4 text-xl font-semibold">
               Technical Challenges and Solutions
             </h3>
-            <p className="mb-4 text-gray-300">
+            <p className="mb-4 text-muted-foreground">
               Working with Ethos Business Process APIs presented several
               technical challenges that required innovative solutions:
             </p>
             <div className="grid gap-8 md:grid-cols-2">
               <div>
                 <h4 className="mb-2 text-lg font-semibold">Challenges</h4>
-                <ul className="space-y-2 text-gray-300">
+                <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
@@ -558,7 +559,7 @@ export default function MyUIPage() {
               </div>
               <div>
                 <h4 className="mb-2 text-lg font-semibold">Solutions</h4>
-                <ul className="space-y-2 text-gray-300">
+                <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start">
                     <span className="mr-2 text-primary flex-shrink-0">•</span>
                     <div>
@@ -590,11 +591,11 @@ export default function MyUIPage() {
                 </ul>
               </div>
             </div>
-            <div className="mt-4 rounded-lg bg-gray-900 p-4">
-              <h4 className="mb-2 text-sm font-medium text-gray-400">
+            <div className="mt-4 rounded-lg bg-card p-4">
+              <h4 className="mb-2 text-sm font-medium text-muted-foreground">
                 Implementation Note
               </h4>
-              <p className="text-gray-300">
+              <p className="text-muted-foreground">
                 While the specific implementation details are proprietary, the
                 integration approach followed Ellucian&apos;s best practices for
                 Ethos Integration. This included using the hub-and-spoke model
@@ -610,14 +611,14 @@ export default function MyUIPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Results and Impact</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
-          <div className="rounded-lg bg-gray-800 p-6">
-            <p className="mb-4 text-lg text-gray-300">
+          <div className="rounded-lg bg-card p-6">
+            <p className="mb-4 text-lg text-muted-foreground">
               The launch of MyUI has significantly improved the digital
               experience for the University of Idaho community:
             </p>
-            <ul className="mb-4 space-y-2 text-gray-300">
+            <ul className="mb-4 space-y-2 text-muted-foreground">
               <li className="flex items-start">
                 <span className="mr-2 text-primary">•</span>
                 <strong className="mr-2">Increased Efficiency:</strong> Reduced
@@ -642,7 +643,7 @@ export default function MyUIPage() {
                 Simplified administrative tasks for both students and staff
               </li>
             </ul>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-muted-foreground">
               The Library Card component, in particular, has seen high
               engagement rates, with a significant increase in study room
               reservations and 3D printer usage since its implementation.
@@ -654,24 +655,24 @@ export default function MyUIPage() {
         <section className="mb-16">
           <div className="mb-8 flex items-center">
             <h2 className="text-3xl font-bold">Conclusion</h2>
-            <div className="ml-4 h-px flex-1 bg-white/10"></div>
+            <div className="ml-4 h-px flex-1 bg-border"></div>
           </div>
-          <div className="rounded-lg bg-gray-800 p-6">
-            <p className="mb-4 text-lg text-gray-300">
+          <div className="rounded-lg bg-card p-6">
+            <p className="mb-4 text-lg text-muted-foreground">
               The MyUI project represents a significant modernization of the
               University of Idaho&apos;s digital infrastructure. As lead
               developer, I was able to leverage my React expertise to create a
               user-friendly, efficient platform that serves the diverse needs of
               the university community.
             </p>
-            <p className="mb-4 text-lg text-gray-300">
+            <p className="mb-4 text-lg text-muted-foreground">
               The card-based architecture provides flexibility for future
               expansion, allowing new services to be integrated seamlessly as
               the university&apos;s needs evolve. The successful implementation
               of MyUI demonstrates the power of modern web technologies to
               transform institutional systems.
             </p>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-muted-foreground">
               Looking forward, there are opportunities to further enhance the
               platform with additional personalization options, deeper
               integration with academic tools, and expanded mobile capabilities.
@@ -688,20 +689,21 @@ export default function MyUIPage() {
             <Link href="https://my.uidaho.edu" target="_blank">
               <Button
                 variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+                className="flex items-center gap-2"
               >
                 <PlayIcon className="h-4 w-4" />
                 Visit MyUI
               </Button>
             </Link>
             <Link href="/">
-              <Button className="bg-white text-black hover:bg-gray-200">
+              <Button variant="accent">
                 Back to Portfolio
               </Button>
             </Link>
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

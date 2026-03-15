@@ -100,10 +100,13 @@ export default function ContactForm() {
         </Button>
         {message && (
           <p
+            role={isSuccess ? "status" : "alert"}
+            aria-live="polite"
+            aria-atomic="true"
             className={`text-sm text-center mt-4 ${
               isSuccess
-                ? "text-green-600 dark:text-green-400"
-                : "text-red-600 dark:text-red-400"
+                ? "text-accent"
+                : "text-destructive"
             }`}
           >
             {message}
