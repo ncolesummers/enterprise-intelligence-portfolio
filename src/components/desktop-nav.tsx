@@ -10,7 +10,7 @@ const DesktopNav = () => {
           <Link
             key={item.name}
             href={item.href}
-            className="text-lg font-medium hover:text-accent transition-colors"
+            className="relative text-lg font-medium hover:text-accent transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
             {...(item.href.startsWith("http")
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {})}

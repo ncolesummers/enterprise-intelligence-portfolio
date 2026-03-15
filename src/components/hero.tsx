@@ -10,7 +10,7 @@ const Hero = () => {
           <h1 className="font-bold tracking-tighter text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
             ENTERPRISE
             <br />
-            <span className="text-accent">INTELLIGENCE &</span>
+            <span className="text-accent dark:[text-shadow:0_0_40px_oklch(0.62_0.22_240_/_0.15)]">INTELLIGENCE &</span>
             <br />
             APPLICATIONS
           </h1>

@@ -21,14 +21,14 @@ export default function ProjectCard({
   comingSoon = false, // Default to false
 }: ProjectCardProps) {
   return (
-    <Card className="overflow-hidden p-0">
+    <Card className="overflow-hidden p-0 motion-safe:transition-all motion-safe:duration-300 hover:border-accent/30">
       <div className="relative aspect-video">
         <Image
           src={image || "/placeholder.svg"}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover transition-transform hover:scale-105"
+          className="object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:hover:scale-105"
         />
       </div>
       <CardContent className="p-4 pt-0">
