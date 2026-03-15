@@ -25,7 +25,7 @@ export default function ProfileExtractorPage() {
         <div className="container flex h-14 items-center">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm hover:text-muted-foreground"
+            className="flex items-center gap-2 text-sm hover:text-muted-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
@@ -83,11 +83,7 @@ export default function ProfileExtractorPage() {
         </Section>
 
         {/* Project Overview */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Project Overview</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Project Overview">
           <div className="grid gap-8 md:grid-cols-[2fr_1fr] lg:grid-cols-2 xl:grid-cols-[3fr_1fr]">
             <div>
               <p className="mb-4 text-lg text-muted-foreground">
@@ -151,14 +147,10 @@ export default function ProfileExtractorPage() {
               </div>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Approach & Methodology */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Approach & Methodology</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Approach & Methodology">
           <ContentCard className="mb-8">
             <h3 className="mb-4 text-xl font-semibold">Three-Step Process</h3>
             <p className="mb-4 text-muted-foreground">
@@ -255,14 +247,10 @@ export default function ProfileExtractorPage() {
               </BulletedList>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Technical Implementation */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Technical Implementation</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Technical Implementation">
           <div className="grid gap-8 md:grid-cols-2">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">Data Schemas</h3>
@@ -377,14 +365,10 @@ validation_model = ChatGoogleGenerativeAI(
               </div>
             </div>
           </ContentCard>
-        </section>
+        </Section>
 
         {/* Results */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Results</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Results">
           <div className="grid gap-8 md:grid-cols-3">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">High Accuracy</h3>
@@ -555,14 +539,10 @@ validation_model = ChatGoogleGenerativeAI(
               </div>
             </div>
           </ContentCard>
-        </section>
+        </Section>
 
         {/* Recommendations */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Recommendations</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Recommendations">
           <div className="rounded-lg bg-card p-6">
             <h3 className="mb-4 text-xl font-semibold">
               Feasibility Assessment
@@ -609,14 +589,10 @@ validation_model = ChatGoogleGenerativeAI(
               </div>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Next Steps */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Next Steps</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Next Steps">
           <div className="grid gap-8 md:grid-cols-2">
             <div className="rounded-lg bg-card p-6">
               <h3 className="mb-4 text-xl font-semibold">Short-Term Actions</h3>
@@ -670,14 +646,10 @@ validation_model = ChatGoogleGenerativeAI(
               </ul>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Conclusion */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Conclusion</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Conclusion">
           <div className="rounded-lg bg-card p-6">
             <p className="mb-4 text-lg text-muted-foreground">
               The Person Profile Data Extraction Spike has successfully
@@ -700,7 +672,7 @@ validation_model = ChatGoogleGenerativeAI(
               other data extraction and integration scenarios at the university.
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Call to Action */}
         <section className="text-center">

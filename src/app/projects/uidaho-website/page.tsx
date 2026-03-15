@@ -59,10 +59,10 @@ export default function UIdahoWebsitePage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
-        <div className="container flex pl-2 h-14 items-center">
+        <div className="container flex h-14 items-center">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm hover:text-muted-foreground"
+            className="flex items-center gap-2 text-sm hover:text-muted-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
@@ -375,7 +375,7 @@ export default function UIdahoWebsitePage() {
         {/* Call to Action */}
         <section className="mt-16 rounded-lg border border-border bg-gradient-to-br from-card to-background p-12 text-center">
           <h2 className="mb-4 text-3xl font-bold">
-            Interested in Learning More?
+            Interested in learning more?
           </h2>
           <p className="mb-8 text-lg text-muted-foreground">
             Explore the live University of Idaho website or get in touch to

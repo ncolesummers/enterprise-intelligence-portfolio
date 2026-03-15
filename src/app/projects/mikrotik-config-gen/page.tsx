@@ -21,11 +21,11 @@ export const metadata = generatePageMetadata({
 export default function MikrotikConfigGenPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 left-2 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
         <div className="container flex h-14 items-center">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm hover:text-muted-foreground"
+            className="flex items-center gap-2 text-sm hover:text-muted-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
@@ -92,11 +92,7 @@ export default function MikrotikConfigGenPage() {
         </Section>
 
         {/* Project Overview */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Project Overview</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Project Overview">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4 text-lg text-muted-foreground">
@@ -124,6 +120,7 @@ export default function MikrotikConfigGenPage() {
                   src={mcg2020}
                   alt="Mikrotik Configuration Generator Screenshot"
                   className="h-full w-full object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className="p-4">
@@ -148,14 +145,10 @@ export default function MikrotikConfigGenPage() {
               </div>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Challenges Faced */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Challenges Faced</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Challenges Faced">
           <div className="grid gap-8 md:grid-cols-3">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
@@ -215,14 +208,10 @@ export default function MikrotikConfigGenPage() {
               </ListItem>
             </BulletedList>
           </ContentCard>
-        </section>
+        </Section>
 
         {/* Solutions Implemented */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Solutions Implemented</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Solutions Implemented">
           <div className="grid gap-8 md:grid-cols-2">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
@@ -308,14 +297,10 @@ app.Run()`}
               </CodeBlock>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Results Achieved */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Results Achieved</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Results Achieved">
           <div className="grid gap-8 md:grid-cols-2">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">
@@ -365,14 +350,10 @@ app.Run()`}
               </ListItem>
             </BulletedList>
           </ContentCard>
-        </section>
+        </Section>
 
         {/* Conclusion */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Conclusion</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Conclusion">
           <ContentCard>
             <p className="mb-4 text-lg text-muted-foreground">
               The Mikrotik Configuration Generator project demonstrates the
@@ -395,7 +376,7 @@ app.Run()`}
               frameworks like .NET 6/MAUI or Tauri.
             </p>
           </ContentCard>
-        </section>
+        </Section>
 
         {/* Call to Action */}
         <section className="text-center">

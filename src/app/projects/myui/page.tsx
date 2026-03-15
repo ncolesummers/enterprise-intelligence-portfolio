@@ -21,12 +21,12 @@ export default function MyUIPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
-        <div className="container flex pl-2 h-14 items-center">
+        <div className="container flex h-14 items-center">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm hover:text-muted-foreground"
+            className="flex items-center gap-2 text-sm hover:text-muted-foreground transition-colors"
           >
-            <ArrowLeft className=" h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>
         </div>
@@ -116,7 +116,11 @@ export default function MyUIPage() {
             </div>
             <div className="overflow-hidden rounded-lg bg-card">
               <div className="aspect-video w-full bg-card p-4 flex items-center justify-center">
-                <Image src={EllucianImage} alt="Ellucian Experience" />
+                <Image
+                  src={EllucianImage}
+                  alt="Ellucian Experience"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
               <div className="p-4">
                 <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
@@ -194,11 +198,7 @@ export default function MyUIPage() {
         </Section>
 
         {/* My Role */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">My Role as Lead Developer</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="My Role as Lead Developer">
           <div className="mb-8">
             <p className="mb-4 text-lg text-muted-foreground">
               I was chosen as the lead developer for the MyUI dashboard due to
@@ -297,16 +297,10 @@ export default function MyUIPage() {
               elements.
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Benefits */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">
-              Benefits for the University Community
-            </h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Benefits for the University Community">
           <div className="grid gap-8 md:grid-cols-3">
             <ContentCard>
               <h3 className="mb-4 text-xl font-semibold">For Students</h3>
@@ -334,14 +328,10 @@ export default function MyUIPage() {
               </p>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Technical Implementation */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Technical Implementation</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Technical Implementation">
           <ContentCard>
             <h3 className="mb-4 text-xl font-semibold">
               React Component Architecture
@@ -420,14 +410,10 @@ export default function MyUIPage() {
               </BulletedList>
             </ContentCard>
           </div>
-        </section>
+        </Section>
 
         {/* Ethos Integration */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Ethos Integration</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Ethos Integration">
           <ContentCard>
             <h3 className="mb-4 text-xl font-semibold">
               Leveraging Ellucian Ethos Platform
@@ -605,14 +591,10 @@ export default function MyUIPage() {
               </p>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Results and Impact */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Results and Impact</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Results and Impact">
           <div className="rounded-lg bg-card p-6">
             <p className="mb-4 text-lg text-muted-foreground">
               The launch of MyUI has significantly improved the digital
@@ -649,14 +631,10 @@ export default function MyUIPage() {
               reservations and 3D printer usage since its implementation.
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Conclusion */}
-        <section className="mb-16">
-          <div className="mb-8 flex items-center">
-            <h2 className="text-3xl font-bold">Conclusion</h2>
-            <div className="ml-4 h-px flex-1 bg-border"></div>
-          </div>
+        <Section title="Conclusion">
           <div className="rounded-lg bg-card p-6">
             <p className="mb-4 text-lg text-muted-foreground">
               The MyUI project represents a significant modernization of the
@@ -678,7 +656,7 @@ export default function MyUIPage() {
               integration with academic tools, and expanded mobile capabilities.
             </p>
           </div>
-        </section>
+        </Section>
 
         {/* Call to Action */}
         <section className="text-center">
