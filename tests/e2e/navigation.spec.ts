@@ -30,13 +30,15 @@ test.describe("Navigation", () => {
 
       const skipLink = page.locator(".skip-to-content");
 
-      // Focus the skip link and verify it becomes visible
+      // Focus the skip link and verify it moves into the viewport
       await skipLink.focus();
       await expect(skipLink).toBeFocused();
-      await expect(skipLink).toBeVisible();
+      const box = await skipLink.boundingBox();
+      expect(box).not.toBeNull();
+      expect(box!.y).toBeGreaterThanOrEqual(0);
 
-      // Activate the skip link via keyboard (Enter) since it may be outside the clickable viewport
-      await page.keyboard.press("Enter");
+      // Activate the skip link via Enter
+      await skipLink.press("Enter");
 
       // Verify the URL hash changed to #main-content
       await expect(page).toHaveURL(/#main-content/);
@@ -263,7 +265,10 @@ test.describe("Navigation", () => {
       page.on("console", msg => {
         if (msg.type() === "error") {
           const text = msg.text();
-          if (!text.includes("Failed to load resource")) {
+          // Ignore external resource 403s (e.g. analytics, fonts) but catch missing app resources
+          if (
+            !(text.includes("Failed to load resource") && text.includes("403"))
+          ) {
             consoleErrors.push(text);
           }
         }
