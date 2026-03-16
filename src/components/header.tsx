@@ -14,10 +14,10 @@ const Header = () => {
           n_cole_summers
         </Link>
         <div className="flex items-center gap-4">
-          <nav>
+          <div>
             <MobileNav />
             <DesktopNav />
-          </nav>
+          </div>
           <ThemeToggle />
         </div>
       </div>

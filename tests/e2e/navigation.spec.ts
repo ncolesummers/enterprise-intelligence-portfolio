@@ -113,20 +113,75 @@ test.describe("Navigation", () => {
 
   test.describe("Responsive Navigation", () => {
     test("should work on mobile viewports", async ({ page }) => {
-      // Set mobile viewport
       await page.setViewportSize({ width: 375, height: 667 });
       await page.goto("/");
 
-      // Check if mobile navigation is present
-      const mobileNav = page.locator('[data-testid="mobile-nav"]');
-      if (await mobileNav.isVisible()) {
-        // Test mobile navigation functionality
-        await mobileNav.click();
-        await expect(page.locator("text=About")).toBeVisible();
-      }
+      // Hamburger menu should be visible on mobile
+      const hamburger = page.locator('[data-testid="mobile-nav"]');
+      await expect(hamburger).toBeVisible();
+
+      // Open the sheet
+      await hamburger.click();
+      const sheet = page.locator('[data-slot="sheet-content"]');
+      await expect(sheet).toBeVisible();
+
+      // Nav links should be visible inside the sheet
+      await expect(sheet.locator("text=Work")).toBeVisible();
+      await expect(sheet.locator("text=About")).toBeVisible();
+      await expect(sheet.locator("text=Contact")).toBeVisible();
 
       // Ensure content is accessible on mobile
       await expect(page.locator("text=Cole Summers")).toBeVisible();
+    });
+
+    test("should close sheet when a nav link is clicked", async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 667 });
+      await page.goto("/");
+
+      const hamburger = page.locator('[data-testid="mobile-nav"]');
+      await hamburger.click();
+
+      const sheet = page.locator('[data-slot="sheet-content"]');
+      await expect(sheet).toBeVisible();
+
+      // Click a nav link
+      await sheet.locator("text=About").click();
+
+      // Sheet should close
+      await expect(sheet).not.toBeVisible();
+    });
+
+    test("should close sheet with Escape key", async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 667 });
+      await page.goto("/");
+
+      const hamburger = page.locator('[data-testid="mobile-nav"]');
+      await hamburger.click();
+
+      const sheet = page.locator('[data-slot="sheet-content"]');
+      await expect(sheet).toBeVisible();
+
+      await page.keyboard.press("Escape");
+      await expect(sheet).not.toBeVisible();
+    });
+
+    test("should show social icons inside sheet", async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 667 });
+      await page.goto("/");
+
+      const hamburger = page.locator('[data-testid="mobile-nav"]');
+      await hamburger.click();
+
+      const sheet = page.locator('[data-slot="sheet-content"]');
+      await expect(
+        sheet.locator('a[aria-label="LinkedIn Profile"]'),
+      ).toBeVisible();
+      await expect(
+        sheet.locator('a[aria-label="GitHub Profile"]'),
+      ).toBeVisible();
+      await expect(
+        sheet.locator('a[aria-label="Instagram Profile"]'),
+      ).toBeVisible();
     });
   });
 

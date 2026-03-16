@@ -8,7 +8,7 @@ test.describe("Social Icons Accessibility", () => {
     await page.emulateMedia({ colorScheme: "light" });
 
     const socialIcons = page.locator('a[aria-label*="Profile"]');
-    await expect(socialIcons).toHaveCount(9); // 3 each in header, mobile nav, footer
+    await expect(socialIcons).toHaveCount(6); // 3 each in desktop nav and footer (mobile nav icons inside Sheet portal, not rendered until opened)
 
     // Verify visible icons have proper contrast
     const visibleIcons = page.locator('a[aria-label*="Profile"]:visible');
@@ -110,14 +110,14 @@ test.describe("Social Icons Accessibility", () => {
 
     // Get all social icon elements
     const allSocialIcons = page.locator('a[aria-label*="Profile"]');
-    await expect(allSocialIcons).toHaveCount(9); // 3 locations × 3 icons
+    await expect(allSocialIcons).toHaveCount(6); // 2 locations × 3 icons (desktop nav + footer; mobile nav inside Sheet portal)
 
-    // Test each platform appears in all locations
+    // Test each platform appears in rendered locations
     const platforms = ["LinkedIn", "GitHub", "Instagram"];
 
     for (const platform of platforms) {
       const platformIcons = page.locator(`a[aria-label="${platform} Profile"]`);
-      await expect(platformIcons).toHaveCount(3); // desktop nav, mobile nav, footer
+      await expect(platformIcons).toHaveCount(2); // desktop nav and footer
 
       // Verify visible instances have consistent attributes
       const visiblePlatformIcons = page.locator(
