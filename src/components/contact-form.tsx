@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Spinner } from "@/components/ui/spinner";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -96,14 +97,24 @@ export default function ContactForm() {
           />
         </div>
         <Button type="submit" className="w-full" disabled={pending || !isValid}>
-          {pending ? "Sending..." : "Send Message"}
+          {pending ? (
+            <>
+              <Spinner className="mr-2 h-4 w-4" />
+              Sending...
+            </>
+          ) : (
+            "Send Message"
+          )}
         </Button>
         {message && (
           <p
+            role="status"
+            aria-live={isSuccess ? "polite" : "assertive"}
+            aria-atomic="true"
             className={`text-sm text-center mt-4 ${
               isSuccess
-                ? "text-green-600 dark:text-green-400"
-                : "text-red-600 dark:text-red-400"
+                ? "text-accent"
+                : "text-destructive"
             }`}
           >
             {message}

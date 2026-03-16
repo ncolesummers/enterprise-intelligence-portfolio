@@ -94,7 +94,7 @@ export class ScrollAnimations {
       }
 
       element.style.transition =
-        "opacity 0.6s ease-out, transform 0.6s ease-out";
+        "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
     }
 
     this.observer.observe(element);

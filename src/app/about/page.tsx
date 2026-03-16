@@ -3,7 +3,6 @@ import {
   BookOpen,
   Code,
   Github,
-  Instagram,
   Linkedin,
   Mail,
   Music,
@@ -14,6 +13,7 @@ import ContentCard from "@/components/ui/content-card";
 import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
 import Section from "@/components/ui/section";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata = generatePageMetadata({
@@ -259,39 +259,7 @@ export default function AboutPage() {
         </Section>
       </main>
 
-      <footer className="border-t border-border py-6 mt-16">
-        <div className="container flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
-          <div className="flex items-center gap-6">
-            <Link
-              href="https://www.linkedin.com/in/n-cole-summers/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Linkedin className="h-5 w-5" />
-            </Link>
-            <Link
-              href="https://github.com/ncolesummers/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Github className="h-5 w-5" />
-            </Link>
-            <Link
-              href="https://www.instagram.com/ncolesummers/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Instagram className="h-5 w-5" />
-            </Link>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            all socials @ncolesummers
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

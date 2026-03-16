@@ -8,6 +8,7 @@ import { defaultMetadata } from "@/lib/metadata";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
+import { ConsoleGreeting } from "@/components/console-greeting";
 
 export const metadata: Metadata = defaultMetadata;
 
@@ -35,6 +36,7 @@ export default function RootLayout({
             Skip to main content
           </a>
           <ErrorBoundary>{children}</ErrorBoundary>
+          <ConsoleGreeting />
           <Analytics />
         </ThemeProvider>
       </body>

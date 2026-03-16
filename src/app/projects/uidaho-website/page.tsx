@@ -6,6 +6,7 @@ import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
 import Section from "@/components/ui/section";
 import { generatePageMetadata } from "@/lib/metadata";
 import TabbedScreenshotGallery from "@/components/tabbed-screenshot-gallery";
+import Footer from "@/components/footer";
 
 // Screenshot imports
 import applyDesktop from "@/assets/uidaho-screenshots/uidaho-apply-desktop.webp";
@@ -56,12 +57,12 @@ export default function UIdahoWebsitePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60 px-4">
-        <div className="container flex pl-2 h-14 items-center">
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
+        <div className="container flex h-14 items-center">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm hover:text-gray-300"
+            className="flex items-center gap-2 text-sm hover:text-muted-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
@@ -75,7 +76,7 @@ export default function UIdahoWebsitePage() {
           <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
             University of Idaho Website
           </h1>
-          <p className="mb-8 max-w-2xl text-xl text-gray-400">
+          <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
             A modern redesign of the University of Idaho website built with
             Sitecore CMS, Next.js, TypeScript, and Azure cloud services
           </p>
@@ -83,7 +84,7 @@ export default function UIdahoWebsitePage() {
             <Link href="https://www.uidaho.edu" target="_blank">
               <Button
                 variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+                className="flex items-center gap-2"
               >
                 <ExternalLink className="h-4 w-4" />
                 Visit Live Site
@@ -103,7 +104,7 @@ export default function UIdahoWebsitePage() {
             ].map(tech => (
               <span
                 key={tech}
-                className="rounded-full bg-white/10 px-3 py-1 text-sm"
+                className="rounded-full bg-muted px-3 py-1 text-sm"
               >
                 {tech}
               </span>
@@ -115,19 +116,19 @@ export default function UIdahoWebsitePage() {
         <Section title="Introduction">
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 The University of Idaho website redesign represents a
                 comprehensive modernization of the university&apos;s digital
                 presence, transitioning to a headless CMS architecture powered
                 by Sitecore and Next.js.
               </p>
-              <p className="mb-4 text-lg text-gray-300">
+              <p className="mb-4 text-lg text-muted-foreground">
                 As a full-stack developer on this project, I worked across the
                 entire technology stack—from building reusable React components
                 with Storybook to implementing Azure Blob Storage and serverless
                 functions for dynamic content delivery.
               </p>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 This project demonstrates enterprise-level architecture with a
                 focus on performance, scalability, and maintainability.
               </p>
@@ -157,10 +158,10 @@ export default function UIdahoWebsitePage() {
           <ContentCard>
             <div className="space-y-4">
               <div>
-                <h3 className="mb-2 text-lg font-semibold text-white">
+                <h3 className="mb-2 text-lg font-semibold text-foreground">
                   Full-Stack Development
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-muted-foreground">
                   Developed across the entire technology stack, from frontend
                   React components to backend Azure services. Focused on
                   creating a seamless integration between Sitecore&apos;s
@@ -168,7 +169,7 @@ export default function UIdahoWebsitePage() {
                 </p>
               </div>
               <div>
-                <h3 className="mb-2 text-lg font-semibold text-white">
+                <h3 className="mb-2 text-lg font-semibold text-foreground">
                   Key Contributions
                 </h3>
                 <BulletedList>
@@ -205,7 +206,7 @@ export default function UIdahoWebsitePage() {
               <h3 className="mb-3 text-lg font-semibold">
                 Component Library & Storybook
               </h3>
-              <p className="mb-3 text-gray-300">
+              <p className="mb-3 text-muted-foreground">
                 Developed a comprehensive component library using React and
                 TypeScript, documented in Storybook for team collaboration and
                 consistency.
@@ -222,7 +223,7 @@ export default function UIdahoWebsitePage() {
               <h3 className="mb-3 text-lg font-semibold">
                 Sitecore Headless CMS
               </h3>
-              <p className="mb-3 text-gray-300">
+              <p className="mb-3 text-muted-foreground">
                 Implemented a headless CMS architecture connecting Sitecore to
                 the Next.js frontend via REST APIs and GraphQL.
               </p>
@@ -238,7 +239,7 @@ export default function UIdahoWebsitePage() {
               <h3 className="mb-3 text-lg font-semibold">
                 Performance & Azure
               </h3>
-              <p className="mb-3 text-gray-300">
+              <p className="mb-3 text-muted-foreground">
                 Utilized Next.js performance features and Azure services for
                 optimal load times and scalability.
               </p>
@@ -258,7 +259,7 @@ export default function UIdahoWebsitePage() {
             <h3 className="mb-4 text-xl font-semibold">Technology Stack</h3>
             <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <h4 className="mb-2 font-semibold text-white">Frontend</h4>
+                <h4 className="mb-2 font-semibold text-foreground">Frontend</h4>
                 <BulletedList>
                   <ListItem>
                     <strong className="mr-1">Next.js:</strong>React framework
@@ -279,7 +280,7 @@ export default function UIdahoWebsitePage() {
                 </BulletedList>
               </div>
               <div>
-                <h4 className="mb-2 font-semibold text-white">
+                <h4 className="mb-2 font-semibold text-foreground">
                   Backend & Infrastructure
                 </h4>
                 <BulletedList>
@@ -311,14 +312,14 @@ export default function UIdahoWebsitePage() {
             <h3 className="mb-4 text-xl font-semibold">
               Modern Redesign Benefits
             </h3>
-            <p className="mb-4 text-gray-300">
+            <p className="mb-4 text-muted-foreground">
               The redesigned University of Idaho website represents a
               significant technological advancement from the legacy system,
               delivering improved performance, scalability, and user experience.
             </p>
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <h4 className="mb-2 font-semibold text-white">
+                <h4 className="mb-2 font-semibold text-foreground">
                   Technical Improvements
                 </h4>
                 <BulletedList>
@@ -335,7 +336,7 @@ export default function UIdahoWebsitePage() {
                 </BulletedList>
               </div>
               <div>
-                <h4 className="mb-2 font-semibold text-white">
+                <h4 className="mb-2 font-semibold text-foreground">
                   Content Management
                 </h4>
                 <BulletedList>
@@ -351,19 +352,19 @@ export default function UIdahoWebsitePage() {
 
         {/* Website Showcase */}
         <Section title="Website Showcase">
-          <p className="mb-6 text-gray-300">
+          <p className="mb-6 text-muted-foreground">
             Explore screenshots of key pages from the University of Idaho
             website. Switch between tabs to view different sections of the site,
             showcasing the modern design and comprehensive content architecture.
           </p>
           <TabbedScreenshotGallery pages={screenshotPages} defaultPage={0} />
-          <p className="mt-4 text-sm text-gray-400">
+          <p className="mt-4 text-sm text-muted-foreground">
             Screenshots captured January 2026. Visit{" "}
             <a
               href="https://www.uidaho.edu"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 underline"
+              className="text-accent hover:text-accent/80 underline"
             >
               uidaho.edu
             </a>{" "}
@@ -372,11 +373,11 @@ export default function UIdahoWebsitePage() {
         </Section>
 
         {/* Call to Action */}
-        <section className="mt-16 rounded-lg border border-white/10 bg-gradient-to-br from-gray-900 to-black p-12 text-center">
+        <section className="mt-16 rounded-lg border border-border bg-gradient-to-br from-card to-background p-12 text-center">
           <h2 className="mb-4 text-3xl font-bold">
-            Interested in Learning More?
+            Interested in learning more?
           </h2>
-          <p className="mb-8 text-lg text-gray-400">
+          <p className="mb-8 text-lg text-muted-foreground">
             Explore the live University of Idaho website or get in touch to
             discuss enterprise web development projects.
           </p>
@@ -384,20 +385,21 @@ export default function UIdahoWebsitePage() {
             <Link href="https://www.uidaho.edu" target="_blank">
               <Button
                 variant="outline"
-                className="flex items-center gap-2 border-white/20 text-white hover:bg-white/10"
+                className="flex items-center gap-2"
               >
                 <ExternalLink className="h-4 w-4" />
                 Visit uidaho.edu
               </Button>
             </Link>
             <Link href="/#contact">
-              <Button className="bg-white text-black hover:bg-gray-200">
+              <Button variant="accent">
                 Contact Me
               </Button>
             </Link>
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

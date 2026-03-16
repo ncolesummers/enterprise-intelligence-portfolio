@@ -11,8 +11,8 @@ export default function Page() {
       <main id="main-content">
         <Hero />
         <ProjectGrid />
-        <section id="contact" className="py-32">
-          <div className="container px-4">
+        <section id="contact" className="py-20">
+          <div className="container px-4 sm:px-8 md:px-16">
             <div className="max-w-2xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-8">
                 Get In Touch
