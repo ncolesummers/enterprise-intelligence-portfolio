@@ -66,9 +66,5 @@ export default function ProjectCard({
     );
   }
 
-  return (
-    <Card className="overflow-hidden p-0 opacity-75">
-      {cardContent}
-    </Card>
-  );
+  return <Card className="overflow-hidden p-0 opacity-75">{cardContent}</Card>;
 }

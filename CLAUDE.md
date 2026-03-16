@@ -91,18 +91,22 @@ The codebase follows shadcn/ui conventions with the `cn()` utility function for 
 ## Design Context
 
 ### Users
+
 Hiring managers, engineering leaders, and potential collaborators evaluating N. Cole Summers' technical portfolio. They arrive with intent — scanning for evidence of competence, taste, and ambition. The site's job is to make that evaluation effortless and leave a strong impression.
 
 ### Brand Personality
+
 **Technical, Refined, Confident.** The interface communicates deep engineering competence through its own execution quality. Every detail — from typography to interaction — signals intentionality and craft.
 
 ### Aesthetic Direction
+
 - **Visual tone**: Dark-first, developer-focused, with subtle polish. Inspired by Linear and Vercel — clean layouts, restrained color, and precise spacing.
 - **Theme**: Dark mode default with full light mode support. OKLCH color system with neutral grays and a blue accent (hue 240).
 - **Typography**: Geist Sans (body) and Geist Mono (code). Tight tracking on headings, generous line-height on body text.
 - **Anti-references**: Avoid generic template aesthetics, gratuitous gradients, or overly playful/casual tone. No rainbow colors or busy layouts.
 
 ### Design System
+
 - **Framework**: Tailwind CSS v4 with shadcn/ui "new-york" style components
 - **Colors**: OKLCH tokens via CSS variables — `--primary`, `--accent` (oklch hue 240), `--muted`, `--destructive`
 - **Radius**: 0.625rem base (`--radius`), computed variants for sm/md/lg/xl
@@ -111,6 +115,7 @@ Hiring managers, engineering leaders, and potential collaborators evaluating N. 
 - **Spacing**: Container-based layout with `px-4 sm:px-8 md:px-16` responsive padding
 
 ### Design Principles
+
 1. **Precision over decoration** — Every element earns its place. Favor whitespace and alignment over ornament.
 2. **Confidence through restraint** — Use color, motion, and emphasis sparingly so they carry weight when they appear.
 3. **Technical credibility** — The site's build quality should itself demonstrate engineering taste. Clean code, accessible markup, performant rendering.
