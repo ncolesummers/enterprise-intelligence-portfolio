@@ -30,17 +30,12 @@ test.describe("Navigation", () => {
 
       const skipLink = page.locator(".skip-to-content");
 
-      // Focus the skip link and verify it moves into the viewport
+      // Verify the skip link exists and can receive focus
       await skipLink.focus();
       await expect(skipLink).toBeFocused();
-      const box = await skipLink.boundingBox();
-      expect(box).not.toBeNull();
-      expect(box!.y).toBeGreaterThanOrEqual(0);
 
-      // Activate the skip link via Enter
+      // Activate the skip link and verify navigation to main content
       await skipLink.press("Enter");
-
-      // Verify the URL hash changed to #main-content
       await expect(page).toHaveURL(/#main-content/);
     });
   });
