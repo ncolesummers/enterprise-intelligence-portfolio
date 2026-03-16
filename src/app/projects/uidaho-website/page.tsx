@@ -82,10 +82,7 @@ export default function UIdahoWebsitePage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="https://www.uidaho.edu" target="_blank">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2"
-              >
+              <Button variant="outline" className="flex items-center gap-2">
                 <ExternalLink className="h-4 w-4" />
                 Visit Live Site
               </Button>
@@ -383,18 +380,13 @@ export default function UIdahoWebsitePage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="https://www.uidaho.edu" target="_blank">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2"
-              >
+              <Button variant="outline" className="flex items-center gap-2">
                 <ExternalLink className="h-4 w-4" />
                 Visit uidaho.edu
               </Button>
             </Link>
             <Link href="/#contact">
-              <Button variant="accent">
-                Contact Me
-              </Button>
+              <Button variant="accent">Contact Me</Button>
             </Link>
           </div>
         </section>

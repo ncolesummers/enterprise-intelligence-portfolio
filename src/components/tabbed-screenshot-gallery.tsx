@@ -66,54 +66,54 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
         id={`tabpanel-${activePage}`}
         aria-labelledby={`tab-${activePage}`}
       >
-      {/* Page Description */}
-      {currentPage.description && (
-        <div className="mb-4">
-          <p className="text-sm text-muted-foreground">
-            {currentPage.description}
-          </p>
-        </div>
-      )}
-
-      {/* Screenshot Display */}
-      <div
-        className={`relative overflow-hidden rounded-lg border border-border bg-card ${
-          isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"
-        }`}
-        onClick={() => setIsZoomed(!isZoomed)}
-      >
-        <div
-          className={`transition-all duration-300 ${
-            isZoomed ? "overflow-auto" : "overflow-hidden"
-          }`}
-          style={{
-            maxHeight: isZoomed ? "80vh" : "600px",
-          }}
-        >
-          <Image
-            src={currentImage}
-            alt={`${currentPage.label} page screenshot`}
-            className={`w-full h-auto transition-transform duration-300 ${
-              isZoomed ? "scale-100" : ""
-            }`}
-            loading="lazy"
-            quality={90}
-            placeholder="blur"
-          />
-        </div>
-
-        {/* Zoom Hint */}
-        {!isZoomed && (
-          <div className="absolute bottom-4 right-4 rounded-lg bg-background/80 px-3 py-2 text-xs text-foreground/80 backdrop-blur">
-            Click to zoom
+        {/* Page Description */}
+        {currentPage.description && (
+          <div className="mb-4">
+            <p className="text-sm text-muted-foreground">
+              {currentPage.description}
+            </p>
           </div>
         )}
-      </div>
 
-      {/* Image Info */}
-      <div className="mt-2 text-center text-xs text-muted-foreground">
-        <span>Click image to zoom</span>
-      </div>
+        {/* Screenshot Display */}
+        <div
+          className={`relative overflow-hidden rounded-lg border border-border bg-card ${
+            isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"
+          }`}
+          onClick={() => setIsZoomed(!isZoomed)}
+        >
+          <div
+            className={`transition-all duration-300 ${
+              isZoomed ? "overflow-auto" : "overflow-hidden"
+            }`}
+            style={{
+              maxHeight: isZoomed ? "80vh" : "600px",
+            }}
+          >
+            <Image
+              src={currentImage}
+              alt={`${currentPage.label} page screenshot`}
+              className={`w-full h-auto transition-transform duration-300 ${
+                isZoomed ? "scale-100" : ""
+              }`}
+              loading="lazy"
+              quality={90}
+              placeholder="blur"
+            />
+          </div>
+
+          {/* Zoom Hint */}
+          {!isZoomed && (
+            <div className="absolute bottom-4 right-4 rounded-lg bg-background/80 px-3 py-2 text-xs text-foreground/80 backdrop-blur">
+              Click to zoom
+            </div>
+          )}
+        </div>
+
+        {/* Image Info */}
+        <div className="mt-2 text-center text-xs text-muted-foreground">
+          <span>Click image to zoom</span>
+        </div>
       </div>
     </div>
   );

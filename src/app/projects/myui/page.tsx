@@ -44,10 +44,7 @@ export default function MyUIPage() {
           </p>
           <div className="flex gap-4">
             <Link href="https://my.uidaho.edu" target="_blank">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2"
-              >
+              <Button variant="outline" className="flex items-center gap-2">
                 <PlayIcon className="h-4 w-4" />
                 Visit MyUI
               </Button>
@@ -665,18 +662,13 @@ export default function MyUIPage() {
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="https://my.uidaho.edu" target="_blank">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2"
-              >
+              <Button variant="outline" className="flex items-center gap-2">
                 <PlayIcon className="h-4 w-4" />
                 Visit MyUI
               </Button>
             </Link>
             <Link href="/">
-              <Button variant="accent">
-                Back to Portfolio
-              </Button>
+              <Button variant="accent">Back to Portfolio</Button>
             </Link>
           </div>
         </section>

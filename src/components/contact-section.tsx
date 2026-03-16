@@ -11,9 +11,7 @@ const ContactSection = () => {
           I&apos;m open to new opportunities and would love to hear from you.
         </p>
         <a href="mailto:nate@ncolesummers.com">
-          <Button variant="accent">
-            Contact me
-          </Button>
+          <Button variant="accent">Contact me</Button>
         </a>
       </div>
     </section>

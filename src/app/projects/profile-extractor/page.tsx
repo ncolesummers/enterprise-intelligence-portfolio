@@ -681,9 +681,7 @@ validation_model = ChatGoogleGenerativeAI(
           </h2>
           <div className="flex justify-center gap-4">
             <Link href="/">
-              <Button variant="accent">
-                Back to Portfolio
-              </Button>
+              <Button variant="accent">Back to Portfolio</Button>
             </Link>
           </div>
         </section>

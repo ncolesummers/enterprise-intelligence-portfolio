@@ -33,8 +33,11 @@ const MobileNav = () => {
               Navigation
             </SheetTitle>
           </SheetHeader>
-          <nav className="flex flex-col px-6 py-4" aria-label="Mobile navigation">
-            {navigation.map((item) => (
+          <nav
+            className="flex flex-col px-6 py-4"
+            aria-label="Mobile navigation"
+          >
+            {navigation.map(item => (
               <Link
                 key={item.name}
                 href={item.href}

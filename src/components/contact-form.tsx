@@ -112,9 +112,7 @@ export default function ContactForm() {
             aria-live={isSuccess ? "polite" : "assertive"}
             aria-atomic="true"
             className={`text-sm text-center mt-4 ${
-              isSuccess
-                ? "text-accent"
-                : "text-destructive"
+              isSuccess ? "text-accent" : "text-destructive"
             }`}
           >
             {message}
