@@ -33,6 +33,6 @@ export const Socials = [
   },
   {
     name: "Instagram",
-    href: "https://www.instagram.com/ncolesummers/",
+    href: "https://www.instagram.com/n__cole__summers/",
   },
 ];
