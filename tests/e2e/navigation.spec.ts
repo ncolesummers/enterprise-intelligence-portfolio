@@ -113,7 +113,7 @@ test.describe("Navigation", () => {
       await expect(page.locator("header")).toBeVisible();
 
       // Should be able to navigate back to home
-      await page.click("text=n_cole_summers"); // Logo/name link
+      await page.click("text=n__cole__summers"); // Logo/name link
       await expect(page).toHaveURL("/");
     });
   });

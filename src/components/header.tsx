@@ -11,7 +11,7 @@ const Header = () => {
           className="text-lg font-bold tracking-tight sm:tracking-normal"
           href="/"
         >
-          n_cole_summers
+          n__cole__summers
         </Link>
         <div className="flex items-center gap-4">
           <div>
