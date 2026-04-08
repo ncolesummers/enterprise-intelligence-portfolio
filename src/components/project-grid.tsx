@@ -26,6 +26,7 @@ const ProjectGrid = () => {
               description="A modern redesign of the University of Idaho website built with Sitecore, Next.js, TypeScript, Storybook, and Azure services."
               link="/projects/uidaho-website"
               image={uidahoWebsiteImage}
+              tags={["TypeScript", "Next.js", "Sitecore"]}
             />
           </AnimatedCard>
           <AnimatedCard delay={200}>
@@ -34,6 +35,7 @@ const ProjectGrid = () => {
               description="Research spike exploring the feasibility of using foundation models to extract faculty and staff profile data for the University of Idaho website."
               link="/projects/profile-extractor"
               image={profileExtractorImage}
+              tags={["Python", "LangGraph", "Gemini Flash"]}
             />
           </AnimatedCard>
           <AnimatedCard delay={300}>
@@ -42,6 +44,7 @@ const ProjectGrid = () => {
               description="Lead developer for University of Idaho's modernized dashboard, creating custom React components to streamline student access to university services."
               link="/projects/myui"
               image={myuiImage}
+              tags={["JavaScript", "React", "Ellucian Experience"]}
             />
           </AnimatedCard>
           <AnimatedCard delay={400}>
@@ -50,6 +53,7 @@ const ProjectGrid = () => {
               description="A cross-platform desktop application that standardizes router configurations for ISP technicians, built with Go and Wails."
               link="/projects/mikrotik-config-gen"
               image={mikrotikConfigGenImage}
+              tags={["Go", "Wails", "React"]}
             />
           </AnimatedCard>
         </div>
