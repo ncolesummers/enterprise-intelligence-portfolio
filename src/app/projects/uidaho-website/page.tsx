@@ -81,12 +81,16 @@ export default function UIdahoWebsitePage() {
             Sitecore CMS, Next.js, TypeScript, and Azure cloud services
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="https://www.uidaho.edu" target="_blank">
-              <Button variant="outline" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+              asChild
+            >
+              <Link href="https://www.uidaho.edu" target="_blank">
                 <ExternalLink className="h-4 w-4" />
                 Visit Live Site
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
 
           {/* Tech Stack Badges */}
@@ -379,15 +383,19 @@ export default function UIdahoWebsitePage() {
             discuss enterprise web development projects.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="https://www.uidaho.edu" target="_blank">
-              <Button variant="outline" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+              asChild
+            >
+              <Link href="https://www.uidaho.edu" target="_blank">
                 <ExternalLink className="h-4 w-4" />
                 Visit uidaho.edu
-              </Button>
-            </Link>
-            <Link href="/#contact">
-              <Button variant="accent">Contact Me</Button>
-            </Link>
+              </Link>
+            </Button>
+            <Button variant="accent" asChild>
+              <Link href="/#contact">Contact Me</Link>
+            </Button>
           </div>
         </section>
       </main>

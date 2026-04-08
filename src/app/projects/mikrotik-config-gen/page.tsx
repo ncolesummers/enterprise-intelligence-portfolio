@@ -44,12 +44,19 @@ export default function MikrotikConfigGenPage() {
             ISP technicians
           </p>
           <div className="flex gap-4">
-            <Link href="https://presentation.ncolesummers.com" target="_blank">
-              <Button variant="outline" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+              asChild
+            >
+              <Link
+                href="https://presentation.ncolesummers.com"
+                target="_blank"
+              >
                 <UploadIcon className="h-4 w-4" />
                 View Presentation
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
 
@@ -381,15 +388,22 @@ app.Run()`}
             Interested in learning more?
           </h2>
           <div className="flex justify-center gap-4">
-            <Link href="https://presentation.ncolesummers.com" target="_blank">
-              <Button variant="outline" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+              asChild
+            >
+              <Link
+                href="https://presentation.ncolesummers.com"
+                target="_blank"
+              >
                 <UploadIcon className="h-4 w-4" />
                 View Presentation
-              </Button>
-            </Link>
-            <Link href="/">
-              <Button variant="accent">Back to Portfolio</Button>
-            </Link>
+              </Link>
+            </Button>
+            <Button variant="accent" asChild>
+              <Link href="/">Back to Portfolio</Link>
+            </Button>
           </div>
         </section>
       </main>

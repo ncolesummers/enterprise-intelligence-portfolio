@@ -42,6 +42,7 @@ export const pageUrls = {
   home: "/",
   about: "/about",
   projects: {
+    agentDevelopmentLifecycle: "/projects/agent-development-lifecycle",
     mikrotikConfigGen: "/projects/mikrotik-config-gen",
     myui: "/projects/myui",
     profileExtractor: "/projects/profile-extractor",

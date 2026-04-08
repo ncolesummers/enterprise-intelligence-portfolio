@@ -41,6 +41,14 @@ test.describe("Navigation", () => {
   });
 
   test.describe("Project Pages", () => {
+    test("should navigate to ADLC project", async ({ page }) => {
+      await page.goto("/");
+
+      await page.click("text=Enterprise Agent Development Lifecycle");
+      await expect(page).toHaveURL(pageUrls.projects.agentDevelopmentLifecycle);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    });
+
     test("should navigate to MikroTik Config Generator project", async ({
       page,
     }) => {
@@ -74,6 +82,9 @@ test.describe("Navigation", () => {
 
     test("should handle direct project page access", async ({ page }) => {
       // Test direct navigation to project pages
+      await page.goto(pageUrls.projects.agentDevelopmentLifecycle);
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
       await page.goto(pageUrls.projects.mikrotikConfigGen);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
