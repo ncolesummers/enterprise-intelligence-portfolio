@@ -16,7 +16,8 @@
     "test:contact-form": "playwright test contact-form.spec.ts",
     "test:integration": "playwright test contact-form-integration.spec.ts",
     "test:integration:full": "TEST_INTEGRATION=true playwright test contact-form-integration.spec.ts",
-    "test:ui-only": "playwright test --grep-invert 'Integration'"
+    "test:ui-only": "playwright test --grep-invert 'Integration'",
+    "generate:favicons": "tsx scripts/generate-favicons.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -47,6 +48,7 @@
     "eslint-config-next": "15.2.4",
     "prettier": "^3.8.1",
     "sharp": "^0.34.5",
+    "sharp-ico": "^0.1.5",
     "tailwindcss": "^4",
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.21.0",
