@@ -44,16 +44,16 @@ export default function AgentDevelopmentLifecyclePage() {
             a production-grade implementation built on the Claude Agent SDK
           </p>
           <div className="flex gap-4">
-            <a
-              href="https://github.com/ncolesummers/enterprise-agent-development-lifecycle"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="outline" className="gap-2">
+            <Button variant="outline" className="gap-2" asChild>
+              <a
+                href="https://github.com/ncolesummers/enterprise-agent-development-lifecycle"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="h-4 w-4" />
                 View on GitHub
-              </Button>
-            </a>
+              </a>
+            </Button>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-2">
             <span className="rounded-md bg-muted px-2 py-1 text-sm">
@@ -415,19 +415,19 @@ const report = EvaluationReportSchema.parse(data);`}
             available on GitHub.
           </p>
           <div className="flex justify-center gap-4">
-            <a
-              href="https://github.com/ncolesummers/enterprise-agent-development-lifecycle"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="outline" className="gap-2">
+            <Button variant="outline" className="gap-2" asChild>
+              <a
+                href="https://github.com/ncolesummers/enterprise-agent-development-lifecycle"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ExternalLink className="h-4 w-4" />
                 View on GitHub
-              </Button>
-            </a>
-            <Link href="/#contact">
-              <Button variant="accent">Contact Me</Button>
-            </Link>
+              </a>
+            </Button>
+            <Button variant="accent" asChild>
+              <Link href="/#contact">Contact Me</Link>
+            </Button>
           </div>
         </section>
       </main>

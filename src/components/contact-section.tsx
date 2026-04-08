@@ -10,9 +10,9 @@ const ContactSection = () => {
         <p className="mb-8 text-sm sm:text-base md:text-lg text-muted-foreground">
           I&apos;m open to new opportunities and would love to hear from you.
         </p>
-        <a href="mailto:nate@ncolesummers.com">
-          <Button variant="accent">Contact me</Button>
-        </a>
+        <Button variant="accent" asChild>
+          <a href="mailto:nate@ncolesummers.com">Contact me</a>
+        </Button>
       </div>
     </section>
   );

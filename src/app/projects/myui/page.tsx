@@ -43,12 +43,16 @@ export default function MyUIPage() {
             services for the University of Idaho community
           </p>
           <div className="flex gap-4">
-            <Link href="https://my.uidaho.edu" target="_blank">
-              <Button variant="outline" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+              asChild
+            >
+              <Link href="https://my.uidaho.edu" target="_blank">
                 <PlayIcon className="h-4 w-4" />
                 Visit MyUI
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
 
@@ -661,15 +665,19 @@ export default function MyUIPage() {
             Interested in learning more?
           </h2>
           <div className="flex justify-center gap-4">
-            <Link href="https://my.uidaho.edu" target="_blank">
-              <Button variant="outline" className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+              asChild
+            >
+              <Link href="https://my.uidaho.edu" target="_blank">
                 <PlayIcon className="h-4 w-4" />
                 Visit MyUI
-              </Button>
-            </Link>
-            <Link href="/">
-              <Button variant="accent">Back to Portfolio</Button>
-            </Link>
+              </Link>
+            </Button>
+            <Button variant="accent" asChild>
+              <Link href="/">Back to Portfolio</Link>
+            </Button>
           </div>
         </section>
       </main>
