@@ -39,9 +39,9 @@ export default function AgentDevelopmentLifecyclePage() {
             Enterprise Agent Development Lifecycle
           </h1>
           <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
-            A TypeScript reference architecture for multi-agent autonomous coding
-            systems, synthesizing five Anthropic research documents into a
-            production-grade implementation built on the Claude Agent SDK
+            A TypeScript reference architecture for multi-agent autonomous
+            coding systems, synthesizing five Anthropic research documents into
+            a production-grade implementation built on the Claude Agent SDK
           </p>
           <div className="flex gap-4">
             <a
@@ -70,9 +70,7 @@ export default function AgentDevelopmentLifecyclePage() {
             <span className="rounded-md bg-muted px-2 py-1 text-sm">
               Commander
             </span>
-            <span className="rounded-md bg-muted px-2 py-1 text-sm">
-              Biome
-            </span>
+            <span className="rounded-md bg-muted px-2 py-1 text-sm">Biome</span>
           </div>
         </div>
 
@@ -91,10 +89,9 @@ export default function AgentDevelopmentLifecyclePage() {
                 This project translates those patterns to TypeScript and Bun,
                 making the architectural insights accessible to teams already
                 operating in the JavaScript ecosystem. The core problem these
-                documents address is the{" "}
-                <strong>context window gap</strong> — even frontier models fail
-                at production-quality builds because compaction alone is not
-                sufficient for multi-session work.
+                documents address is the <strong>context window gap</strong> —
+                even frontier models fail at production-quality builds because
+                compaction alone is not sufficient for multi-session work.
               </p>
               <p className="text-lg text-muted-foreground">
                 Two critical failure modes emerge in practice:{" "}
@@ -110,25 +107,28 @@ export default function AgentDevelopmentLifecyclePage() {
               <h3 className="mb-4 text-xl font-semibold">Source Research</h3>
               <BulletedList>
                 <ListItem>
-                  <strong>&quot;Effective Harnesses for Long-Running
-                  Agents&quot;</strong>{" "}
+                  <strong>
+                    &quot;Effective Harnesses for Long-Running Agents&quot;
+                  </strong>{" "}
                   (Nov 2025) — Two-agent pattern, feature list as source of
                   truth, progress tracking, boot sequence
                 </ListItem>
                 <ListItem>
-                  <strong>&quot;Harness Design for Long-Running Application
-                  Development&quot;</strong>{" "}
+                  <strong>
+                    &quot;Harness Design for Long-Running Application
+                    Development&quot;
+                  </strong>{" "}
                   (Mar 2026) — GAN-inspired three-agent architecture, context
                   anxiety, self-evaluation bias, four grading criteria
                 </ListItem>
                 <ListItem>
-                  <strong>Autonomous Coding Quickstart</strong> (GitHub) — Python
-                  reference implementation with session management, security
-                  model, and browser automation
+                  <strong>Autonomous Coding Quickstart</strong> (GitHub) —
+                  Python reference implementation with session management,
+                  security model, and browser automation
                 </ListItem>
                 <ListItem>
-                  <strong>Claude Code Hooks Multi-Agent Observability</strong>
-                  {" "}(GitHub) — Hook-to-event mapping, real-time monitoring
+                  <strong>Claude Code Hooks Multi-Agent Observability</strong>{" "}
+                  (GitHub) — Hook-to-event mapping, real-time monitoring
                   patterns, security hooks
                 </ListItem>
                 <ListItem>
@@ -180,11 +180,12 @@ export default function AgentDevelopmentLifecyclePage() {
               <li className="flex items-start">
                 <span className="mr-2 font-bold">2.</span>
                 <div>
-                  <strong>Generator</strong> — Implements exactly one feature per
-                  session following a prescribed boot sequence: verify working
-                  directory, read progress, check git log, run init script,
-                  confirm baseline, then implement. One-feature-per-session
-                  discipline prevents context exhaustion.
+                  <strong>Generator</strong> — Implements exactly one feature
+                  per session following a prescribed boot sequence: verify
+                  working directory, read progress, check git log, run init
+                  script, confirm baseline, then implement.
+                  One-feature-per-session discipline prevents context
+                  exhaustion.
                 </div>
               </li>
               <li className="flex items-start">
@@ -213,8 +214,8 @@ export default function AgentDevelopmentLifecyclePage() {
         → complete`}
               </CodeBlock>
               <p className="mt-4 text-muted-foreground">
-                The orchestrator uses state detection to determine which agent to
-                dispatch next. File-based state survives context resets,
+                The orchestrator uses state detection to determine which agent
+                to dispatch next. File-based state survives context resets,
                 providing clean handoffs between sessions.
               </p>
             </ContentCard>
@@ -254,14 +255,12 @@ export default function AgentDevelopmentLifecyclePage() {
         <Section title="Technical Implementation">
           <div className="grid gap-8 md:grid-cols-2">
             <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">
-                Runtime Validation
-              </h3>
+              <h3 className="mb-4 text-xl font-semibold">Runtime Validation</h3>
               <p className="mb-4 text-muted-foreground">
                 Every agent communication boundary is protected by Zod schema
                 validation. State files are validated at both read and write,
-                ensuring agents cannot create malformed state or silently corrupt
-                the shared coordination layer.
+                ensuring agents cannot create malformed state or silently
+                corrupt the shared coordination layer.
               </p>
               <CodeBlock title="Zod Schema Validation">
                 {`// Every state file is validated at read and write
@@ -331,11 +330,11 @@ const report = EvaluationReportSchema.parse(data);`}
             <div className="grid gap-8 md:grid-cols-2">
               <div>
                 <p className="mb-4 text-lg text-muted-foreground">
-                  Long-running agents face{" "}
-                  <strong>context anxiety</strong> — models begin wrapping up
-                  work prematurely as they approach what they believe is their
-                  context limit. This manifests as rushing through
-                  implementation, cutting corners, and declaring victory early.
+                  Long-running agents face <strong>context anxiety</strong> —
+                  models begin wrapping up work prematurely as they approach
+                  what they believe is their context limit. This manifests as
+                  rushing through implementation, cutting corners, and declaring
+                  victory early.
                 </p>
                 <p className="mb-4 text-lg text-muted-foreground">
                   Context resets (clearing the window entirely) proved more

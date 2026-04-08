@@ -45,9 +45,7 @@ test.describe("Navigation", () => {
       await page.goto("/");
 
       await page.click("text=Enterprise Agent Development Lifecycle");
-      await expect(page).toHaveURL(
-        pageUrls.projects.agentDevelopmentLifecycle,
-      );
+      await expect(page).toHaveURL(pageUrls.projects.agentDevelopmentLifecycle);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     });
 
