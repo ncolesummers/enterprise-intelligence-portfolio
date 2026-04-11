@@ -19,6 +19,9 @@
     "test:ui-only": "playwright test --grep-invert 'Integration'",
     "generate:favicons": "tsx scripts/generate-favicons.ts"
   },
+  "engines": {
+    "node": ">=24"
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-slot": "^1.1.2",
@@ -41,7 +44,7 @@
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.52.0",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
@@ -53,5 +56,8 @@
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.21.0",
     "typescript": "^5"
+  },
+  "volta": {
+    "node": "24.14.0"
   }
 }
