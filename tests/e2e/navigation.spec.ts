@@ -81,6 +81,8 @@ test.describe("Navigation", () => {
     });
 
     test("should handle direct project page access", async ({ page }) => {
+      // WebKit in CI is slower; this test visits 4 pages sequentially so needs extra headroom
+      test.setTimeout(60000);
       // Test direct navigation to project pages
       await page.goto(pageUrls.projects.agentDevelopmentLifecycle);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
