@@ -96,16 +96,15 @@ export default function AboutPage() {
               </p>
               <p className="mb-4 text-lg text-muted-foreground">
                 I&apos;ve been leveraging AI to accelerate software development
-                since the technical preview of GitHub Copilot in June 2021 —
-                long before the current wave of AI tooling. That early
-                experience shaped how I think about human-AI collaboration: what
-                to automate, what to leave to developers, and where the
-                boundaries should be.
+                since the technical preview of GitHub Copilot in June 2021, long
+                before the current wave of AI tooling. That early experience
+                shaped how I think about human-AI collaboration: what to
+                automate, what to leave to developers, and where the boundaries
+                should be.
               </p>
               <p className="text-lg text-muted-foreground">
-                I work across TypeScript, Python, Go, C#, and Rust — choosing
-                the right tool for each problem rather than defaulting to one
-                stack.
+                I work across TypeScript, Python, Go, C#, and Rust, choosing the
+                right tool for each problem rather than defaulting to one stack.
               </p>
             </div>
             <ContentCard>
@@ -170,12 +169,12 @@ export default function AboutPage() {
               <p className="mb-4 text-lg text-muted-foreground">
                 I believe the best AI-assisted workflows are the ones where
                 humans stay in the driver&apos;s seat. Automation should
-                eliminate toil, not judgment — freeing developers to focus on
+                eliminate toil, not judgment. It frees developers to focus on
                 architecture, design, and the decisions that matter.
               </p>
               <p className="mb-4 text-lg text-muted-foreground">
                 I&apos;m drawn to the intersection of AI-powered developer tools
-                and enterprise software — where automation can meaningfully
+                and enterprise software, where automation can meaningfully
                 reduce cycle time without sacrificing reliability or developer
                 trust.
               </p>
@@ -230,7 +229,8 @@ export default function AboutPage() {
               <h3 className="mb-2 text-xl font-semibold">Food & Music</h3>
               <p className="text-muted-foreground">
                 Can always be tempted away from work with the promise of good
-                food and live music—the perfect combination for recharging.
+                food and live music. It&apos;s the perfect combination for
+                recharging.
               </p>
             </ContentCard>
           </div>
