@@ -89,7 +89,7 @@ export default function AboutPage() {
               <p className="mb-4 text-lg text-muted-foreground">
                 I&apos;m currently an Enterprise Applications Developer at the
                 University of Idaho, where I focus on integrating AI agents into
-                the software development lifecycle. With 9 years of IT
+                the software development lifecycle. With ten years of IT
                 experience and 5 years of application development, I build
                 systems that automate repetitive workflows while keeping
                 developers in control.
