@@ -9,7 +9,6 @@ import Section from "@/components/ui/section";
 import Image from "next/image";
 import mcg2020 from "@/assets/mcg-2020.jpeg";
 import { generatePageMetadata } from "@/lib/metadata";
-import Footer from "@/components/footer";
 
 export const metadata = generatePageMetadata({
   title: "Mikrotik Configuration Generator",
@@ -20,221 +19,206 @@ export const metadata = generatePageMetadata({
 
 export default function MikrotikConfigGenPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
-        <div className="container flex h-14 items-center">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm hover:text-muted-foreground transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Link>
+    <main id="main-content" className="sheet">
+      <Link
+        href="/#work"
+        className="type-label text-line-soft hover:text-annotation inline-flex items-center gap-2 transition-colors"
+      >
+        <ArrowLeft className="h-3 w-3" />
+        Return to index
+      </Link>
+      {/* Hero Section */}
+      <div className="mb-16 flex flex-col items-center text-center">
+        <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
+          Mikrotik Configuration Generator
+        </h1>
+        <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
+          A desktop application that standardizes router configurations for ISP
+          technicians
+        </p>
+        <div className="flex gap-4">
+          <Button variant="outline" className="flex items-center gap-2" asChild>
+            <Link href="https://presentation.ncolesummers.com" target="_blank">
+              <UploadIcon className="h-4 w-4" />
+              View Presentation
+            </Link>
+          </Button>
         </div>
-      </header>
+      </div>
 
-      <main className="container py-12 px-4">
-        {/* Hero Section */}
-        <div className="mb-16 flex flex-col items-center text-center">
-          <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
-            Mikrotik Configuration Generator
-          </h1>
-          <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
-            A desktop application that standardizes router configurations for
-            ISP technicians
-          </p>
-          <div className="flex gap-4">
-            <Button
-              variant="outline"
-              className="flex items-center gap-2"
-              asChild
-            >
-              <Link
-                href="https://presentation.ncolesummers.com"
-                target="_blank"
-              >
-                <UploadIcon className="h-4 w-4" />
-                View Presentation
-              </Link>
-            </Button>
-          </div>
-        </div>
-
-        {/* Introduction */}
-        <Section title="Introduction">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div>
-              <p className="mb-4 text-lg text-muted-foreground">
-                The Mikrotik Configuration Generator was developed for First
-                Step Internet to address the lack of standardization in home
-                router installations. Without standards, each router was
-                configured uniquely, increasing the complexity of
-                troubleshooting and maintenance.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                As the developer, I needed to create a solution that would work
-                offline, be self-contained, and provide a simple interface for
-                technicians to generate standardized configurations for Mikrotik
-                routers.
-              </p>
-            </div>
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
-              <BulletedList>
-                <ListItem>Cross-platform desktop application</ListItem>
-                <ListItem>Built with Go and Wails framework</ListItem>
-                <ListItem>
-                  Evolved through multiple iterations and technologies
-                </ListItem>
-                <ListItem>Simplified workflow for ISP technicians</ListItem>
-                <ListItem>
-                  Self-contained executable with embedded filesystem
-                </ListItem>
-              </BulletedList>
-            </ContentCard>
-          </div>
-        </Section>
-
-        {/* Project Overview */}
-        <Section title="Project Overview">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div>
-              <p className="mb-4 text-lg text-muted-foreground">
-                The Mikrotik Configuration Generator went through several
-                iterations, starting as a Python console application and
-                eventually evolving into a modern desktop application built with
-                Go and Wails.
-              </p>
-              <p className="mb-4 text-lg text-muted-foreground">
-                The application allows technicians to input customer and network
-                details through a simple interface, then generates standardized
-                configuration scripts for Mikrotik routers. These scripts can be
-                directly applied to the routers, ensuring consistent setup
-                across all installations.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                The project&apos;s evolution reflects a journey through
-                different technologies and approaches, each addressing specific
-                requirements and constraints.
-              </p>
-            </div>
-            <div className="overflow-hidden rounded-lg bg-card">
-              <div className="aspect-video w-full bg-card p-4 flex items-center justify-center">
-                <Image
-                  src={mcg2020}
-                  alt="Mikrotik Configuration Generator Screenshot"
-                  className="h-full w-full object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                    Go
-                  </span>
-                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                    Wails
-                  </span>
-                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                    ReactJS
-                  </span>
-                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                    Material UI
-                  </span>
-                  <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                    HTML Templates
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Section>
-
-        {/* Challenges Faced */}
-        <Section title="Challenges Faced">
-          <div className="grid gap-8 md:grid-cols-3">
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">
-                Technical Requirements
-              </h3>
-              <p className="text-muted-foreground">
-                The application needed to work offline and be a self-contained
-                executable, which limited the choice of frameworks and
-                technologies.
-              </p>
-            </ContentCard>
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">User Experience</h3>
-              <p className="text-muted-foreground">
-                The initial TUI (Text User Interface) was easy to develop but
-                difficult for entry-level technicians to learn and use
-                efficiently.
-              </p>
-            </ContentCard>
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">
-                Cross-Platform Compatibility
-              </h3>
-              <p className="text-muted-foreground">
-                Finding a framework that could produce a lightweight,
-                cross-platform application with a modern UI proved challenging.
-              </p>
-            </ContentCard>
-          </div>
-          <ContentCard className="mt-8">
-            <h3 className="mb-4 text-xl font-semibold">
-              Framework Exploration
-            </h3>
-            <p className="mb-4 text-muted-foreground">
-              Several frameworks were considered during development:
+      {/* Introduction */}
+      <Section title="Introduction">
+        <div className="grid gap-8 md:grid-cols-2">
+          <div>
+            <p className="mb-4 text-lg text-muted-foreground">
+              The Mikrotik Configuration Generator was developed for First Step
+              Internet to address the lack of standardization in home router
+              installations. Without standards, each router was configured
+              uniquely, increasing the complexity of troubleshooting and
+              maintenance.
             </p>
+            <p className="text-lg text-muted-foreground">
+              As the developer, I needed to create a solution that would work
+              offline, be self-contained, and provide a simple interface for
+              technicians to generate standardized configurations for Mikrotik
+              routers.
+            </p>
+          </div>
+          <ContentCard>
+            <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
             <BulletedList>
+              <ListItem>Cross-platform desktop application</ListItem>
+              <ListItem>Built with Go and Wails framework</ListItem>
               <ListItem>
-                <strong>Flutter Desktop</strong> - Too new and still in alpha at
-                the time
+                Evolved through multiple iterations and technologies
               </ListItem>
+              <ListItem>Simplified workflow for ISP technicians</ListItem>
               <ListItem>
-                <strong>Electron</strong> - Memory footprint was too high for
-                the target laptops
-              </ListItem>
-              <ListItem>
-                <strong>Winforms</strong> - Well-documented and supported native
-                solution
-              </ListItem>
-              <ListItem>
-                <strong>Fyne</strong> - The GUI library written in Go with the
-                most stars on Github
-              </ListItem>
-              <ListItem>
-                <strong>C# with .NET 5.0</strong> - Single File Executables for
-                Windows were pushed back to .NET 6.0
+                Self-contained executable with embedded filesystem
               </ListItem>
             </BulletedList>
           </ContentCard>
-        </Section>
+        </div>
+      </Section>
 
-        {/* Solutions Implemented */}
-        <Section title="Solutions Implemented">
-          <div className="grid gap-8 md:grid-cols-2">
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">
-                Version 1.0: Python Console Program
-              </h3>
-              <p className="mb-4 text-muted-foreground">
-                The initial version was a Python console application with a
-                text-based interface. While functional, it had limitations:
-              </p>
-              <BulletedList className="mb-4">
-                <ListItem>
-                  Lots of duplicated code, particularly in string templates
-                </ListItem>
-                <ListItem>
-                  TUI was difficult for entry-level technicians to learn
-                </ListItem>
-              </BulletedList>
-              <CodeBlock title="Example Python Function">
-                {`def input_validation(x):
+      {/* Project Overview */}
+      <Section title="Project Overview">
+        <div className="grid gap-8 md:grid-cols-2">
+          <div>
+            <p className="mb-4 text-lg text-muted-foreground">
+              The Mikrotik Configuration Generator went through several
+              iterations, starting as a Python console application and
+              eventually evolving into a modern desktop application built with
+              Go and Wails.
+            </p>
+            <p className="mb-4 text-lg text-muted-foreground">
+              The application allows technicians to input customer and network
+              details through a simple interface, then generates standardized
+              configuration scripts for Mikrotik routers. These scripts can be
+              directly applied to the routers, ensuring consistent setup across
+              all installations.
+            </p>
+            <p className="text-lg text-muted-foreground">
+              The project&apos;s evolution reflects a journey through different
+              technologies and approaches, each addressing specific requirements
+              and constraints.
+            </p>
+          </div>
+          <div className="overflow-hidden rounded-lg bg-card">
+            <div className="aspect-video w-full bg-card p-4 flex items-center justify-center">
+              <Image
+                src={mcg2020}
+                alt="Mikrotik Configuration Generator Screenshot"
+                className="h-full w-full object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-md bg-muted px-2 py-1 text-sm">
+                  Go
+                </span>
+                <span className="rounded-md bg-muted px-2 py-1 text-sm">
+                  Wails
+                </span>
+                <span className="rounded-md bg-muted px-2 py-1 text-sm">
+                  ReactJS
+                </span>
+                <span className="rounded-md bg-muted px-2 py-1 text-sm">
+                  Material UI
+                </span>
+                <span className="rounded-md bg-muted px-2 py-1 text-sm">
+                  HTML Templates
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Challenges Faced */}
+      <Section title="Challenges Faced">
+        <div className="grid gap-8 md:grid-cols-3">
+          <ContentCard>
+            <h3 className="mb-4 text-xl font-semibold">
+              Technical Requirements
+            </h3>
+            <p className="text-muted-foreground">
+              The application needed to work offline and be a self-contained
+              executable, which limited the choice of frameworks and
+              technologies.
+            </p>
+          </ContentCard>
+          <ContentCard>
+            <h3 className="mb-4 text-xl font-semibold">User Experience</h3>
+            <p className="text-muted-foreground">
+              The initial TUI (Text User Interface) was easy to develop but
+              difficult for entry-level technicians to learn and use
+              efficiently.
+            </p>
+          </ContentCard>
+          <ContentCard>
+            <h3 className="mb-4 text-xl font-semibold">
+              Cross-Platform Compatibility
+            </h3>
+            <p className="text-muted-foreground">
+              Finding a framework that could produce a lightweight,
+              cross-platform application with a modern UI proved challenging.
+            </p>
+          </ContentCard>
+        </div>
+        <ContentCard className="mt-8">
+          <h3 className="mb-4 text-xl font-semibold">Framework Exploration</h3>
+          <p className="mb-4 text-muted-foreground">
+            Several frameworks were considered during development:
+          </p>
+          <BulletedList>
+            <ListItem>
+              <strong>Flutter Desktop</strong> - Too new and still in alpha at
+              the time
+            </ListItem>
+            <ListItem>
+              <strong>Electron</strong> - Memory footprint was too high for the
+              target laptops
+            </ListItem>
+            <ListItem>
+              <strong>Winforms</strong> - Well-documented and supported native
+              solution
+            </ListItem>
+            <ListItem>
+              <strong>Fyne</strong> - The GUI library written in Go with the
+              most stars on Github
+            </ListItem>
+            <ListItem>
+              <strong>C# with .NET 5.0</strong> - Single File Executables for
+              Windows were pushed back to .NET 6.0
+            </ListItem>
+          </BulletedList>
+        </ContentCard>
+      </Section>
+
+      {/* Solutions Implemented */}
+      <Section title="Solutions Implemented">
+        <div className="grid gap-8 md:grid-cols-2">
+          <ContentCard>
+            <h3 className="mb-4 text-xl font-semibold">
+              Version 1.0: Python Console Program
+            </h3>
+            <p className="mb-4 text-muted-foreground">
+              The initial version was a Python console application with a
+              text-based interface. While functional, it had limitations:
+            </p>
+            <BulletedList className="mb-4">
+              <ListItem>
+                Lots of duplicated code, particularly in string templates
+              </ListItem>
+              <ListItem>
+                TUI was difficult for entry-level technicians to learn
+              </ListItem>
+            </BulletedList>
+            <CodeBlock title="Example Python Function">
+              {`def input_validation(x):
     '''This function substitutes characters that will break
     Mikrotik Scripting Syntax with their
     corresponding hex code.'''
@@ -258,32 +242,32 @@ export default function MikrotikConfigGenPage() {
                 x = x.replace(c, syntax_breakers.get(c))
                 syntax_breakers_list.remove(c)
     return x`}
-              </CodeBlock>
-            </ContentCard>
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">
-                Version 2.0: Go with Wails
-              </h3>
-              <p className="mb-4 text-muted-foreground">
-                The final solution was built with Go and Wails, which offered
-                several advantages:
-              </p>
-              <BulletedList className="mb-4">
-                <ListItem>
-                  Go&apos;s Embed feature made it trivial to include an entire
-                  filesystem in the binary
-                </ListItem>
-                <ListItem>
-                  The templating engine in Go&apos;s standard library allowed
-                  reuse of templates with minor changes
-                </ListItem>
-                <ListItem>
-                  Wails provided a modern UI framework that met all project
-                  requirements
-                </ListItem>
-              </BulletedList>
-              <CodeBlock title="Example Go Code">
-                {`app := wails.CreateApp(&wails.AppConfig{
+            </CodeBlock>
+          </ContentCard>
+          <ContentCard>
+            <h3 className="mb-4 text-xl font-semibold">
+              Version 2.0: Go with Wails
+            </h3>
+            <p className="mb-4 text-muted-foreground">
+              The final solution was built with Go and Wails, which offered
+              several advantages:
+            </p>
+            <BulletedList className="mb-4">
+              <ListItem>
+                Go&apos;s Embed feature made it trivial to include an entire
+                filesystem in the binary
+              </ListItem>
+              <ListItem>
+                The templating engine in Go&apos;s standard library allowed
+                reuse of templates with minor changes
+              </ListItem>
+              <ListItem>
+                Wails provided a modern UI framework that met all project
+                requirements
+              </ListItem>
+            </BulletedList>
+            <CodeBlock title="Example Go Code">
+              {`app := wails.CreateApp(&wails.AppConfig{
     Width:     576,
     Height:    576,
     Title:     "Mikrotik Configuration Generator v" + version,
@@ -298,116 +282,102 @@ app.Bind(builder.BuildeFiber)
 app.Bind(builder.BuildRadio)
 app.Bind(builder.BuildRouter)
 app.Run()`}
-              </CodeBlock>
-            </ContentCard>
-          </div>
-        </Section>
-
-        {/* Results Achieved */}
-        <Section title="Results Achieved">
-          <div className="grid gap-8 md:grid-cols-2">
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">
-                Standardized Configurations
-              </h3>
-              <p className="text-muted-foreground">
-                The application successfully standardized router configurations,
-                reducing the complexity of troubleshooting and maintenance.
-                Technicians could now generate consistent configurations with
-                minimal training.
-              </p>
-            </ContentCard>
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">
-                Improved Efficiency
-              </h3>
-              <p className="text-muted-foreground">
-                The intuitive UI significantly reduced the time required to
-                configure routers, allowing technicians to complete
-                installations more quickly and with fewer errors.
-              </p>
-            </ContentCard>
-          </div>
-          <ContentCard className="mt-8">
-            <h3 className="mb-4 text-xl font-semibold">
-              Technical Achievements
-            </h3>
-            <BulletedList>
-              <ListItem>
-                Created a cross-platform desktop application that works offline
-              </ListItem>
-              <ListItem>
-                Developed a self-contained executable with an embedded
-                filesystem
-              </ListItem>
-              <ListItem>
-                Built a modern UI that&apos;s easy for entry-level technicians
-                to use
-              </ListItem>
-              <ListItem>
-                Implemented a templating system for generating configuration
-                scripts
-              </ListItem>
-              <ListItem>
-                Successfully navigated through multiple technologies to find the
-                optimal solution
-              </ListItem>
-            </BulletedList>
+            </CodeBlock>
           </ContentCard>
-        </Section>
+        </div>
+      </Section>
 
-        {/* Conclusion */}
-        <Section title="Conclusion">
+      {/* Results Achieved */}
+      <Section title="Results Achieved">
+        <div className="grid gap-8 md:grid-cols-2">
           <ContentCard>
-            <p className="mb-4 text-lg text-muted-foreground">
-              The Mikrotik Configuration Generator project demonstrates the
-              importance of selecting the right tools for specific requirements.
-              Through multiple iterations and technology explorations, the final
-              solution successfully addressed the need for standardized router
-              configurations.
-            </p>
-            <p className="mb-4 text-lg text-muted-foreground">
-              The journey from a text-based interface to a modern desktop
-              application highlights the evolution of the project and the
-              developer&apos;s commitment to finding the optimal solution. The
-              final product not only met the technical requirements but also
-              provided a user-friendly experience for technicians.
-            </p>
-            <p className="text-lg text-muted-foreground">
-              Looking forward, there are opportunities for further improvement,
-              such as adding animations, swapping Material UI components for
-              Headless UI and TailwindCSS, or potentially rebuilding with newer
-              frameworks like .NET 6/MAUI or Tauri.
+            <h3 className="mb-4 text-xl font-semibold">
+              Standardized Configurations
+            </h3>
+            <p className="text-muted-foreground">
+              The application successfully standardized router configurations,
+              reducing the complexity of troubleshooting and maintenance.
+              Technicians could now generate consistent configurations with
+              minimal training.
             </p>
           </ContentCard>
-        </Section>
+          <ContentCard>
+            <h3 className="mb-4 text-xl font-semibold">Improved Efficiency</h3>
+            <p className="text-muted-foreground">
+              The intuitive UI significantly reduced the time required to
+              configure routers, allowing technicians to complete installations
+              more quickly and with fewer errors.
+            </p>
+          </ContentCard>
+        </div>
+        <ContentCard className="mt-8">
+          <h3 className="mb-4 text-xl font-semibold">Technical Achievements</h3>
+          <BulletedList>
+            <ListItem>
+              Created a cross-platform desktop application that works offline
+            </ListItem>
+            <ListItem>
+              Developed a self-contained executable with an embedded filesystem
+            </ListItem>
+            <ListItem>
+              Built a modern UI that&apos;s easy for entry-level technicians to
+              use
+            </ListItem>
+            <ListItem>
+              Implemented a templating system for generating configuration
+              scripts
+            </ListItem>
+            <ListItem>
+              Successfully navigated through multiple technologies to find the
+              optimal solution
+            </ListItem>
+          </BulletedList>
+        </ContentCard>
+      </Section>
 
-        {/* Call to Action */}
-        <section className="text-center">
-          <h2 className="mb-6 text-3xl font-bold">
-            Interested in learning more?
-          </h2>
-          <div className="flex justify-center gap-4">
-            <Button
-              variant="outline"
-              className="flex items-center gap-2"
-              asChild
-            >
-              <Link
-                href="https://presentation.ncolesummers.com"
-                target="_blank"
-              >
-                <UploadIcon className="h-4 w-4" />
-                View Presentation
-              </Link>
-            </Button>
-            <Button variant="accent" asChild>
-              <Link href="/">Back to Portfolio</Link>
-            </Button>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+      {/* Conclusion */}
+      <Section title="Conclusion">
+        <ContentCard>
+          <p className="mb-4 text-lg text-muted-foreground">
+            The Mikrotik Configuration Generator project demonstrates the
+            importance of selecting the right tools for specific requirements.
+            Through multiple iterations and technology explorations, the final
+            solution successfully addressed the need for standardized router
+            configurations.
+          </p>
+          <p className="mb-4 text-lg text-muted-foreground">
+            The journey from a text-based interface to a modern desktop
+            application highlights the evolution of the project and the
+            developer&apos;s commitment to finding the optimal solution. The
+            final product not only met the technical requirements but also
+            provided a user-friendly experience for technicians.
+          </p>
+          <p className="text-lg text-muted-foreground">
+            Looking forward, there are opportunities for further improvement,
+            such as adding animations, swapping Material UI components for
+            Headless UI and TailwindCSS, or potentially rebuilding with newer
+            frameworks like .NET 6/MAUI or Tauri.
+          </p>
+        </ContentCard>
+      </Section>
+
+      {/* Call to Action */}
+      <section className="text-center">
+        <h2 className="mb-6 text-3xl font-bold">
+          Interested in learning more?
+        </h2>
+        <div className="flex justify-center gap-4">
+          <Button variant="outline" className="flex items-center gap-2" asChild>
+            <Link href="https://presentation.ncolesummers.com" target="_blank">
+              <UploadIcon className="h-4 w-4" />
+              View Presentation
+            </Link>
+          </Button>
+          <Button variant="accent" asChild>
+            <Link href="/">Back to Portfolio</Link>
+          </Button>
+        </div>
+      </section>
+    </main>
   );
 }
