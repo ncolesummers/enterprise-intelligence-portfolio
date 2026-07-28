@@ -42,3 +42,11 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# agent workspaces (local worktrees, personal settings)
+/.claude/
+
+# impeccable local state (consent, caches, live session journals)
+/.impeccable/config.local.json
+/.impeccable/hook.cache.json
+/.impeccable/live/sessions/
