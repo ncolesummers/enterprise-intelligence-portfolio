@@ -22,6 +22,22 @@ export const navigation = [
     href: "/#contact",
   },
 ];
+// Title-block sheet designators. The title block carries only true things —
+// no drawing numbers, revisions, scales, or dates (see DESIGN.md). A sheet
+// name is our own index label, so it names the section rather than numbering it.
+const sheetNames: Record<string, string> = {
+  "/": "Index",
+  "/about": "About",
+};
+
+export function sheetName(pathname: string): string {
+  const path = pathname.replace(/\/+$/, "") || "/";
+  if (sheetNames[path]) return sheetNames[path];
+
+  const slug = path.split("/").filter(Boolean).pop();
+  return slug ? slug.replace(/-/g, " ") : "Index";
+}
+
 export const Socials = [
   {
     name: "LinkedIn",
