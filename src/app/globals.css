@@ -3,127 +3,191 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-}
+/* ==========================================================================
+   The Figure Sheet — token layer
+
+   DESIGN.md is the authority. What follows is that spec resolved into built
+   values; where the two disagree, DESIGN.md wins and this file is corrected.
+
+   Two traditions, authored independently. Light is ink on paper. Dark is a
+   chalk line on a cyanotype blueprint. Neither is the other one inverted:
+   the annotation red alone differs by 0.17 in lightness and 6 degrees of hue
+   between them, because the ground each sits on is a different material.
+   ========================================================================== */
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.45 0.2 240);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  color-scheme: light;
+
+  /* Tradition: ink on paper.
+     Measured against --ground: line 16.3:1, line-soft 5.6:1, annotation 5.4:1.
+     The annotation is deeper than the #C8402A carried through the specimen,
+     which measured 4.56:1 — a pass with no margin, on a color whose whole job
+     is small label text. DESIGN.md's risk register calls for a per-theme value
+     rather than a lowered bar. */
+  --ground: oklch(0.9703 0.007 88.64); /* paper     #F7F5F0 */
+  --line: oklch(0.2086 0.0085 264.37); /* ink       #16181C */
+  --line-soft: oklch(0.4952 0.0142 96.61); /* graphite  #646259 */
+  --annotation: oklch(0.5241 0.1714 32.35); /* vermilion #B8351E */
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.62 0.22 240);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  color-scheme: dark;
+
+  /* Tradition: chalk on cyanotype.
+     Measured against --ground: line 11.8:1, line-soft 6.0:1, annotation 4.9:1.
+     The ground is drenched rather than dark-neutral — it is Prussian blue,
+     the pigment the cyanotype process actually produces. */
+  --ground: oklch(0.2842 0.0724 250.58); /* blueprint #072B4C */
+  --line: oklch(0.9316 0.0169 88); /* chalk     #EDE8DC */
+  --line-soft: oklch(0.7278 0.041 247.21); /* faded     #93AAC0 */
+  --annotation: oklch(0.6899 0.1665 37.98); /* vermilion #EF7048 */
+}
+
+:root,
+.dark {
+  /* Drafting line hierarchy. Weight is semantic: name which of the five a
+     stroke is before assigning it. Color carries the lighter weights, because
+     sub-pixel strokes are not reliably reproducible on screen — nothing here
+     goes below 1px, which is also the responsive floor. */
+  --rule-object: var(--line); /* outline of the thing described */
+  --rule-hidden: color-mix(in oklab, var(--line) 70%, var(--ground));
+  --rule-leader: color-mix(in oklab, var(--line) 55%, var(--ground));
+  --rule-center: color-mix(in oklab, var(--line) 40%, var(--ground));
+  --rule-hatch: color-mix(in oklab, var(--line) 28%, var(--ground));
+  --rule: color-mix(in oklab, var(--line) 38%, var(--ground));
+
+  --line-w-object: 2px;
+  --line-w-hidden: 1.5px;
+  --line-w-leader: 1px;
+  --line-w-center: 1px;
+  --line-w-hatch: 1px;
+
+  /* SVG stroke-dasharray values, so a hidden line in a figure and a hidden
+     line in the layout are the same line. */
+  --dash-hidden: 6 4;
+  --dash-center: 14 3 3 3;
+
+  /* Sheet geometry. --sheet-margin is viewport edge to border rule;
+     --sheet-gutter is border rule to content. */
+  --sheet-margin: clamp(0.625rem, 2.2vw, 1.75rem);
+  --sheet-gutter: clamp(1rem, 3.5vw, 3rem);
+  --sheet-max: 90rem;
+  /* Inside the border and margin rules — where anything drawn on the sheet,
+     including the title block, is allowed to start. */
+  --sheet-inner: calc(var(--sheet-margin) + 0.625rem);
+  --title-block-h: 3rem;
+
+  /* shadcn/ui compatibility surface. These names stay so the primitives keep
+     working; the values are now the figure sheet's. A card is not a raised
+     plane here — it is the same sheet with a rule drawn around it. */
+  --background: var(--ground);
+  --foreground: var(--line);
+  --card: var(--ground);
+  --card-foreground: var(--line);
+  --popover: var(--ground);
+  --popover-foreground: var(--line);
+  --primary: var(--line);
+  --primary-foreground: var(--ground);
+  --secondary: color-mix(in oklab, var(--line) 7%, var(--ground));
+  --secondary-foreground: var(--line);
+  --muted: color-mix(in oklab, var(--line) 7%, var(--ground));
+  --muted-foreground: var(--line-soft);
+  --accent: var(--annotation);
+  --accent-foreground: var(--ground);
+  /* One annotation color is the system: an invalid field is an active callout,
+     so it is marked in the same red rather than a second one. */
+  --destructive: var(--annotation);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--annotation);
+}
+
+@theme inline {
+  --font-sans: var(--font-saira), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    var(--font-monaspace), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ground: var(--ground);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-annotation: var(--annotation);
+
+  --color-rule: var(--rule);
+  --color-rule-object: var(--rule-object);
+  --color-rule-hidden: var(--rule-hidden);
+  --color-rule-leader: var(--rule-leader);
+  --color-rule-center: var(--rule-center);
+  --color-rule-hatch: var(--rule-hatch);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Corners are square. The callout circle is the only curve in this system
+     and it is drawn with rounded-full, which is not part of this scale. */
+  --radius: 0;
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+
+  /* The Flat Sheet Rule, enforced at the token layer rather than by review.
+     Clearing these namespaces means no shadow utility is generated at all,
+     so a stray shadow-lg cannot render one. */
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--rule);
   }
+
   html {
     scroll-behavior: smooth;
   }
+
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--ground);
+    color: var(--line);
+    font-family: var(--font-sans);
+    font-stretch: 100%;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Respect user's motion preferences */
+  /* Focus is the active callout, so it is marked in the annotation red at
+     object-line weight — the same vocabulary the figures use. */
+  :focus-visible {
+    outline: var(--line-w-object) solid var(--annotation);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--annotation);
+    color: var(--ground);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -137,41 +201,122 @@
     }
   }
 
-  /* Focus outline for accessibility */
-  .focus-visible-outline:focus-visible {
-    @apply outline-2 outline-ring outline-offset-2;
-  }
-
-  /* Skip to content link for screen readers */
   .skip-to-content {
-    @apply absolute -top-10 left-6 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md transition-all duration-200;
+    position: absolute;
+    top: -4rem;
+    left: var(--sheet-margin);
+    z-index: 60;
+    background-color: var(--ground);
+    color: var(--line);
+    border: var(--line-w-object) solid var(--rule-object);
+    padding: 0.5rem 1rem;
   }
   .skip-to-content:focus {
-    @apply top-6;
+    top: var(--sheet-margin);
   }
 }
 
-@layer base {
-  .hero-bg {
-    background: radial-gradient(
-      ellipse 80% 50% at 50% 0%,
-      oklch(0.92 0.03 240) 0%,
-      oklch(1 0 0) 70%
-    );
-  }
-  .dark .hero-bg {
-    background: radial-gradient(
-      ellipse 80% 50% at 50% 0%,
-      oklch(0.22 0.04 240) 0%,
-      oklch(0.145 0 0) 70%
-    );
-  }
+/* --------------------------------------------------------------------------
+   Lettering. One hand sets the whole sheet: register comes from Saira's width
+   axis via font-stretch, never from a second family. Monospace means code.
+   -------------------------------------------------------------------------- */
+
+@utility type-display {
+  font-stretch: 87.5%;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 7.5vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+@utility type-headline {
+  font-stretch: 87.5%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+@utility type-title {
+  font-stretch: 100%;
+  font-weight: 600;
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  line-height: 1.3;
+}
+
+@utility type-body {
+  font-stretch: 100%;
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+@utility type-label {
+  font-stretch: 87.5%;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility type-code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
+}
+
+/* Measure. Body copy is set for reading, not for filling the sheet. */
+@utility measure {
+  max-width: 66ch;
+}
+
+/* The drawing area: everything inside the border and margin rules, clearing
+   the title block along the lower edge. */
+@utility sheet {
+  margin-inline: auto;
+  max-width: var(--sheet-max);
+  padding-inline: calc(var(--sheet-margin) + var(--sheet-gutter));
+  padding-block-start: calc(var(--sheet-margin) + var(--sheet-gutter));
+  padding-block-end: calc(
+    var(--sheet-inner) + var(--title-block-h) + var(--sheet-gutter)
+  );
+}
+
+/* --------------------------------------------------------------------------
+   Named line weights, usable as borders. Naming the weight at the call site is
+   the point: it forces the question of which of the five a given stroke is.
+   -------------------------------------------------------------------------- */
+
+@utility rule-object {
+  border-style: solid;
+  border-width: var(--line-w-object);
+  border-color: var(--rule-object);
+}
+
+@utility rule-leader {
+  border-style: solid;
+  border-width: var(--line-w-leader);
+  border-color: var(--rule-leader);
+}
+
+@utility rule-hidden {
+  border-style: dashed;
+  border-width: var(--line-w-hidden);
+  border-color: var(--rule-hidden);
 }
 
 @layer utilities {
   /* Input component utilities */
   .input-base {
-    @apply flex h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+    @apply flex h-10 w-full min-w-0 border border-input bg-transparent px-3 py-1 text-base transition-colors outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
   }
 
   .input-file {
@@ -187,24 +332,24 @@
   }
 
   .input-dark {
-    @apply dark:bg-input/30;
+    @apply dark:bg-transparent;
   }
 
   .input-focus {
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply focus-visible:border-annotation;
   }
 
   .input-invalid {
-    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+    @apply aria-invalid:border-destructive;
   }
 
   .input-error {
-    @apply border-destructive focus-visible:border-destructive focus-visible:ring-destructive/20;
+    @apply border-destructive focus-visible:border-destructive;
   }
 
   /* Textarea component utilities */
   .textarea-base {
-    @apply flex field-sizing-content min-h-16 w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+    @apply flex field-sizing-content min-h-16 w-full border border-input bg-transparent px-3 py-2 text-base transition-colors outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
   }
 
   .textarea-placeholder {
@@ -212,18 +357,18 @@
   }
 
   .textarea-dark {
-    @apply dark:bg-input/30;
+    @apply dark:bg-transparent;
   }
 
   .textarea-focus {
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply focus-visible:border-annotation;
   }
 
   .textarea-invalid {
-    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+    @apply aria-invalid:border-destructive;
   }
 
   .textarea-error {
-    @apply border-destructive focus-visible:border-destructive focus-visible:ring-destructive/20;
+    @apply border-destructive focus-visible:border-destructive;
   }
 }
