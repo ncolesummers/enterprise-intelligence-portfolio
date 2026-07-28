@@ -3,7 +3,7 @@ name: N. Cole Summers
 description: A portfolio drawn as a set of engineering figure sheets.
 ---
 
-<!-- SEED: established with the user before implementation; re-run /impeccable document once there's code to capture the actual tokens and components. -->
+<!-- Colors, typography, line weights, and the sheet frame are built and their values here are real. The component inventory is not yet captured; re-run /impeccable document once Phase 2 lands the figures and callouts. -->
 
 # Design System: N. Cole Summers
 
@@ -32,18 +32,35 @@ A drawing is ink on a ground, plus one annotation color. Nothing else earns a pl
 
 The strategy is deliberately asymmetric between themes. Light is **Restrained**: paper ground, ink line, one accent held in reserve. Dark is **Drenched**: the blueprint ground owns the whole surface, and the line sits on top of it. Light is the default, because ink on paper is this world's canonical form and because leading with a bright ground is a genuine break from the dark-developer-portfolio convention this site is replacing.
 
-Values below are provisional starting points established during the type specimen exploration. The first build settles them, and this file gets updated with what survived.
+Values are settled and live in `src/app/globals.css`. Each theme is expressed through four role tokens — `--ground`, `--line`, `--line-soft`, `--annotation` — so a component names the role and the tradition supplies the material.
+
+### Light: ink on paper
+
+| Role           | Value     | Material  | Contrast on ground |
+| -------------- | --------- | --------- | ------------------ |
+| `--ground`     | `#F7F5F0` | Paper     | —                  |
+| `--line`       | `#16181C` | Ink       | 16.3:1             |
+| `--line-soft`  | `#646259` | Graphite  | 5.6:1              |
+| `--annotation` | `#B8351E` | Vermilion | 5.4:1              |
+
+**Paper** is a warm-neutral drawing stock, deliberately not cream; cream plus a serif is the aesthetic default this world must not collapse into. **Ink** is near-black, never pure black.
+
+### Dark: chalk on cyanotype
+
+| Role           | Value     | Material    | Contrast on ground |
+| -------------- | --------- | ----------- | ------------------ |
+| `--ground`     | `#072B4C` | Blueprint   | —                  |
+| `--line`       | `#EDE8DC` | Chalk       | 11.8:1             |
+| `--line-soft`  | `#93AAC0` | Faded chalk | 6.0:1              |
+| `--annotation` | `#EF7048` | Vermilion   | 4.9:1              |
+
+**Blueprint** is the Prussian blue the cyanotype process actually produces, drenched across the whole surface rather than used as a tint. **Chalk** sits on it the way white pencil sits on a blueprint.
 
 ### Primary
 
-- **Vermilion** (`#C8402A`, provisional): the draftsman's red annotation pencil. It marks exactly one thing: what is currently active, selected, or being pointed at. It is never a brand color, never a fill, never decorative.
+**Vermilion** is the draftsman's red annotation pencil. It marks exactly one thing: what is currently active, selected, or being pointed at. It is never a brand color, never a fill, never decorative.
 
-### Neutral
-
-- **Paper** (`#F7F5F0`, provisional): the light-theme ground. A warm-neutral drawing stock, deliberately not cream. Cream plus a serif is the aesthetic default this world must not collapse into.
-- **Ink** (`#16181C`, provisional): the light-theme line and body text. Near-black, never pure black.
-- **Blueprint** (provisional, deep Prussian blue): the dark-theme ground, drenched. Derived from the cyanotype process, where exposure turns the field blue and the line stays unexposed.
-- **Chalk** (provisional, warm off-white): the dark-theme line and body text, sitting on Blueprint the way white pencil sits on a blueprint.
+The two vermilions are 0.17 apart in lightness and six degrees apart in hue. They are not one value and its inverse; each was chosen against the ground it sits on. The light value is deeper than the `#C8402A` carried through the type specimen, which measured 4.56:1 — a pass with no margin, on a color whose whole job is small label text.
 
 ### Named Rules
 
@@ -60,12 +77,18 @@ Values below are provisional starting points established during the type specime
 
 ### Hierarchy
 
-- **Display** (Saira, semi-condensed, heavy, tight tracking): figure titles and the opening statement. Sized to command the sheet.
-- **Headline** (Saira, semi-condensed): section and figure headings.
-- **Title** (Saira, normal width, medium): case-study subheads.
-- **Body** (Saira, normal width, regular, generous line-height, 60–70ch measure): long-form case-study reading. Normal width is mandatory here; semi-condensed body text across a long case study is fatiguing, which the specimen demonstrated.
-- **Label** (Saira, semi-condensed, uppercase, wide tracking): reference numerals, figure captions, title-block fields, tags, and navigation.
-- **Code** (Monaspace, programming ligatures enabled): literal code only.
+Each step is a utility in `globals.css`. Width is set with `font-stretch`, which drives Saira's `wdth` axis directly, so a step composes with Tailwind's weight and size utilities instead of fighting them. Monaspace is Neon, self-hosted, and not preloaded — a page with no code block never fetches it.
+
+| Step            | Width | Weight | Size                                    | Use                                               |
+| --------------- | ----- | ------ | --------------------------------------- | ------------------------------------------------- |
+| `type-display`  | 87.5% | 800    | `clamp(2.5rem, 7.5vw, 6rem)`            | Figure titles, the opening statement              |
+| `type-headline` | 87.5% | 700    | `clamp(1.5rem, 3vw, 2.25rem)`           | Section and figure headings                       |
+| `type-title`    | 100%  | 600    | `clamp(1.125rem, 1.6vw, 1.375rem)`      | Case-study subheads                               |
+| `type-body`     | 100%  | 400    | `1.0625rem` / 1.65                      | Long-form reading, paired with `measure` (66ch)   |
+| `type-label`    | 87.5% | 600    | `0.6875rem`, 0.16em, uppercase, tabular | Numerals, captions, title-block fields, tags, nav |
+| `type-code`     | —     | —      | `0.875rem`                              | Literal code only, `liga` and `calt` on           |
+
+Body copy at normal width is mandatory. Semi-condensed body text across a long case study is fatiguing, which the specimen demonstrated.
 
 ### Named Rules
 
@@ -75,9 +98,13 @@ Values below are provisional starting points established during the type specime
 
 ## Layout
 
-The page is a sheet. It carries a border rule, an inner margin rule, and a title block, and its content sits inside that frame rather than bleeding to the viewport edge.
+The page is a sheet. It carries a border rule at object weight, an inner margin rule at leader weight, and centering marks at the midpoint of each edge. The frame is fixed rather than scrolled, so it reads as the edge of the drawing board while the sheet pans beneath it. Content sits inside that frame rather than bleeding to the viewport edge; `--sheet-margin` is viewport edge to border rule and `--sheet-gutter` is border rule to content.
 
-The **title block** is persistent chrome, following the drafting convention of the lower-right credit panel: ruled cells carrying drawn-by, sheet number, revision, and status. It absorbs the roles that would otherwise become a conventional header and footer, and it carries navigation and the theme control.
+The **title block** is persistent chrome that absorbs the roles a conventional header and footer would split: identity, navigation, off-sheet references, and the theme control. It is a full-width ruled band along the lower edge of the sheet rather than a lower-right panel. Both placements are authentic — ISO 5457 sheets use the bottom band — and the band neither occludes the drawing area nor needs a second layout on small screens, which the corner panel did on both counts. Its cell divisions are drawn by one-pixel gaps over a rule-colored ground, so no division is ever a doubled border.
+
+The theme control is a **medium** field. It names the two traditions, paper and blueprint, rather than reaching for the sun-and-moon pair every site in this category already uses.
+
+Every field in the block states something true: drawn-by, the sheet's section name, and the current medium. There are no drawing numbers, revision letters, scales, sheet sizes, or approvers, because none of them exist.
 
 Content is organized as numbered **figures** rather than cards. The work index is a sheet of figures the visitor can scan at once, not a procession that forces sequence. Visitors arrive under time pressure and compare candidates side by side; making depth mandatory would be a direct cost to them. Depth stays one click away and never in the way.
 
@@ -95,15 +122,17 @@ Depth is carried entirely by **line weight hierarchy**, borrowed directly from d
 - **Center and construction line** (thin, chain-dashed): axes, symmetry, and the geometry a form was constructed from.
 - **Section hatching** (fine parallel rule): a surface cut through, used where a system is opened up to show its interior.
 
+Weights are `--line-w-object` (2px), `--line-w-hidden` (1.5px), and 1px for leader, center, and hatching. Nothing goes below 1px: sub-pixel strokes are not reliably reproducible on screen, and 1px is also the responsive floor. The three lightest weights are told apart by ink and by dash pattern rather than by width — `--dash-hidden` and `--dash-center` are stroke-dasharray values, so a hidden line in a figure and a hidden line in the layout are the same line.
+
 ### Named Rules
 
-**The Flat Sheet Rule.** No `box-shadow` anywhere in the codebase. Separation between surfaces comes from rules, line weight, and hatching. If two regions need distinguishing, draw a line, change a weight, or hatch one of them.
+**The Flat Sheet Rule.** No `box-shadow` anywhere in the codebase. Separation between surfaces comes from rules, line weight, and hatching. If two regions need distinguishing, draw a line, change a weight, or hatch one of them. This is enforced at the token layer rather than by review: `globals.css` clears the `--shadow-*`, `--inset-shadow-*`, `--drop-shadow-*`, and `--text-shadow-*` namespaces, so Tailwind generates no shadow utility at all and a stray `shadow-lg` cannot render one.
 
 **The Weight-Means-Something Rule.** Line weight is semantic, never decorative. Before assigning a stroke width, name which of the five weights above it is and why. A heavy rule around something that is not an object outline is a mistake.
 
 ## Shapes
 
-Corners are square. `--radius` is `0`, and rounded rectangles do not exist in this world. The incumbent 0.625rem radius is removed entirely rather than reduced.
+Corners are square. The incumbent 0.625rem radius is removed entirely rather than reduced: every step of Tailwind's radius scale from `--radius-xs` through `--radius-4xl` is set to `0`, so the seventy existing `rounded-*` classes flatten without being touched one by one. `rounded-full` is deliberately left alone, because it is not part of that scale and it is how the one legitimate curve is drawn.
 
 The one curve that belongs is the **callout bubble**: the circle enclosing a reference numeral. It is a perfect circle, drawn in object-line weight, and it is the system's single recurring silhouette. Because it is the only circular form, it carries enormous identifying weight, and it appears in the mark itself.
 

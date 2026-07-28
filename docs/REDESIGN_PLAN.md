@@ -62,14 +62,19 @@ Image generation's role in this project is finished. It served direction-finding
 
 ## Phases
 
-### Phase 1 — Foundation (Claude)
+### Phase 1 — Foundation (Claude) — **done**
 
-- Replace Geist with **Saira** (variable, width + weight axes) and **Monaspace** for code.
-- Rewrite the token block in `src/app/globals.css`: paper/ink/vermilion for light, blueprint/chalk/vermilion for dark. Both themes authored independently, neither computed as an inversion.
-- `--radius: 0` and remove the computed radius variants.
-- Add line-weight custom properties for the five drafting weights.
-- Delete shadow tokens; no `box-shadow` survives anywhere.
-- Build the sheet frame and the **title block** component, absorbing `header.tsx` and `footer.tsx` roles including navigation and the theme toggle.
+Saira and Monaspace Neon in place, both themes authored independently and measured, radius and shadow namespaces zeroed at the token layer, sheet frame and title block built, `header.tsx` / `footer.tsx` / `desktop-nav.tsx` / `mobile-nav.tsx` deleted. Settled values live in DESIGN.md and `src/app/globals.css`.
+
+Decisions made during the build that the plan did not anticipate:
+
+- **The title block is a full-width band along the lower edge, not a lower-right panel.** Both are authentic; the band does not occlude the drawing area and does not need a second layout on small screens, which the corner panel needed on both counts. This matters most for Phase 2 — the whole sheet is free for FIG. 1.
+- **The light annotation moved from `#C8402A` to `#B8351E`.** The specimen value measured 4.56:1 on paper, a pass with no margin on a color whose job is small label text. Per the risk register, the theme got its own value rather than the bar being lowered.
+- **The theme control is a `MEDIUM` field reading PAPER / BLUEPRINT**, not a sun-and-moon toggle.
+- **Buttons became ruled label boxes.** The incumbent `accent` variant was a filled vermilion button, which DESIGN.md prohibits outright — the annotation color is never a fill.
+- **Shadow enforcement is structural.** Clearing the `--shadow-*` namespaces means Tailwind emits no shadow utility, so the rule cannot be broken by a stray class. The last `box-shadow` in the codebase was `ring-1 ring-inset` on tag chips, now real rules.
+
+Known breakage handed to Phase 3: **the Playwright suite fails broadly.** `navigation.spec.ts` asserts on `header` and `footer` elements and a `mobile-nav` test id that no longer exist; `social-icons-accessibility.spec.ts` counts icons per their old locations.
 
 ### Phase 2 — FIG. 1 and the homepage (Claude)
 
@@ -115,9 +120,11 @@ Requires the assembled static figure to be complete and good on its own first. R
 ## Open items
 
 - **FIG. 1's parts must be verified against the actual Loopworks repo before drawing.** Current knowledge is README-level only. Drawing a component that does not exist would violate PRODUCT.md's evidence rules.
-- Exact type scale, spacing rhythm, and final token values are settled during Phase 1, after which DESIGN.md is updated from seed to real and the `.impeccable/design.json` sidecar is generated.
+- **Cut the contact form.** The FormSpree integration was never paid for and is not used. Removing it takes `contact-form.tsx`, the `useFormValidation` hook, the mock route at `src/app/api/test/formspree-mock/route.ts`, the contact-form specs, and the `test:contact-form` / `test:integration` scripts with it, and turns the CONTACT nav item into a mailto. Best done alongside Phase 2, which rebuilds the index sheet anyway. Not urgent.
 - The constructed monogram is committed in concept but undrawn. Two or three versions get reviewed before it becomes the mark.
 - Whether case studies keep their current length is open; PRODUCT.md does not bind it.
+- The spacing rhythm is not yet a scale. Phase 1 settled color, type, and line weight; vertical rhythm is still incumbent Tailwind spacing and should be resolved when the index sheet is composed.
+- The `.impeccable/design.json` sidecar is not generated yet; it waits on the component inventory in Phase 2.
 
 ## Reference
 
