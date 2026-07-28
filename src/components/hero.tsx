@@ -4,21 +4,19 @@ import { AnimatedText } from "@/components/ui/animated-section";
 
 const Hero = () => {
   return (
-    <section className="hero-bg flex min-h-[80vh] flex-col items-start justify-center px-4 sm:px-8 md:px-16">
-      <div className="container">
+    <section className="flex min-h-[80vh] flex-col items-start justify-center">
+      <div>
         <AnimatedText delay={0}>
-          <h1 className="font-bold tracking-tighter text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="type-display">
             ENTERPRISE
             <br />
-            <span className="text-accent dark:[text-shadow:0_0_40px_oklch(0.62_0.22_240_/_0.15)]">
-              INTELLIGENCE &
-            </span>
+            INTELLIGENCE &
             <br />
             APPLICATIONS
           </h1>
         </AnimatedText>
         <AnimatedText delay={200}>
-          <p className="mt-3 text-lg sm:text-xl text-muted-foreground max-w-2xl">
+          <p className="type-body text-line-soft measure mt-6">
             Abstracting the knowledge from knowledge work.
           </p>
         </AnimatedText>

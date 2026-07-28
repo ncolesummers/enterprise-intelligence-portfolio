@@ -104,7 +104,7 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
 
           {/* Zoom Hint */}
           {!isZoomed && (
-            <div className="absolute bottom-4 right-4 rounded-lg bg-background/80 px-3 py-2 text-xs text-foreground/80 backdrop-blur">
+            <div className="bg-ground rule-leader text-line-soft type-label absolute right-4 bottom-4 px-3 py-2">
               Click to zoom
             </div>
           )}

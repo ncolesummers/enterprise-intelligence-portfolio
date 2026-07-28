@@ -9,7 +9,7 @@ import uidahoWebsiteImage from "@/assets/uidaho-explore-hero.webp";
 const ProjectGrid = () => {
   return (
     <section id="work" className="py-20 pt-20">
-      <div className="container px-4 sm:px-8 md:px-16">
+      <div>
         <div className="grid gap-8 md:grid-cols-2">
           <AnimatedCard delay={0}>
             <ProjectCard
