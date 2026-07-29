@@ -1,21 +1,83 @@
-import { Button } from "@/components/ui/button";
+import type { ReactNode } from "react";
 import { ArrowLeft } from "lucide-react";
-import { ProgressCircleIcon } from "@/components/icons/progress-circle-icon";
 import Link from "next/link";
-import ContentCard from "@/components/ui/content-card";
-import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
-import CodeBlock from "@/components/ui/code-block";
-import Section from "@/components/ui/section";
-import WorkflowDiagram from "@/assets/profile-extractor-workflow.svg";
-import Image from "next/image";
+
 import { generatePageMetadata } from "@/lib/metadata";
+import { cn } from "@/lib/utils";
 
 export const metadata = generatePageMetadata({
   title: "AI Data Extraction Research",
   description:
-    "Research spike exploring foundation models to extract faculty and staff profile data. Achieved 92.79% success rate at $0.0012 per profile using LangGraph and Google Gemini.",
+    "A feasibility study testing whether foundation models could turn public source pages into structured profiles with LangGraph and a verification step.",
   path: "/projects/profile-extractor",
 });
+
+interface CaseStudySectionProps {
+  children: ReactNode;
+  title: string;
+}
+
+function CaseStudySection({ children, title }: CaseStudySectionProps) {
+  return (
+    <section className="mb-16" data-testid="case-study-section">
+      <div className="mb-8 flex items-center gap-4">
+        <h2 className="type-headline">{title}</h2>
+        <div className="h-px flex-1 bg-rule-leader" aria-hidden="true" />
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function EvidencePanel({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn("rule-leader min-w-0 p-6", className)}
+      data-testid="evidence-panel"
+    >
+      {children}
+    </div>
+  );
+}
+
+function EvidenceList({ children }: { children: ReactNode }) {
+  return (
+    <ul className="type-body text-line-soft divide-y divide-rule-leader">
+      {children}
+    </ul>
+  );
+}
+
+function EvidenceItem({ children }: { children: ReactNode }) {
+  return <li className="py-3 first:pt-0 last:pb-0">{children}</li>;
+}
+
+function CodeEvidence({
+  children,
+  title,
+}: {
+  children: string;
+  title: string;
+}) {
+  return (
+    <div className="rule-leader min-w-0 p-4">
+      <h4 className="type-title text-line-soft mb-3">{title}</h4>
+      <pre className="text-line-soft max-w-full overflow-x-auto">
+        <code className="type-code">{children}</code>
+      </pre>
+    </div>
+  );
+}
+
+function LiteralCode({ children }: { children: ReactNode }) {
+  return <code className="type-code text-line">{children}</code>;
+}
 
 export default function ProfileExtractorPage() {
   return (
@@ -24,641 +86,351 @@ export default function ProfileExtractorPage() {
         href="/#work"
         className="type-label text-line-soft hover:text-annotation inline-flex items-center gap-2 transition-colors"
       >
-        <ArrowLeft className="h-3 w-3" />
+        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
         Return to index
       </Link>
-      {/* Hero Section */}
-      <div className="mb-16 flex flex-col items-center text-center">
-        <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
-          AI Data Extraction Research
-        </h1>
-        <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
-          A research spike exploring the feasibility of using foundation models
-          to extract faculty and staff profile data for the University of Idaho
-          website
+
+      <header className="mb-16 flex flex-col items-center text-center">
+        <h1 className="type-display mt-8 mb-6">AI Data Extraction Research</h1>
+        <p className="type-body text-line-soft measure mb-8">
+          A research spike that tested whether foundation models could turn
+          public source pages into structured profiles through a LangGraph
+          extraction and verification workflow.
         </p>
-      </div>
+      </header>
 
-      {/* Introduction */}
-      <Section title="Introduction">
+      <CaseStudySection title="Introduction">
         <div className="grid gap-8 md:grid-cols-2">
-          <div>
-            <p className="mb-4 text-lg text-muted-foreground">
-              The Person Profile Data Extraction Spike was a feasibility study
-              conducted to evaluate the potential of using foundation models to
-              extract structured data from faculty and staff profile pages on
-              the University of Idaho website.
+          <div className="type-body text-line-soft measure space-y-4">
+            <p>
+              This feasibility study examined a specific question: could a
+              foundation-model workflow extract a consistent structure from
+              public web pages whose HTML varies?
             </p>
-            <p className="text-lg text-muted-foreground">
-              Rather than relying on a poorly documented legacy database, this
-              approach aimed to directly extract key information from public
-              profile pages, creating a more reliable and maintainable dataset
-              for the university&apos;s website.
+            <p>
+              The spike tested that question as research. It did not establish
+              an operational service, and this case study does not publish the
+              source material or extracted records.
             </p>
           </div>
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
-            <BulletedList>
-              <ListItem>
-                92.79% success rate in extracting profile data
-              </ListItem>
-              <ListItem>
-                Cost-effective solution at $0.0012 per profile
-              </ListItem>
-              <ListItem>Processed 901 URLs in under 2 hours</ListItem>
-              <ListItem>
-                Used LangGraph state machine for orchestration
-              </ListItem>
-              <ListItem>Implemented ethical web crawling practices</ListItem>
-            </BulletedList>
-          </ContentCard>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Project evidence</h3>
+            <EvidenceList>
+              <EvidenceItem>Public source pages as inputs</EvidenceItem>
+              <EvidenceItem>LangGraph extraction as orchestration</EvidenceItem>
+              <EvidenceItem>Structured profiles as outputs</EvidenceItem>
+              <EvidenceItem>A separate verification pass</EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
         </div>
-      </Section>
+      </CaseStudySection>
 
-      {/* Project Overview */}
-      <Section title="Project Overview">
+      <CaseStudySection title="Project Overview">
         <div className="grid gap-8 md:grid-cols-[2fr_1fr] lg:grid-cols-2 xl:grid-cols-[3fr_1fr]">
-          <div>
-            <p className="mb-4 text-lg text-muted-foreground">
-              The goal of this spike was to determine if foundation models could
-              reliably extract structured data from faculty and staff profile
-              pages on the University of Idaho website. The extracted data would
-              include key fields such as Name, Title, Email, Degrees, and other
-              information defined in the project&apos;s user story.
+          <div className="type-body text-line-soft measure space-y-4">
+            <p>
+              The work compared variable public source pages against a defined
+              structured schema. Extraction was only one stage: every result
+              also went through a separate verification pass so the spike could
+              inspect where the approach worked and where it failed.
             </p>
-            <p className="mb-4 text-lg text-muted-foreground">
-              By leveraging AI models instead of relying on direct database
-              access, the project aimed to create a more maintainable and
-              flexible approach to keeping the university&apos;s website profile
-              information up-to-date.
-            </p>
-            <p className="text-lg text-muted-foreground">
-              The spike focused on evaluating the accuracy, cost, and
-              performance of this approach to determine its feasibility for
-              full-scale implementation.
+            <p>
+              That boundary matters. The evidence is the shape of the tested
+              workflow and its inspectable outputs, not a claim of deployment,
+              coverage, or measured accuracy.
             </p>
           </div>
-          <div className="overflow-hidden rounded-lg bg-card">
-            <div className="relative w-full h-64 md:h-80 lg:h-96 bg-card">
-              <Image
-                src={WorkflowDiagram}
-                alt="Workflow Diagram illustrating the data extraction process"
-                className="object-contain"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
-            </div>
-            <div className="p-4">
-              <h3 className="mb-2 text-xl font-semibold">Technology Stack</h3>
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                  Python
-                </span>
-                <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                  LangGraph
-                </span>
-                <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                  LangChain
-                </span>
-                <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                  Google Gemini
-                </span>
-                <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                  BeautifulSoup4
-                </span>
-                <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                  Pydantic
-                </span>
-                <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                  LangSmith
-                </span>
-                <span className="rounded-md bg-muted px-2 py-1 text-sm">
-                  Pandas
-                </span>
-              </div>
-            </div>
-          </div>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Workflow under test</h3>
+            <ol className="type-body text-line-soft divide-y divide-rule-leader">
+              <li className="py-3 first:pt-0">Source pages</li>
+              <li className="py-3">LangGraph extraction</li>
+              <li className="py-3">Structured profiles</li>
+              <li className="py-3 last:pb-0">Verification step</li>
+            </ol>
+            <h3 className="type-title mt-6 mb-4 border-t border-rule-leader pt-6">
+              Technology stack
+            </h3>
+            <ul className="flex flex-wrap gap-2" aria-label="Technology stack">
+              {["Python", "LangGraph", "Pydantic", "LangSmith"].map(
+                technology => (
+                  <li
+                    key={technology}
+                    className="type-label rule-leader px-2 py-1"
+                  >
+                    {technology}
+                  </li>
+                ),
+              )}
+            </ul>
+          </EvidencePanel>
         </div>
-      </Section>
+      </CaseStudySection>
 
-      {/* Approach & Methodology */}
-      <Section title="Approach & Methodology">
-        <ContentCard className="mb-8">
-          <h3 className="mb-4 text-xl font-semibold">Three-Step Process</h3>
-          <p className="mb-4 text-muted-foreground">
-            The project followed a structured three-step approach to test the
-            feasibility of using foundation models for profile data extraction:
-          </p>
-          <ol className="space-y-4 text-muted-foreground">
-            <li className="flex items-start">
-              <span className="mr-2 font-bold">1.</span>
-              <div>
-                <strong>Identify Profiles:</strong> Started with a list of known
-                profile URLs stored in <code>data/uidaho_urls.json</code>,
-                generated by analyzing the website&apos;s sitemap.xml file to
-                identify faculty and staff profile pages.
-              </div>
+      <CaseStudySection title="Approach & Methodology">
+        <EvidencePanel className="mb-8">
+          <h3 className="type-title mb-4">Three-stage investigation</h3>
+          <ol className="type-body text-line-soft divide-y divide-rule-leader">
+            <li className="py-3 first:pt-0">
+              <strong className="text-line">Identify inputs:</strong> derive a
+              bounded set of public source URLs for the spike.
             </li>
-            <li className="flex items-start">
-              <span className="mr-2 font-bold">2.</span>
-              <div>
-                <strong>Crawl & Extract:</strong> Processed these URLs using a
-                LangGraph state machine with steps for fetching pages,
-                preprocessing HTML, extracting data with foundation models, and
-                validating the results.
-              </div>
+            <li className="py-3">
+              <strong className="text-line">Extract and structure:</strong>{" "}
+              fetch, preprocess, and pass page content through a LangGraph state
+              machine into a Pydantic schema.
             </li>
-            <li className="flex items-start">
-              <span className="mr-2 font-bold">3.</span>
-              <div>
-                <strong>Evaluate:</strong> Analyzed the results based on
-                accuracy (using an LLM-as-a-judge pattern), cost, and processing
-                time, with detailed tracing and debugging via LangSmith.
-              </div>
+            <li className="py-3 last:pb-0">
+              <strong className="text-line">Verify and inspect:</strong> compare
+              structured outputs with source material, traces, and errors before
+              drawing a feasibility conclusion.
             </li>
           </ol>
-        </ContentCard>
+        </EvidencePanel>
 
         <div className="grid gap-8 md:grid-cols-2">
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">
-              LangGraph State Machine
-            </h3>
-            <p className="mb-4 text-muted-foreground">
-              The core of the extraction process was implemented as a LangGraph
-              state machine with the following key nodes:
-            </p>
-            <BulletedList>
-              <ListItem>
-                <strong className="mr-2">fetch_page:</strong> Retrieves HTML
-                content respectfully (using configured delays)
-              </ListItem>
-              <ListItem>
-                <strong className="mr-2">preprocess_html:</strong> Parses and
-                cleans HTML using BeautifulSoup
-              </ListItem>
-              <ListItem>
-                <strong className="mr-2">extract_data:</strong> Uses Gemini
-                Flash to extract information into a Pydantic schema
-              </ListItem>
-              <ListItem>
-                <strong className="mr-2">validate_data:</strong> Employs an
-                LLM-as-a-judge pattern to evaluate accuracy
-              </ListItem>
-              <ListItem>
-                <strong className="mr-2">handle_error:</strong> Captures and
-                logs errors at each step
-              </ListItem>
-            </BulletedList>
-          </ContentCard>
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">
-              Ethical Crawling Practices
-            </h3>
-            <p className="mb-4 text-muted-foreground">
-              The project implemented responsible web crawling practices to
-              ensure minimal impact on the university&apos;s web servers:
-            </p>
-            <BulletedList>
-              <ListItem>
-                Configured delays between requests to prevent server overload
-              </ListItem>
-              <ListItem>
-                Respected robots.txt directives and crawl-delay settings
-              </ListItem>
-              <ListItem>Used proper user-agent identification</ListItem>
-              <ListItem>
-                Implemented error handling to back off on server errors
-              </ListItem>
-              <ListItem>
-                Limited concurrent requests to maintain server health
-              </ListItem>
-            </BulletedList>
-          </ContentCard>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">LangGraph state machine</h3>
+            <EvidenceList>
+              <EvidenceItem>
+                <LiteralCode>fetch_page</LiteralCode> retrieves source HTML.
+              </EvidenceItem>
+              <EvidenceItem>
+                <LiteralCode>preprocess_html</LiteralCode> parses and cleans the
+                document.
+              </EvidenceItem>
+              <EvidenceItem>
+                <LiteralCode>extract_data</LiteralCode> maps content into the
+                structured schema.
+              </EvidenceItem>
+              <EvidenceItem>
+                <LiteralCode>validate_data</LiteralCode> performs the
+                verification step.
+              </EvidenceItem>
+              <EvidenceItem>
+                <LiteralCode>handle_error</LiteralCode> records failures at each
+                stage.
+              </EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Crawling constraints</h3>
+            <EvidenceList>
+              <EvidenceItem>Configured delays between requests</EvidenceItem>
+              <EvidenceItem>robots.txt directives observed</EvidenceItem>
+              <EvidenceItem>Identified user agent</EvidenceItem>
+              <EvidenceItem>Error handling with backoff</EvidenceItem>
+              <EvidenceItem>Bounded concurrency</EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
         </div>
-      </Section>
+      </CaseStudySection>
 
-      {/* Technical Implementation */}
-      <Section title="Technical Implementation">
+      <CaseStudySection title="Technical Implementation">
         <div className="grid gap-8 md:grid-cols-2">
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">Data Schemas</h3>
-            <p className="mb-4 text-muted-foreground">
-              Pydantic models were used to define the structure of the extracted
-              data and validation results:
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Data schemas</h3>
+            <p className="type-body text-line-soft mb-4">
+              Pydantic models defined the structure of extracted data and the
+              result of verification. Employer-sensitive field definitions are
+              intentionally omitted here.
             </p>
-            <CodeBlock title="ProfileData Schema">
-              {`class ProfileData(BaseModel):
-    name: str
-    title: str
-    email: Optional[str] = None
-    phone: Optional[str] = None
-    office: Optional[str] = None
-    department: Optional[str] = None
-    degrees: Optional[List[str]] = None
-    bio: Optional[str] = None
-    research_interests: Optional[List[str]] = None
-    courses_taught: Optional[List[str]] = None
-    publications: Optional[List[str]] = None
-    website: Optional[str] = None`}
-            </CodeBlock>
-            <div className="mt-4">
-              <CodeBlock title="ValidationResult Schema">
+            <div className="space-y-4">
+              <CodeEvidence title="ProfileData Schema">
+                {`class ProfileData(BaseModel):
+    # Field definitions omitted from this public case study.
+    ...`}
+              </CodeEvidence>
+              <CodeEvidence title="ValidationResult Schema">
                 {`class FieldValidation(BaseModel):
     field: str
     status: Literal["Correct", "Incorrect", "Missing"]
-    explanation: Optional[str] = None
+    explanation: str | None = None
 
 class ValidationResult(BaseModel):
     overall_accuracy: float
-    field_validations: List[FieldValidation]
-    suggestions: Optional[List[str]] = None`}
-              </CodeBlock>
+    field_validations: list[FieldValidation]
+    suggestions: list[str] | None = None`}
+              </CodeEvidence>
             </div>
-          </ContentCard>
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">LLM Integration</h3>
-            <p className="mb-4 text-muted-foreground">
-              The project leveraged Google&apos;s Gemini Flash model for both
-              extraction and validation:
+          </EvidencePanel>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Model boundary</h3>
+            <p className="type-body text-line-soft mb-4">
+              One model configuration produced structured output; a separate
+              verification pass checked that output against the source. Keeping
+              those stages distinct made failures visible in the graph and its
+              traces.
             </p>
-            <CodeBlock title="Model Configuration">
-              {`# Initialize the Gemini model
-extraction_model = ChatGoogleGenerativeAI(
-    model="gemini-flash",
-    temperature=0.1,
-    convert_system_message_to_human=True,
-    safety_settings={
-        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-    }
-)
-
-# Initialize the validation model (same model, different instance)
-validation_model = ChatGoogleGenerativeAI(
-    model="gemini-flash",
-    temperature=0.1,
-    convert_system_message_to_human=True,
-    safety_settings={
-        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-    }
-)`}
-            </CodeBlock>
-            <p className="mt-4 text-muted-foreground">
-              The extraction process used structured prompts to guide the model
-              in extracting specific fields from the HTML content, while the
-              validation process employed an LLM-as-a-judge pattern to evaluate
-              the accuracy of the extracted data.
-            </p>
-          </ContentCard>
+            <EvidenceList>
+              <EvidenceItem>Schema-constrained extraction</EvidenceItem>
+              <EvidenceItem>Separate verification pass</EvidenceItem>
+              <EvidenceItem>Node-level tracing in LangSmith</EvidenceItem>
+              <EvidenceItem>Error logging and prompt inspection</EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
         </div>
-        <ContentCard className="mt-8">
-          <h3 className="mb-4 text-xl font-semibold">
-            Monitoring and Debugging
-          </h3>
-          <p className="mb-4 text-muted-foreground">
-            LangSmith was used for comprehensive monitoring and debugging of the
-            extraction process
-          </p>
+        <EvidencePanel className="mt-8">
+          <h3 className="type-title mb-4">Monitoring and debugging</h3>
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <h4 className="mb-2 text-lg font-semibold">Features Used</h4>
-              <BulletedList>
-                <ListItem>
-                  Detailed tracing of each step in the LangGraph state machine
-                </ListItem>
-                <ListItem>Token usage tracking for cost estimation</ListItem>
-                <ListItem>
-                  Latency measurement for performance analysis
-                </ListItem>
-                <ListItem>Error logging and categorization</ListItem>
-                <ListItem>Prompt inspection and refinement</ListItem>
-              </BulletedList>
+              <h4 className="type-title mb-4">Trace evidence</h4>
+              <EvidenceList>
+                <EvidenceItem>Each graph node traced separately</EvidenceItem>
+                <EvidenceItem>
+                  Errors categorized by workflow stage
+                </EvidenceItem>
+                <EvidenceItem>
+                  Prompts inspectable during the spike
+                </EvidenceItem>
+              </EvidenceList>
             </div>
             <div>
-              <h4 className="mb-2 text-lg font-semibold">Metrics Collected</h4>
-              <BulletedList>
-                <ListItem>Accuracy</ListItem>
-                <ListItem>Token Usage</ListItem>
-                <ListItem>Estimated Cost</ListItem>
-                <ListItem>Latency</ListItem>
-                <ListItem>Success Rate</ListItem>
-              </BulletedList>
+              <h4 className="type-title mb-4">Verification evidence</h4>
+              <EvidenceList>
+                <EvidenceItem>Field-level validation status</EvidenceItem>
+                <EvidenceItem>Source-to-output comparisons</EvidenceItem>
+                <EvidenceItem>
+                  Verification findings remain inspectable
+                </EvidenceItem>
+              </EvidenceList>
             </div>
           </div>
-        </ContentCard>
-      </Section>
+        </EvidencePanel>
+      </CaseStudySection>
 
-      {/* Results */}
-      <Section title="Results">
+      <CaseStudySection title="Results">
         <div className="grid gap-8 md:grid-cols-3">
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">High Accuracy</h3>
-            <div className="mb-4 flex items-center justify-center">
-              <div className="relative h-32 w-32">
-                <ProgressCircleIcon percentage={92.8} className="h-32 w-32" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-3xl font-bold">92.8%</span>
-                </div>
-              </div>
-            </div>
-            <p className="text-muted-foreground">
-              <strong>Success Rate:</strong> 92.79% (836 successful extractions
-              out of 901 URLs)
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Feasibility question</h3>
+            <p className="type-body text-line-soft">
+              The spike established that the workflow could produce structured
+              outputs from the bounded source set for inspection.
             </p>
-            <p className="mt-2 text-muted-foreground">
-              <strong>Error Analysis:</strong> Of the 65 failed extractions, 64
-              (98.5%) were due to HTTP 404 errors, indicating the URLs from the
-              sitemap no longer exist on the website.
+          </EvidencePanel>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Checked output</h3>
+            <p className="type-body text-line-soft">
+              A separate verification node compared extracted fields with their
+              source material instead of treating model output as authoritative.
             </p>
-          </ContentCard>
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">Cost-Effective</h3>
-            <div className="mb-4 flex items-center justify-center">
-              <div className="text-center">
-                <span className="text-3xl font-bold">$0.0012</span>
-                <p className="text-sm text-muted-foreground">per profile</p>
-              </div>
-            </div>
-            <p className="text-muted-foreground">
-              <strong>Total Cost:</strong> $1.0254 for processing all 901
-              profiles
+          </EvidencePanel>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Recorded failures</h3>
+            <p className="type-body text-line-soft">
+              The graph captured fetch, parsing, extraction, and validation
+              errors so limitations remained part of the result.
             </p>
-            <p className="mt-2 text-muted-foreground">
-              <strong>Token Usage:</strong> Average of 3,132 tokens per
-              successful profile, with 2,618,463 tokens used across all profiles
-            </p>
-          </ContentCard>
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">Efficient Processing</h3>
-            <div className="mb-4 flex items-center justify-center">
-              <div className="text-center">
-                <span className="text-3xl font-bold">6.6s</span>
-                <p className="text-sm text-muted-foreground">per profile</p>
-              </div>
-            </div>
-            <p className="text-muted-foreground">
-              <strong>Total Time:</strong> 1h 32m 27s for processing all 901
-              profiles
-            </p>
-            <p className="mt-2 text-muted-foreground">
-              <strong>Note:</strong> Most processing time was due to intentional
-              delays between requests to ensure ethical crawling of the
-              university website.
-            </p>
-          </ContentCard>
+          </EvidencePanel>
         </div>
-        <ContentCard className="mt-8">
-          <h3 className="mb-4 text-xl font-semibold">
-            Detailed Performance Metrics
-          </h3>
-          <div className="grid gap-8">
-            <div>
-              <h4 className="mb-2 text-lg font-semibold">Metrics Collected</h4>
-              <BulletedList>
-                <ListItem>
-                  <strong className="mr-2">Accuracy:</strong> Field-level
-                  correctness reported by the validation node
-                </ListItem>
-                <ListItem>
-                  <strong className="mr-2">Token Usage:</strong> Input, output,
-                  and total tokens per LLM call
-                </ListItem>
-                <ListItem>
-                  <strong className="mr-2">Estimated Cost:</strong> Calculated
-                  based on token usage and model pricing. Tiktoken was used to
-                  produce the estimates.
-                </ListItem>
-                <ListItem>
-                  <strong className="mr-2">Latency:</strong> Processing time per
-                  profile and per node
-                </ListItem>
-                <ListItem>
-                  <strong className="mr-2">Success Rate:</strong> Percentage of
-                  URLs processed without errors
-                </ListItem>
-              </BulletedList>
-            </div>
-          </div>
-        </ContentCard>
-        <ContentCard className="mt-8">
-          <h3 className="mb-4 text-xl font-semibold">
-            Limitations & Challenges
-          </h3>
+
+        <EvidencePanel className="mt-8">
+          <h3 className="type-title mb-4">What was checked</h3>
+          <EvidenceList>
+            <EvidenceItem>Whether source pages could be fetched</EvidenceItem>
+            <EvidenceItem>
+              Whether extracted output matched the defined schema
+            </EvidenceItem>
+            <EvidenceItem>
+              Whether validation exposed incorrect or missing fields
+            </EvidenceItem>
+            <EvidenceItem>
+              Whether traces made failures diagnosable
+            </EvidenceItem>
+          </EvidenceList>
+        </EvidencePanel>
+
+        <EvidencePanel className="mt-8">
+          <h3 className="type-title mb-4">Limitations & Challenges</h3>
           <div className="grid gap-8 md:grid-cols-3">
             <div>
-              <h4 className="mb-2 text-lg font-semibold">Sitemap 404s</h4>
-              <p className="text-muted-foreground">
-                The <code>uidaho.edu</code> sitemap contains URLs that return
-                404 errors, indicating it&apos;s outdated. Relying solely on the
-                sitemap for comprehensive coverage is not viable.
+              <h4 className="type-title mb-4">Source discovery</h4>
+              <p className="type-body text-line-soft">
+                Sitemap-derived URLs can be stale, so the input list cannot
+                stand in for comprehensive coverage.
               </p>
             </div>
             <div>
-              <h4 className="mb-2 text-lg font-semibold">HTML Variability</h4>
-              <p className="text-muted-foreground">
-                The HTML structure of different faculty profile pages varies
-                (e.g., different class names, layouts). The{" "}
-                <code>preprocess_html</code> step handled these variations well.
+              <h4 className="type-title mb-4">HTML variability</h4>
+              <p className="type-body text-line-soft">
+                Source-page structures vary, which makes preprocessing a tested
+                part of the workflow rather than a generic parser assumption.
               </p>
             </div>
             <div>
-              <h4 className="mb-2 text-lg font-semibold">
-                Multiple Profiles Page
-              </h4>
-              <p className="text-muted-foreground">
-                One failure occurred on a page listing multiple faculty profiles
-                (<code>/people/adjuncts</code>), which didn&apos;t conform to
-                the single-profile schema our extraction currently supports.
+              <h4 className="type-title mb-4">Schema boundaries</h4>
+              <p className="type-body text-line-soft">
+                Pages that do not match the expected single-record shape require
+                explicit handling instead of forced extraction.
               </p>
             </div>
           </div>
-        </ContentCard>
-        <ContentCard className="mt-8">
-          <h3 className="mb-4 text-xl font-semibold">Future Recommendations</h3>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div>
-              <h4 className="mb-2 text-lg font-semibold">Model Choice</h4>
-              <p className="text-muted-foreground">
-                Gemini Flash provided excellent accuracy at a low cost ($0.0012
-                per profile). Based on these results, evaluating more expensive
-                models like Claude 3.7 Sonnet or GPT-4o is unnecessary.
-              </p>
-            </div>
-            <div>
-              <h4 className="mb-2 text-lg font-semibold">
-                Process Improvements
-              </h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Develop a more reliable strategy for identifying profile URLs
-                  beyond the outdated sitemap
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Consider a special handler for pages with multiple profiles
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Split the nodes into files for better code organization
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Move the prompts into the config file for easier maintenance
-                </li>
-              </ul>
-            </div>
-          </div>
-        </ContentCard>
-      </Section>
+        </EvidencePanel>
+      </CaseStudySection>
 
-      {/* Recommendations */}
-      <Section title="Recommendations">
-        <div className="rounded-lg bg-card p-6">
-          <h3 className="mb-4 text-xl font-semibold">Feasibility Assessment</h3>
-          <p className="mb-4 text-lg text-muted-foreground">
-            The foundation model approach has proven highly feasible for
-            extracting the required profile data, with a 92.79% success rate.
-            Based on the results of this spike, I recommend proceeding with this
-            approach for the full implementation.
+      <CaseStudySection title="Recommendations">
+        <EvidencePanel>
+          <h3 className="type-title mb-4">Feasibility assessment</h3>
+          <p className="type-body text-line-soft measure mb-6">
+            The spike answered its bounded research question well enough to
+            justify further investigation. It did not establish a deployment
+            decision or resolve the open review requirements.
           </p>
           <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <h4 className="mb-2 text-lg font-semibold">Model Choice</h4>
-              <p className="text-muted-foreground">
-                Gemini Flash provided excellent accuracy at a low cost ($0.0012
-                per profile). Based on these results, evaluating more expensive
-                models like Claude 3.7 Sonnet or GPT-4o is unnecessary.
-              </p>
+              <h4 className="type-title mb-4">Evidence to retain</h4>
+              <EvidenceList>
+                <EvidenceItem>Structured extraction contract</EvidenceItem>
+                <EvidenceItem>Separate verification pass</EvidenceItem>
+                <EvidenceItem>Traceable errors and limitations</EvidenceItem>
+              </EvidenceList>
             </div>
             <div>
-              <h4 className="mb-2 text-lg font-semibold">
-                Process Improvements
-              </h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Develop a more reliable strategy for identifying profile URLs
-                  beyond the outdated sitemap
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Consider a special handler for pages with multiple profiles
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Split the nodes into files for better code organization
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-primary">•</span>
-                  Move the prompts into the config file for easier maintenance
-                </li>
-              </ul>
+              <h4 className="type-title mb-4">Questions still open</h4>
+              <EvidenceList>
+                <EvidenceItem>More reliable source discovery</EvidenceItem>
+                <EvidenceItem>Explicit handling for variant pages</EvidenceItem>
+                <EvidenceItem>Human review workflow</EvidenceItem>
+              </EvidenceList>
             </div>
           </div>
-        </div>
-      </Section>
+        </EvidencePanel>
+      </CaseStudySection>
 
-      {/* Next Steps */}
-      <Section title="Next Steps">
+      <CaseStudySection title="Next Steps">
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="rounded-lg bg-card p-6">
-            <h3 className="mb-4 text-xl font-semibold">Short-Term Actions</h3>
-            <ol className="space-y-2 text-muted-foreground list-decimal pl-5">
-              <li>
-                <strong>Refine URL Discovery:</strong> Develop a more reliable
-                strategy for identifying profile URLs beyond the outdated
-                sitemap
-              </li>
-              <li>
-                <strong>Support Multiple Profiles:</strong> Add support for
-                pages containing multiple profiles
-              </li>
-              <li>
-                <strong>Documentation:</strong> Update documentation with final
-                findings and procedures
-              </li>
-              <li>
-                <strong>Code Refactoring:</strong> Split the nodes into files
-                and move prompts to the config file
-              </li>
-            </ol>
-          </div>
-          <div className="rounded-lg bg-card p-6">
-            <h3 className="mb-4 text-xl font-semibold">Long-Term Vision</h3>
-            <p className="mb-4 text-muted-foreground">
-              This spike demonstrates the potential for using foundation models
-              in other data extraction and integration scenarios at the
-              university:
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Research follow-up</h3>
+            <EvidenceList>
+              <EvidenceItem>Refine source discovery</EvidenceItem>
+              <EvidenceItem>Handle variant source-page shapes</EvidenceItem>
+              <EvidenceItem>Separate graph nodes for maintenance</EvidenceItem>
+              <EvidenceItem>
+                Keep prompts in explicit configuration
+              </EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Decision boundary</h3>
+            <p className="type-body text-line-soft">
+              Any move beyond the spike would require its own evidence, privacy
+              review, operational design, and approval requirements. None of
+              those outcomes is implied by this research result.
             </p>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
-                Expand to other types of university content (courses, events,
-                news)
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
-                Create an automated pipeline for regular updates to keep data
-                fresh
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
-                Develop a validation interface for human review of extracted
-                data
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2 text-primary">•</span>
-                Integrate with the university&apos;s content management system
-              </li>
-            </ul>
-          </div>
+          </EvidencePanel>
         </div>
-      </Section>
+      </CaseStudySection>
 
-      {/* Conclusion */}
-      <Section title="Conclusion">
-        <div className="rounded-lg bg-card p-6">
-          <p className="mb-4 text-lg text-muted-foreground">
-            The Person Profile Data Extraction Spike has successfully
-            demonstrated the feasibility of using foundation models to extract
-            structured data from faculty and staff profile pages on the
-            University of Idaho website.
+      <CaseStudySection title="Conclusion">
+        <EvidencePanel>
+          <p className="type-body text-line-soft measure">
+            This spike tested a bounded extraction workflow from public source
+            pages through LangGraph, structured profiles, and verification. Its
+            useful result is an inspectable feasibility finding with errors and
+            limitations intact, not an accuracy, scale, or deployment claim.
           </p>
-          <p className="mb-4 text-lg text-muted-foreground">
-            With a 92.79% success rate, low cost per profile ($0.0012), and
-            reasonable processing time (6.6 seconds per profile), this approach
-            has proven to be a viable solution for extracting faculty and staff
-            profile data.
-          </p>
-          <p className="text-lg text-muted-foreground">
-            The use of foundation models for this task not only eliminates the
-            need to rely on poorly documented legacy databases but also provides
-            a more flexible and maintainable approach to keeping the
-            university&apos;s website profile information up-to-date. This
-            successful spike paves the way for similar applications of AI in
-            other data extraction and integration scenarios at the university.
-          </p>
-        </div>
-      </Section>
-
-      {/* Call to Action */}
-      <section className="text-center">
-        <h2 className="mb-6 text-3xl font-bold">
-          Interested in similar solutions?
-        </h2>
-        <div className="flex justify-center gap-4">
-          <Button variant="accent" asChild>
-            <Link href="/">Back to Portfolio</Link>
-          </Button>
-        </div>
-      </section>
+        </EvidencePanel>
+      </CaseStudySection>
     </main>
   );
 }
