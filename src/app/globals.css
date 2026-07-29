@@ -372,3 +372,158 @@
     @apply border-destructive focus-visible:border-destructive;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Figures.
+
+   The five-weight hierarchy from DESIGN.md, applied to authored SVG. Every
+   stroke declares which weight it is and why: object lines outline the parts
+   and the path between them, leader lines point, hidden lines mark a route
+   that exists but is not the primary one, centre lines mark an axis, and
+   hatching shows a surface cut through.
+
+   `non-scaling-stroke` throughout. A figure that scales to a phone would
+   otherwise render its 2px object line at well under 1px, and the weights
+   would stop distinguishing anything.
+--------------------------------------------------------------------------- */
+@layer components {
+  .fig-box,
+  .fig-flow,
+  .fig-leader,
+  .fig-return,
+  .fig-boundary,
+  .fig-bubble,
+  .fig-gate line,
+  .fig-gate path,
+  .fig-hatch-line {
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* Object line: the outline of a part, and the path work travels along. */
+  .fig-box,
+  .fig-flow,
+  .fig-gate line,
+  .fig-gate path {
+    stroke: var(--rule-object);
+    stroke-width: var(--line-w-object);
+  }
+
+  .fig-arrowhead,
+  .fig-node {
+    fill: var(--rule-object);
+  }
+
+  /* Leader line: points from a numeral to its part, or from a stage down to
+     the control plane it writes into. */
+  .fig-leader {
+    stroke: var(--rule-leader);
+    stroke-width: var(--line-w-leader);
+  }
+
+  /* Hidden line: the return path is real, but it is not the route work takes
+     when nothing goes wrong. */
+  .fig-return {
+    stroke: var(--rule-hidden);
+    stroke-width: var(--line-w-hidden);
+    stroke-dasharray: var(--dash-hidden);
+  }
+
+  /* Centre line: an axis of the drawing, not the edge of a part. Here it is
+     the boundary between what GitHub owns and what Loopworks owns. */
+  .fig-boundary {
+    stroke: var(--rule-center);
+    stroke-width: var(--line-w-center);
+    stroke-dasharray: var(--dash-center);
+  }
+
+  .fig-hatch-line {
+    stroke: var(--rule-hatch);
+    stroke-width: var(--line-w-hatch);
+  }
+
+  /* The bubble is filled with ground so its leader stops at the circle rather
+     than running through the numeral. */
+  .fig-bubble {
+    fill: var(--ground);
+    stroke: var(--rule-object);
+    stroke-width: var(--line-w-object);
+  }
+
+  .fig-numeral {
+    fill: var(--line);
+    font-size: 15px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-anchor: middle;
+  }
+
+  .fig-box-label {
+    fill: var(--line);
+    font-size: 15px;
+    font-weight: 600;
+    font-stretch: 87.5%;
+    text-anchor: middle;
+  }
+
+  /* Sized to hold the longest real actor name, "validation-reviewer", inside
+     the narrowest stage box. Actor names are verified identifiers from the
+     source, so the type accommodates them rather than the reverse. */
+  .fig-box-sub,
+  .fig-zone {
+    fill: var(--line-soft);
+    font-size: 9.5px;
+    font-weight: 600;
+    font-stretch: 87.5%;
+    letter-spacing: 0.04em;
+    text-anchor: middle;
+    text-transform: uppercase;
+  }
+
+  .fig-zone {
+    text-anchor: start;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  }
+
+  /* The tall plate is roughly a third the width of the wide one, so its type
+     is set larger in user units to land at the same rendered size. */
+  .fig-tall .fig-numeral,
+  .fig-tall .fig-box-label {
+    font-size: 20px;
+  }
+
+  .fig-tall .fig-box-sub,
+  .fig-tall .fig-zone {
+    font-size: 13px;
+  }
+
+  /* The one annotation. A part is vermilion only while it is the active
+     callout, which is why exactly one can be active at a time. */
+  .fig-callout,
+  .fig-part,
+  .fig-gate {
+    transition:
+      stroke 150ms ease,
+      fill 150ms ease;
+  }
+
+  .fig-callout[data-active] .fig-bubble,
+  .fig-gate[data-active] line,
+  .fig-gate[data-active] path,
+  .fig-part[data-active] .fig-box {
+    stroke: var(--annotation);
+  }
+
+  .fig-callout[data-active] .fig-leader,
+  .fig-part[data-active] .fig-return {
+    stroke: var(--annotation);
+  }
+
+  .fig-callout[data-active] .fig-numeral,
+  .fig-part[data-active] .fig-box-label,
+  .fig-part[data-active] .fig-box-sub,
+  .fig-part[data-active].fig-node,
+  .fig-part[data-active] .fig-arrowhead {
+    fill: var(--annotation);
+  }
+}
