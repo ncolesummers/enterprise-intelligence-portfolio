@@ -1,7 +1,4 @@
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Saira } from "next/font/google";
-import localFont from "next/font/local";
 import "./globals.css";
 import type React from "react";
 import { defaultMetadata } from "@/lib/metadata";
@@ -12,25 +9,6 @@ import { ConsoleGreeting } from "@/components/console-greeting";
 import SheetFrame from "@/components/sheet-frame";
 import TitleBlock from "@/components/title-block";
 
-// One hand letters the whole sheet. The width axis is loaded because register
-// changes come from it rather than from a second family — semi-condensed for
-// the drawing apparatus, normal width for prose.
-const saira = Saira({
-  subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-saira",
-  display: "swap",
-});
-
-// Code only, so it is not preloaded: pages without a code block never fetch it.
-const monaspace = localFont({
-  src: "./fonts/MonaspaceNeonVar.woff2",
-  weight: "200 800",
-  variable: "--font-monaspace",
-  display: "swap",
-  preload: false,
-});
-
 export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
@@ -40,13 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "bg-ground text-line min-h-screen font-sans antialiased",
-          saira.variable,
-          monaspace.variable,
-        )}
-      >
+      <body className="bg-ground text-line min-h-screen font-sans antialiased">
         {/* Ink on paper is this world's canonical form, so it leads. Both
             mediums are authored traditions; neither is a fallback. */}
         <ThemeProvider

@@ -3,6 +3,44 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Self-hosted English/Latin faces. Saira keeps the width and weight ranges
+   that carry the drawing registers. Monaspace remains code-only, so its face
+   is fetched only when a page renders literal code. */
+@font-face {
+  font-family: "Saira";
+  src: url("./fonts/SairaLatinVar.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 50% 125%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Saira Fallback";
+  src: local("Arial");
+  ascent-override: 109.52%;
+  descent-override: 42.36%;
+  line-gap-override: 0%;
+  size-adjust: 103.63%;
+}
+
+@font-face {
+  font-family: "Portfolio Code";
+  src: url("./fonts/PortfolioCodeLatinVar.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monaspace Fallback";
+  src: local("Arial");
+  ascent-override: 69.55%;
+  descent-override: 14.72%;
+  line-gap-override: 7.36%;
+  size-adjust: 135.87%;
+}
+
 /* ==========================================================================
    The Figure Sheet — token layer
 
@@ -17,6 +55,9 @@
 
 :root {
   color-scheme: light;
+
+  --font-saira: "Saira", "Saira Fallback";
+  --font-monaspace: "Portfolio Code", "Monaspace Fallback";
 
   /* Tradition: ink on paper.
      Measured against --ground: line 16.3:1, line-soft 5.6:1, annotation 5.4:1.
