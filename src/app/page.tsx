@@ -1,4 +1,5 @@
-import Hero from "@/components/hero";
+import Statement from "@/components/statement";
+import DeliveryLoopFigure from "@/components/figures/delivery-loop-figure";
 import ProjectGrid from "@/components/project-grid";
 import ContactForm from "@/components/contact-form";
 import SocialLinks from "@/components/social-links";
@@ -6,7 +7,8 @@ import SocialLinks from "@/components/social-links";
 export default function Page() {
   return (
     <main id="main-content" className="sheet">
-      <Hero />
+      <Statement />
+      <DeliveryLoopFigure />
       <ProjectGrid />
       <section id="contact" className="py-20">
         <div className="mx-auto max-w-2xl">
