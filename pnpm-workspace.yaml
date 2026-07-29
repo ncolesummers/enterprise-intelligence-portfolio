@@ -1,0 +1,13 @@
+# pnpm 10+ requires each dependency's install scripts to be approved explicitly.
+# Both of these need theirs to fetch or link a platform-native binary, and
+# neither works at all without it:
+#
+#   sharp    - direct devDependency for icon generation, and Next.js's image
+#              optimizer depends on it too
+#   esbuild  - the engine behind tsx, which runs this repo's TypeScript scripts
+#
+# Anything not listed here stays blocked, which is the point: an unfamiliar
+# package should not get to run code at install time without someone deciding.
+allowBuilds:
+  esbuild: true
+  sharp: true
