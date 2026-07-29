@@ -8,7 +8,7 @@ Three files own different questions. Read the relevant one rather than inferring
 
 - **PRODUCT.md** — who the site is for, what it must prove, what may never be fabricated, and the employer boundaries on University of Idaho work.
 - **DESIGN.md** — the visual system: palette, typography, line-weight hierarchy, named rules, and prohibitions.
-- **docs/TEST_PLAN.md** — the three-tier testing strategy in full.
+- **docs/TEST_PLAN.md** — the current Playwright testing strategy in full.
 
 Do not restate their contents here. If this file and one of them disagree, they win.
 
