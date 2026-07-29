@@ -152,6 +152,7 @@ Requires the assembled static figure to be complete and good on its own first. R
 - Whether case studies keep their current length is open; PRODUCT.md does not bind it.
 - The spacing rhythm is still incumbent Tailwind spacing. Composing the index sheet did not force a scale, so this stays open and should be settled in Phase 5 rather than guessed at now.
 - The `.impeccable/design.json` sidecar is not generated yet; it waits on the component inventory in Phase 2.
+- **Dependencies need a real audit and update pass, deferred until the migration lands** (decided 2026-07-28). Not a redesign task, and deliberately not interleaved with one: churning versions underneath a half-finished visual migration would make it impossible to tell which change broke what. Nothing pins pnpm either, so contributors drift between major versions; `packageManager` would fix it but needs corepack and is part of the same later pass.
 
 ## Reference
 
