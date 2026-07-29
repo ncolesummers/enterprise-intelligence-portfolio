@@ -76,20 +76,47 @@ Decisions made during the build that the plan did not anticipate:
 
 Known breakage handed to Phase 3: **the Playwright suite fails broadly.** `navigation.spec.ts` asserts on `header` and `footer` elements and a `mobile-nav` test id that no longer exist; `social-icons-accessibility.spec.ts` counts icons per their old locations.
 
-### Phase 2 — FIG. 1 and the homepage (Claude)
+### Phase 2 — FIG. 1 and the homepage (Claude) — **all but the monogram done**
 
-- Author FIG. 1, the Loopworks delivery loop, as SVG with addressable part groups.
-- Build the **callout numeral** component: circle, leader line, active state in vermilion, keyboard reachable, one active at a time.
-- Statement at display scale.
-- Figure index with six plates; author **one** index plate fully as the pattern for the rest.
-- FIG. 6 (Inbox Idaho) as the dashed hidden-line figure.
-- Redraw the NCS mark as a constructed monogram inside the title-block stamp.
+Done: FIG. 1 in both geometries, the reference-numeral system, the statement,
+the figure index, FIG. 5 as the pattern plate, and FIG. 6 in hidden line.
+The parts inventory behind FIG. 1 is `docs/design/loopworks-parts.md`.
+
+Decisions the plan did not anticipate:
+
+- **FIG. 1 is two plates, not one drawing.** A wide plate runs the stages across the sheet with the control plane as a band beneath; a tall plate stacks them with the control plane as a column beside. Scaling one drawing from 1240 to 358 units made it illegible, and mobile is where most visitors arrive. The two share the parts list and the active-part contract, not their geometry.
+- **The numerals are HTML, not SVG hit targets.** Both plates are `aria-hidden`; the meaning lives in a description, the caption, and a reference-numeral table whose entries are the controls. A figure sheet already splits plate from numeral table, so the accessible structure and the drawing convention turned out to be the same structure.
+- **Pointing previews, taking pins.** Hover and focus set the active part; click pins it so the reading survives moving the pointer. A single active value backed both, and click-to-toggle on an already-hovered part read as turning it off.
+- **`vector-effect: non-scaling-stroke` throughout.** This is what makes the five-weight hierarchy survive scaling, and it retires the "line art at small sizes" risk: a 2px object line stays 2px at any plate size.
+- **The gate valve carries the argument.** Both approval gates are drawn as valve symbols interrupting the flow. It is the detail that makes the figure read as an engineering drawing rather than a flowchart, and gates are the most important true thing about the system.
+- **FIG. 1 is not repeated in the index.** It is drawn at full scale directly above; a thumbnail of the figure just read is noise. The index covers FIGS. 2 through 6.
+- **The ADLC entry is gone from the index**, per PRODUCT.md's roster change. Its route still needs the redirect, which stays Phase 3.
+
+Still open: **the monogram.** It needs two or three versions put in front of a
+human before one becomes the mark, so it is a checkpoint rather than a task to
+finish unattended.
+
+#### Specs for the three remaining index plates
+
+Codex draws these from `src/components/figures/index-plates.tsx`, following
+`PlateMikrotik` exactly: same `320 x 170` viewBox, same `PlateFrame`, same
+classes. A plate states **one structural fact** the case study substantiates.
+It is not a diagram of the whole system and never a screenshot.
+
+- **FIG. 2, University of Idaho website.** Draw the publishing path: authored content in Sitecore, the Next.js application that renders it, delivery on Azure. The fact is that the CMS and the rendering application are separate systems.
+- **FIG. 3, MyUI.** Draw custom React components seated inside the Ellucian Experience shell. The fact is that the work is components inside a platform the university does not own, not an application built from nothing. **Employer boundary applies:** no student-facing data, no dashboard content, nothing resembling a real record.
+- **FIG. 4, AI data extraction research.** Draw the spike's shape: source pages in, a LangGraph extraction pass, structured profiles out, and a verification step. The fact is that it was a feasibility question with a checked answer. **No accuracy numbers** — none are published.
+
+Until they are drawn, those three cells render a reserved plate reading
+"plate in preparation" at leader weight. That is deliberately distinct from
+FIG. 6's hidden-line "not yet defined", which is a statement about the system
+rather than about the drawing. Do not merge the two treatments.
 
 ### Phase 3 — Propagation (Codex)
 
 Hand off once Phase 2 establishes the pattern. Codex gets a token and component contract plus one worked example, and does the mechanical spread:
 
-- Remaining four index plates, scaffolded from written specs.
+- Remaining **three** index plates, drawn to the specs recorded under Phase 2.
 - Case-study pages restyled onto the new system.
 - Redirect `/projects/agent-development-lifecycle` (retired; folded into Loopworks as lineage). Must not 404 — it may be indexed.
 - Self-host and subset Saira and Monaspace; verify ligature features are on for code.
@@ -111,19 +138,19 @@ Requires the assembled static figure to be complete and good on its own first. R
 
 ## Risk register
 
-- **Vermilion contrast.** `#C8402A` on paper and on Prussian blue both need WCAG AA verification. If it fails on one ground, that theme gets its own annotation value rather than the contrast bar being lowered.
+- ~~**Vermilion contrast.**~~ Retired in Phase 1. Each theme carries its own measured annotation value.
 - **SVG accessibility.** Every figure needs `<title>`/`<desc>`; numerals must be keyboard reachable and announce which part they mark. A drawing that only works visually fails this project's own bar.
-- **Line art at small sizes.** Hairlines disappear on mobile. Line weights need a responsive floor.
+- ~~**Line art at small sizes.**~~ Retired. `vector-effect: non-scaling-stroke` holds every weight at its declared width regardless of plate scale.
 - **Scroll choreography cost.** Must stay smooth on a mid-range phone. The site's argument is its own build quality; a janky signature moment does real damage.
 - **The drawings are the labor.** This world has no chrome to hide behind. Weak figures collapse the whole direction.
 
 ## Open items
 
-- **FIG. 1's parts must be verified against the actual Loopworks repo before drawing.** Current knowledge is README-level only. Drawing a component that does not exist would violate PRODUCT.md's evidence rules.
 - **Cut the contact form.** The FormSpree integration was never paid for and is not used. Removing it takes `contact-form.tsx`, the `useFormValidation` hook, the mock route at `src/app/api/test/formspree-mock/route.ts`, the contact-form specs, and the `test:contact-form` / `test:integration` scripts with it, and turns the CONTACT nav item into a mailto. Best done alongside Phase 2, which rebuilds the index sheet anyway. Not urgent.
-- The constructed monogram is committed in concept but undrawn. Two or three versions get reviewed before it becomes the mark.
+- The constructed monogram is committed in concept but undrawn. Two or three versions get reviewed before it becomes the mark. This is the one Phase 2 item still outstanding.
+- **`project-card.tsx`, `tech-stack.tsx`, and `animated-section.tsx` may now be unused** on the index sheet. Confirm before deleting; the case studies still import some of them.
 - Whether case studies keep their current length is open; PRODUCT.md does not bind it.
-- The spacing rhythm is not yet a scale. Phase 1 settled color, type, and line weight; vertical rhythm is still incumbent Tailwind spacing and should be resolved when the index sheet is composed.
+- The spacing rhythm is still incumbent Tailwind spacing. Composing the index sheet did not force a scale, so this stays open and should be settled in Phase 5 rather than guessed at now.
 - The `.impeccable/design.json` sidecar is not generated yet; it waits on the component inventory in Phase 2.
 
 ## Reference
