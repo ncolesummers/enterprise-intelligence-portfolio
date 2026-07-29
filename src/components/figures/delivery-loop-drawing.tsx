@@ -232,7 +232,7 @@ const DeliveryLoopDrawing = ({
                   className="fig-box-label"
                   x={cx}
                   y={
-                    stage.label.length === 1 ? ROW_Y + 31 : ROW_Y + 25 + li * 17
+                    stage.label.length === 1 ? ROW_Y + 31 : ROW_Y + 21 + li * 16
                   }
                 >
                   {line}

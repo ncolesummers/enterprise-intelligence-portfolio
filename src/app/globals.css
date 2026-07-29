@@ -485,6 +485,24 @@
     letter-spacing: 0.16em;
   }
 
+  /* Index plates are small drawings rendered large, so their type is set down
+     to keep them reading as plates rather than as diagrams in their own right. */
+  .fig-plate .fig-box-label {
+    font-size: 13px;
+  }
+
+  .fig-plate .fig-box-sub,
+  .fig-plate .fig-zone {
+    font-size: 8.5px;
+  }
+
+  /* Interrupts the reserved-area cross-hatching so the label sits on ground
+     rather than on top of the lines. */
+  .fig-plate-reserve {
+    fill: var(--ground);
+    stroke: none;
+  }
+
   /* The tall plate is roughly a third the width of the wide one, so its type
      is set larger in user units to land at the same rendered size. */
   .fig-tall .fig-numeral,
