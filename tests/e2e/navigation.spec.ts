@@ -1,293 +1,321 @@
-import { test, expect } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
+
 import { pageUrls } from "../fixtures/test-data";
+import {
+  expectReducedMotionTransition,
+  expectRuntimeHealthClean,
+  observeRuntimeHealth,
+  type RuntimeHealth,
+} from "../fixtures/runtime-health";
+
+const projects = [
+  {
+    figure: 2,
+    heading: "University of Idaho Website",
+    path: pageUrls.projects.uidahoWebsite,
+  },
+  {
+    figure: 3,
+    heading: "MyUI Dashboard",
+    path: pageUrls.projects.myui,
+  },
+  {
+    figure: 4,
+    heading: "AI Data Extraction Research",
+    path: pageUrls.projects.profileExtractor,
+  },
+  {
+    figure: 5,
+    heading: "Mikrotik Configuration Generator",
+    path: pageUrls.projects.mikrotikConfigGen,
+  },
+] as const;
+
+const runtimeByPage = new WeakMap<Page, RuntimeHealth>();
+
+const pressForwardTab = async (page: Page, browserName: string) => {
+  await page.keyboard.press(browserName === "webkit" ? "Alt+Tab" : "Tab");
+};
+
+test.beforeEach(({ page, baseURL }) => {
+  if (!baseURL) throw new Error("Playwright baseURL is required");
+  runtimeByPage.set(page, observeRuntimeHealth(page, baseURL));
+});
+
+test.afterEach(async ({ page }) => {
+  await page.waitForTimeout(50);
+  expectRuntimeHealthClean(runtimeByPage.get(page)!);
+});
 
 test.describe("Navigation", () => {
-  test.describe("Homepage Components", () => {
-    test("should load homepage with all main components", async ({ page }) => {
-      await page.goto("/");
-
-      // Check header
-      await expect(page.locator("header")).toBeVisible();
-
-      // Check main content sections
-      await expect(page.locator("#main-content")).toBeVisible();
-
-      // Check hero section
-      await expect(page.locator("text=Cole Summers")).toBeVisible();
-
-      // Check projects section
-      await expect(page.locator("#work")).toBeVisible();
-
-      // Check contact section
-      await expect(page.locator("text=Get In Touch")).toBeVisible();
-
-      // Check footer
-      await expect(page.locator("footer")).toBeVisible();
-    });
-
-    test("should have working skip to content link", async ({ page }) => {
-      await page.goto("/");
-
-      const skipLink = page.locator(".skip-to-content");
-
-      // Verify the skip link exists and can receive focus
-      await skipLink.focus();
-      await expect(skipLink).toBeFocused();
-
-      // Activate the skip link and verify navigation to main content
-      await skipLink.press("Enter");
-      await expect(page).toHaveURL(/#main-content/);
-    });
-  });
-
-  test.describe("Project Pages", () => {
-    test("should navigate to ADLC project", async ({ page }) => {
-      await page.goto("/");
-
-      await page.click("text=Enterprise Agent Development Lifecycle");
-      await expect(page).toHaveURL(pageUrls.projects.agentDevelopmentLifecycle);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    });
-
-    test("should navigate to MikroTik Config Generator project", async ({
+  test.describe("Homepage and title block", () => {
+    test("exposes the current sheet, navigation, work, and contact contracts", async ({
       page,
     }) => {
       await page.goto("/");
 
-      // Find and click the MikroTik project link
-      await page.click("text=MikroTik Configuration Generator");
+      await expect(page.getByRole("main")).toHaveAttribute(
+        "id",
+        "main-content",
+      );
+      await expect(
+        page.getByRole("heading", {
+          level: 1,
+          name: "I build the systems that build software.",
+        }),
+      ).toBeVisible();
+      await expect(
+        page.getByRole("heading", { level: 2, name: "Figure index" }),
+      ).toBeVisible();
+      await expect(
+        page.getByRole("heading", { level: 2, name: "Get In Touch" }),
+      ).toBeVisible();
 
-      // Should navigate to project page
-      await expect(page).toHaveURL(pageUrls.projects.mikrotikConfigGen);
+      const titleBlock = page.getByRole("banner");
+      const primary = titleBlock.getByRole("navigation", { name: "Primary" });
+      await expect(titleBlock).toBeVisible();
+      await expect(
+        titleBlock.getByRole("link", { name: "N. Cole Summers, home" }),
+      ).toHaveAttribute("href", "/");
+      await expect(
+        primary.getByRole("link", { name: "Work", exact: true }),
+      ).toHaveAttribute("href", "/#work");
+      await expect(
+        primary.getByRole("link", { name: "About", exact: true }),
+      ).toHaveAttribute("href", "/about");
+      await expect(
+        primary.getByRole("link", { name: "Contact", exact: true }),
+      ).toHaveAttribute("href", "mailto:nate@ncolesummers.com");
 
-      // Page should load with project content
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await expect(page.locator("footer")).toHaveCount(0);
+      await expect(page.getByTestId("mobile-nav")).toHaveCount(0);
+      await expect(
+        page.getByRole("link", {
+          name: "Enterprise Agent Development Lifecycle",
+        }),
+      ).toHaveCount(0);
     });
 
-    test("should navigate to MyUI project", async ({ page }) => {
+    test("moves keyboard focus through the skip link to main content", async ({
+      page,
+      browserName,
+    }) => {
       await page.goto("/");
 
-      await page.click("text=MyUI");
-      await expect(page).toHaveURL(pageUrls.projects.myui);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    });
+      const skipLink = page.getByRole("link", {
+        name: "Skip to main content",
+      });
+      await pressForwardTab(page, browserName);
+      await expect(skipLink).toBeFocused();
+      await skipLink.press("Enter");
 
-    test("should navigate to Profile Extractor project", async ({ page }) => {
-      await page.goto("/");
+      await expect(page).toHaveURL(/#main-content$/);
+      const main = page.getByRole("main");
+      await expect(main).toBeVisible();
+      await expect(main).toHaveAttribute("id", "main-content");
 
-      await page.click("text=AI Data Extraction Research");
-      await expect(page).toHaveURL(pageUrls.projects.profileExtractor);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    });
-
-    test("should handle direct project page access", async ({ page }) => {
-      // WebKit in CI is slower; this test visits 4 pages sequentially so needs extra headroom
-      test.setTimeout(60000);
-      // Test direct navigation to project pages
-      await page.goto(pageUrls.projects.agentDevelopmentLifecycle);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-
-      await page.goto(pageUrls.projects.mikrotikConfigGen);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-
-      await page.goto(pageUrls.projects.myui);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-
-      await page.goto(pageUrls.projects.profileExtractor);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+      await pressForwardTab(page, browserName);
+      await expect(
+        main.getByRole("link", { name: "read the repository", exact: true }),
+      ).toBeFocused();
     });
   });
 
-  test.describe("About Page", () => {
-    test("should navigate to about page", async ({ page }) => {
-      await page.goto("/");
+  test.describe("Project pages", () => {
+    for (const project of projects) {
+      test(`opens FIG. ${project.figure} at its exact current route`, async ({
+        page,
+      }) => {
+        await page.goto("/");
 
-      // On mobile viewports, open hamburger menu first
-      const mobileNav = page.getByTestId("mobile-nav");
-      if (await mobileNav.isVisible()) {
-        await mobileNav.click();
-        // Wait for the sheet to open and the About link to be visible
         await page
-          .getByRole("navigation", { name: "Mobile navigation" })
-          .waitFor();
-      }
+          .getByRole("link", {
+            name: `Read FIG. ${project.figure}`,
+            exact: true,
+          })
+          .click();
 
-      // Click about link in navigation
-      await page.getByRole("link", { name: "About" }).click();
-
-      await expect(page).toHaveURL(pageUrls.about);
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    });
-
-    test("should have consistent header on about page", async ({ page }) => {
-      await page.goto(pageUrls.about);
-
-      // Header should be present and functional
-      await expect(page.locator("header")).toBeVisible();
-
-      // Should be able to navigate back to home
-      await page.click("text=n__cole__summers"); // Logo/name link
-      await expect(page).toHaveURL("/");
-    });
-  });
-
-  test.describe("Responsive Navigation", () => {
-    test("should work on mobile viewports", async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 });
-      await page.goto("/");
-
-      // Hamburger menu should be visible on mobile
-      const hamburger = page.locator('[data-testid="mobile-nav"]');
-      await expect(hamburger).toBeVisible();
-
-      // Open the sheet
-      await hamburger.click();
-      const sheet = page.locator('[data-slot="sheet-content"]');
-      await expect(sheet).toBeVisible();
-
-      // Nav links should be visible inside the sheet
-      await expect(sheet.locator("text=Work")).toBeVisible();
-      await expect(sheet.locator("text=About")).toBeVisible();
-      await expect(sheet.locator("text=Contact")).toBeVisible();
-
-      // Ensure content is accessible on mobile
-      await expect(page.locator("text=Cole Summers")).toBeVisible();
-    });
-
-    test("should close sheet when a nav link is clicked", async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 });
-      await page.goto("/");
-
-      const hamburger = page.locator('[data-testid="mobile-nav"]');
-      await hamburger.click();
-
-      const sheet = page.locator('[data-slot="sheet-content"]');
-      await expect(sheet).toBeVisible();
-
-      // Click a nav link
-      await sheet.locator("text=About").click();
-
-      // Sheet should close
-      await expect(sheet).not.toBeVisible();
-    });
-
-    test("should close sheet with Escape key", async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 });
-      await page.goto("/");
-
-      const hamburger = page.locator('[data-testid="mobile-nav"]');
-      await hamburger.click();
-
-      const sheet = page.locator('[data-slot="sheet-content"]');
-      await expect(sheet).toBeVisible();
-
-      await page.keyboard.press("Escape");
-      await expect(sheet).not.toBeVisible();
-    });
-
-    test("should show social icons inside sheet", async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 });
-      await page.goto("/");
-
-      const hamburger = page.locator('[data-testid="mobile-nav"]');
-      await hamburger.click();
-
-      const sheet = page.locator('[data-slot="sheet-content"]');
-      await expect(
-        sheet.locator('a[aria-label="LinkedIn Profile"]'),
-      ).toBeVisible();
-      await expect(
-        sheet.locator('a[aria-label="GitHub Profile"]'),
-      ).toBeVisible();
-      await expect(
-        sheet.locator('a[aria-label="Instagram Profile"]'),
-      ).toBeVisible();
-    });
-  });
-
-  test.describe("Focus Management", () => {
-    test("should support keyboard navigation", async ({ page }) => {
-      await page.goto("/");
-
-      // Tab through navigation
-      await page.keyboard.press("Tab"); // Skip link
-      await page.keyboard.press("Tab"); // First nav item
-
-      // Should be able to navigate with keyboard
-      const focusedElement = page.locator(":focus");
-      await expect(focusedElement).toBeVisible();
-    });
-
-    test("should maintain focus order", async ({ page, browserName }) => {
-      await page.goto("/");
-
-      const tabbableElements = [
-        ".skip-to-content",
-        "header a", // Navigation links
-        "main a", // Content links
-        "#name", // Form fields
-        "#email",
-        "#message",
-        'button[type="submit"]',
-      ];
-
-      // Tab through elements and verify logical order
-      for (let i = 0; i < 5; i++) {
-        await page.keyboard.press("Tab");
-
-        // Add browser-specific wait strategy for focus stability
-        if (browserName === "webkit") {
-          await page.waitForTimeout(100);
-        }
-
-        const focused = page.locator(":focus").first();
-
-        // Use more lenient check - ensure focusable element exists rather than strict visibility
-        const focusedCount = await focused.count();
-        expect(focusedCount).toBeGreaterThanOrEqual(0);
-
-        // Only check visibility if element is actually focused
-        if (focusedCount > 0) {
-          await expect(focused).toBeVisible({ timeout: 2000 });
-        }
-      }
-    });
-  });
-
-  test.describe("Performance", () => {
-    test("should load pages quickly", async ({ page }) => {
-      const startTime = Date.now();
-      await page.goto("/");
-      const endTime = Date.now();
-
-      const loadTime = endTime - startTime;
-      expect(loadTime).toBeLessThan(3000); // Should load within 3 seconds
-
-      // Check that main content is visible
-      await expect(page.locator("#main-content")).toBeVisible();
-    });
-
-    test("should have no console errors on page load", async ({ page }) => {
-      const consoleErrors: string[] = [];
-
-      page.on("console", msg => {
-        if (msg.type() === "error") {
-          const text = msg.text();
-          // Ignore external resource 403s (e.g. analytics, fonts) but catch missing app resources
-          if (
-            !(text.includes("Failed to load resource") && text.includes("403"))
-          ) {
-            consoleErrors.push(text);
-          }
-        }
+        await expect(page).toHaveURL(project.path);
+        await expect(
+          page.getByRole("heading", {
+            level: 1,
+            name: project.heading,
+            exact: true,
+          }),
+        ).toBeVisible();
       });
 
+      test(`serves ${project.path} directly without application 404s`, async ({
+        page,
+      }) => {
+        const response = await page.goto(project.path);
+
+        expect(response?.status()).toBe(200);
+        await expect(
+          page.getByRole("heading", {
+            level: 1,
+            name: project.heading,
+            exact: true,
+          }),
+        ).toBeVisible();
+      });
+    }
+  });
+
+  test.describe("About page", () => {
+    test("opens About from the primary title-block navigation", async ({
+      page,
+    }) => {
       await page.goto("/");
 
-      // Allow some time for any async errors
-      await page.waitForTimeout(1000);
+      await page
+        .getByRole("navigation", { name: "Primary" })
+        .getByRole("link", { name: "About", exact: true })
+        .click();
 
-      expect(consoleErrors).toHaveLength(0);
+      await expect(page).toHaveURL(pageUrls.about);
+      await expect(
+        page.getByRole("heading", {
+          level: 1,
+          name: "Nathan Cole Summers",
+        }),
+      ).toBeVisible();
+      await expect(
+        page
+          .getByRole("navigation", { name: "Primary" })
+          .getByRole("link", { name: "About", exact: true }),
+      ).toHaveAttribute("aria-current", "page");
+    });
+
+    test("returns home through the title-block mark", async ({ page }) => {
+      await page.goto(pageUrls.about);
+
+      const titleBlock = page.getByRole("banner").last();
+      const homeMark = titleBlock.getByRole("link", {
+        name: "N. Cole Summers, home",
+      });
+      await homeMark.focus();
+      await expect(homeMark).toBeFocused();
+      await homeMark.press("Enter");
+
+      await expect(page).toHaveURL(pageUrls.home);
+      await expect(
+        page.getByRole("heading", {
+          level: 1,
+          name: "I build the systems that build software.",
+        }),
+      ).toBeVisible();
+    });
+  });
+
+  test.describe("Responsive title-block navigation", () => {
+    test("keeps primary actions usable without a mobile menu", async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 375, height: 667 });
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.goto("/");
+
+      const primary = page.getByRole("navigation", { name: "Primary" });
+      const work = primary.getByRole("link", { name: "Work", exact: true });
+      const about = primary.getByRole("link", { name: "About", exact: true });
+      const contact = primary.getByRole("link", {
+        name: "Contact",
+        exact: true,
+      });
+
+      await expect(page.getByTestId("mobile-nav")).toHaveCount(0);
+      await expect(work).toBeVisible();
+      await expect(about).toBeVisible();
+      await expect(contact).toBeVisible();
+      await expect(contact).toHaveAttribute(
+        "href",
+        "mailto:nate@ncolesummers.com",
+      );
+      for (const link of [work, about, contact]) {
+        await expectReducedMotionTransition(link);
+      }
+
+      await work.click();
+      await expect(page).toHaveURL(/#work$/);
+      await expect(page.locator("#work")).toBeVisible();
+    });
+
+    test("keeps contact-section social references visible and focusable on mobile", async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 375, height: 667 });
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.goto("/");
+
+      const contactSection = page.locator("#contact");
+      for (const name of [
+        "LinkedIn profile",
+        "GitHub profile",
+        "Instagram profile",
+      ]) {
+        const link = contactSection.getByRole("link", { name, exact: true });
+        await expect(link).toBeVisible();
+        await link.focus();
+        await expect(link).toBeFocused();
+        await expectReducedMotionTransition(link);
+      }
+    });
+  });
+
+  test.describe("Focus management", () => {
+    test("follows the exact title-block-to-content keyboard order", async ({
+      page,
+      browserName,
+    }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto("/");
+
+      const titleBlock = page.getByRole("banner");
+      const primary = titleBlock.getByRole("navigation", { name: "Primary" });
+      const focusOrder = [
+        page.getByRole("link", { name: "Skip to main content" }),
+        titleBlock.getByRole("link", { name: "N. Cole Summers, home" }),
+        titleBlock.getByRole("link", { name: "LinkedIn profile" }),
+        titleBlock.getByRole("link", { name: "GitHub profile" }),
+        titleBlock.getByRole("link", { name: "Instagram profile" }),
+        primary.getByRole("link", { name: "Work", exact: true }),
+        primary.getByRole("link", { name: "About", exact: true }),
+        primary.getByRole("link", { name: "Contact", exact: true }),
+        titleBlock.getByRole("button", {
+          name: "Switch to the blueprint medium",
+          exact: true,
+        }),
+        page.getByRole("link", { name: "read the repository", exact: true }),
+        page.getByRole("button", { name: /GitHub issue/ }),
+      ];
+
+      for (const target of focusOrder) {
+        await pressForwardTab(page, browserName);
+        await expect(target).toBeFocused();
+        await expect(target).toHaveCSS("outline-style", "solid");
+      }
+    });
+  });
+
+  test.describe("Runtime health", () => {
+    test("loads the homepage within the existing budget", async ({ page }) => {
+      const startTime = Date.now();
+      await page.goto("/");
+      const loadTime = Date.now() - startTime;
+
+      expect(loadTime).toBeLessThan(3000);
+      await expect(page.getByRole("main")).toBeVisible();
+    });
+
+    test("has no unexpected console errors or same-origin 404s", async ({
+      page,
+    }) => {
+      const response = await page.goto("/");
+
+      expect(response?.status()).toBe(200);
+      await expect(page.getByRole("main")).toBeVisible();
+      await page.waitForTimeout(1000);
     });
   });
 });
