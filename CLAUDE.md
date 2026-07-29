@@ -19,20 +19,13 @@ pnpm dev              # dev server (Turbopack)
 pnpm build            # production build
 pnpm lint             # ESLint
 pnpm format           # Prettier write
-pnpm test:e2e         # Playwright: UI behavior + mocked integration
+pnpm test:e2e         # Playwright UI behavior
 pnpm test:e2e:ui      # interactive test UI
-pnpm test:contact-form
 ```
 
 Node 24+ (pinned via Volta), pnpm.
 
 **Always run `pnpm format` before committing.**
-
-**Full integration tests hit the real FormSpree endpoint and are rate limited.** They are opt-in only:
-
-```bash
-TEST_INTEGRATION=true pnpm test:e2e
-```
 
 ## Architecture
 
@@ -49,10 +42,6 @@ No external data fetching. Content is authored directly in components.
 ## Patterns worth knowing
 
 **`cn()`** (`src/lib/utils.ts`) merges Tailwind classes via clsx + tailwind-merge. Use it for every conditional class rather than template strings.
-
-**Form validation** uses React Hook Form with Zod schemas, centralized in the `useFormValidation` hook. Error states must carry correct ARIA wiring; the E2E suite asserts on it.
-
-**FormSpree has a mock route** at `src/app/api/test/formspree-mock/route.ts` so contact-form tests stay deterministic and off the rate limit. Point tests at the mock unless explicitly testing the real integration.
 
 **Theming** runs through next-themes with CSS custom properties. Both themes are first-class; neither is a computed inversion of the other. See DESIGN.md.
 

@@ -10,11 +10,10 @@ A modern, enterprise-grade portfolio website showcasing enterprise intelligence 
 - 🎨 **Theme Toggle**: Light/dark mode switching with system preference detection
 - 📱 **Responsive Design**: Mobile-first approach with seamless cross-device experience
 - 🔒 **Type Safety**: Comprehensive TypeScript implementation with strict mode
-- 📧 **Functional Contact Form**: FormSpree integration with real email delivery
-- 🎭 **Smooth Animations**: Intersection Observer-based scroll animations with reduced motion support
+- 📧 **Direct Contact**: Email and social links without an external form service
+- 🎭 **Reduced Motion**: Interface transitions respect reduced-motion preferences
 - ♿ **Accessibility First**: WCAG 2.1 AA compliance with keyboard navigation and screen reader support
-- 🧪 **Testing Excellence**: 153 E2E tests across 5 browsers with 100% reliability and flaky test elimination
-- 🔧 **Form Validation**: React Hook Form + Zod schema validation with real-time feedback
+- 🧪 **Testing Excellence**: Playwright coverage spans supported desktop and mobile browsers
 - 📊 **Analytics Ready**: Vercel Analytics integration for engagement insights
 - 🔍 **SEO Optimized**: Meta tags, Open Graph, structured data, and dynamic sitemap
 
@@ -22,7 +21,7 @@ A modern, enterprise-grade portfolio website showcasing enterprise intelligence 
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 24+
 - pnpm (recommended) or npm
 
 ### Installation
@@ -53,10 +52,8 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
 ### Testing
 
-- `pnpm test:e2e` - Run Playwright E2E tests (UI behavior + mocked integration)
+- `pnpm test:e2e` - Run Playwright E2E tests
 - `pnpm test:e2e:ui` - Run tests with interactive UI
-- `pnpm test:contact-form` - Run contact form specific tests
-- `TEST_INTEGRATION=true pnpm test:e2e` - Run full integration tests (use sparingly due to rate limits)
 
 #### Testing Strategy
 
@@ -64,17 +61,15 @@ This project achieves **testing excellence** through comprehensive automation:
 
 **📊 Test Metrics:**
 
-- **153 E2E tests** across 5 browser configurations (Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari)
-- **100% test reliability** with flaky test elimination and browser-specific optimizations
-- **Three-tier strategy**: UI behavior tests, integration health checks, full API testing
+- **Playwright E2E coverage** across supported desktop and mobile browser configurations
+- **Cross-browser strategy**: UI behavior, accessibility, and navigation tests
 - **WCAG 2.1 AA compliance** with accessibility and keyboard navigation testing
 
 **🎯 Quality Achievements:**
 
 - Zero ESLint violations with strict TypeScript
-- Cross-browser form validation and error handling
+- Cross-browser navigation and accessibility checks
 - Performance testing with <3s load time requirements
-- Rate-limit-aware testing with FormSpree API mocking
 
 For detailed testing documentation and AI-assisted development methodology, see [`docs/TEST_PLAN.md`](./docs/TEST_PLAN.md) and [`/.prompts/`](./.prompts/).
 
@@ -84,9 +79,8 @@ This portfolio follows enterprise-grade development practices with **AI-assisted
 
 - **Component Architecture**: Modular components with clear separation of concerns
 - **Design System**: shadcn/ui components with consistent theming and accessibility
-- **Form Validation**: React Hook Form + Zod schemas with TypeScript integration
 - **State Management**: Centralized configuration with next-themes for theme management
-- **Testing Strategy**: Three-tier approach with mocked APIs and cross-browser validation
+- **Testing Strategy**: Cross-browser UI and accessibility validation
 - **Performance**: Optimized images, lazy loading, and efficient bundle splitting
 - **Error Handling**: Comprehensive error boundaries and graceful degradation
 
@@ -127,7 +121,7 @@ Before considering any code change complete, ensure all criteria are met:
 
 - [ ] **E2E tests pass**: Relevant Playwright tests execute successfully
 - [ ] **No console errors**: Browser console shows no JavaScript errors
-- [ ] **Contact form verification**: FormSpree integration tested (when touching contact functionality)
+- [ ] **Contact verification**: Email and social destinations are correct (when touching contact functionality)
 
 #### Performance & UX
 
@@ -162,8 +156,7 @@ Before considering any code change complete, ensure all criteria are met:
 - **Components**: shadcn/ui + Radix UI primitives
 - **Theme**: next-themes with system preference detection
 - **Icons**: Lucide React
-- **Forms**: React Hook Form + Zod validation with FormSpree integration
-- **Testing**: Playwright E2E testing with 153 tests across 5 browsers
+- **Testing**: Playwright E2E testing across supported desktop and mobile browsers
 - **Analytics**: Vercel Analytics
 - **Deployment**: Vercel Platform
 
@@ -172,10 +165,9 @@ Before considering any code change complete, ensure all criteria are met:
 ```
 src/
 ├── app/                 # Next.js App Router pages
-│   └── api/            # API routes (FormSpree mock)
 ├── components/          # Reusable components
 │   └── ui/             # shadcn/ui components
-├── lib/                # Utilities, validation, and configurations
+├── lib/                # Utilities and configuration
 └── assets/             # Static assets and images
 tests/
 ├── e2e/                # Playwright E2E tests

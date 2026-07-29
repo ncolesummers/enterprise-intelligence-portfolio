@@ -49,9 +49,9 @@ The site itself is a work sample. It is built with AI-assisted development, so i
 
 **Current surfaces**
 
-- Home (`/`) — hero, selected project grid, contact section.
+- Home (`/`) — opening statement, system figure, and project figure index.
 - About (`/about`) — professional journey, focus areas, philosophy, certifications, personal interests.
-- Five project case studies: `/projects/agent-development-lifecycle`, `/projects/uidaho-website`, `/projects/profile-extractor`, `/projects/myui`, `/projects/mikrotik-config-gen`.
+- Four project case studies: `/projects/uidaho-website`, `/projects/profile-extractor`, `/projects/myui`, `/projects/mikrotik-config-gen`.
 
 **Planned roster change**
 
@@ -62,7 +62,7 @@ The site itself is a work sample. It is built with AI-assisted development, so i
 **Technical constraints**
 
 - Next.js 15 App Router, React 19, TypeScript strict mode, Tailwind CSS v4, shadcn/ui ("new-york"), deployed on Vercel.
-- Contact form is FormSpree-backed with React Hook Form + Zod validation; it is subject to rate limits, so full integration tests run only on manual trigger.
+- Contact is a direct `mailto:nate@ncolesummers.com` link; the site has no contact-form service or contact API.
 - Playwright E2E suite across five browser configurations; the project holds itself to a 100% pass rate.
 - Node 24+; pnpm.
 - Vercel Analytics is present for engagement insight.
