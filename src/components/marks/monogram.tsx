@@ -73,3 +73,104 @@ export const MarkConstruction = ({ className, title }: MarkProps) => (
     <path className="mark-line" d="M 33 70 V 30 L 67 70 V 30" />
   </svg>
 );
+
+/**
+ * D — Cole. A constructed C inside the callout circle, matched to the N's cap
+ * height so it carries the same weight in the block.
+ *
+ * The known risk is concentricity: a round letter inside a round frame can
+ * read as two rings rather than as a letter. The C is drawn large and its
+ * aperture turned to the same side each time to fight that.
+ */
+export const MarkCole = ({ className, title }: MarkProps) => (
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    className={className}
+    {...frame(title)}
+  >
+    <circle className="mark-line" cx={50} cy={50} r={45} />
+    <path className="mark-line" d="M 70.4 65.4 A 24 24 0 1 1 70.4 34.6" />
+  </svg>
+);
+
+/**
+ * E — Aperture. The callout circle is itself the C: one form lifted at the
+ * right, doing both jobs at once.
+ *
+ * This is the only candidate where the mark and the system's recurring
+ * silhouette are the same object rather than one containing the other. It is
+ * also the most minimal, which cuts both ways.
+ */
+export const MarkAperture = ({ className, title }: MarkProps) => (
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    className={className}
+    {...frame(title)}
+  >
+    <path className="mark-line" d="M 88.2 73.8 A 45 45 0 1 1 88.2 26.2" />
+  </svg>
+);
+
+/**
+ * F — Summers. A constructed S inside the callout circle, built from the same
+ * two arcs as the lockup's S.
+ *
+ * The S is the one round letter that does not fight the circle: its double
+ * curve reverses against the frame instead of echoing it.
+ */
+export const MarkSummers = ({ className, title }: MarkProps) => (
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    className={className}
+    {...frame(title)}
+  >
+    <circle className="mark-line" cx={50} cy={50} r={45} />
+    <path
+      className="mark-line"
+      d="M 59 32.3 A 14 10 0 1 0 50 50 A 14 10 0 1 1 41 67.7"
+    />
+  </svg>
+);
+
+/**
+ * G — Cole Summers, as a lockup. The C is a compass circle with its segment
+ * lifted, the S is the same two arcs used everywhere else. Two letters sit
+ * better than three: the pair is evenly weighted and needs far less width.
+ *
+ * The initials are the name he goes by. Any second reading they happen to
+ * carry stays unstated — a mark that has to explain its own pun has stopped
+ * being a mark.
+ */
+export const MarkColeSummers = ({ className, title }: MarkProps) => (
+  <svg viewBox="0 0 104 70" fill="none" className={className} {...frame(title)}>
+    <path className="mark-line" d="M 44.1 49.1 A 20 20 0 1 1 44.1 20.9" />
+    <path
+      className="mark-line"
+      d="M 89 17.3 A 14 10 0 1 0 80 35 A 14 10 0 1 1 71 52.7"
+    />
+  </svg>
+);
+
+/**
+ * H — Cole Summers, forced into the stamp. Included to be judged rather than
+ * argued about: two letters inside the callout circle have to shrink to about
+ * a third of its diameter, and the 24px column shows what that costs.
+ */
+export const MarkColeSummersStamp = ({ className, title }: MarkProps) => (
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    className={className}
+    {...frame(title)}
+  >
+    <circle className="mark-line" cx={50} cy={50} r={45} />
+    <path className="mark-line" d="M 48 62 A 17 17 0 1 1 48 38" />
+    <path
+      className="mark-line"
+      d="M 75.7 35 A 12 8.5 0 1 0 68 50 A 12 8.5 0 1 1 60.3 65"
+    />
+  </svg>
+);
