@@ -1,5 +1,8 @@
 import Link from "next/link";
 import {
+  PlateUIdaho,
+  PlateMyUI,
+  PlateProfileExtractor,
   PlateMikrotik,
   PlateForthcoming,
 } from "@/components/figures/index-plates";
@@ -25,6 +28,8 @@ type Figure = {
   tags: readonly string[];
   href?: string;
   plate?: React.ReactNode;
+  /** Exact structural fact exposed to assistive technology for a decorative plate. */
+  plateDescription?: string;
   /** Set when the system itself is undrawn, not merely the plate. */
   forthcoming?: boolean;
 };
@@ -37,6 +42,9 @@ const figures: readonly Figure[] = [
       "A redesign of the university's public website built with Sitecore, Next.js, TypeScript, Storybook, and Azure services.",
     tags: ["TypeScript", "Next.js", "Sitecore"],
     href: "/projects/uidaho-website",
+    plate: <PlateUIdaho />,
+    plateDescription:
+      "Sitecore holds authored content. A separate Next.js application renders it for delivery on Azure.",
   },
   {
     numeral: 3,
@@ -45,6 +53,9 @@ const figures: readonly Figure[] = [
       "Lead developer on the university's modernized student dashboard, building custom React components on Ellucian Experience.",
     tags: ["JavaScript", "React", "Ellucian Experience"],
     href: "/projects/myui",
+    plate: <PlateMyUI />,
+    plateDescription:
+      "Custom React components are seated inside the Ellucian Experience shell; the platform is not owned by the University of Idaho.",
   },
   {
     numeral: 4,
@@ -53,6 +64,9 @@ const figures: readonly Figure[] = [
       "A research spike on whether foundation models could extract faculty and staff profile data reliably enough to trust.",
     tags: ["Python", "LangGraph", "Gemini Flash"],
     href: "/projects/profile-extractor",
+    plate: <PlateProfileExtractor />,
+    plateDescription:
+      "Source pages pass through a LangGraph extraction step into structured profiles, followed by verification. The research spike asked a feasibility question and checked the answer.",
   },
   {
     numeral: 5,
@@ -83,7 +97,7 @@ const Cell = ({ figure }: { figure: Figure }) => (
       )}
     </div>
 
-    <div className="mt-5 mb-6">
+    <figure className="mt-5 mb-6">
       {figure.plate ?? (
         <svg
           viewBox="0 0 320 170"
@@ -98,7 +112,10 @@ const Cell = ({ figure }: { figure: Figure }) => (
           </text>
         </svg>
       )}
-    </div>
+      {figure.plateDescription && (
+        <figcaption className="sr-only">{figure.plateDescription}</figcaption>
+      )}
+    </figure>
 
     <h3 className="type-title mt-auto">{figure.title}</h3>
     <p className="type-body text-line-soft mt-3 text-[0.9375rem]">
