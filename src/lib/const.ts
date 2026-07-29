@@ -19,7 +19,7 @@ export const navigation = [
   },
   {
     name: "Contact",
-    href: "/#contact",
+    href: "mailto:nate@ncolesummers.com",
   },
 ];
 // Title-block sheet designators. The title block carries only true things —

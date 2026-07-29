@@ -104,8 +104,7 @@ const TitleBlock = () => {
           {/* The open field. A title block is mostly ruled empty space. */}
           <div className="bg-ground min-w-0 flex-1" />
 
-          {/* Below sm there is no room for these without crowding navigation;
-            the contact section on the index sheet carries them too. */}
+          {/* Below sm there is no room for these without crowding navigation. */}
           <SocialLinks className="bg-ground hidden shrink-0 sm:flex" />
 
           <Field label="Sheet" className="hidden md:flex">

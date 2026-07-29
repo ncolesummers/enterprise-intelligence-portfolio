@@ -9,8 +9,7 @@ const icons: Record<string, typeof Github> = {
   Instagram: Instagram,
 };
 
-/** Off-sheet references. One definition, used by the title block and by the
- *  contact section, so the two can never drift apart. */
+/** Off-sheet references shared by the title block and contact section. */
 const SocialLinks = ({ className }: { className?: string }) => (
   <div className={cn("flex items-stretch", className)}>
     {Socials.map(social => {
