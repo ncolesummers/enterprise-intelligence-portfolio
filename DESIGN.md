@@ -136,6 +136,8 @@ Corners are square. The incumbent 0.625rem radius is removed entirely rather tha
 
 The one curve that belongs is the **callout bubble**: the circle enclosing a reference numeral. It is a perfect circle, drawn in object-line weight, and it is the system's single recurring silhouette. Because it is the only circular form, it carries enormous identifying weight, and it appears in the mark itself.
 
+**The mark is CS inside that circle** — Cole Summers, the name he goes by rather than the N he does not. Both letters are constructed: the C is one compass circle with a segment lifted, the S is two arcs meeting at the letter's midpoint, widened to an elliptical rx so it carries the C's optical width. It lives in the title block at roughly 24px and has a second, unframed configuration for places with horizontal room. Unlike the figures, its stroke scales with the mark; a fixed stroke at 24px leaves all stroke and no counter. Any second reading the initials carry stays unstated in code, copy, and alt text.
+
 Boxes are ruled, not filled. Where a region needs bounding, it gets a rule; where it needs emphasis, it gets a heavier rule or hatching.
 
 ## Do's and Don'ts

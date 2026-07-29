@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { navigation, sheetName } from "@/lib/const";
 import SocialLinks from "@/components/social-links";
+import { Mark } from "@/components/marks/monogram";
 
 /**
  * The title block: the ruled credit panel a drafting sheet carries along its
@@ -86,9 +87,18 @@ const TitleBlock = () => {
         {/* One-pixel gaps over a rule-colored ground draw the cell divisions, so
           every division is exactly one leader-weight line with no doubling. */}
         <div className="rule-object bg-rule-object flex h-12 gap-px [font-stretch:87.5%]">
-          <Field label="Drawn by">
-            <span className="sm:hidden">NCS</span>
-            <span className="hidden sm:inline">N. Cole Summers</span>
+          {/* The stamp cell. A title block carries the drafter's mark, and
+              below sm it carries the identity alone so navigation gets the
+              width the abbreviated name was using. */}
+          <Link
+            href="/"
+            className="bg-ground hover:text-annotation flex shrink-0 items-center px-3 transition-colors"
+          >
+            <Mark className="h-6 w-6" title="N. Cole Summers, home" />
+          </Link>
+
+          <Field label="Drawn by" className="hidden sm:flex">
+            N. Cole Summers
           </Field>
 
           {/* The open field. A title block is mostly ruled empty space. */}

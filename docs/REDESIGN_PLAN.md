@@ -76,7 +76,7 @@ Decisions made during the build that the plan did not anticipate:
 
 Known breakage handed to Phase 3: **the Playwright suite fails broadly.** `navigation.spec.ts` asserts on `header` and `footer` elements and a `mobile-nav` test id that no longer exist; `social-icons-accessibility.spec.ts` counts icons per their old locations.
 
-### Phase 2 — FIG. 1 and the homepage (Claude) — **all but the monogram done**
+### Phase 2 — FIG. 1 and the homepage (Claude) — **done**
 
 Done: FIG. 1 in both geometries, the reference-numeral system, the statement,
 the figure index, FIG. 5 as the pattern plate, and FIG. 6 in hidden line.
@@ -92,9 +92,13 @@ Decisions the plan did not anticipate:
 - **FIG. 1 is not repeated in the index.** It is drawn at full scale directly above; a thumbnail of the figure just read is noise. The index covers FIGS. 2 through 6.
 - **The ADLC entry is gone from the index**, per PRODUCT.md's roster change. Its route still needs the redirect, which stays Phase 3.
 
-Still open: **the monogram.** It needs two or three versions put in front of a
-human before one becomes the mark, so it is a checkpoint rather than a task to
-finish unattended.
+**The mark is CS in the callout circle**, chosen from eight candidates drawn at
+their real sizes on a temporary review route. Two findings from that round are
+worth keeping: two letters inside the circle stay legible at 24px, contrary to
+the prediction that killed the idea on paper; and a lone C inside a circle is
+unusable because it is the copyright glyph, which is a collision no drawing
+fixes. N was dropped once the question was asked plainly, since he presents as
+N. Cole Summers and does not go by the N.
 
 #### Specs for the three remaining index plates
 
@@ -147,7 +151,6 @@ Requires the assembled static figure to be complete and good on its own first. R
 ## Open items
 
 - **Cut the contact form.** The FormSpree integration was never paid for and is not used. Removing it takes `contact-form.tsx`, the `useFormValidation` hook, the mock route at `src/app/api/test/formspree-mock/route.ts`, the contact-form specs, and the `test:contact-form` / `test:integration` scripts with it, and turns the CONTACT nav item into a mailto. Best done alongside Phase 2, which rebuilds the index sheet anyway. Not urgent.
-- The constructed monogram is committed in concept but undrawn. Two or three versions get reviewed before it becomes the mark. This is the one Phase 2 item still outstanding.
 - **`project-card.tsx`, `tech-stack.tsx`, and `animated-section.tsx` may now be unused** on the index sheet. Confirm before deleting; the case studies still import some of them.
 - Whether case studies keep their current length is open; PRODUCT.md does not bind it.
 - The spacing rhythm is still incumbent Tailwind spacing. Composing the index sheet did not force a scale, so this stays open and should be settled in Phase 5 rather than guessed at now.
