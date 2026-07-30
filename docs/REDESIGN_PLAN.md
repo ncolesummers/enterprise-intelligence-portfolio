@@ -154,6 +154,12 @@ Scroll-driven exploded assembly on the case study. Parts separate along their ow
 
 The assembled figure it resolves to is now in place on the page that will carry the motion, so the precondition is met.
 
+**The shape is settled in `docs/design/deconstruction-brief.md`.** Three decisions from it are worth carrying here, because each contradicts what this plan assumed:
+
+- **The prose drives it.** The case study's own sections are the scroll budget, rather than a scroll distance invented for the figure. Six of the nine sections name parts.
+- **It needs a third geometry.** A sticky figure gets about half a viewport, which the wide plate fits at desktop and the tall plate cannot fit on a phone at any legible size. The deconstruction is a detail plate showing three or four parts at a time, which is what a figure sheet does anyway. This is the load-bearing decision.
+- **Scroll owns exposure, the pointer owns reading.** The two inputs meet on the same parts now that a drawn part can be pointed at, so they are split across axes: scroll decides which parts are shown, pointing decides which shown part is read. Pinning is dropped inside the deconstruction, where a pin goes stale as soon as it is scrolled past.
+
 ### Phase 5 — Finish (Claude)
 
 `/impeccable audit` then `/impeccable polish`. Catch Codex drift, verify both themes, confirm the accessibility gates.
