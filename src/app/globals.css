@@ -331,6 +331,16 @@
   );
 }
 
+/* The title block is fixed over the foot of the sheet. Anything brought into
+   view programmatically has to reserve that band or it arrives underneath it,
+   which reads as the scroll having failed. Same expression as the sheet's own
+   foot padding, so the two cannot drift apart. */
+@utility clears-title-block {
+  scroll-margin-block-end: calc(
+    var(--sheet-inner) + var(--title-block-h) + var(--sheet-gutter)
+  );
+}
+
 /* --------------------------------------------------------------------------
    Named line weights, usable as borders. Naming the weight at the call site is
    the point: it forces the question of which of the five a given stroke is.
@@ -582,6 +592,28 @@
     transition:
       stroke 150ms ease,
       fill 150ms ease;
+  }
+
+  /* A drawn part can be pointed at, and reads the same as its numeral. These
+     shapes are strokes over an unfilled sheet, so without pointer-events the
+     only hit area would be the 1px to 2px line itself; `all` gives the whole
+     enclosed region to the part it belongs to. Cursor rather than any resting
+     colour change, because a drawing that highlights on approach would break
+     the one-annotation rule before anything had been chosen. */
+  .fig-callout,
+  .fig-part,
+  .fig-gate {
+    cursor: pointer;
+    pointer-events: all;
+  }
+
+  /* Leader lines are the drawing's connective tissue, not parts. Letting them
+     take the pointer would put a hit target across half the plate. */
+  .fig-leader,
+  .fig-flow,
+  .fig-boundary,
+  .fig-hatch-line {
+    pointer-events: none;
   }
 
   .fig-callout[data-active] .fig-bubble,

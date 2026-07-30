@@ -19,6 +19,22 @@ export type Part = {
   note: string;
 };
 
+/**
+ * How a plate hands pointer interest back to the figure.
+ *
+ * A drawn part points at the same single active value its numeral does. The
+ * plates stay `aria-hidden` and unfocusable, so this is a pointer affordance
+ * layered on the numeral table rather than a second way to reach a part: a
+ * keyboard or a screen reader still goes through the table, which is the only
+ * route that was ever announced.
+ */
+export type PartPointer = {
+  /** Preview a part, or clear the preview with null. */
+  onPoint?: (numeral: number | null) => void;
+  /** Pin a part, or unpin it when it is already pinned. */
+  onTake?: (numeral: number) => void;
+};
+
 export const parts: readonly Part[] = [
   {
     numeral: 10,

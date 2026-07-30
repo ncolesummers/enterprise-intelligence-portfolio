@@ -1,3 +1,5 @@
+import type { PartPointer } from "@/components/figures/parts";
+
 /**
  * FIG. 1 — the Loopworks delivery loop, drawn wide.
  *
@@ -6,6 +8,11 @@
  * figure sheet actually works: the plate carries the numerals, the table
  * carries the words. That split is also what keeps this accessible without
  * bolting focus handlers onto <path> elements.
+ *
+ * Pointing at a drawn part reads that part, exactly as pointing at its numeral
+ * does. Nothing here is focusable and the plate stays aria-hidden, so this adds
+ * a pointer route to a reading that was already reachable rather than moving
+ * the meaning into the drawing.
  *
  * Stroke widths use non-scaling-stroke so the five-weight hierarchy survives
  * being scaled down. Without it, an object line at half scale is a hairline and
@@ -73,21 +80,32 @@ const ENTRY_X = 94;
 const EXIT_X = 1017;
 const center = (x: number) => x + BOX_W / 2;
 
+/**
+ * What a part's group is handed: its active state and its pointer handlers.
+ * Structural rather than `ComponentProps<"g">`, because the same bundle is
+ * spread onto a bare circle as well as onto groups.
+ */
+type PartProps = {
+  "data-active"?: true;
+  onPointerEnter?: () => void;
+  onPointerLeave?: () => void;
+  onClick?: () => void;
+};
+
 /** A reference numeral in its bubble, on a leader line to the part it marks. */
 const Callout = ({
   numeral,
   x,
   y,
   leaderTo,
-  active,
+  ...part
 }: {
   numeral: number;
   x: number;
   y: number;
   leaderTo: [number, number];
-  active: boolean;
-}) => (
-  <g className="fig-callout" data-active={active || undefined}>
+} & PartProps) => (
+  <g className="fig-callout" {...part}>
     <line
       className="fig-leader"
       x1={x}
@@ -103,8 +121,8 @@ const Callout = ({
 );
 
 /** Gate valve. The drafting symbol for a thing that stops flow until opened. */
-const Gate = ({ x, y, active }: { x: number; y: number; active: boolean }) => (
-  <g className="fig-gate" data-active={active || undefined}>
+const Gate = ({ x, y, ...part }: { x: number; y: number } & PartProps) => (
+  <g className="fig-gate" {...part}>
     <path
       d={`M ${x - 9} ${y - 9} L ${x + 9} ${y + 9} L ${x + 9} ${y - 9} L ${x - 9} ${y + 9} Z`}
     />
@@ -133,11 +151,28 @@ const Arrow = ({
 const DeliveryLoopDrawing = ({
   className,
   active,
+  onPoint,
+  onTake,
 }: {
   className?: string;
   active: number | null;
-}) => {
+} & PartPointer) => {
   const on = (numeral: number | null) => numeral !== null && active === numeral;
+
+  /**
+   * Everything a part's group needs: its state, and its way of reporting.
+   * Stages that carry no numeral get nothing, so an unnumbered box is inert
+   * rather than pointing at a part the table does not list.
+   */
+  const part = (numeral: number | null): PartProps =>
+    numeral === null
+      ? {}
+      : {
+          "data-active": on(numeral) || undefined,
+          onPointerEnter: onPoint && (() => onPoint(numeral)),
+          onPointerLeave: onPoint && (() => onPoint(null)),
+          onClick: onTake && (() => onTake(numeral)),
+        };
 
   return (
     <svg
@@ -163,7 +198,7 @@ const DeliveryLoopDrawing = ({
       <text className="fig-zone" x={24} y={18}>
         GitHub
       </text>
-      <g className="fig-part" data-active={on(10) || undefined}>
+      <g className="fig-part" {...part(10)}>
         <rect className="fig-box" x={24} y={30} width={140} height={54} />
         <text className="fig-box-label" x={94} y={53}>
           Issue
@@ -173,7 +208,7 @@ const DeliveryLoopDrawing = ({
         </text>
       </g>
 
-      <g className="fig-part" data-active={on(80) || undefined}>
+      <g className="fig-part" {...part(80)}>
         <rect className="fig-box" x={947} y={30} width={140} height={54} />
         <text className="fig-box-label" x={EXIT_X} y={53}>
           Draft PR
@@ -198,27 +233,24 @@ const DeliveryLoopDrawing = ({
       <Arrow x={STAGES[0].x} y={ROW_MID} dir="right" />
       <circle
         className="fig-node fig-part"
-        data-active={on(12) || undefined}
+        {...part(12)}
         cx={ENTRY_X}
         cy={114}
         r={5}
       />
-      <Gate x={ENTRY_X} y={176} active={on(14)} />
+      <Gate x={ENTRY_X} y={176} {...part(14)} />
 
       {/* ---- Exit: PR stage up through the external-write gate ---- */}
       <line className="fig-flow" x1={EXIT_X} y1={ROW_Y} x2={EXIT_X} y2={93} />
       <Arrow x={EXIT_X} y={84} dir="up" />
-      <Gate x={EXIT_X} y={166} active={on(70)} />
+      <Gate x={EXIT_X} y={166} {...part(70)} />
 
       {/* ---- The eight stages ---- */}
       {STAGES.map((stage, i) => {
         const cx = center(stage.x);
         return (
           <g key={stage.key}>
-            <g
-              className="fig-part"
-              data-active={on(stage.numeral) || undefined}
-            >
+            <g className="fig-part" {...part(stage.numeral)}>
               <rect
                 className="fig-box"
                 x={stage.x}
@@ -267,10 +299,10 @@ const DeliveryLoopDrawing = ({
       })}
 
       {/* Plan-review gate, in the widened gap after planning */}
-      <Gate x={268} y={ROW_MID} active={on(22)} />
+      <Gate x={268} y={ROW_MID} {...part(22)} />
 
       {/* ---- Return path. Hidden line: real, but not the primary route ---- */}
-      <g className="fig-part" data-active={on(62) || undefined}>
+      <g className="fig-part" {...part(62)}>
         <path
           className="fig-return"
           d={`M 749 ${ROW_BOTTOM} V ${RETURN_Y} H 347`}
@@ -294,7 +326,7 @@ const DeliveryLoopDrawing = ({
       </g>
 
       {/* ---- Control plane, cut open ---- */}
-      <g className="fig-part" data-active={on(90) || undefined}>
+      <g className="fig-part" {...part(90)}>
         <rect
           x={130}
           y={CP_Y}
@@ -312,96 +344,78 @@ const DeliveryLoopDrawing = ({
       </g>
 
       {/* ---- Reference numerals ---- */}
-      <Callout
-        numeral={10}
-        x={196}
-        y={57}
-        leaderTo={[164, 57]}
-        active={on(10)}
-      />
-      <Callout
-        numeral={12}
-        x={40}
-        y={114}
-        leaderTo={[85, 114]}
-        active={on(12)}
-      />
-      <Callout
-        numeral={14}
-        x={40}
-        y={176}
-        leaderTo={[79, 176]}
-        active={on(14)}
-      />
+      <Callout numeral={10} x={196} y={57} leaderTo={[164, 57]} {...part(10)} />
+      <Callout numeral={12} x={40} y={114} leaderTo={[85, 114]} {...part(12)} />
+      <Callout numeral={14} x={40} y={176} leaderTo={[79, 176]} {...part(14)} />
       <Callout
         numeral={20}
         x={189}
         y={162}
         leaderTo={[189, ROW_Y - 4]}
-        active={on(20)}
+        {...part(20)}
       />
       <Callout
         numeral={22}
         x={268}
         y={162}
         leaderTo={[268, ROW_MID - 15]}
-        active={on(22)}
+        {...part(22)}
       />
       <Callout
         numeral={30}
         x={347}
         y={162}
         leaderTo={[347, ROW_Y - 4]}
-        active={on(30)}
+        {...part(30)}
       />
       <Callout
         numeral={40}
         x={481}
         y={162}
         leaderTo={[481, ROW_Y - 4]}
-        active={on(40)}
+        {...part(40)}
       />
       <Callout
         numeral={50}
         x={615}
         y={162}
         leaderTo={[615, ROW_Y - 4]}
-        active={on(50)}
+        {...part(50)}
       />
       <Callout
         numeral={60}
         x={749}
         y={162}
         leaderTo={[749, ROW_Y - 4]}
-        active={on(60)}
+        {...part(60)}
       />
       <Callout
         numeral={62}
         x={549}
         y={352}
         leaderTo={[549, RETURN_Y + 4]}
-        active={on(62)}
+        {...part(62)}
       />
       <Callout
         numeral={70}
         x={1078}
         y={166}
         leaderTo={[1032, 166]}
-        active={on(70)}
+        {...part(70)}
       />
       <Callout
         numeral={80}
         x={1119}
         y={57}
         leaderTo={[1087, 57]}
-        active={on(80)}
+        {...part(80)}
       />
       <Callout
         numeral={90}
         x={60}
         y={CP_Y + 32}
         leaderTo={[116, CP_Y + 32]}
-        active={on(90)}
+        {...part(90)}
       />
     </svg>
   );

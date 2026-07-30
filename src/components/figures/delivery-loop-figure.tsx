@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import DeliveryLoopDrawing from "@/components/figures/delivery-loop-drawing";
 import DeliveryLoopDrawingTall from "@/components/figures/delivery-loop-drawing-tall";
@@ -44,14 +44,35 @@ const DeliveryLoopFigure = ({ readHref }: { readHref?: string }) => {
   const active = pointed ?? pinned;
   const activePart = parts.find(part => part.numeral === active);
 
+  const readoutRef = useRef<HTMLParagraphElement>(null);
+
+  const take = (numeral: number) => {
+    const next = pinned === numeral ? null : numeral;
+    setPinned(next);
+    // The tall plate is most of a phone screen, so a part taken near its top
+    // leaves the reading below the fold and the tap looks like it did nothing.
+    // `nearest` moves the least it can and is a no-op wherever the readout is
+    // already visible, which is every case on a desktop plate.
+    if (next !== null) readoutRef.current?.scrollIntoView({ block: "nearest" });
+  };
+
+  // The plates report the same two gestures the numerals do, so a part behaves
+  // identically whether it is picked up off the drawing or out of the table.
+  const pointing = { onPoint: setPointed, onTake: take };
+
   return (
     <figure className="mt-8 sm:mt-10">
       <p className="sr-only">{DESCRIPTION}</p>
 
-      <DeliveryLoopDrawing className="hidden w-full lg:block" active={active} />
+      <DeliveryLoopDrawing
+        className="hidden w-full lg:block"
+        active={active}
+        {...pointing}
+      />
       <DeliveryLoopDrawingTall
         className="mx-auto w-full max-w-lg lg:hidden"
         active={active}
+        {...pointing}
       />
 
       <figcaption className="rule-object mt-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-0 border-t pt-4">
@@ -72,8 +93,9 @@ const DeliveryLoopFigure = ({ readHref }: { readHref?: string }) => {
       {/* Readout. Holds the figure's own description until a part is taken,
           so the resting state still says something. */}
       <p
+        ref={readoutRef}
         className={cn(
-          "type-body measure mt-4 min-h-[7rem] sm:min-h-[5rem]",
+          "type-body measure clears-title-block mt-4 min-h-[7rem] sm:min-h-[5rem]",
           activePart ? "text-line" : "text-line-soft",
         )}
       >
@@ -97,11 +119,7 @@ const DeliveryLoopFigure = ({ readHref }: { readHref?: string }) => {
               <button
                 type="button"
                 aria-pressed={part.numeral === pinned}
-                onClick={() =>
-                  setPinned(current =>
-                    current === part.numeral ? null : part.numeral,
-                  )
-                }
+                onClick={() => take(part.numeral)}
                 onPointerEnter={() => setPointed(part.numeral)}
                 onPointerLeave={() => setPointed(null)}
                 onFocus={() => setPointed(part.numeral)}

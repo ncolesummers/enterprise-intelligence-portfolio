@@ -1,3 +1,5 @@
+import type { PartPointer } from "@/components/figures/parts";
+
 /**
  * FIG. 1, drawn tall.
  *
@@ -9,7 +11,19 @@
  * This is a second drawing rather than the wide one scaled down. A figure
  * reduced to a third of its width stops being legible, and an illegible
  * drawing on the surface most visitors arrive on is not a drawing at all.
+ *
+ * Parts take pointer interest here as they do on the wide plate. This is the
+ * touch surface, so a tap on a drawn box pins its reading exactly as a tap on
+ * its numeral does; nothing is focusable and the plate stays aria-hidden.
  */
+
+/** See the wide plate. Structural, because it is spread onto a circle too. */
+type PartProps = {
+  "data-active"?: true;
+  onPointerEnter?: () => void;
+  onPointerLeave?: () => void;
+  onClick?: () => void;
+};
 
 const STAGES = [
   {
@@ -74,15 +88,14 @@ const Callout = ({
   x,
   y,
   leaderTo,
-  active,
+  ...part
 }: {
   numeral: number;
   x: number;
   y: number;
   leaderTo: [number, number];
-  active: boolean;
-}) => (
-  <g className="fig-callout" data-active={active || undefined}>
+} & PartProps) => (
+  <g className="fig-callout" {...part}>
     <line
       className="fig-leader"
       x1={x}
@@ -97,8 +110,8 @@ const Callout = ({
   </g>
 );
 
-const Gate = ({ x, y, active }: { x: number; y: number; active: boolean }) => (
-  <g className="fig-gate" data-active={active || undefined}>
+const Gate = ({ x, y, ...part }: { x: number; y: number } & PartProps) => (
+  <g className="fig-gate" {...part}>
     <path
       d={`M ${x - 10} ${y - 10} L ${x + 10} ${y + 10} L ${x + 10} ${y - 10} L ${x - 10} ${y + 10} Z`}
     />
@@ -127,11 +140,24 @@ const Arrow = ({
 const DeliveryLoopDrawingTall = ({
   className,
   active,
+  onPoint,
+  onTake,
 }: {
   className?: string;
   active: number | null;
-}) => {
+} & PartPointer) => {
   const on = (numeral: number | null) => numeral !== null && active === numeral;
+
+  /** State and reporting for one part. Unnumbered stages stay inert. */
+  const part = (numeral: number | null): PartProps =>
+    numeral === null
+      ? {}
+      : {
+          "data-active": on(numeral) || undefined,
+          onPointerEnter: onPoint && (() => onPoint(numeral)),
+          onPointerLeave: onPoint && (() => onPoint(null)),
+          onClick: onTake && (() => onTake(numeral)),
+        };
 
   return (
     <svg
@@ -157,7 +183,7 @@ const DeliveryLoopDrawingTall = ({
       <text className="fig-zone" x={BOX_X} y={16}>
         GitHub
       </text>
-      <g className="fig-part" data-active={on(10) || undefined}>
+      <g className="fig-part" {...part(10)}>
         <rect className="fig-box" x={BOX_X} y={28} width={BOX_W} height={54} />
         <text className="fig-box-label" x={CHAIN_X} y={52}>
           Issue
@@ -183,17 +209,17 @@ const DeliveryLoopDrawingTall = ({
       <Arrow x={CHAIN_X} y={STAGES[0].y} dir="down" />
       <circle
         className="fig-node fig-part"
-        data-active={on(12) || undefined}
+        {...part(12)}
         cx={CHAIN_X}
         cy={104}
         r={6}
       />
-      <Gate x={CHAIN_X} y={140} active={on(14)} />
+      <Gate x={CHAIN_X} y={140} {...part(14)} />
 
       {/* ---- Stages ---- */}
       {STAGES.map((stage, i) => (
         <g key={stage.key}>
-          <g className="fig-part" data-active={on(stage.numeral) || undefined}>
+          <g className="fig-part" {...part(stage.numeral)}>
             <rect
               className="fig-box"
               x={BOX_X}
@@ -231,10 +257,10 @@ const DeliveryLoopDrawingTall = ({
         </g>
       ))}
 
-      <Gate x={CHAIN_X} y={253} active={on(22)} />
+      <Gate x={CHAIN_X} y={253} {...part(22)} />
 
       {/* ---- Return path, threaded between the stages and the column ---- */}
-      <g className="fig-part" data-active={on(62) || undefined}>
+      <g className="fig-part" {...part(62)}>
         <path className="fig-return" d={`M ${BOX_R} 569 H ${RETURN_X} V 289`} />
         <line
           className="fig-return"
@@ -255,7 +281,7 @@ const DeliveryLoopDrawingTall = ({
       </g>
 
       {/* ---- Control plane, as a column ---- */}
-      <g className="fig-part" data-active={on(90) || undefined}>
+      <g className="fig-part" {...part(90)}>
         <rect
           x={COL_X}
           y={172}
@@ -280,13 +306,13 @@ const DeliveryLoopDrawingTall = ({
         d={`M ${BOX_X} 745 H ${EXIT_X} V 951 H ${BOX_X - 10}`}
       />
       <Arrow x={BOX_X} y={951} dir="right" />
-      <Gate x={EXIT_X} y={880} active={on(70)} />
+      <Gate x={EXIT_X} y={880} {...part(70)} />
 
       <line className="fig-boundary" x1={0} y1={896} x2={440} y2={896} />
       <text className="fig-zone" x={BOX_X} y={914}>
         GitHub
       </text>
-      <g className="fig-part" data-active={on(80) || undefined}>
+      <g className="fig-part" {...part(80)}>
         <rect className="fig-box" x={BOX_X} y={924} width={BOX_W} height={54} />
         <text className="fig-box-label" x={CHAIN_X} y={948}>
           Draft PR
@@ -302,28 +328,28 @@ const DeliveryLoopDrawingTall = ({
         x={CALLOUT_X}
         y={55}
         leaderTo={[BOX_X, 55]}
-        active={on(10)}
+        {...part(10)}
       />
       <Callout
         numeral={12}
         x={CALLOUT_X}
         y={104}
         leaderTo={[CHAIN_X - 8, 104]}
-        active={on(12)}
+        {...part(12)}
       />
       <Callout
         numeral={14}
         x={CALLOUT_X}
         y={140}
         leaderTo={[CHAIN_X - 12, 140]}
-        active={on(14)}
+        {...part(14)}
       />
       <Callout
         numeral={22}
         x={CALLOUT_X}
         y={253}
         leaderTo={[CHAIN_X - 12, 253]}
-        active={on(22)}
+        {...part(22)}
       />
       {STAGES.filter(stage => stage.numeral !== null).map(stage => (
         <Callout
@@ -332,7 +358,7 @@ const DeliveryLoopDrawingTall = ({
           x={CALLOUT_X}
           y={stage.y + 16}
           leaderTo={[BOX_X, stage.y + 16]}
-          active={on(stage.numeral)}
+          {...part(stage.numeral)}
         />
       ))}
       <Callout
@@ -340,28 +366,28 @@ const DeliveryLoopDrawingTall = ({
         x={RETURN_X}
         y={608}
         leaderTo={[RETURN_X, 587]}
-        active={on(62)}
+        {...part(62)}
       />
       <Callout
         numeral={70}
         x={CALLOUT_X}
         y={880}
         leaderTo={[EXIT_X - 11, 880]}
-        active={on(70)}
+        {...part(70)}
       />
       <Callout
         numeral={80}
         x={CALLOUT_X}
         y={951}
         leaderTo={[EXIT_X - 11, 951]}
-        active={on(80)}
+        {...part(80)}
       />
       <Callout
         numeral={90}
         x={410}
         y={905}
         leaderTo={[410, 866]}
-        active={on(90)}
+        {...part(90)}
       />
     </svg>
   );
