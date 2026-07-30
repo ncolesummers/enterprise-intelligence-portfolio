@@ -21,6 +21,22 @@ Current suites cover:
 - Figure-index content and the evidence stated by each completed plate.
 - Both drawing media and responsive behavior where the surface varies by
   viewport.
+- Scroll-driven figures: which parts a scroll position exposes, which shown part
+  pointing reads, and that neither input does the other's job.
+
+Two hazards are worth knowing before adding to the scroll-driven suites, because
+both produce failures that look like product bugs and are not:
+
+- **The sheet scrolls smoothly.** Playwright brings a target into view before
+  acting on it, so an action can leave a scroll animation running. A later instant
+  jump does not cancel it — the animation carries on to its own target and the
+  jump is lost. Wait for the scroll to settle before jumping, and drive pointer
+  assertions with `page.mouse` at explicit coordinates when the assertion is about
+  the page not moving.
+- **A pointer left resting on a plate keeps reading.** After a scroll changes which
+  view is drawn, whatever part is now under the cursor is being pointed at, which
+  is correct behavior. Move the pointer off the plate before asserting what
+  survived the scroll.
 
 The suite must prefer role- and name-based locators over styling or DOM-shape
 selectors. Removing a product behavior may remove its test, but surviving

@@ -219,9 +219,10 @@ test.describe("Loopworks case study", () => {
 
     const figure = page.locator("figure").filter({ hasText: "FIG. 1" });
     const readout = figure.locator("p.type-body");
-    // Exact text, because "Validation" is also a substring of the code-review
-    // stage's actor.
-    const validationBox = page.locator(
+    // Scoped to the figure, because the deconstruction's detail plate draws the
+    // same parts further down the page. Exact text, because "Validation" is also
+    // a substring of the code-review stage's actor.
+    const validationBox = figure.locator(
       'svg:not(.fig-tall) g.fig-part:has(text:text-is("Validation"))',
     );
     // By accessible name from the numeral, since other parts' notes mention
@@ -253,7 +254,7 @@ test.describe("Loopworks case study", () => {
 
     // A stage the numeral table does not list is inert rather than pointing at
     // a part that has no entry.
-    const commitBox = page
+    const commitBox = figure
       .locator("svg:not(.fig-tall) g.fig-part")
       .filter({ hasText: "Commit" });
     await commitBox.hover();

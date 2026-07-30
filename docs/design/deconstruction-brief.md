@@ -77,6 +77,25 @@ viewport, and scales up under a max-height cap on desktop.
 
 This is the load-bearing decision. Everything else follows from it.
 
+**Drawn and checked at 390×844. It holds.** The frame settled at 440×320, which
+renders 251px tall in the 345px of content a 390px phone leaves inside the sheet
+gutters, and the band that carries it comes to roughly 410px — 49% of an 844px
+viewport, which is the half-viewport budget this table assumed. Six views fit
+that frame: the entry chain, the stage chain, the two gates, the return, the
+guarded write, and the control plane cut open. Type is set in user units the way
+the tall plate's is, since the frame is the same 440 wide.
+
+Two things had to give to fit, both recorded in the component:
+
+- **The stage chain drops to five boxes and names the rest.** Only five of the
+  eight stages carry numerals, so the chain is cut after code review and closed
+  with "then commit · PR · done" rather than drawing three parts the numeral
+  table does not list.
+- **The return view drops the actor column.** "Code review" beside
+  `validation-reviewer` does not fit a box narrow enough to leave a lane for the
+  return line. That view's subject is the route, not who runs it, and the actors
+  are stated in the stage view and the numeral table.
+
 ---
 
 ## Section to part mapping
@@ -90,7 +109,7 @@ parts hold the previous state rather than resetting it.
 | Admission                        | 10, 12, 14             |
 | The Development Loop             | 20, 30, 40, 50, 60     |
 | Where Judgment Stays Human       | 22, 70                 |
-| Why It Is a Loop                 | 62                     |
+| Why It Is a Loop                 | 62, and 30, 40, 50, 60 |
 | Isolation and the Guarded Write  | 40, 70, 80             |
 | The Control Plane                | 90                     |
 | Lineage                          | hold                   |
@@ -98,6 +117,12 @@ parts hold the previous state rather than resetting it.
 
 Parts separate along their own leader lines, whose geometry already exists in
 both plates and can be reused as the separation vectors.
+
+The return path's row grew while building. A return path cannot be drawn without
+the stages it routes between, and drawing those stages unnumbered while they carry
+numerals two views earlier is worse than numbering them — so that view exposes the
+four stages as well, with 62 as its subject. All five are in the parts inventory,
+so nothing new is claimed.
 
 ---
 
@@ -107,6 +132,15 @@ both plates and can be reused as the separation vectors.
 DESIGN.md requires this and `globals.css` already collapses durations under
 `prefers-reduced-motion`. The static state is not a degraded version; it is the
 drawing, which is why 4a shipped it first.
+
+Resolved by not drawing the band at all under that query, rather than by
+collapsing its durations. Collapsing them would leave the plate hard-cutting
+between views on scroll, which is the thing being opted out of. What is lost is
+nothing: each view's resting note restates the claim its own section opens with,
+and the facts the views add — the three admission outcomes, each gate's required
+evidence, the implementer's sandbox, the six kinds of state the control plane
+holds — are all in the prose beside them. There is a test that asserts exactly
+that.
 
 **Smooth on a mid-range phone.** The risk register calls this out, and the site's
 argument is its own build quality, so a janky signature moment does real damage.
@@ -124,11 +158,54 @@ layer that does not ship.
 
 ---
 
-## Open, and deliberately not settled here
+## Settled while building
 
-- Whether the sticky figure sits beside the prose on desktop and above it on a
-  phone, or takes the same position at both widths.
-- Whether the detail plate is one drawing with parts hidden per state, or a small
-  set of drawings. The parts inventory supports either.
-- Whether the reader can step through states without scrolling, for a keyboard
-  user who would otherwise experience the figure only as it passes.
+The three questions this brief left open, and what they resolved to.
+
+**The band takes the same position at both widths: pinned above the prose.**
+Beside the prose on desktop would have meant restructuring six tested sections,
+each of which already spends its horizontal room on a prose column beside an
+evidence panel, and squeezing the measure to buy width a 1.375:1 plate does not
+want. What does move by width is the arrangement *inside* the band: below `lg`
+the plate sits above its reading, and at `lg` the reading moves alongside it, so
+the band stays about a third of a desktop viewport instead of half.
+
+The retreat this brief named — a second figure below the prose — is still a
+layout change rather than a rebuild.
+
+**One plate, six compositions, all of them in the DOM.** A change of view is
+opacity and transform on a `<g>`: no remount, no layout pass, one paint surface.
+Parts arrive along their leader lines, staggered by their place in the view, and
+the leaders in this frame run in from the callout column at the left, so the
+separation vector is the leader line exactly as the brief asked.
+
+Keeping every view mounted has one cost that has to be paid explicitly: hit
+testing must follow visibility all the way down. `pointer-events: none` on a
+hidden group is not enough, because the parts inside declare `all` and a child
+that re-enables pointer events is hit-tested whatever its parent said — and since
+SVG paints in source order with no z-index, the last view would otherwise answer
+the pointer for the whole plate. There is a test for this.
+
+**No keyboard stepper.** The premise was partly false: keyboard scrolling is
+scrolling, so a keyboard user drives the deconstruction with Space and PageDown
+like anyone else. Beyond that, a stepper would give motion a second owner, which
+this brief forbids, and it would have to be focusable inside a band that is
+deliberately `aria-hidden`. The announced route to every part is the numeral
+table on the assembled figure, which is above the prose and independent of scroll
+position. Nothing in the deconstruction is the only way to reach anything.
+
+## Two things worth knowing before touching this
+
+**The reading line is measured, not chosen.** Which view is on the plate is
+decided by which section has last started above a line just under the pinned
+band. That line has to come from the band's own height: the band takes about half
+a phone screen and a third of a desktop one, and a fixed share of the viewport
+that clears it on a phone lands a whole section ahead on a desktop. The wake-up
+strip and the decision line are derived from one measurement, because measuring
+twice lets a boundary cross the decision line during a jump without waking
+anything up.
+
+**A pointer resting on the plate keeps reading as the view changes under it.**
+That is correct — the pointer is on a part — but it means a test that leaves the
+mouse parked on the plate is measuring the part now under the cursor, not what
+survived the scroll. Move off the plate first.

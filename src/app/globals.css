@@ -584,6 +584,82 @@
     font-size: 13px;
   }
 
+  /* The detail plate shares the tall plate's 440-unit width, so it lands at the
+     same rendered scale on a phone and wants the same lettering. */
+  .fig-detail .fig-numeral,
+  .fig-detail .fig-box-label {
+    font-size: 20px;
+  }
+
+  .fig-detail .fig-box-sub,
+  .fig-detail .fig-zone {
+    font-size: 13px;
+  }
+
+  /* Set from the left or the right rather than centred. Declared after the
+     lettering steps so it wins on source order; a presentation attribute would
+     lose to the class it is correcting. */
+  .fig-name {
+    text-anchor: start;
+  }
+
+  .fig-value {
+    text-anchor: end;
+  }
+
+  /* One detail view at a time. All six stay in the DOM so a state change is a
+     paint rather than a remount, and the hidden ones are taken out of hit
+     testing so a part that is not on the plate cannot be pointed at. */
+  .fig-detail-view {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 260ms ease;
+  }
+
+  /* Hit testing has to follow visibility all the way down. `pointer-events: none`
+     on the group does not settle it: the parts inside declare `all`, and a child
+     that re-enables pointer events is hit-tested whatever its parent said. An
+     invisible detail would otherwise answer the pointer — and since SVG paints
+     in source order with no z-index, the last view would answer for the
+     whole plate. */
+  .fig-detail-view:not([data-shown]) * {
+    pointer-events: none;
+  }
+
+  .fig-detail-view[data-shown] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Parts arrive along their own leader lines, which in this frame run in from
+     the callout column at the left. `--fig-i` is the part's place in the view,
+     so they lift in order instead of the whole plate sliding as one piece.
+     Transform and opacity only: nothing here can trigger layout. */
+  .fig-lift {
+    opacity: 0;
+    transform: translateX(-22px);
+    transition:
+      opacity 260ms ease,
+      transform 340ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+
+  .fig-detail-view[data-shown] .fig-lift {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(var(--fig-i, 0) * 45ms);
+  }
+
+  /* Reduced motion resolves to the assembled drawing, which sits above the
+     prose and is complete on its own. The deconstruction is a second way of
+     looking at that drawing, not the only way, so here it is simply not drawn —
+     collapsing its durations instead would leave the plate cutting between
+     views on scroll, which is the thing being opted out of. */
+  @media (prefers-reduced-motion: reduce) {
+    .fig-deconstruction-band {
+      display: none;
+    }
+  }
+
   /* The one annotation. A part is vermilion only while it is the active
      callout, which is why exactly one can be active at a time. */
   .fig-callout,

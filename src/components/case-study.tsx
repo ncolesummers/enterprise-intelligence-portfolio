@@ -18,13 +18,25 @@ import { cn } from "@/lib/utils";
 
 export function CaseStudySection({
   children,
+  detailView,
   title,
 }: {
   children: ReactNode;
+  /**
+   * Which detail view of the page's figure this section reaches, if the section
+   * is inside a scroll-driven deconstruction. The attribute is what the
+   * deconstruction observes, so the mapping from prose to drawing is declared
+   * where the prose is rather than duplicated as a list of headings.
+   */
+  detailView?: string;
   title: string;
 }) {
   return (
-    <section className="mb-16" data-testid="case-study-section">
+    <section
+      className="mb-16"
+      data-testid="case-study-section"
+      data-detail-view={detailView}
+    >
       <div className="mb-8 flex items-center gap-4">
         <h2 className="type-headline">{title}</h2>
         <div className="h-px flex-1 bg-rule-leader" aria-hidden="true" />

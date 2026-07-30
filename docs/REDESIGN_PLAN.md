@@ -148,17 +148,20 @@ Decisions the plan did not anticipate:
 - **A drawn part can be pointed at.** Phase 2 ruled that the numerals are HTML rather than SVG hit targets, which settled where the _controls_ live and why: an `aria-hidden` plate reaches nobody on a keyboard or a screen reader, so it can never be the only route to a part. That is not an argument against the plate also taking a pointer. Hovering or tapping a box now reads it exactly as its numeral does, feeding the same single active value. Nothing in the plate became focusable and nothing became announced, so the numeral table is still the only route that was ever promised. Unfilled strokes do not hit-test, so the parts take `pointer-events: all`; leader lines and flow arrows explicitly do not, or half the plate becomes a target. A stage with no numeral stays inert rather than pointing at a part the table does not list.
 - **Taking a part brings its reading into view.** The tall plate is 768px of an 844px phone screen, which put the reading a screenful below any part taken near its top: the tap looked like it did nothing. Taking a part now scrolls the reading into view by the minimum needed, which is a no-op on every desktop plate. The new `clears-title-block` utility reserves the fixed title block's band, sharing the sheet's own foot-padding expression so the two cannot drift.
 
-#### 4b — The deconstruction
+#### 4b — The deconstruction — **done**
 
-Scroll-driven exploded assembly on the case study. Parts separate along their own leader lines. Layers must map to real components: GitHub Issue as source of truth, webhook, the named loops (agent-ready, development, research), sandbox, deployment.
-
-The assembled figure it resolves to is now in place on the page that will carry the motion, so the precondition is met.
-
-**The shape is settled in `docs/design/deconstruction-brief.md`.** Three decisions from it are worth carrying here, because each contradicts what this plan assumed:
+Scroll-driven detail views on the case study, riding the six sections that name parts. `docs/design/deconstruction-brief.md` carries the shape and the reasoning; it was written before the build and updated with what building settled. Three decisions from it are worth carrying here, because each contradicts what this plan assumed:
 
 - **The prose drives it.** The case study's own sections are the scroll budget, rather than a scroll distance invented for the figure. Six of the nine sections name parts.
-- **It needs a third geometry.** A sticky figure gets about half a viewport, which the wide plate fits at desktop and the tall plate cannot fit on a phone at any legible size. The deconstruction is a detail plate showing three or four parts at a time, which is what a figure sheet does anyway. This is the load-bearing decision.
+- **It needs a third geometry.** A sticky figure gets about half a viewport, which the wide plate fits at desktop and the tall plate cannot fit on a phone at any legible size. The deconstruction is a detail plate showing three or four parts at a time, which is what a figure sheet does anyway. This was the load-bearing decision, and it was drawn and checked at 390×844 before anything was built on it. The frame is 440×320, it renders 251px tall on a phone, and the band that carries it comes to 49% of the viewport — the budget the brief assumed.
 - **Scroll owns exposure, the pointer owns reading.** The two inputs meet on the same parts now that a drawn part can be pointed at, so they are split across axes: scroll decides which parts are shown, pointing decides which shown part is read. Pinning is dropped inside the deconstruction, where a pin goes stale as soon as it is scrolled past.
+
+What building added, beyond the brief's three open questions (all three resolved there):
+
+- **The band is not drawn at all under `prefers-reduced-motion`.** Collapsing its durations instead would leave the plate hard-cutting between views on scroll, which is the thing being opted out of. Nothing is lost: every fact a detail view states is in the prose beside it, and the assembled FIG. 1 above the prose is the resolution.
+- **The reading line is measured from the band, not chosen as a share of the viewport.** A fixed share that clears the band on a phone lands a whole section ahead on a desktop. The wake-up strip and the decision line come from one measurement, because measuring twice lets a section boundary cross the decision line during a scroll jump without waking anything up. That bug was real and is why the decision is geometric rather than a running tally of what has crossed.
+- **`CaseStudySection` grew a `detailView` prop.** The prose-to-drawing mapping is declared on the section it describes rather than kept as a separate list of headings that could drift from them.
+- **`tests/e2e/loopworks-deconstruction.spec.ts`** covers both axes, the hold through a section that names no parts, hit testing following visibility, the `aria-hidden` band being unreachable by keyboard, reduced motion, and both media at three widths.
 
 ### Phase 5 — Finish (Claude)
 
