@@ -15,10 +15,11 @@ import {
  * depth stays one click away and never in the way.
  *
  * FIG. 1 is not repeated here. It is drawn at full scale immediately above,
- * and a thumbnail of the figure the visitor just read would be noise.
+ * and a thumbnail of the figure the visitor just read would be noise. Its way
+ * into the case study is the caption of the drawing itself.
  *
  * The ADLC entry is gone: per PRODUCT.md it retires as a standalone study and
- * folds into Loopworks as lineage. Its route still needs a redirect.
+ * folds into Loopworks as lineage, which the Loopworks case study now carries.
  */
 
 type Figure = {

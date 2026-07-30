@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import DeliveryLoopDrawing from "@/components/figures/delivery-loop-drawing";
 import DeliveryLoopDrawingTall from "@/components/figures/delivery-loop-drawing-tall";
 import { parts } from "@/components/figures/parts";
@@ -28,7 +29,13 @@ const RESTING_NOTE =
 const DESCRIPTION =
   "A labeled GitHub issue enters through a signed webhook and an admission guard, then passes through eight stages: planning, test writing, development, validation, code review, commit, pull request, and done. Two approval gates interrupt the flow, one after planning and one before the only GitHub write. A return path carries work from code review back to development or test writing. Every stage writes to a durable control plane.";
 
-const DeliveryLoopFigure = () => {
+/**
+ * `readHref` turns the caption into a way into the case study. The index sheet
+ * passes it, because FIG. 1 is the only figure with no cell in the index and
+ * would otherwise be the one figure a visitor cannot follow. The case study
+ * itself does not, since a figure does not link to the page it is already on.
+ */
+const DeliveryLoopFigure = ({ readHref }: { readHref?: string }) => {
   // Pointing at a part previews it; taking it pins it so the reading survives
   // moving the pointer away. Without the split, a click lands on a part that
   // hover has already made active and reads as turning it off.
@@ -52,6 +59,14 @@ const DeliveryLoopFigure = () => {
         <span className="type-label text-line-soft">
           Loopworks — agent-ready delivery loop
         </span>
+        {readHref && (
+          <Link
+            href={readHref}
+            className="type-label hover:text-annotation transition-colors sm:ml-auto"
+          >
+            Read FIG. 1
+          </Link>
+        )}
       </figcaption>
 
       {/* Readout. Holds the figure's own description until a part is taken,

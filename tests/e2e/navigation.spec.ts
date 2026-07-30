@@ -10,6 +10,13 @@ import {
 
 const projects = [
   {
+    // FIG. 1 has no index cell. Its link lives in the caption of the drawing
+    // itself, which is the only route into the flagship case study.
+    figure: 1,
+    heading: "Loopworks",
+    path: pageUrls.projects.loopworks,
+  },
+  {
     figure: 2,
     heading: "University of Idaho Website",
     path: pageUrls.projects.uidahoWebsite,
@@ -287,6 +294,9 @@ test.describe("Navigation", () => {
           exact: true,
         }),
         page.getByRole("link", { name: "read the repository", exact: true }),
+        // The caption link sits above the numeral table on the sheet, so it is
+        // reached before it in the tab order too.
+        page.getByRole("link", { name: "Read FIG. 1", exact: true }),
         page.getByRole("button", { name: /GitHub issue/ }),
       ];
 

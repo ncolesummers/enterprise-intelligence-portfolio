@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <main id="main-content" className="sheet">
       <Statement />
-      <DeliveryLoopFigure />
+      <DeliveryLoopFigure readHref="/projects/loopworks" />
       <FigureIndex />
       <section id="contact" className="py-20">
         <div className="mx-auto max-w-2xl">
