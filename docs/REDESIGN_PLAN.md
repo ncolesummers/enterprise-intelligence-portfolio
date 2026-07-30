@@ -116,9 +116,9 @@ Until they are drawn, those three cells render a reserved plate reading
 FIG. 6's hidden-line "not yet defined", which is a statement about the system
 rather than about the drawing. Do not merge the two treatments.
 
-### Phase 3 — Propagation (Codex)
+### Phase 3 — Propagation (Codex) — **done**
 
-Hand off once Phase 2 establishes the pattern. Codex gets a token and component contract plus one worked example, and does the mechanical spread:
+Handed off once Phase 2 established the pattern. Codex got a token and component contract plus one worked example, and did the mechanical spread:
 
 - Remaining **three** index plates, drawn to the specs recorded under Phase 2.
 - Case-study pages restyled onto the new system.
@@ -128,11 +128,29 @@ Hand off once Phase 2 establishes the pattern. Codex gets a token and component 
 
 **Codex must not** choose type, color, composition, or what a system looks like as a drawing. Deciding that MyUI reads as a particular diagram is design judgment.
 
-### Phase 4 — The deconstruction (Claude)
+The boundaries Phase 3 ran under, and the alternatives they rejected, are in `docs/adr/0001-phase-3-propagation-boundaries.md`.
 
-Scroll-driven exploded assembly on the Loopworks case study. Parts separate along their own leader lines. Layers must map to real components: GitHub Issue as source of truth, webhook, the named loops (agent-ready, development, research), sandbox, deployment.
+### Phase 4 — The Loopworks case study and its deconstruction (Claude)
 
-Requires the assembled static figure to be complete and good on its own first. Reduced motion resolves to it.
+The plan assumed this phase only had to add motion. It does not: **there was no Loopworks case study to add it to.** FIG. 1 was drawn on the index sheet and linked only to GitHub, while PRODUCT.md has Loopworks leading the work section and carrying the retired ADLC substance as lineage. So the phase splits.
+
+#### 4a — The case study — **done**
+
+`/projects/loopworks`, built from `docs/design/loopworks-parts.md` and nothing else. Nine sections: what it is, admission, the eight declared stages, the two approval gates, why it is a loop, isolation and the guarded write, the control plane, ADLC lineage, and a closing section stating what the source does not support.
+
+Decisions the plan did not anticipate:
+
+- **The drawing sits above the prose, and FIG. 1 is reused rather than redrawn.** It is the same component the index sheet renders, which is what makes it the assembled static state 4b resolves to. A visitor who reads only the figure and its numeral table has still had the argument.
+- **The way into the case study is the figure's own caption.** FIG. 1 has no index cell by Phase 2's decision, so it would otherwise have been the one figure a visitor could not follow. `readHref` puts a `Read FIG. 1` link in the caption band; the case study does not pass it, because a figure does not link to the page it is already on.
+- **Case-study primitives moved to `src/components/case-study.tsx`.** The four incumbents each declare their own copy, which was correct under Phase 3's mechanical-propagation boundary. A fifth copy was not. The incumbents are untouched and can migrate in Phase 5, when their specs are being read anyway.
+- **Source identifiers are set in Monaspace.** Stage keys, table names, label names, and commands are literal code even inside a sentence, and they are exactly what a reader would grep for. This follows the `LiteralCode` precedent already shipped on the profile-extractor page rather than inventing a treatment.
+- **The commit is on the page.** Saying the parts were read at `9727357` is a claim about when the drawing was made, so it stays true as the repository advances instead of decaying into a stale assertion.
+
+#### 4b — The deconstruction
+
+Scroll-driven exploded assembly on the case study. Parts separate along their own leader lines. Layers must map to real components: GitHub Issue as source of truth, webhook, the named loops (agent-ready, development, research), sandbox, deployment.
+
+The assembled figure it resolves to is now in place on the page that will carry the motion, so the precondition is met.
 
 ### Phase 5 — Finish (Claude)
 
@@ -150,8 +168,9 @@ Requires the assembled static figure to be complete and good on its own first. R
 
 ## Open items
 
-- **Cut the contact form.** The FormSpree integration was never paid for and is not used. Removing it takes `contact-form.tsx`, the `useFormValidation` hook, the mock route at `src/app/api/test/formspree-mock/route.ts`, the contact-form specs, and the `test:contact-form` / `test:integration` scripts with it, and turns the CONTACT nav item into a mailto. Best done alongside Phase 2, which rebuilds the index sheet anyway. Not urgent.
-- **`project-card.tsx`, `tech-stack.tsx`, and `animated-section.tsx` may now be unused** on the index sheet. Confirm before deleting; the case studies still import some of them.
+- ~~**Cut the contact form.**~~ Done in Phase 3. CONTACT is a mailto, and the component, hook, mock route, specs, and scripts are gone.
+- ~~**`project-card.tsx`, `tech-stack.tsx`, and `animated-section.tsx` may now be unused.**~~ Confirmed and removed in Phase 3.
+- **Where `/projects/agent-development-lifecycle` should land.** ADR 0001 chose `/` because no replacement route was in scope. One now exists and carries the ADLC substance as lineage, which is the condition the ADR conditioned its choice on. Retargeting the redirect to `/projects/loopworks` was deliberately left out of Phase 4a: it changes an accepted decision, so it wants a superseding record rather than a quiet edit. `adlc-redirect.spec.ts` pins the current destination.
 - Whether case studies keep their current length is open; PRODUCT.md does not bind it.
 - The spacing rhythm is still incumbent Tailwind spacing. Composing the index sheet did not force a scale, so this stays open and should be settled in Phase 5 rather than guessed at now.
 - The `.impeccable/design.json` sidecar is not generated yet; it waits on the component inventory in Phase 2.
