@@ -211,6 +211,106 @@ test.describe("Loopworks case study", () => {
     );
   });
 
+  test("reads a part off the drawing exactly as it reads off the numeral table", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto(route);
+
+    const figure = page.locator("figure").filter({ hasText: "FIG. 1" });
+    const readout = figure.locator("p.type-body");
+    // Exact text, because "Validation" is also a substring of the code-review
+    // stage's actor.
+    const validationBox = page.locator(
+      'svg:not(.fig-tall) g.fig-part:has(text:text-is("Validation"))',
+    );
+    // By accessible name from the numeral, since other parts' notes mention
+    // validation too.
+    const validationNumeral = figure.getByRole("button", {
+      name: /^50 Validation\b/,
+    });
+
+    // Nothing in the plate is reachable by keyboard or announced. The pointer
+    // route is additive; the numeral table stays the only announced one.
+    await expect(page.locator("svg [tabindex]")).toHaveCount(0);
+
+    // Pointing previews without taking, same as pointing at the numeral.
+    await validationBox.hover();
+    await expect(readout).toContainText("50 Validation");
+    await expect(validationNumeral).toHaveAttribute("aria-pressed", "false");
+
+    // Taking pins, so the reading survives the pointer moving away.
+    await validationBox.click();
+    await expect(validationNumeral).toHaveAttribute("aria-pressed", "true");
+    await page.getByRole("heading", { level: 1 }).hover();
+    await expect(readout).toContainText("50 Validation");
+
+    // Taking it again puts it down, matching the numeral's toggle.
+    await validationBox.click();
+    await expect(validationNumeral).toHaveAttribute("aria-pressed", "false");
+    await page.getByRole("heading", { level: 1 }).hover();
+    await expect(readout).toContainText("Thirteen numbered parts");
+
+    // A stage the numeral table does not list is inert rather than pointing at
+    // a part that has no entry.
+    const commitBox = page
+      .locator("svg:not(.fig-tall) g.fig-part")
+      .filter({ hasText: "Commit" });
+    await commitBox.hover();
+    await expect(readout).toContainText("Thirteen numbered parts");
+  });
+
+  test("brings the reading into view when a part is taken on the tall plate", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(route);
+
+    const readout = page
+      .locator("figure")
+      .filter({ hasText: "FIG. 1" })
+      .locator("p.type-body");
+    const placement = () =>
+      readout.evaluate(element => {
+        const reading = element.getBoundingClientRect();
+        // The title block is fixed across the foot of the sheet, so landing
+        // behind it is landing out of sight.
+        const floor = document
+          .querySelector("header")!
+          .getBoundingClientRect().top;
+        return { top: reading.top, bottom: reading.bottom, floor };
+      });
+
+    // The tall plate is most of a phone screen. Taken from its top, the reading
+    // starts well below the fold, so a tap that does not move the page reads as
+    // a tap that did nothing.
+    //
+    // Getting there is an instant scroll on purpose. The page scrolls smoothly
+    // outside reduced motion, and clicking a part while the setup scroll is
+    // still animating aims at a moving target.
+    await page.evaluate(() => {
+      const plate = document.querySelector("svg.fig-tall")!;
+      const top = plate.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: "instant" });
+    });
+    // Not readable: the reading starts at or below the foot of the sheet, where
+    // the fixed title block sits.
+    const before = await placement();
+    expect(before.top).toBeGreaterThanOrEqual(before.floor);
+
+    await page
+      .locator('svg.fig-tall g.fig-part:has(text:text-is("Planning"))')
+      .click();
+    await expect(readout).toContainText("20 Planning");
+
+    await expect
+      .poll(async () => {
+        const { top, bottom, floor } = await placement();
+        return top >= 0 && bottom <= floor;
+      })
+      .toBe(true);
+  });
+
   for (const viewport of [
     { name: "mobile", width: 390, height: 844 },
     { name: "tablet", width: 768, height: 1024 },
