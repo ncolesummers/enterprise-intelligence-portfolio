@@ -167,6 +167,8 @@ What building added, beyond the brief's three open questions (all three resolved
 
 `/impeccable audit` then `/impeccable polish`. Catch Codex drift, verify both themes, confirm the accessibility gates.
 
+One Phase 5 finding was pulled forward rather than left for the audit, because it cost the site every route into its own depth: **a figure cell is now the way into its case study.** The only link was a 13px line of label type at the foot of each cell, set in the same treatment as the tag chips beside it and the `FIG.` numeral above it, so nothing at rest distinguished a control from a caption — and the plate and the title, the two things a reader aims at, did nothing. The title now carries the link with its hit area stretched over the whole cell. FIG. 1 has no cell, so its caption link was padded to a real target on the same reasoning.
+
 ---
 
 ## Risk register

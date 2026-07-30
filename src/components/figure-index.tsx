@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import {
   PlateUIdaho,
@@ -6,6 +7,7 @@ import {
   PlateMikrotik,
   PlateForthcoming,
 } from "@/components/figures/index-plates";
+import { cn } from "@/lib/utils";
 
 /**
  * The figure index.
@@ -89,8 +91,31 @@ const figures: readonly Figure[] = [
   },
 ];
 
+/**
+ * One figure's cell.
+ *
+ * The whole cell is the way in, not a label at the foot of it. The title carries
+ * the link and its hit area is stretched over the cell with an inset overlay, so
+ * the plate — the largest thing in the cell, and the thing a reader actually aims
+ * at — leads where it looks like it should. One link per cell, named by the
+ * project, which is also the most useful name in a screen reader's list of links.
+ *
+ * The state is drawn rather than lit: the cell's own rule goes from leader ink to
+ * object ink, and the title takes the annotation red. That is the same vocabulary
+ * FIG. 1's parts use when pointed at, and it needs no shadow and no fill.
+ *
+ * The overlay does mean text inside a linked cell cannot be selected. That is the
+ * cost of the pattern, and it is worth paying on a cell whose entire purpose is to
+ * be followed.
+ */
 const Cell = ({ figure }: { figure: Figure }) => (
-  <article className="rule-leader flex h-full flex-col p-5">
+  <article
+    className={cn(
+      "rule-leader relative flex h-full flex-col p-5 transition-colors",
+      figure.href &&
+        "group hover:border-rule-object focus-within:border-rule-object",
+    )}
+  >
     <div className="flex items-baseline gap-3">
       <span className="type-label shrink-0">FIG. {figure.numeral}</span>
       {figure.forthcoming && (
@@ -118,7 +143,20 @@ const Cell = ({ figure }: { figure: Figure }) => (
       )}
     </figure>
 
-    <h3 className="type-title mt-auto">{figure.title}</h3>
+    <h3
+      className={cn(
+        "type-title mt-auto transition-colors",
+        figure.href && "group-hover:text-annotation",
+      )}
+    >
+      {figure.href ? (
+        <Link href={figure.href} className="after:absolute after:inset-0">
+          {figure.title}
+        </Link>
+      ) : (
+        figure.title
+      )}
+    </h3>
     <p className="type-body text-line-soft mt-3 text-[0.9375rem]">
       {figure.description}
     </p>
@@ -131,13 +169,18 @@ const Cell = ({ figure }: { figure: Figure }) => (
       ))}
     </ul>
 
+    {/* The cue, not the control. The title above is the link, so announcing this
+        too would put the same destination in the tab order twice under two
+        different names. It stays visible because a cell has to look followable
+        before it is pointed at. */}
     {figure.href && (
-      <Link
-        href={figure.href}
-        className="type-label hover:text-annotation mt-5 inline-block transition-colors"
+      <p
+        aria-hidden="true"
+        className="type-label text-line-soft group-hover:text-annotation mt-5 flex items-center gap-2 transition-colors"
       >
         Read FIG. {figure.numeral}
-      </Link>
+        <ArrowRight className="h-3 w-3" />
+      </p>
     )}
   </article>
 );

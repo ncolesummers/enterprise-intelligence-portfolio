@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import DeliveryLoopDrawing from "@/components/figures/delivery-loop-drawing";
 import DeliveryLoopDrawingTall from "@/components/figures/delivery-loop-drawing-tall";
@@ -80,12 +81,17 @@ const DeliveryLoopFigure = ({ readHref }: { readHref?: string }) => {
         <span className="type-label text-line-soft">
           Loopworks — agent-ready delivery loop
         </span>
+        {/* FIG. 1 has no cell in the index, so this caption is the only route
+            into the flagship case study. Padded to a real target and carrying an
+            arrow, because a 13px line of label type is not a way in that anyone
+            finds. The arrow is hidden, so the link is still named "Read FIG. 1". */}
         {readHref && (
           <Link
             href={readHref}
-            className="type-label hover:text-annotation transition-colors sm:ml-auto"
+            className="type-label hover:text-annotation inline-flex items-center gap-2 py-1.5 transition-colors sm:ml-auto"
           >
             Read FIG. 1
+            <ArrowRight className="h-3 w-3" aria-hidden="true" />
           </Link>
         )}
       </figcaption>
