@@ -31,6 +31,17 @@ import { cn } from "@/lib/utils";
  * FIG. 1 above the prose is the resolution — the complete drawing, which is why
  * 4a shipped it first — and this adds a way of looking at it rather than the
  * only one.
+ *
+ * **The pinned band is `lg` and wider only.** A phone browser spends around
+ * 145px of its height on chrome the layout viewport does not report, so the band
+ * measured at 53% of an iPhone's reported height is nearer 62% of the height the
+ * reader actually has — about five lines of prose left under it. Holding it to
+ * half would have meant a plate near 160px, well under the 251px that justified
+ * drawing a third geometry at all. Below `lg` the section carries its own plate
+ * instead, via `CaseStudySection`'s `detailFigure`: the same drawing, met on the
+ * way into the section it belongs to, with the prose getting the whole viewport
+ * back. This is the retreat the brief pre-authorised as a layout change rather
+ * than a rebuild, taken only where the pinned form was never affordable.
  */
 
 /**
@@ -59,12 +70,33 @@ const DeliveryLoopDeconstruction = ({ children }: { children: ReactNode }) => {
     setHeld(null);
   }, [shown]);
 
+  /**
+   * Whether the pinned band is drawn at all.
+   *
+   * It is not under reduced motion, and it is not below `lg`, where each section
+   * carries its own plate instead. Both are media queries rather than one-time
+   * facts, so this is state and not a check inside the observer effect: crossing
+   * either boundary has to build the observer or tear it down, and an effect that
+   * only read the query once would leave it dead after a resize into `lg`.
+   *
+   * False until mounted, which matches the server render.
+   */
+  const [drawn, setDrawn] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia(
+      "(min-width: 64rem) and (not (prefers-reduced-motion: reduce))",
+    );
+    const sync = () => setDrawn(query.matches);
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
+
   useEffect(() => {
     const root = rootRef.current;
     const band = bandRef.current;
-    if (!root || !band) return;
-    // Nothing to observe when the band is not drawn.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!root || !band || !drawn) return;
 
     const sections = Array.from(
       root.querySelectorAll<HTMLElement>("[data-detail-view]"),
@@ -134,7 +166,7 @@ const DeliveryLoopDeconstruction = ({ children }: { children: ReactNode }) => {
       observer?.disconnect();
       window.removeEventListener("resize", observe);
     };
-  }, []);
+  }, [drawn]);
 
   const view = detailViews.find(candidate => candidate.key === shown);
   const activePart = parts.find(part => part.numeral === active);
@@ -152,9 +184,9 @@ const DeliveryLoopDeconstruction = ({ children }: { children: ReactNode }) => {
         data-testid="deconstruction"
         className="fig-deconstruction-band bg-ground rule-object sticky top-0 z-10 mb-12 border-0 border-b pt-(--sheet-inner) pb-4"
       >
-        <div className="lg:flex lg:items-start lg:gap-10">
+        <div className="flex items-start gap-10">
           <DeliveryLoopDetail
-            className="mx-auto w-full max-w-[27rem] lg:mx-0 lg:shrink-0"
+            className="w-full max-w-[27rem] shrink-0"
             shown={shown}
             active={active}
             onPoint={setPointed}
@@ -163,7 +195,7 @@ const DeliveryLoopDeconstruction = ({ children }: { children: ReactNode }) => {
             }
           />
 
-          <div className="rule-object mt-4 border-0 border-t pt-3 lg:mt-0 lg:flex-1">
+          <div className="rule-object flex-1 border-0 border-t pt-3">
             <p className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
               <span className="type-label shrink-0">FIG. 1 · Detail</span>
               <span className="type-label text-line-soft">{view?.caption}</span>
@@ -172,7 +204,7 @@ const DeliveryLoopDeconstruction = ({ children }: { children: ReactNode }) => {
                 reader is in the middle of. */}
             <p
               className={cn(
-                "type-body measure mt-3 min-h-[6.5rem] sm:min-h-[4.5rem] lg:min-h-[6rem]",
+                "type-body measure mt-3 min-h-[6rem]",
                 activePart ? "text-line" : "text-line-soft",
               )}
             >

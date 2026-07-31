@@ -9,6 +9,8 @@ import {
   LiteralCode,
 } from "@/components/case-study";
 import DeliveryLoopDeconstruction from "@/components/figures/delivery-loop-deconstruction";
+import DeliveryLoopDetailInline from "@/components/figures/delivery-loop-detail-inline";
+import type { DetailViewKey } from "@/components/figures/delivery-loop-detail";
 import DeliveryLoopFigure from "@/components/figures/delivery-loop-figure";
 import { Button } from "@/components/ui/button";
 import { generatePageMetadata } from "@/lib/metadata";
@@ -37,6 +39,17 @@ export const metadata = generatePageMetadata({
 const REPOSITORY = "https://github.com/ncolesummers/loopworks";
 const ADLC_REPOSITORY =
   "https://github.com/ncolesummers/enterprise-agent-development-lifecycle";
+
+/**
+ * Names a section's detail view once, for both of the places that need it: the
+ * attribute the pinned band observes at `lg` and wider, and the plate the
+ * section draws for itself below that. Two spellings of the same key is exactly
+ * the drift the `detailView` attribute was introduced to avoid.
+ */
+const detail = (view: DetailViewKey) => ({
+  detailView: view,
+  detailFigure: <DeliveryLoopDetailInline view={view} />,
+});
 
 type Stage = {
   ordinal: number;
@@ -192,11 +205,13 @@ export default function LoopworksPage() {
         </div>
       </CaseStudySection>
 
-      {/* The six sections that name parts, and the detail plate that rides
-          them. Which detail is on the plate is decided by which section the
-          reader has reached; the mapping is declared on each section. */}
+      {/* The six sections that name parts. At `lg` and wider a pinned plate
+          rides them, and which detail it shows is decided by which section the
+          reader has reached. Below that the plate is not affordable pinned, so
+          each section draws its own instead. Either way the mapping is declared
+          once, on the section. */}
       <DeliveryLoopDeconstruction>
-        <CaseStudySection title="Admission" detailView="admission">
+        <CaseStudySection title="Admission" {...detail("admission")}>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="type-body text-line-soft measure space-y-4">
               <p>
@@ -250,7 +265,7 @@ export default function LoopworksPage() {
           </div>
         </CaseStudySection>
 
-        <CaseStudySection title="The Development Loop" detailView="stages">
+        <CaseStudySection title="The Development Loop" {...detail("stages")}>
           <p className="type-body text-line-soft measure mb-8">
             Eight stages, declared as a constant rather than assembled at
             runtime. Each names its actor and the artifacts that have to exist
@@ -308,7 +323,10 @@ export default function LoopworksPage() {
           </div>
         </CaseStudySection>
 
-        <CaseStudySection title="Where Judgment Stays Human" detailView="gates">
+        <CaseStudySection
+          title="Where Judgment Stays Human"
+          {...detail("gates")}
+        >
           <div className="grid gap-8 md:grid-cols-2">
             <div className="type-body text-line-soft measure space-y-4">
               <p>
@@ -352,7 +370,7 @@ export default function LoopworksPage() {
           </div>
         </CaseStudySection>
 
-        <CaseStudySection title="Why It Is a Loop" detailView="return">
+        <CaseStudySection title="Why It Is a Loop" {...detail("return")}>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="type-body text-line-soft measure space-y-4">
               <p>
@@ -396,7 +414,7 @@ export default function LoopworksPage() {
 
         <CaseStudySection
           title="Isolation and the Guarded Write"
-          detailView="write"
+          {...detail("write")}
         >
           <div className="grid gap-8 md:grid-cols-2">
             <div className="type-body text-line-soft measure space-y-4">
@@ -443,7 +461,7 @@ export default function LoopworksPage() {
           </div>
         </CaseStudySection>
 
-        <CaseStudySection title="The Control Plane" detailView="control">
+        <CaseStudySection title="The Control Plane" {...detail("control")}>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="type-body text-line-soft measure space-y-4">
               <p>

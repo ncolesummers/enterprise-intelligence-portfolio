@@ -69,6 +69,24 @@ const viewOf = (page: Page, view: string) =>
   band(page).locator(`[data-view="${view}"]`);
 
 /**
+ * The width at or above which the plate is pinned. Below it each section draws
+ * its own instead, so which element carries the drawing depends on the viewport
+ * and every width-parameterised assertion has to ask.
+ *
+ * `lg` in Tailwind's default scale, which is what the component's media query
+ * uses. Kept as a number here because the tests set pixel viewports.
+ */
+const PINNED_FROM = 1024;
+
+/** The plate a section's drawing is on at this width, pinned or in place. */
+const plateFor = (page: Page, width: number, view: string) =>
+  width >= PINNED_FROM
+    ? band(page)
+    : page.locator(`[data-detail-inline="${view}"]`);
+
+const inlinePlates = (page: Page) => page.getByTestId("deconstruction-inline");
+
+/**
  * Wait for the page to stop moving.
  *
  * The sheet scrolls smoothly, and Playwright brings a target into view before
@@ -111,7 +129,7 @@ const shownCaption = (page: Page) =>
 
 test.describe("Loopworks deconstruction", () => {
   for (const viewport of [
-    { name: "mobile", width: 390, height: 844 },
+    { name: "lg", width: 1024, height: 800 },
     { name: "desktop", width: 1440, height: 1000 },
   ]) {
     test(`scroll decides which parts are exposed at ${viewport.name}`, async ({
@@ -144,6 +162,62 @@ test.describe("Loopworks deconstruction", () => {
         // this section names and nothing else.
         await expect(band(page).locator("[data-shown]")).toHaveCount(1);
       }
+    });
+  }
+
+  for (const viewport of [
+    { name: "mobile", width: 390, height: 844 },
+    { name: "short phone", width: 375, height: 667 },
+    { name: "tablet", width: 768, height: 1024 },
+  ]) {
+    test(`gives the prose the viewport back at ${viewport.name}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize(viewport);
+      await page.goto(route);
+
+      // A phone browser spends height on chrome the layout viewport does not
+      // report, so a band measured at half the reported height is nearer
+      // two thirds of the height the reader has. Below `lg` nothing is pinned:
+      // the section draws its own plate and the prose keeps the whole viewport.
+      await expect(band(page)).toBeHidden();
+      await expect(inlinePlates(page)).toHaveCount(SECTION_VIEWS.length);
+
+      // Each section carries its own view, and only its own.
+      for (const { section, view, caption } of SECTION_VIEWS) {
+        const plate = plateFor(page, viewport.width, view);
+        await expect(plate).toBeVisible();
+        await expect(plate.locator("svg.fig-detail")).toBeVisible();
+        await expect(plate.locator("[data-shown]")).toHaveCount(1);
+        await expect(plate.locator(`[data-view="${view}"]`)).toHaveAttribute(
+          "data-shown",
+          "true",
+        );
+        await expect(
+          plate.locator("p").first().locator("span").nth(1),
+        ).toHaveText(caption);
+
+        // The plate belongs to the section it illustrates.
+        const heading = await plate.evaluate(element => {
+          const owner = element.closest("[data-detail-view]");
+          return owner?.querySelector("h2")?.textContent ?? null;
+        });
+        expect(heading).toBe(section);
+      }
+
+      // Nothing is pinned, so scrolling leaves no element parked at the top of
+      // the viewport eating the reader's room.
+      await readSection(page, "The Control Plane");
+      const pinned = await page.evaluate(() =>
+        Array.from(document.querySelectorAll("main *")).some(element => {
+          const style = getComputedStyle(element);
+          if (style.position !== "sticky" && style.position !== "fixed")
+            return false;
+          const box = element.getBoundingClientRect();
+          return box.height > 0 && box.top <= 2;
+        }),
+      );
+      expect(pinned).toBe(false);
     });
   }
 
@@ -262,39 +336,54 @@ test.describe("Loopworks deconstruction", () => {
     await expect(viewOf(page, "admission")).toHaveCSS("pointer-events", "auto");
   });
 
-  test("says nothing to assistive technology that the numerals do not", async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto(route);
-    await readSection(page, "Admission");
+  // Both forms of the plate are outside the accessibility tree, so both are
+  // checked: the retreat must not have made the drawing announceable on phones.
+  for (const viewport of [
+    { name: "mobile", width: 390, height: 844 },
+    { name: "desktop", width: 1440, height: 1000 },
+  ]) {
+    test(`says nothing to assistive technology that the numerals do not at ${viewport.name}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize(viewport);
+      await page.goto(route);
+      await readSection(page, "Admission");
 
-    // The plates stay aria-hidden and unfocusable; the numeral table on the
-    // assembled figure remains the only announced route to a part. Motion must
-    // never become the only way to learn something.
-    await expect(band(page)).toHaveAttribute("aria-hidden", "true");
-    await expect(band(page).locator("svg.fig-detail")).toHaveAttribute(
-      "aria-hidden",
-      "true",
-    );
-    await expect(
-      band(page).locator("a, button, input, select, textarea, [tabindex]"),
-    ).toHaveCount(0);
+      const plate = plateFor(page, viewport.width, "admission");
 
-    // The band is not a stop on the way through the page.
-    await page.getByRole("link", { name: "Return to index" }).focus();
-    for (let step = 0; step < 25; step += 1) {
-      await page.keyboard.press("Tab");
-      const insideBand = await page.evaluate(() => {
-        const active = document.activeElement;
-        return Boolean(active?.closest('[data-testid="deconstruction"]'));
-      });
-      expect(insideBand).toBe(false);
-    }
-  });
+      // The plates stay aria-hidden and unfocusable; the numeral table on the
+      // assembled figure remains the only announced route to a part. Motion must
+      // never become the only way to learn something.
+      await expect(plate).toHaveAttribute("aria-hidden", "true");
+      await expect(plate.locator("svg.fig-detail")).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      );
+      await expect(
+        plate.locator("a, button, input, select, textarea, [tabindex]"),
+      ).toHaveCount(0);
+
+      // No plate is a stop on the way through the page, in either form.
+      await page.getByRole("link", { name: "Return to index" }).focus();
+      for (let step = 0; step < 25; step += 1) {
+        await page.keyboard.press("Tab");
+        const insidePlate = await page.evaluate(() => {
+          const active = document.activeElement;
+          return Boolean(
+            active?.closest(
+              '[data-testid="deconstruction"], [data-testid="deconstruction-inline"]',
+            ),
+          );
+        });
+        expect(insidePlate).toBe(false);
+      }
+    });
+  }
 
   test("is not drawn at all under reduced motion", async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
+    // At a width where it would otherwise be pinned, so this measures reduced
+    // motion rather than the breakpoint.
+    await page.setViewportSize({ width: 1440, height: 1000 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(route);
 
@@ -332,12 +421,15 @@ test.describe("Loopworks deconstruction", () => {
       await page.goto(route);
       await readSection(page, "The Development Loop");
 
+      // Whichever form this width draws, the medium contract is the same.
+      const plate = plateFor(page, viewport.width, "stages");
+
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - window.innerWidth,
       );
       expect(overflow).toBeLessThanOrEqual(1);
 
-      // The band is drawn inside the sheet's content column, like everything
+      // The plate is drawn inside the sheet's content column, like everything
       // else on the sheet.
       const sheetContent = await page.getByRole("main").evaluate(element => {
         const bounds = element.getBoundingClientRect();
@@ -347,9 +439,9 @@ test.describe("Loopworks deconstruction", () => {
           right: bounds.right - Number.parseFloat(style.paddingRight),
         };
       });
-      const bandBox = (await band(page).boundingBox())!;
-      expect(bandBox.x).toBeGreaterThanOrEqual(sheetContent.left - 1);
-      expect(bandBox.x + bandBox.width).toBeLessThanOrEqual(
+      const plateBox = (await plate.boundingBox())!;
+      expect(plateBox.x).toBeGreaterThanOrEqual(sheetContent.left - 1);
+      expect(plateBox.x + plateBox.width).toBeLessThanOrEqual(
         sheetContent.right + 1,
       );
 
@@ -360,25 +452,23 @@ test.describe("Loopworks deconstruction", () => {
         note: await locator.evaluate(
           element => getComputedStyle(element).color,
         ),
-        annotations: await band(page)
-          .locator("*")
-          .evaluateAll(elements => {
-            const probe = document.createElement("span");
-            probe.style.color = "var(--annotation)";
-            document.body.append(probe);
-            const annotation = getComputedStyle(probe).color;
-            probe.remove();
-            return elements.filter(element => {
-              const style = getComputedStyle(element);
-              return [style.color, style.fill, style.stroke].includes(
-                annotation,
-              );
-            }).length;
-          }),
+        annotations: await plate.locator("*").evaluateAll(elements => {
+          const probe = document.createElement("span");
+          probe.style.color = "var(--annotation)";
+          document.body.append(probe);
+          const annotation = getComputedStyle(probe).color;
+          probe.remove();
+          return elements.filter(element => {
+            const style = getComputedStyle(element);
+            return [style.color, style.fill, style.stroke].includes(annotation);
+          }).length;
+        }),
       });
 
+      const note = plate.locator("p.type-body");
+
       await expect(page.locator("html")).not.toHaveClass(/dark/);
-      const paper = await read(readout(page));
+      const paper = await read(note);
       await page
         .getByRole("button", {
           name: "Switch to the blueprint medium",
@@ -386,7 +476,7 @@ test.describe("Loopworks deconstruction", () => {
         })
         .click();
       await expect(page.locator("html")).toHaveClass(/dark/);
-      const blueprint = await read(readout(page));
+      const blueprint = await read(note);
 
       expect(blueprint.background).not.toBe(paper.background);
       for (const medium of [paper, blueprint]) {
@@ -399,10 +489,11 @@ test.describe("Loopworks deconstruction", () => {
       }
 
       // And one part pointed at is exactly one annotation.
-      await viewOf(page, "stages")
+      await plate
+        .locator('[data-view="stages"]')
         .locator('g.fig-part:has(text:text-is("Validation"))')
         .hover();
-      await expect(readout(page)).toContainText("50 Validation");
+      await expect(note).toContainText("50 Validation");
     });
   }
 });

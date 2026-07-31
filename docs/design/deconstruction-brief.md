@@ -194,6 +194,44 @@ deliberately `aria-hidden`. The announced route to every part is the numeral
 table on the assembled figure, which is above the prose and independent of scroll
 position. Nothing in the deconstruction is the only way to reach anything.
 
+## The retreat, taken on phones (2026-07-30)
+
+The brief named a retreat and pre-authorised it as "a layout change rather than a
+rebuild". It has been taken, below `lg` only.
+
+**What the measurement missed.** The half-viewport budget above was checked
+against the viewport a phone *reports*, and that is not the height a reader
+gets. Mobile Safari spends roughly 145px on chrome the layout viewport does not
+subtract. Measured on an iPhone 16 Pro: the band is 53% of the reported 874px and
+about 62% of the ~730px actually available, which leaves roughly five lines of
+prose under it. The screenshot that prompted this showed a sentence cut off
+mid-word behind the fixed title block.
+
+**Why no amount of trimming fixes it.** Holding the band to half of 730px means a
+plate around 160px, against the 251px that justified drawing a third geometry in
+the first place. The 150px reading block is not slack either — at phone widths
+the resting note fills all four of its lines, so shortening the reserve would
+clip the readings that taking a part produces.
+
+**What was done instead.** Below `lg` nothing is pinned. Each of the six sections
+draws its own detail plate, above its prose, through `CaseStudySection`'s new
+`detailFigure`. Same plate, same parts, same pointer contract; what is given up
+is scroll-driven exposure, and only where it was never affordable. `lg` and wider
+are untouched — still 369px and 37% at 1440×1000, 46% at the `lg` edge.
+
+Two consequences worth keeping:
+
+- **The view key is named once per section.** `detailView` and `detailFigure` are
+  produced together by one `detail(view)` helper on the page, because two
+  spellings of the same key is exactly the drift the `detailView` attribute was
+  introduced to prevent.
+- **Whether the band is drawn is one rule set in `globals.css`, not a utility.**
+  It has two independent reasons not to be drawn, and a Tailwind `lg:block` in
+  the utilities layer silently beat the reduced-motion rule in the components
+  layer — layer order wins over specificity, so the test caught a band that was
+  still drawn under `prefers-reduced-motion`. The component matches the same
+  query in JS to decide whether to run the observer; the two must agree.
+
 ## Two things worth knowing before touching this
 
 **The reading line is measured, not chosen.** Which view is on the plate is

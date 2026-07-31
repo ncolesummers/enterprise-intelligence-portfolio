@@ -649,11 +649,31 @@
     transition-delay: calc(var(--fig-i, 0) * 45ms);
   }
 
-  /* Reduced motion resolves to the assembled drawing, which sits above the
-     prose and is complete on its own. The deconstruction is a second way of
-     looking at that drawing, not the only way, so here it is simply not drawn —
-     collapsing its durations instead would leave the plate cutting between
-     views on scroll, which is the thing being opted out of. */
+  /* Whether the pinned band is drawn at all, in one place, because it has two
+     independent reasons not to be and they must not be expressed in different
+     cascade layers — a `lg:block` utility would silently beat a reduced-motion
+     rule written here, since utilities is the later layer.
+     `delivery-loop-deconstruction.tsx` matches this query in JS to decide
+     whether to run the observer; the two have to say the same thing.
+
+     Below `lg`: a pinned plate costs more viewport than it earns on a phone,
+     whose browser chrome takes height the layout viewport never reports. Each
+     section draws its own plate instead.
+
+     Under reduced motion: the deconstruction is a second way of looking at the
+     assembled drawing above the prose, not the only way, so it is simply not
+     drawn — collapsing its durations instead would leave the plate cutting
+     between views on scroll, which is the thing being opted out of. */
+  .fig-deconstruction-band {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .fig-deconstruction-band {
+      display: block;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .fig-deconstruction-band {
       display: none;

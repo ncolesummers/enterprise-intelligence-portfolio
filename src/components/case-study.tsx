@@ -18,10 +18,18 @@ import { cn } from "@/lib/utils";
 
 export function CaseStudySection({
   children,
+  detailFigure,
   detailView,
   title,
 }: {
   children: ReactNode;
+  /**
+   * The section's own drawing, for viewports where a pinned figure costs more
+   * room than it earns. Rendered under the heading and above the prose, so the
+   * reader meets the drawing on the way in. The deconstruction supplies this
+   * only below its own breakpoint; above it the pinned band is the figure.
+   */
+  detailFigure?: ReactNode;
   /**
    * Which detail view of the page's figure this section reaches, if the section
    * is inside a scroll-driven deconstruction. The attribute is what the
@@ -41,6 +49,7 @@ export function CaseStudySection({
         <h2 className="type-headline">{title}</h2>
         <div className="h-px flex-1 bg-rule-leader" aria-hidden="true" />
       </div>
+      {detailFigure}
       {children}
     </section>
   );
