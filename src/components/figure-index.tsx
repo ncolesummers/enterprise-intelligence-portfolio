@@ -111,7 +111,7 @@ const figures: readonly Figure[] = [
 const Cell = ({ figure }: { figure: Figure }) => (
   <article
     className={cn(
-      "rule-leader relative flex h-full flex-col p-5 transition-colors",
+      "rule-leader relative flex h-full flex-col p-6 transition-colors",
       figure.href &&
         "group hover:border-rule-object focus-within:border-rule-object",
     )}
@@ -123,7 +123,7 @@ const Cell = ({ figure }: { figure: Figure }) => (
       )}
     </div>
 
-    <figure className="mt-5 mb-6">
+    <figure className="mt-6 mb-6">
       {figure.plate ?? (
         <svg
           viewBox="0 0 320 170"
@@ -176,7 +176,7 @@ const Cell = ({ figure }: { figure: Figure }) => (
     {figure.href && (
       <p
         aria-hidden="true"
-        className="type-label text-line-soft group-hover:text-annotation mt-5 flex items-center gap-2 transition-colors"
+        className="type-label text-line-soft group-hover:text-annotation mt-6 flex items-center gap-2 transition-colors"
       >
         Read FIG. {figure.numeral}
         <ArrowRight className="h-3 w-3" />
@@ -186,7 +186,7 @@ const Cell = ({ figure }: { figure: Figure }) => (
 );
 
 const FigureIndex = () => (
-  <section id="work" className="pt-24 pb-20">
+  <section id="work" className="pt-24">
     <div className="rule-object flex flex-wrap items-baseline gap-x-4 gap-y-1 border-0 border-b pb-4">
       <h2 className="type-label shrink-0">Figure index</h2>
       <p className="type-label text-line-soft">Figures 2 through 6</p>

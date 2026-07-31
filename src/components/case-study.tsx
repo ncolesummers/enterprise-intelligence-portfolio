@@ -1,3 +1,5 @@
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -15,6 +17,63 @@ import { cn } from "@/lib/utils";
  * The shapes are unchanged from the incumbents, including the test ids, so a
  * migration is an import swap rather than a rewrite.
  */
+
+/**
+ * The head of a case study: the way back, the figure's own numeral, its title,
+ * and what it is in one paragraph.
+ *
+ * It states the numeral because the index sends readers here by it — "Read
+ * FIG. 4" led to a page that never mentioned FIG. 4, which dropped the site's
+ * navigating conceit at the exact moment it was followed. The numeral is a
+ * caption, not a link back to the cell the reader just left.
+ *
+ * Set from the left margin. The incumbent headers were centred, which put the
+ * one centred block on each page directly above prose set from the left, and
+ * centred display type is the habit of the convention this world replaces.
+ */
+export function CaseStudyHeader({
+  children,
+  figure,
+  summary,
+  title,
+}: {
+  /** Buttons and tag lists belonging to the head, rendered under the summary. */
+  children?: ReactNode;
+  /** The figure numeral this study is drawn as on the index sheet. */
+  figure: number;
+  summary: ReactNode;
+  title: string;
+}) {
+  return (
+    <header className="mb-16">
+      <Link
+        href="/#work"
+        className="type-label text-line-soft hover:text-annotation inline-flex items-center gap-2 transition-colors"
+      >
+        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
+        Return to index
+      </Link>
+
+      {/* Spelled as the index cells spell it, so the numeral a reader followed
+          and the numeral that greets them are the same string. Carries a test id
+          because a study that draws its own plate states the numeral twice —
+          once here for the page, once in the plate's caption for the drawing —
+          and both are correct. */}
+      <p
+        className="type-label text-line-soft mt-8"
+        data-testid="case-study-figure"
+      >
+        FIG. {figure}
+      </p>
+      <h1 className="type-display mt-3">{title}</h1>
+      <p className="type-body text-line-soft measure mt-6">{summary}</p>
+
+      {children && (
+        <div className="mt-8 flex flex-wrap items-center gap-4">{children}</div>
+      )}
+    </header>
+  );
+}
 
 export function CaseStudySection({
   children,

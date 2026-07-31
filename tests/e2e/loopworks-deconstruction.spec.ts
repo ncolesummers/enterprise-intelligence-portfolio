@@ -301,6 +301,13 @@ test.describe("Loopworks deconstruction", () => {
     await page.goto(route);
     await readSection(page, "The Development Loop");
 
+    // The scroll decides which view is drawn a frame or more after it lands, and
+    // a view that is not shown takes no pointer events by design. Clicking
+    // before the switch therefore lands on nothing and leaves the previous
+    // section's reading standing, which looks exactly like the staleness this
+    // test is about — so wait for the plate to be showing stages first.
+    await expect(viewOf(page, "stages")).toHaveAttribute("data-shown", "true");
+
     await viewOf(page, "stages")
       .locator('g.fig-part:has(text:text-is("Validation"))')
       .click();

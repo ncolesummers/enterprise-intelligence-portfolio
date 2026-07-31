@@ -1,6 +1,6 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
-import { contrastRatio, readComputedColor } from "../fixtures/contrast";
+import { contrastRatio, readResolved } from "../fixtures/contrast";
 import {
   expectReducedMotionTransition,
   expectRuntimeHealthClean,
@@ -72,19 +72,40 @@ async function expectSocialContract(
   }
 }
 
+/**
+ * The ground and every reference on a surface, read in one style recalculation.
+ *
+ * Reading them separately can straddle a medium switch: the class lands on
+ * `html`, the ground is sampled before the repaint and comes back paper, and the
+ * references are sampled after and come back blueprint chalk. Chalk on paper is
+ * 1.1:1, so the assertion fails loudly on a pair that never existed on screen.
+ * A stale colour is fully resolved, so polling for resolution cannot catch it —
+ * only sampling the set together can, which is what `readResolved` is for.
+ *
+ * Selected by `aria-label` inside the evaluate because a Playwright locator
+ * cannot cross into it. That is still name-based selection, not DOM shape.
+ */
 async function expectSocialContrast(page: Page, surfaces: Locator[]) {
-  const background = await readComputedColor(
-    page.locator("body"),
-    "backgroundColor",
-  );
-
   for (const surface of surfaces) {
-    for (const social of socials) {
-      const color = await readComputedColor(
-        surface.getByRole("link", { name: social.name, exact: true }),
-        "color",
+    const sample = await readResolved(
+      () =>
+        surface.evaluate(
+          (root, names) => ({
+            background: getComputedStyle(document.body).backgroundColor,
+            colors: names.map(name => {
+              const link = root.querySelector(`a[aria-label="${name}"]`);
+              return link ? getComputedStyle(link).color : "";
+            }),
+          }),
+          socials.map(social => social.name),
+        ),
+      value => [value.background, ...value.colors],
+    );
+
+    for (const color of sample.colors) {
+      expect(contrastRatio(color, sample.background)).toBeGreaterThanOrEqual(
+        4.5,
       );
-      expect(contrastRatio(color, background)).toBeGreaterThanOrEqual(4.5);
     }
   }
 }

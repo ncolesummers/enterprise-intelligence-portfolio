@@ -83,9 +83,21 @@ test.describe("Navigation", () => {
       await expect(
         page.getByRole("heading", { level: 2, name: "Figure index" }),
       ).toBeVisible();
+      // The sheet's foot names its off-sheet references rather than asking to
+      // be contacted, and each row shows the address before it is followed.
       await expect(
-        page.getByRole("heading", { level: 2, name: "Get In Touch" }),
+        page.getByRole("heading", { level: 2, name: "Off-sheet references" }),
       ).toBeVisible();
+      const references = page.locator("#contact");
+      await expect(
+        references.getByRole("link", { name: "GitHub profile", exact: true }),
+      ).toContainText("github.com/ncolesummers");
+      await expect(
+        references.getByRole("link", {
+          name: "Email nate@ncolesummers.com",
+          exact: true,
+        }),
+      ).toHaveAttribute("href", "mailto:nate@ncolesummers.com");
 
       const titleBlock = page.getByRole("banner");
       const primary = titleBlock.getByRole("navigation", { name: "Primary" });
@@ -156,6 +168,13 @@ test.describe("Navigation", () => {
             exact: true,
           }),
         ).toBeVisible();
+
+        // The numeral is how the index sends a reader here, so the destination
+        // states it. "Read FIG. 4" previously landed on a page that never
+        // mentioned FIG. 4, which dropped the conceit as it was being followed.
+        await expect(page.getByTestId("case-study-figure")).toHaveText(
+          `FIG. ${project.figure}`,
+        );
       });
 
       test(`serves ${project.path} directly without application 404s`, async ({
@@ -280,10 +299,12 @@ test.describe("Navigation", () => {
         .click();
 
       await expect(page).toHaveURL(pageUrls.about);
+      // The about sheet leads with the stance, not the name: the title block
+      // already states the name on every screen.
       await expect(
         page.getByRole("heading", {
           level: 1,
-          name: "Nathan Cole Summers",
+          name: "AI removes the toil. Humans keep the judgment.",
         }),
       ).toBeVisible();
       await expect(

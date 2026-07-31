@@ -9,7 +9,11 @@ const icons: Record<string, typeof Github> = {
   Instagram: Instagram,
 };
 
-/** Off-sheet references shared by the title block and contact section. */
+/**
+ * Off-sheet references as a row of marks, for the title block, where there is
+ * width for a glyph and not for a name. The index sheet's foot names each
+ * destination instead; see `references.tsx`.
+ */
 const SocialLinks = ({ className }: { className?: string }) => (
   <div className={cn("flex items-stretch", className)}>
     {Socials.map(social => {
