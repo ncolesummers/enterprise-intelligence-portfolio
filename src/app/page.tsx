@@ -1,28 +1,20 @@
-import Header from "@/components/header";
-import Hero from "@/components/hero";
-import ProjectGrid from "@/components/project-grid";
-import ContactForm from "@/components/contact-form";
-import Footer from "@/components/footer";
+import Statement from "@/components/statement";
+import DeliveryLoopFigure from "@/components/figures/delivery-loop-figure";
+import FigureIndex from "@/components/figure-index";
+import SocialLinks from "@/components/social-links";
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
-      <main id="main-content">
-        <Hero />
-        <ProjectGrid />
-        <section id="contact" className="py-20">
-          <div className="container px-4 sm:px-8 md:px-16">
-            <div className="max-w-2xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8">
-                Get In Touch
-              </h2>
-              <ContactForm />
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+    <main id="main-content" className="sheet">
+      <Statement />
+      <DeliveryLoopFigure readHref="/projects/loopworks" />
+      <FigureIndex />
+      <section id="contact" className="py-20">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="type-headline mb-8 text-center">Get In Touch</h2>
+          <SocialLinks className="justify-center" />
+        </div>
+      </section>
+    </main>
   );
 }

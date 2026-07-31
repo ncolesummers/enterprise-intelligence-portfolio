@@ -1,137 +1,202 @@
-import { test, expect } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
-test.describe("Social Icons Accessibility", () => {
-  test("should display social icons with proper contrast in light mode", async ({
+import { contrastRatio, readComputedColor } from "../fixtures/contrast";
+import {
+  expectReducedMotionTransition,
+  expectRuntimeHealthClean,
+  observeRuntimeHealth,
+  type RuntimeHealth,
+} from "../fixtures/runtime-health";
+
+const socials = [
+  {
+    name: "LinkedIn profile",
+    href: "https://www.linkedin.com/in/n-cole-summers/",
+  },
+  {
+    name: "GitHub profile",
+    href: "https://github.com/ncolesummers",
+  },
+  {
+    name: "Instagram profile",
+    href: "https://www.instagram.com/n__cole__summers/",
+  },
+] as const;
+
+const titleBlock = (page: Page) => page.getByRole("banner");
+const contactSection = (page: Page) => page.locator("#contact");
+const runtimeByPage = new WeakMap<Page, RuntimeHealth>();
+
+test.beforeEach(({ page, baseURL }) => {
+  if (!baseURL) throw new Error("Playwright baseURL is required");
+  runtimeByPage.set(page, observeRuntimeHealth(page, baseURL));
+});
+
+test.afterEach(async ({ page }) => {
+  await page.waitForTimeout(50);
+  expectRuntimeHealthClean(runtimeByPage.get(page)!);
+});
+
+async function expectKeyboardFocus(
+  page: Page,
+  link: Locator,
+  browserName: string,
+) {
+  await link.focus();
+  await expect(link).toBeFocused();
+
+  await page.keyboard.press(
+    browserName === "webkit" ? "Alt+Shift+Tab" : "Shift+Tab",
+  );
+  await page.keyboard.press(browserName === "webkit" ? "Alt+Tab" : "Tab");
+  await expect(link).toBeFocused();
+  await expect(link).toHaveCSS("outline-style", "solid");
+}
+
+async function expectSocialContract(
+  page: Page,
+  surface: Locator,
+  browserName: string,
+) {
+  for (const social of socials) {
+    const link = surface.getByRole("link", {
+      name: social.name,
+      exact: true,
+    });
+    await expect(link).toBeVisible();
+    await expect(link).toHaveAttribute("href", social.href);
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(link.locator("svg")).toHaveAttribute("aria-hidden", "true");
+    await expectKeyboardFocus(page, link, browserName);
+  }
+}
+
+async function expectSocialContrast(page: Page, surfaces: Locator[]) {
+  const background = await readComputedColor(
+    page.locator("body"),
+    "backgroundColor",
+  );
+
+  for (const surface of surfaces) {
+    for (const social of socials) {
+      const color = await readComputedColor(
+        surface.getByRole("link", { name: social.name, exact: true }),
+        "color",
+      );
+      expect(contrastRatio(color, background)).toBeGreaterThanOrEqual(4.5);
+    }
+  }
+}
+
+test.describe("Social links accessibility", () => {
+  test("exposes the exact off-sheet references in both desktop surfaces", async ({
     page,
+    browserName,
   }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
-    await page.emulateMedia({ colorScheme: "light" });
 
-    const socialIcons = page.locator('a[aria-label*="Profile"]');
-    await expect(socialIcons).toHaveCount(6); // 3 each in desktop nav and footer (mobile nav icons inside Sheet portal, not rendered until opened)
+    await expectSocialContract(page, titleBlock(page), browserName);
+    await expectSocialContract(page, contactSection(page), browserName);
 
-    // Verify visible icons have proper contrast
-    const visibleIcons = page.locator('a[aria-label*="Profile"]:visible');
-    const iconCount = await visibleIcons.count();
-    expect(iconCount).toBeGreaterThan(0);
-
-    for (let i = 0; i < iconCount; i++) {
-      const icon = visibleIcons.nth(i);
-      const color = await icon.evaluate(el => getComputedStyle(el).color);
-
-      // Ensure not white text (invisible in light mode)
-      expect(color).not.toBe("rgb(255, 255, 255)");
-      expect(color).not.toBe("rgba(255, 255, 255, 1)");
+    for (const social of socials) {
+      await expect(
+        page.getByRole("link", { name: social.name, exact: true }),
+      ).toHaveCount(2);
     }
   });
 
-  test("should maintain visibility during theme transitions", async ({
+  test("keeps the contact references visible and focusable on mobile", async ({
     page,
+    browserName,
   }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
 
-    // Get visible LinkedIn icon (desktop nav on desktop, mobile nav on mobile)
-    const linkedinIcon = page
-      .locator('a[aria-label="LinkedIn Profile"]:visible')
-      .first();
-
-    // Test light mode
-    await page.emulateMedia({ colorScheme: "light" });
-    await expect(linkedinIcon).toBeVisible();
-
-    // Test dark mode
-    await page.emulateMedia({ colorScheme: "dark" });
-    await expect(linkedinIcon).toBeVisible();
-
-    // Test transition back to light
-    await page.emulateMedia({ colorScheme: "light" });
-    await expect(linkedinIcon).toBeVisible();
-  });
-
-  test("should have proper security attributes on all social links", async ({
-    page,
-  }) => {
-    await page.goto("/");
-
-    const socialLinks = page.locator('a[aria-label*="Profile"]');
-
-    for (const link of await socialLinks.all()) {
-      // Verify security attributes
-      await expect(link).toHaveAttribute("target", "_blank");
-      await expect(link).toHaveAttribute("rel", "noopener noreferrer");
-
-      // Verify href starts with https
-      const href = await link.getAttribute("href");
-      expect(href).toMatch(/^https:\/\//);
+    for (const social of socials) {
+      await expect(
+        titleBlock(page).getByRole("link", {
+          name: social.name,
+          exact: true,
+        }),
+      ).not.toBeVisible();
     }
+    await expectSocialContract(page, contactSection(page), browserName);
+    await expectSocialContrast(page, [contactSection(page)]);
+
+    const navigationLinks = page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("link");
+    for (const link of await navigationLinks.all()) {
+      await expectReducedMotionTransition(link);
+    }
+    for (const social of socials) {
+      await expectReducedMotionTransition(
+        contactSection(page).getByRole("link", {
+          name: social.name,
+          exact: true,
+        }),
+      );
+    }
+
+    await page
+      .getByRole("button", {
+        name: "Switch to the blueprint medium",
+        exact: true,
+      })
+      .click();
+    await expect(page.locator("html")).toHaveClass(/dark/);
+    await expectSocialContract(page, contactSection(page), browserName);
+    await expectSocialContrast(page, [contactSection(page)]);
   });
 
-  test("should prevent reverse tabnabbing vulnerabilities", async ({
+  test("maintains WCAG AA contrast in PAPER and BLUEPRINT", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/");
+
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
+    await expectSocialContrast(page, [titleBlock(page), contactSection(page)]);
+
+    await page
+      .getByRole("button", {
+        name: "Switch to the blueprint medium",
+        exact: true,
+      })
+      .click();
+    await expect(page.locator("html")).toHaveClass(/dark/);
+    await expectSocialContrast(page, [titleBlock(page), contactSection(page)]);
+  });
+
+  test("opens external references without an opener", async ({
     page,
     context,
   }) => {
+    await context.route("https://www.linkedin.com/**", route =>
+      route.fulfill({
+        contentType: "text/html",
+        body: "<!doctype html><title>LinkedIn test destination</title>",
+      }),
+    );
     await page.goto("/");
 
-    // Create a promise to handle the new page
-    const pagePromise = context.waitForEvent("page");
+    const linkedin = contactSection(page).getByRole("link", {
+      name: "LinkedIn profile",
+      exact: true,
+    });
+    const [destination] = await Promise.all([
+      context.waitForEvent("page"),
+      linkedin.click(),
+    ]);
+    await destination.waitForLoadState();
 
-    // Click a visible social link (first visible one)
-    await page
-      .locator('a[aria-label="LinkedIn Profile"]:visible')
-      .first()
-      .click();
-
-    const newPage = await pagePromise;
-    await newPage.waitForLoadState();
-
-    // Verify original page is still on the portfolio
-    expect(page.url()).toContain("127.0.0.1:3001");
-
-    // Verify new page opened to LinkedIn
-    expect(newPage.url()).toContain("linkedin.com");
-
-    // Verify no window.opener access (security check)
-    try {
-      const hasOpener = await newPage.evaluate(() => window.opener !== null);
-      expect(hasOpener).toBe(false);
-    } catch (error) {
-      // If page navigated away quickly, that's expected behavior for LinkedIn
-      // The important thing is that the link opened properly
-      console.log("External site navigated quickly - this is expected");
-    }
-
-    await newPage.close();
-  });
-
-  test("should have consistent styling across all social icons", async ({
-    page,
-  }) => {
-    await page.goto("/");
-
-    // Get all social icon elements
-    const allSocialIcons = page.locator('a[aria-label*="Profile"]');
-    await expect(allSocialIcons).toHaveCount(6); // 2 locations × 3 icons (desktop nav + footer; mobile nav inside Sheet portal)
-
-    // Test each platform appears in rendered locations
-    const platforms = ["LinkedIn", "GitHub", "Instagram"];
-
-    for (const platform of platforms) {
-      const platformIcons = page.locator(`a[aria-label="${platform} Profile"]`);
-      await expect(platformIcons).toHaveCount(2); // desktop nav and footer
-
-      // Verify visible instances have consistent attributes
-      const visiblePlatformIcons = page.locator(
-        `a[aria-label="${platform} Profile"]:visible`,
-      );
-      const visibleCount = await visiblePlatformIcons.count();
-      expect(visibleCount).toBeGreaterThan(0);
-
-      for (let i = 0; i < visibleCount; i++) {
-        const icon = visiblePlatformIcons.nth(i);
-        await expect(icon).toBeVisible();
-        await expect(icon).toHaveAttribute("target", "_blank");
-        await expect(icon).toHaveAttribute("rel", "noopener noreferrer");
-      }
-    }
+    expect(destination.url()).toBe(
+      "https://www.linkedin.com/in/n-cole-summers/",
+    );
+    expect(await destination.evaluate(() => window.opener)).toBeNull();
+    await destination.close();
   });
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useId, useRef, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
 export interface ScreenshotPage {
@@ -23,11 +23,13 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
 }) => {
   const [activePage, setActivePage] = useState(defaultPage);
   const [isZoomed, setIsZoomed] = useState(false);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const panelId = `${useId()}-tabpanel`;
 
   if (pages.length === 0) {
     return (
-      <div className="rounded-lg border border-border bg-card p-8 text-center">
-        <p className="text-muted-foreground">No screenshots available</p>
+      <div className="rule-leader p-8 text-center">
+        <p className="type-body text-line-soft">No screenshots available</p>
       </div>
     );
   }
@@ -37,21 +39,51 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
 
   return (
     <div className={className}>
-      {/* Page Tabs */}
       <div className="mb-4 overflow-x-auto">
-        <div className="flex gap-2 border-b border-border pb-2" role="tablist">
+        <div
+          className="flex gap-2 border-b border-rule-leader pb-2"
+          role="tablist"
+          aria-label="University website pages"
+        >
           {pages.map((page, index) => (
             <button
-              key={index}
+              key={page.name}
+              ref={element => {
+                tabRefs.current[index] = element;
+              }}
               role="tab"
-              id={`tab-${index}`}
+              id={`tab-${page.name}`}
               aria-selected={activePage === index}
-              aria-controls={`tabpanel-${index}`}
-              onClick={() => setActivePage(index)}
-              className={`whitespace-nowrap rounded-t-lg px-4 py-2.5 min-h-[44px] text-sm font-medium transition-colors ${
+              aria-controls={panelId}
+              tabIndex={activePage === index ? 0 : -1}
+              onClick={() => {
+                setActivePage(index);
+                setIsZoomed(false);
+              }}
+              onKeyDown={event => {
+                let nextIndex: number | undefined;
+
+                if (event.key === "ArrowRight") {
+                  nextIndex = (index + 1) % pages.length;
+                } else if (event.key === "ArrowLeft") {
+                  nextIndex = (index - 1 + pages.length) % pages.length;
+                } else if (event.key === "Home") {
+                  nextIndex = 0;
+                } else if (event.key === "End") {
+                  nextIndex = pages.length - 1;
+                }
+
+                if (nextIndex === undefined) return;
+
+                event.preventDefault();
+                setActivePage(nextIndex);
+                setIsZoomed(false);
+                tabRefs.current[nextIndex]?.focus();
+              }}
+              className={`type-label min-h-11 whitespace-nowrap border-b-2 px-4 py-2.5 transition-colors ${
                 activePage === index
-                  ? "bg-muted text-foreground"
-                  : "text-muted-foreground hover:bg-card hover:text-foreground/80"
+                  ? "border-annotation text-annotation"
+                  : "text-line-soft hover:text-annotation border-transparent"
               }`}
             >
               {page.label}
@@ -60,24 +92,24 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
         </div>
       </div>
 
-      {/* Tab Panel */}
       <div
         role="tabpanel"
-        id={`tabpanel-${activePage}`}
-        aria-labelledby={`tab-${activePage}`}
+        id={panelId}
+        aria-labelledby={`tab-${currentPage.name}`}
       >
-        {/* Page Description */}
         {currentPage.description && (
           <div className="mb-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="type-body text-line-soft text-sm">
               {currentPage.description}
             </p>
           </div>
         )}
 
-        {/* Screenshot Display */}
-        <div
-          className={`relative overflow-hidden rounded-lg border border-border bg-card ${
+        <button
+          type="button"
+          aria-label={`${isZoomed ? "Restore" : "Zoom"} ${currentPage.label} screenshot`}
+          aria-pressed={isZoomed}
+          className={`rule-leader relative block w-full overflow-hidden text-left ${
             isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"
           }`}
           onClick={() => setIsZoomed(!isZoomed)}
@@ -102,18 +134,12 @@ const TabbedScreenshotGallery: React.FC<TabbedScreenshotGalleryProps> = ({
             />
           </div>
 
-          {/* Zoom Hint */}
           {!isZoomed && (
-            <div className="absolute bottom-4 right-4 rounded-lg bg-background/80 px-3 py-2 text-xs text-foreground/80 backdrop-blur">
+            <div className="bg-ground rule-leader text-line-soft type-label absolute right-4 bottom-4 px-3 py-2">
               Click to zoom
             </div>
           )}
-        </div>
-
-        {/* Image Info */}
-        <div className="mt-2 text-center text-xs text-muted-foreground">
-          <span>Click image to zoom</span>
-        </div>
+        </button>
       </div>
     </div>
   );

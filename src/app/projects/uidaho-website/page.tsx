@@ -1,14 +1,12 @@
-import { Button } from "@/components/ui/button";
+import type { ReactNode } from "react";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import ContentCard from "@/components/ui/content-card";
-import BulletedList, { ListItem } from "@/components/ui/bulleted-list";
-import Section from "@/components/ui/section";
-import { generatePageMetadata } from "@/lib/metadata";
-import TabbedScreenshotGallery from "@/components/tabbed-screenshot-gallery";
-import Footer from "@/components/footer";
 
-// Screenshot imports
+import TabbedScreenshotGallery from "@/components/tabbed-screenshot-gallery";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { generatePageMetadata } from "@/lib/metadata";
+
 import applyDesktop from "@/assets/uidaho-screenshots/uidaho-apply-desktop.webp";
 import costsDesktop from "@/assets/uidaho-screenshots/uidaho-costs-desktop.webp";
 import studentsDesktop from "@/assets/uidaho-screenshots/uidaho-current-students-desktop.webp";
@@ -18,9 +16,55 @@ import giftDesktop from "@/assets/uidaho-screenshots/uidaho-make-a-gift-desktop.
 export const metadata = generatePageMetadata({
   title: "University of Idaho Website Redesign",
   description:
-    "Full-stack developer for University of Idaho's modern website redesign using Sitecore, Next.js, TypeScript, Storybook, Azure Blob Storage, and serverless functions.",
+    "Full-stack developer for the University of Idaho website redesign using Sitecore, Next.js, TypeScript, Storybook, and Azure services.",
   path: "/projects/uidaho-website",
 });
+
+interface CaseStudySectionProps {
+  children: ReactNode;
+  title: string;
+}
+
+function CaseStudySection({ children, title }: CaseStudySectionProps) {
+  return (
+    <section className="mb-16" data-testid="case-study-section">
+      <div className="mb-8 flex items-center gap-4">
+        <h2 className="type-headline">{title}</h2>
+        <div className="h-px flex-1 bg-rule-leader" aria-hidden="true" />
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function EvidencePanel({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn("rule-leader p-6", className)}
+      data-testid="evidence-panel"
+    >
+      {children}
+    </div>
+  );
+}
+
+function EvidenceList({ children }: { children: ReactNode }) {
+  return (
+    <ul className="type-body text-line-soft divide-y divide-rule-leader">
+      {children}
+    </ul>
+  );
+}
+
+function EvidenceItem({ children }: { children: ReactNode }) {
+  return <li className="py-3 first:pt-0 last:pb-0">{children}</li>;
+}
 
 export default function UIdahoWebsitePage() {
   const screenshotPages = [
@@ -57,349 +101,213 @@ export default function UIdahoWebsitePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
-        <div className="container flex h-14 items-center">
+    <main id="main-content" className="sheet">
+      <Link
+        href="/#work"
+        className="type-label text-line-soft hover:text-annotation inline-flex items-center gap-2 transition-colors"
+      >
+        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
+        Return to index
+      </Link>
+
+      <header className="mb-16 flex flex-col items-center text-center">
+        <h1 className="type-display mt-8 mb-6">University of Idaho Website</h1>
+        <p className="type-body text-line-soft measure mb-8">
+          A redesign of the university&apos;s public website built with
+          Sitecore, Next.js, TypeScript, Storybook, and Azure services.
+        </p>
+        <Button variant="outline" asChild>
           <Link
-            href="/"
-            className="flex items-center gap-2 text-sm hover:text-muted-foreground transition-colors"
+            href="https://www.uidaho.edu"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
+            <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            Visit live site
           </Link>
-        </div>
+        </Button>
+
+        <ul
+          className="mt-8 flex flex-wrap justify-center gap-2"
+          aria-label="Technology stack"
+        >
+          {["Next.js", "TypeScript", "Sitecore", "Storybook", "Azure"].map(
+            technology => (
+              <li key={technology} className="type-label rule-leader px-2 py-1">
+                {technology}
+              </li>
+            ),
+          )}
+        </ul>
       </header>
 
-      <main className="container py-12 px-4">
-        {/* Hero Section */}
-        <div className="mb-16 flex flex-col items-center text-center">
-          <h1 className="mb-6 text-4xl font-bold tracking-tighter md:text-6xl">
-            University of Idaho Website
-          </h1>
-          <p className="mb-8 max-w-2xl text-xl text-muted-foreground">
-            A modern redesign of the University of Idaho website built with
-            Sitecore CMS, Next.js, TypeScript, and Azure cloud services
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              variant="outline"
-              className="flex items-center gap-2"
-              asChild
-            >
-              <Link href="https://www.uidaho.edu" target="_blank">
-                <ExternalLink className="h-4 w-4" />
-                Visit Live Site
-              </Link>
-            </Button>
-          </div>
-
-          {/* Tech Stack Badges */}
-          <div className="mt-8 flex flex-wrap justify-center gap-2">
-            {[
-              "Next.js",
-              "TypeScript",
-              "Sitecore",
-              "Tailwind CSS",
-              "Storybook",
-              "Azure",
-            ].map(tech => (
-              <span
-                key={tech}
-                className="rounded-full bg-muted px-3 py-1 text-sm"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Introduction */}
-        <Section title="Introduction">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div>
-              <p className="mb-4 text-lg text-muted-foreground">
-                The University of Idaho website redesign represents a
-                comprehensive modernization of the university&apos;s digital
-                presence, transitioning to a headless CMS architecture powered
-                by Sitecore and Next.js.
-              </p>
-              <p className="mb-4 text-lg text-muted-foreground">
-                As a full-stack developer on this project, I worked across the
-                entire technology stack—from building reusable React components
-                with Storybook to implementing Azure Blob Storage and serverless
-                functions for dynamic content delivery.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                This project demonstrates enterprise-level architecture with a
-                focus on performance, scalability, and maintainability.
-              </p>
-            </div>
-            <ContentCard>
-              <h3 className="mb-4 text-xl font-semibold">Project Highlights</h3>
-              <BulletedList>
-                <ListItem>
-                  Headless CMS architecture with Sitecore and Next.js
-                </ListItem>
-                <ListItem>Component-driven development with Storybook</ListItem>
-                <ListItem>
-                  Azure Blob Storage for media asset management
-                </ListItem>
-                <ListItem>
-                  TypeScript serverless functions for dynamic content
-                </ListItem>
-                <ListItem>Performance optimizations with SSR and SSG</ListItem>
-                <ListItem>Responsive design with Tailwind CSS</ListItem>
-              </BulletedList>
-            </ContentCard>
-          </div>
-        </Section>
-
-        {/* My Role */}
-        <Section title="My Role & Responsibilities">
-          <ContentCard>
-            <div className="space-y-4">
-              <div>
-                <h3 className="mb-2 text-lg font-semibold text-foreground">
-                  Full-Stack Development
-                </h3>
-                <p className="text-muted-foreground">
-                  Developed across the entire technology stack, from frontend
-                  React components to backend Azure services. Focused on
-                  creating a seamless integration between Sitecore&apos;s
-                  headless CMS and the Next.js frontend.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-lg font-semibold text-foreground">
-                  Key Contributions
-                </h3>
-                <BulletedList>
-                  <ListItem>
-                    <strong className="mr-1">Component Architecture:</strong>
-                    Built reusable React components with TypeScript and
-                    documented them in Storybook for consistent UI patterns
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">Azure Integration:</strong>
-                    Implemented Azure Blob Storage for anonymized poll data and
-                    created serverless functions for dynamic content delivery.
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">Performance Optimization:</strong>
-                    Leveraged Next.js features including Server-Side Rendering
-                    (SSR), Static Site Generation (SSG), and image optimization
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">Sitecore Integration:</strong>
-                    Integrated with Sitecore&apos;s headless APIs to deliver
-                    content from the CMS to the Next.js frontend
-                  </ListItem>
-                </BulletedList>
-              </div>
-            </div>
-          </ContentCard>
-        </Section>
-
-        {/* Key Features */}
-        <Section title="Key Features & Technologies">
-          <div className="grid gap-6 md:grid-cols-3">
-            <ContentCard>
-              <h3 className="mb-3 text-lg font-semibold">
-                Component Library & Storybook
-              </h3>
-              <p className="mb-3 text-muted-foreground">
-                Developed a comprehensive component library using React and
-                TypeScript, documented in Storybook for team collaboration and
-                consistency.
-              </p>
-              <BulletedList>
-                <ListItem>Reusable UI components</ListItem>
-                <ListItem>Interactive component documentation</ListItem>
-                <ListItem>Visual regression testing</ListItem>
-                <ListItem>Design system enforcement</ListItem>
-              </BulletedList>
-            </ContentCard>
-
-            <ContentCard>
-              <h3 className="mb-3 text-lg font-semibold">
-                Sitecore Headless CMS
-              </h3>
-              <p className="mb-3 text-muted-foreground">
-                Implemented a headless CMS architecture connecting Sitecore to
-                the Next.js frontend via REST APIs and GraphQL.
-              </p>
-              <BulletedList>
-                <ListItem>Decoupled content management</ListItem>
-                <ListItem>API-driven content delivery</ListItem>
-                <ListItem>Content preview capabilities</ListItem>
-                <ListItem>Multi-site content sharing</ListItem>
-              </BulletedList>
-            </ContentCard>
-
-            <ContentCard>
-              <h3 className="mb-3 text-lg font-semibold">
-                Performance & Azure
-              </h3>
-              <p className="mb-3 text-muted-foreground">
-                Utilized Next.js performance features and Azure services for
-                optimal load times and scalability.
-              </p>
-              <BulletedList>
-                <ListItem>Azure Blob Storage for assets</ListItem>
-                <ListItem>TypeScript serverless functions</ListItem>
-                <ListItem>Next.js SSR and SSG</ListItem>
-                <ListItem>Image optimization & CDN</ListItem>
-              </BulletedList>
-            </ContentCard>
-          </div>
-        </Section>
-
-        {/* Technical Architecture */}
-        <Section title="Technical Architecture">
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">Technology Stack</h3>
-            <div className="grid gap-6 md:grid-cols-2">
-              <div>
-                <h4 className="mb-2 font-semibold text-foreground">Frontend</h4>
-                <BulletedList>
-                  <ListItem>
-                    <strong className="mr-1">Next.js:</strong>React framework
-                    with SSR/SSG capabilities
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">TypeScript:</strong>Type-safe
-                    development
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">Tailwind CSS:</strong>Utility-first
-                    styling
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">Storybook:</strong>Component
-                    documentation and testing
-                  </ListItem>
-                </BulletedList>
-              </div>
-              <div>
-                <h4 className="mb-2 font-semibold text-foreground">
-                  Backend & Infrastructure
-                </h4>
-                <BulletedList>
-                  <ListItem>
-                    <strong className="mr-1">Sitecore:</strong>Headless CMS for
-                    content management
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">Azure Blob Storage:</strong>
-                    Scalable media storage
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">Azure Functions:</strong>Serverless
-                    TypeScript functions
-                  </ListItem>
-                  <ListItem>
-                    <strong className="mr-1">REST APIs & GraphQL:</strong>
-                    Content delivery
-                  </ListItem>
-                </BulletedList>
-              </div>
-            </div>
-          </ContentCard>
-        </Section>
-
-        {/* Project Impact */}
-        <Section title="Project Impact">
-          <ContentCard>
-            <h3 className="mb-4 text-xl font-semibold">
-              Modern Redesign Benefits
-            </h3>
-            <p className="mb-4 text-muted-foreground">
-              The redesigned University of Idaho website represents a
-              significant technological advancement from the legacy system,
-              delivering improved performance, scalability, and user experience.
+      <CaseStudySection title="Introduction">
+        <div className="grid gap-8 md:grid-cols-2">
+          <div className="type-body text-line-soft measure space-y-4">
+            <p>
+              The redesign moved the university&apos;s public website to a
+              headless architecture: Sitecore holds authored content while a
+              separate Next.js application renders it for delivery on Azure.
             </p>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <h4 className="mb-2 font-semibold text-foreground">
-                  Technical Improvements
-                </h4>
-                <BulletedList>
-                  <ListItem>
-                    50%+ faster page load times with Next.js SSG/SSR
-                  </ListItem>
-                  <ListItem>
-                    Fully responsive design across all device sizes
-                  </ListItem>
-                  <ListItem>
-                    Component-driven architecture for easier maintenance
-                  </ListItem>
-                  <ListItem>Improved SEO and accessibility compliance</ListItem>
-                </BulletedList>
-              </div>
-              <div>
-                <h4 className="mb-2 font-semibold text-foreground">
-                  Content Management
-                </h4>
-                <BulletedList>
-                  <ListItem>Decoupled headless CMS architecture</ListItem>
-                  <ListItem>Content preview capabilities for editors</ListItem>
-                  <ListItem>Scalable Azure cloud infrastructure</ListItem>
-                  <ListItem>TypeScript for type-safe development</ListItem>
-                </BulletedList>
-              </div>
-            </div>
-          </ContentCard>
-        </Section>
-
-        {/* Website Showcase */}
-        <Section title="Website Showcase">
-          <p className="mb-6 text-muted-foreground">
-            Explore screenshots of key pages from the University of Idaho
-            website. Switch between tabs to view different sections of the site,
-            showcasing the modern design and comprehensive content architecture.
-          </p>
-          <TabbedScreenshotGallery pages={screenshotPages} defaultPage={0} />
-          <p className="mt-4 text-sm text-muted-foreground">
-            Screenshots captured January 2026. Visit{" "}
-            <a
-              href="https://www.uidaho.edu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent hover:text-accent/80 underline"
-            >
-              uidaho.edu
-            </a>{" "}
-            for the live site experience.
-          </p>
-        </Section>
-
-        {/* Call to Action */}
-        <section className="mt-16 rounded-lg border border-border bg-gradient-to-br from-card to-background p-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">
-            Interested in learning more?
-          </h2>
-          <p className="mb-8 text-lg text-muted-foreground">
-            Explore the live University of Idaho website or get in touch to
-            discuss enterprise web development projects.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              variant="outline"
-              className="flex items-center gap-2"
-              asChild
-            >
-              <Link href="https://www.uidaho.edu" target="_blank">
-                <ExternalLink className="h-4 w-4" />
-                Visit uidaho.edu
-              </Link>
-            </Button>
-            <Button variant="accent" asChild>
-              <Link href="/#contact">Contact Me</Link>
-            </Button>
+            <p>
+              As a full-stack developer, I built reusable React components and
+              worked on the Azure services that support content delivery.
+            </p>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Project highlights</h3>
+            <EvidenceList>
+              <EvidenceItem>
+                Separate Sitecore content management and Next.js rendering
+              </EvidenceItem>
+              <EvidenceItem>
+                Component development documented in Storybook
+              </EvidenceItem>
+              <EvidenceItem>
+                Azure Blob Storage and TypeScript serverless functions
+              </EvidenceItem>
+              <EvidenceItem>Server-side and static rendering</EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
+        </div>
+      </CaseStudySection>
+
+      <CaseStudySection title="My Role & Responsibilities">
+        <EvidencePanel>
+          <h3 className="type-title mb-4">Key contributions</h3>
+          <EvidenceList>
+            <EvidenceItem>
+              <strong className="text-line">Component architecture:</strong>{" "}
+              built reusable React components with TypeScript and documented
+              them in Storybook.
+            </EvidenceItem>
+            <EvidenceItem>
+              <strong className="text-line">Azure integration:</strong>{" "}
+              implemented Blob Storage for anonymized poll data and serverless
+              functions for dynamic content delivery.
+            </EvidenceItem>
+            <EvidenceItem>
+              <strong className="text-line">Rendering:</strong> used Next.js
+              server-side rendering, static generation, and image optimization.
+            </EvidenceItem>
+            <EvidenceItem>
+              <strong className="text-line">Sitecore integration:</strong>{" "}
+              connected the headless CMS APIs to the separate Next.js frontend.
+            </EvidenceItem>
+          </EvidenceList>
+        </EvidencePanel>
+      </CaseStudySection>
+
+      <CaseStudySection title="Key Features & Technologies">
+        <div className="grid gap-6 md:grid-cols-3">
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Component Library & Storybook</h3>
+            <EvidenceList>
+              <EvidenceItem>Reusable React components</EvidenceItem>
+              <EvidenceItem>Interactive component documentation</EvidenceItem>
+              <EvidenceItem>Visual regression testing</EvidenceItem>
+              <EvidenceItem>Shared design-system patterns</EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
+
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Sitecore Headless CMS</h3>
+            <EvidenceList>
+              <EvidenceItem>Decoupled content management</EvidenceItem>
+              <EvidenceItem>API-driven content delivery</EvidenceItem>
+              <EvidenceItem>Content preview capabilities</EvidenceItem>
+              <EvidenceItem>Multi-site content sharing</EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
+
+          <EvidencePanel>
+            <h3 className="type-title mb-4">Performance & Azure</h3>
+            <EvidenceList>
+              <EvidenceItem>Azure Blob Storage for assets</EvidenceItem>
+              <EvidenceItem>TypeScript serverless functions</EvidenceItem>
+              <EvidenceItem>Next.js SSR and SSG</EvidenceItem>
+              <EvidenceItem>Image optimization and CDN delivery</EvidenceItem>
+            </EvidenceList>
+          </EvidencePanel>
+        </div>
+      </CaseStudySection>
+
+      <CaseStudySection title="Technical Architecture">
+        <EvidencePanel>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div>
+              <h3 className="type-title mb-4">Publishing path</h3>
+              <EvidenceList>
+                <EvidenceItem>Sitecore holds authored content.</EvidenceItem>
+                <EvidenceItem>
+                  The Next.js application receives and renders that content.
+                </EvidenceItem>
+                <EvidenceItem>
+                  Azure provides the delivery services.
+                </EvidenceItem>
+              </EvidenceList>
+            </div>
+            <div>
+              <h3 className="type-title mb-4">Implementation</h3>
+              <EvidenceList>
+                <EvidenceItem>React and TypeScript components</EvidenceItem>
+                <EvidenceItem>Storybook component documentation</EvidenceItem>
+                <EvidenceItem>Azure Blob Storage and Functions</EvidenceItem>
+                <EvidenceItem>Next.js SSR and SSG</EvidenceItem>
+              </EvidenceList>
+            </div>
+          </div>
+        </EvidencePanel>
+      </CaseStudySection>
+
+      <CaseStudySection title="Project Impact">
+        <EvidencePanel>
+          <h3 className="type-title mb-4">Modern redesign benefits</h3>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div>
+              <h4 className="type-title mb-4">Technical improvements</h4>
+              <EvidenceList>
+                <EvidenceItem>
+                  Responsive presentation across device sizes
+                </EvidenceItem>
+                <EvidenceItem>
+                  Component-driven architecture for maintenance
+                </EvidenceItem>
+                <EvidenceItem>SEO and accessibility support</EvidenceItem>
+              </EvidenceList>
+            </div>
+            <div>
+              <h4 className="type-title mb-4">Content management</h4>
+              <EvidenceList>
+                <EvidenceItem>Decoupled headless CMS architecture</EvidenceItem>
+                <EvidenceItem>Content preview for editors</EvidenceItem>
+                <EvidenceItem>Azure cloud infrastructure</EvidenceItem>
+                <EvidenceItem>TypeScript development</EvidenceItem>
+              </EvidenceList>
+            </div>
+          </div>
+        </EvidencePanel>
+      </CaseStudySection>
+
+      <CaseStudySection title="Website Showcase">
+        <p className="type-body text-line-soft measure mb-6">
+          These cleared screenshots show public pages from the University of
+          Idaho website. Use the tabs to compare sections of the live site.
+        </p>
+        <TabbedScreenshotGallery pages={screenshotPages} defaultPage={0} />
+        <p className="type-body text-line-soft mt-4 text-sm">
+          Screenshots captured January 2026. Visit{" "}
+          <a
+            href="https://www.uidaho.edu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-annotation underline underline-offset-4"
+          >
+            uidaho.edu
+          </a>{" "}
+          for the current site.
+        </p>
+      </CaseStudySection>
+    </main>
   );
 }

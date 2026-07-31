@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Type specimen — The Figure Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..800&family=Barlow+Semi+Condensed:wght@400;500;600;700&family=Saira+Semi+Condensed:wght@400;500;600;700&family=Chivo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F5F0;
+    --paper-2:#FFFDF9;
+    --ink:#16181C;
+    --ink-60:rgba(22,24,28,.60);
+    --ink-30:rgba(22,24,28,.30);
+    --ink-12:rgba(22,24,28,.12);
+    --vermilion:#C8402A;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding:32px 20px 80px;
+  }
+  .wrap{max-width:1080px;margin:0 auto}
+
+  /* ---- sheet chrome ---- */
+  .sheet{
+    background:var(--paper-2);
+    border:1.5px solid var(--ink);
+    padding:0;
+    margin-bottom:28px;
+    position:relative;
+  }
+  .sheet-inner{padding:34px 38px 30px}
+  .sheet::after{
+    content:"";position:absolute;inset:7px;border:1px solid var(--ink-12);pointer-events:none;
+  }
+  .titleblock{
+    border-top:1.5px solid var(--ink);
+    display:flex;flex-wrap:wrap;
+    font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .titleblock div{
+    padding:9px 14px;border-right:1px solid var(--ink-12);
+    color:var(--ink-60);
+  }
+  .titleblock div b{display:block;color:var(--ink);font-weight:600;letter-spacing:.1em;margin-top:3px;font-size:11px}
+  .titleblock div:last-child{border-right:0;margin-left:auto;text-align:right}
+
+  /* ---- page header ---- */
+  .pagehead{max-width:1080px;margin:0 auto 30px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .pagehead h1{font-size:15px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin:0}
+  .pagehead p{margin:6px 0 0;font-size:13px;color:var(--ink-60);max-width:56ch;line-height:1.5}
+  .legend{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-60);text-align:right;line-height:1.9}
+  .swatch{display:inline-block;width:11px;height:11px;vertical-align:-1px;margin-right:6px;border:1px solid var(--ink-30)}
+
+  /* ---- specimen blocks ---- */
+  .name{
+    display:flex;align-items:baseline;gap:14px;margin-bottom:22px;
+    border-bottom:1px solid var(--ink-12);padding-bottom:10px;
+  }
+  .num{
+    font-size:10px;letter-spacing:.1em;border:1.5px solid var(--ink);
+    width:26px;height:26px;display:grid;place-items:center;border-radius:50%;
+    flex:none;font-weight:700;
+  }
+  .name h2{margin:0;font-size:19px;letter-spacing:.04em;font-weight:700}
+  .name .meta{margin-left:auto;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-60);text-align:right}
+
+  .hero{
+    font-size:clamp(30px,4.6vw,58px);
+    line-height:.98;letter-spacing:-.02em;font-weight:700;
+    margin:0 0 6px;text-wrap:balance;
+  }
+  .heroalt{
+    font-size:clamp(19px,2.3vw,27px);line-height:1.12;letter-spacing:.01em;
+    font-weight:500;color:var(--ink-60);margin:0 0 26px;
+  }
+
+  .cols{display:grid;grid-template-columns:1.25fr 1fr;gap:38px;align-items:start}
+  @media(max-width:760px){.cols{grid-template-columns:1fr;gap:26px}}
+
+  .body p{font-size:15px;line-height:1.62;margin:0 0 12px;max-width:60ch}
+  .body p.small{font-size:12.5px;color:var(--ink-60);line-height:1.6}
+
+  /* callout / drawing-ish demo */
+  .callouts{display:flex;flex-direction:column;gap:12px}
+  .callrow{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .callnum{
+    font-weight:700;font-size:11px;letter-spacing:.06em;
+    border:1.5px solid var(--ink);border-radius:50%;
+    width:30px;height:30px;display:grid;place-items:center;flex:none;
+  }
+  .callrow .lead{flex:1;height:1px;background:var(--ink-30)}
+  .callrow.active .callnum{border-color:var(--vermilion);color:var(--vermilion)}
+  .callrow.active{color:var(--vermilion)}
+  .callrow.active .lead{background:var(--vermilion)}
+
+  .figcap{
+    margin-top:20px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    font-weight:700;
+  }
+  .figcap span{color:var(--ink-60);font-weight:400;letter-spacing:.1em}
+
+  .uibits{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .tag{
+    font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    border:1px solid var(--ink-30);padding:5px 10px;color:var(--ink-60);
+  }
+  .btn{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+    border:1.5px solid var(--ink);padding:8px 16px;background:var(--ink);color:var(--paper-2);
+  }
+  .btn.ghost{background:none;color:var(--ink)}
+
+  .numerals{font-size:13px;letter-spacing:.06em;color:var(--ink-60);margin-top:16px}
+
+  /* font assignments */
+  .f-archivo{font-family:"Archivo",sans-serif}
+  .f-barlow{font-family:"Barlow Semi Condensed",sans-serif}
+  .f-saira{font-family:"Saira Semi Condensed",sans-serif}
+  .f-din{font-family:"DIN Condensed","DIN Alternate",sans-serif}
+  .f-chivo{font-family:"Chivo",sans-serif}
+
+  .note{
+    max-width:1080px;margin:0 auto 34px;font-size:12.5px;line-height:1.65;
+    color:var(--ink-60);border-left:2px solid var(--vermilion);padding-left:14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="pagehead">
+  <div>
+    <h1>Type specimen &mdash; The Figure Sheet</h1>
+    <p>Four candidates rendered in the committed world: paper ground, ink line, vermilion annotation. Judge them here, not in a font menu.</p>
+  </div>
+  <div class="legend">
+    <div><span class="swatch" style="background:#F7F5F0"></span>Paper</div>
+    <div><span class="swatch" style="background:#16181C"></span>Ink</div>
+    <div><span class="swatch" style="background:#C8402A"></span>Vermilion &mdash; active callout</div>
+  </div>
+</div>
+
+<div class="note">
+  <strong>Reference sheet A</strong> shows real DIN, using the DIN Condensed that ships with macOS. You can see it, but we cannot serve it on the web without licensing. It is the north star the other three are measured against.
+</div>
+
+<div class="wrap">
+
+  <!-- A: real DIN reference -->
+  <section class="sheet">
+    <div class="sheet-inner f-din">
+      <div class="name">
+        <div class="num">A</div>
+        <h2>DIN Condensed &mdash; reference only</h2>
+        <div class="meta">macOS system &middot; not web-licensed</div>
+      </div>
+      <div class="hero">I build the systems that build software.</div>
+      <div class="heroalt">Agentic software factories, and the loops that run them.</div>
+      <div class="cols">
+        <div class="body">
+          <p>Loopworks is an agentic software factory portal for planning, executing, validating, and improving software delivery loops. GitHub Issues are the source of truth for roadmap, planning, milestones, decisions, and execution state.</p>
+          <p class="small">This is the genuine article: monolinear strokes, squared arcs, tall x-height, built for reproduction rather than expression.</p>
+          <div class="uibits">
+            <span class="btn">Selected figures</span>
+            <span class="btn ghost">View on GitHub</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Bun</span>
+          </div>
+          <div class="numerals">Numerals &mdash; 0123456789 &middot; FIG. 1 &middot; SHEET 3 OF 7 &middot; REV. B</div>
+        </div>
+        <div class="callouts">
+          <div class="callrow"><div class="callnum">102</div><div class="lead"></div><span>GitHub Issue</span></div>
+          <div class="callrow active"><div class="callnum">104</div><div class="lead"></div><span>Agent-ready loop</span></div>
+          <div class="callrow"><div class="callnum">106</div><div class="lead"></div><span>Development loop</span></div>
+          <div class="callrow"><div class="callnum">108</div><div class="lead"></div><span>Sandbox</span></div>
+          <div class="figcap">FIG. 1 <span>&mdash; delivery loop, assembled view</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="titleblock f-din">
+      <div>Drawn by<b>N. Cole Summers</b></div>
+      <div>Sheet<b>A of D</b></div>
+      <div>Face<b>DIN Condensed</b></div>
+      <div>Status<b>Reference</b></div>
+    </div>
+  </section>
+
+  <!-- B: Archivo -->
+  <section class="sheet">
+    <div class="sheet-inner f-archivo">
+      <div class="name">
+        <div class="num">B</div>
+        <h2>Archivo</h2>
+        <div class="meta">Omnibus-Type &middot; variable width + weight &middot; open</div>
+      </div>
+      <div class="hero">I build the systems that build software.</div>
+      <div class="heroalt">Agentic software factories, and the loops that run them.</div>
+      <div class="cols">
+        <div class="body">
+          <p>Loopworks is an agentic software factory portal for planning, executing, validating, and improving software delivery loops. GitHub Issues are the source of truth for roadmap, planning, milestones, decisions, and execution state.</p>
+          <p class="small">American gothic lineage rather than German. Sturdier and wider than DIN, with a genuine width axis we can compress for callouts. The most robust of the three at small sizes.</p>
+          <div class="uibits">
+            <span class="btn">Selected figures</span>
+            <span class="btn ghost">View on GitHub</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Bun</span>
+          </div>
+          <div class="numerals">Numerals &mdash; 0123456789 &middot; FIG. 1 &middot; SHEET 3 OF 7 &middot; REV. B</div>
+        </div>
+        <div class="callouts">
+          <div class="callrow"><div class="callnum">102</div><div class="lead"></div><span>GitHub Issue</span></div>
+          <div class="callrow active"><div class="callnum">104</div><div class="lead"></div><span>Agent-ready loop</span></div>
+          <div class="callrow"><div class="callnum">106</div><div class="lead"></div><span>Development loop</span></div>
+          <div class="callrow"><div class="callnum">108</div><div class="lead"></div><span>Sandbox</span></div>
+          <div class="figcap">FIG. 1 <span>&mdash; delivery loop, assembled view</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="titleblock f-archivo">
+      <div>Drawn by<b>N. Cole Summers</b></div>
+      <div>Sheet<b>B of D</b></div>
+      <div>Face<b>Archivo</b></div>
+      <div>Status<b>Candidate</b></div>
+    </div>
+  </section>
+
+  <!-- C: Barlow Semi Condensed -->
+  <section class="sheet">
+    <div class="sheet-inner f-barlow">
+      <div class="name">
+        <div class="num">C</div>
+        <h2>Barlow Semi Condensed</h2>
+        <div class="meta">Jeremy Tribby &middot; public-signage lineage &middot; open</div>
+      </div>
+      <div class="hero">I build the systems that build software.</div>
+      <div class="heroalt">Agentic software factories, and the loops that run them.</div>
+      <div class="cols">
+        <div class="body">
+          <p>Loopworks is an agentic software factory portal for planning, executing, validating, and improving software delivery loops. GitHub Issues are the source of truth for roadmap, planning, milestones, decisions, and execution state.</p>
+          <p class="small">Drawn from California highway and transit signage. Slightly rounded terminals make it the warmest of the three, and the most legible on a phone. Least severe, least drafting-like.</p>
+          <div class="uibits">
+            <span class="btn">Selected figures</span>
+            <span class="btn ghost">View on GitHub</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Bun</span>
+          </div>
+          <div class="numerals">Numerals &mdash; 0123456789 &middot; FIG. 1 &middot; SHEET 3 OF 7 &middot; REV. B</div>
+        </div>
+        <div class="callouts">
+          <div class="callrow"><div class="callnum">102</div><div class="lead"></div><span>GitHub Issue</span></div>
+          <div class="callrow active"><div class="callnum">104</div><div class="lead"></div><span>Agent-ready loop</span></div>
+          <div class="callrow"><div class="callnum">106</div><div class="lead"></div><span>Development loop</span></div>
+          <div class="callrow"><div class="callnum">108</div><div class="lead"></div><span>Sandbox</span></div>
+          <div class="figcap">FIG. 1 <span>&mdash; delivery loop, assembled view</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="titleblock f-barlow">
+      <div>Drawn by<b>N. Cole Summers</b></div>
+      <div>Sheet<b>C of D</b></div>
+      <div>Face<b>Barlow Semi Condensed</b></div>
+      <div>Status<b>Candidate</b></div>
+    </div>
+  </section>
+
+  <!-- D: Saira Semi Condensed -->
+  <section class="sheet">
+    <div class="sheet-inner f-saira">
+      <div class="name">
+        <div class="num">D</div>
+        <h2>Saira Semi Condensed</h2>
+        <div class="meta">Omnibus-Type &middot; closest to DIN &middot; open</div>
+      </div>
+      <div class="hero">I build the systems that build software.</div>
+      <div class="heroalt">Agentic software factories, and the loops that run them.</div>
+      <div class="cols">
+        <div class="body">
+          <p>Loopworks is an agentic software factory portal for planning, executing, validating, and improving software delivery loops. GitHub Issues are the source of truth for roadmap, planning, milestones, decisions, and execution state.</p>
+          <p class="small">The most DIN-like of the servable three: squared arcs, monolinear strokes, industrial rather than editorial. Also the most severe, which cuts both ways over long case-study reading.</p>
+          <div class="uibits">
+            <span class="btn">Selected figures</span>
+            <span class="btn ghost">View on GitHub</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Bun</span>
+          </div>
+          <div class="numerals">Numerals &mdash; 0123456789 &middot; FIG. 1 &middot; SHEET 3 OF 7 &middot; REV. B</div>
+        </div>
+        <div class="callouts">
+          <div class="callrow"><div class="callnum">102</div><div class="lead"></div><span>GitHub Issue</span></div>
+          <div class="callrow active"><div class="callnum">104</div><div class="lead"></div><span>Agent-ready loop</span></div>
+          <div class="callrow"><div class="callnum">106</div><div class="lead"></div><span>Development loop</span></div>
+          <div class="callrow"><div class="callnum">108</div><div class="lead"></div><span>Sandbox</span></div>
+          <div class="figcap">FIG. 1 <span>&mdash; delivery loop, assembled view</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="titleblock f-saira">
+      <div>Drawn by<b>N. Cole Summers</b></div>
+      <div>Sheet<b>D of D</b></div>
+      <div>Face<b>Saira Semi Condensed</b></div>
+      <div>Status<b>Candidate</b></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

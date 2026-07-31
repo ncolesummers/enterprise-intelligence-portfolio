@@ -17,6 +17,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      // The flagship case study leads the work section, so it outranks the
+      // other four rather than sitting level with them.
+      url: `${baseUrl}/projects/loopworks`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/projects/mikrotik-config-gen`,
       lastModified: new Date(),
       changeFrequency: "yearly",
@@ -39,12 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/projects/agent-development-lifecycle`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
     },
   ];
 }

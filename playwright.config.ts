@@ -34,31 +34,27 @@ export default defineConfig({
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
-      testIgnore: "**/contact-form-integration.spec.ts",
     },
 
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
-      testIgnore: "**/contact-form-integration.spec.ts",
     },
 
     /* Test against mobile viewports. */
     {
       name: "Mobile Chrome",
       use: { ...devices["Pixel 5"] },
-      testIgnore: "**/contact-form-integration.spec.ts",
     },
     {
       name: "Mobile Safari",
       use: { ...devices["iPhone 12"] },
-      testIgnore: "**/contact-form-integration.spec.ts",
     },
   ],
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "PLAYWRIGHT_TEST_MODE=true pnpm dev --port 3001",
+    command: "pnpm dev --port 3001",
     url: "http://127.0.0.1:3001",
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000, // 2 minutes

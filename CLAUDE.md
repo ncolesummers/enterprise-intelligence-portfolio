@@ -1,175 +1,61 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code when working in this repository.
+
+## Authorities
+
+Three files own different questions. Read the relevant one rather than inferring from code:
+
+- **PRODUCT.md** — who the site is for, what it must prove, what may never be fabricated, and the employer boundaries on University of Idaho work.
+- **DESIGN.md** — the visual system: palette, typography, line-weight hierarchy, named rules, and prohibitions.
+- **docs/TEST_PLAN.md** — the current Playwright testing strategy in full.
+
+Do not restate their contents here. If this file and one of them disagree, they win.
 
 ## Commands
 
-### Development
+```bash
+pnpm dev              # dev server (Turbopack)
+pnpm build            # production build
+pnpm lint             # ESLint
+pnpm format           # Prettier write
+pnpm test:e2e         # Playwright UI behavior
+pnpm test:e2e:ui      # interactive test UI
+```
 
-- `pnpm dev` - Start development server with Turbopack (preferred)
-- `pnpm build` - Build production version
-- `pnpm start` - Start production server
-- `pnpm lint` - Run ESLint
-- `pnpm format` - Format code with Prettier
+Node 24+ (pinned via Volta), pnpm.
 
-### Testing
-
-- `pnpm test:e2e` - Run Playwright E2E tests (UI behavior + mocked integration)
-- `pnpm test:e2e:ui` - Run tests with interactive UI
-- `pnpm test:contact-form` - Run contact form specific tests
-- `TEST_INTEGRATION=true pnpm test:e2e` - Run full integration tests (use sparingly due to rate limits)
-
-#### Testing Strategy
-
-This project uses a three-tier testing approach documented in `docs/TEST_PLAN.md`:
-
-1. **UI Behavior Tests**: Fast, reliable tests with mocked API responses
-2. **Integration Health Checks**: API availability and endpoint configuration verification
-3. **Full Integration Tests**: Real API testing (manual trigger due to FormSpree rate limits)
-
-For detailed testing documentation, see `docs/TEST_PLAN.md`.
+**Always run `pnpm format` before committing.**
 
 ## Architecture
 
-This is a Next.js 15 portfolio website built with the App Router architecture, showcasing enterprise intelligence projects and professional experience.
+Next.js 15 App Router, React 19, TypeScript strict, Tailwind CSS v4, deployed on Vercel.
 
-### Key Architecture Patterns
+- `src/app/` — routes and layouts. Case studies live at `src/app/projects/<slug>/page.tsx`.
+- `src/components/` — section components; `src/components/ui/` holds shadcn/ui ("new-york") primitives.
+- `src/lib/const.ts` — navigation, social links, site metadata.
+- `src/lib/metadata.ts` — `generatePageMetadata()`; every page sets metadata through it.
+- `@/*` maps to `src/*`.
 
-**Project Structure**: Uses Next.js App Router with `src/app/` containing pages and layouts. The main homepage (`src/app/page.tsx`) is a client component that composes major sections: Header, Hero, ProjectGrid, ContactSection, and Footer.
+No external data fetching. Content is authored directly in components.
 
-**Component Organization**:
+## Patterns worth knowing
 
-- `src/components/` contains reusable components
-- `src/components/ui/` contains shadcn/ui components following the "new-york" style
-- Uses component composition pattern with dedicated components for each major section
+**`cn()`** (`src/lib/utils.ts`) merges Tailwind classes via clsx + tailwind-merge. Use it for every conditional class rather than template strings.
 
-**Styling**:
-
-- Tailwind CSS with CSS variables for theming
-- Dark mode enabled by default (set in root layout)
-- shadcn/ui components with class-variance-authority for variant styling
-- Custom design system with consistent spacing and color tokens
-
-**State & Data**:
-
-- Site configuration centralized in `src/lib/const.ts` (navigation, social links, metadata)
-- Client-side rendering for interactive elements
-- No external data fetching currently implemented
-
-**TypeScript Configuration**:
-
-- Strict mode enabled with path aliases (`@/*` maps to `src/*`)
-- All components properly typed with React.ComponentProps patterns
-
-**Key Dependencies**:
-
-- shadcn/ui + Radix UI for accessible components
-- next-themes for theme management
-- Lucide React for icons
-- clsx + tailwind-merge via `cn()` utility for conditional styling
-- React Hook Form + Zod for form validation
-- Playwright for comprehensive E2E testing
-
-### Development Notes
-
-The codebase follows shadcn/ui conventions with the `cn()` utility function for merging Tailwind classes. When adding new components, use the established patterns from existing UI components and maintain the dark theme aesthetic.
-
-**Form Validation Architecture**:
-
-- Uses React Hook Form with Zod schema validation for type-safe form handling
-- Custom `useFormValidation` hook centralizes validation logic
-- Real-time validation with proper ARIA error handling
-- FormSpree integration with mock API for testing reliability
-
-**Testing Excellence**:
-
-- 153 comprehensive E2E tests across 5 browser configurations
-- Three-tier testing strategy: UI behavior, integration health, full API
-- 100% test reliability with flaky test elimination
-- Cross-browser accessibility and keyboard navigation testing
-
-## Design Context
-
-### Users
-
-Hiring managers, engineering leaders, and potential collaborators evaluating N. Cole Summers' technical portfolio. They arrive with intent — scanning for evidence of competence, taste, and ambition. The site's job is to make that evaluation effortless and leave a strong impression.
-
-### Brand Personality
-
-**Technical, Refined, Confident.** The interface communicates deep engineering competence through its own execution quality. Every detail — from typography to interaction — signals intentionality and craft.
-
-### Aesthetic Direction
-
-- **Visual tone**: Dark-first, developer-focused, with subtle polish. Inspired by Linear and Vercel — clean layouts, restrained color, and precise spacing.
-- **Theme**: Dark mode default with full light mode support. OKLCH color system with neutral grays and a blue accent (hue 240).
-- **Typography**: Geist Sans (body) and Geist Mono (code). Tight tracking on headings, generous line-height on body text.
-- **Anti-references**: Avoid generic template aesthetics, gratuitous gradients, or overly playful/casual tone. No rainbow colors or busy layouts.
-
-### Design System
-
-- **Framework**: Tailwind CSS v4 with shadcn/ui "new-york" style components
-- **Colors**: OKLCH tokens via CSS variables — `--primary`, `--accent` (oklch hue 240), `--muted`, `--destructive`
-- **Radius**: 0.625rem base (`--radius`), computed variants for sm/md/lg/xl
-- **Icons**: Lucide React
-- **Animations**: Scroll-triggered (IntersectionObserver), 0.6s ease-out transitions. Respects `prefers-reduced-motion`.
-- **Spacing**: Container-based layout with `px-4 sm:px-8 md:px-16` responsive padding
-
-### Design Principles
-
-1. **Precision over decoration** — Every element earns its place. Favor whitespace and alignment over ornament.
-2. **Confidence through restraint** — Use color, motion, and emphasis sparingly so they carry weight when they appear.
-3. **Technical credibility** — The site's build quality should itself demonstrate engineering taste. Clean code, accessible markup, performant rendering.
-4. **Dark-first, light-ready** — Design for dark mode as the primary experience, ensuring light mode is equally considered, not an afterthought.
-5. **Motion with purpose** — Animations should guide attention and communicate state, never distract. Always respect reduced-motion preferences.
+**Theming** runs through next-themes with CSS custom properties. Both themes are first-class; neither is a computed inversion of the other. See DESIGN.md.
 
 ## Definition of Done
 
-Before considering any code change complete, ensure all of the following criteria are met:
+Hard gates, all of them cheap to check:
 
-### Code Quality
+- [ ] `pnpm lint` clean, `pnpm build` succeeds with no TypeScript errors
+- [ ] `pnpm format` run
+- [ ] Relevant Playwright tests pass, with no newly flaky tests
+- [ ] No console errors in the browser
+- [ ] Works in both themes and at mobile, tablet, and desktop widths
+- [ ] WCAG 2.1 AA holds: keyboard reachable, screen-reader sane, contrast verified
+- [ ] Motion respects `prefers-reduced-motion`, and the static state is complete on its own
+- [ ] No fabricated content (see PRODUCT.md — this is a real risk on this project, not boilerplate)
 
-- [ ] **Linting passes**: Run `pnpm lint` with zero errors or warnings
-- [ ] **Build succeeds**: Run `pnpm build` successfully without TypeScript errors
-- [ ] **Type safety**: All TypeScript types are properly defined and used
-- [ ] **Code formatting**: Code follows Prettier formatting standards
-
-### Functionality
-
-- [ ] **Feature works as intended**: Manual testing confirms expected behavior
-- [ ] **Cross-browser compatibility**: Tested in Chrome, Firefox, and Safari (when applicable)
-- [ ] **Responsive design**: Works on mobile, tablet, and desktop viewports
-- [ ] **Accessibility**: Meets WCAG 2.1 AA standards (keyboard navigation, screen readers, color contrast)
-
-### Testing
-
-- [ ] **E2E tests pass**: All relevant Playwright tests execute successfully across browsers
-- [ ] **Test reliability**: No flaky tests, 100% pass rate required
-- [ ] **Validation testing**: Form validation scenarios covered with proper error states
-- [ ] **Accessibility testing**: ARIA attributes and keyboard navigation verified
-- [ ] **No console errors**: Browser console shows no JavaScript errors
-- [ ] **Contact form verification**: FormSpree integration tested (when touching contact functionality)
-
-### Performance & UX
-
-- [ ] **Reduced motion respected**: Animations honor `prefers-reduced-motion` setting
-- [ ] **Theme compatibility**: Works correctly in both light and dark themes
-- [ ] **Loading states**: Appropriate loading indicators for async operations
-- [ ] **Error handling**: Graceful error states with user-friendly messages
-
-### Documentation
-
-- [ ] **Code is self-documenting**: Clear component and function names
-- [ ] **Complex logic explained**: Comments added for non-obvious implementations
-- [ ] **CLAUDE.md updated**: Architecture notes updated if patterns change
-
-### Git Standards
-
-- [ ] **Atomic commits**: Each commit represents one logical change
-- [ ] **Clear commit messages**: Descriptive messages explaining "why" not just "what"
-- [ ] **No sensitive data**: No API keys, secrets, or personal data committed
-
-### Production Readiness
-
-- [ ] **Vercel deployment succeeds**: Build and deployment pipeline completes
-- [ ] **Analytics working**: Vercel Analytics tracking page views (when applicable)
-- [ ] **SEO optimized**: Meta tags, Open Graph, and structured data present
+Commits are atomic and conventional, and explain why rather than what.

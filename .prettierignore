@@ -14,4 +14,8 @@ yarn.lock
 .env*
 
 # Ignore other cache/config files
-.DS_Store 
+.DS_Store
+
+# Captured design artifacts. These are records of what was explored, not
+# maintained source; reformatting them only adds churn to their history.
+docs/design/ 
