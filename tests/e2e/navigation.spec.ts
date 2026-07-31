@@ -280,10 +280,12 @@ test.describe("Navigation", () => {
         .click();
 
       await expect(page).toHaveURL(pageUrls.about);
+      // The about sheet leads with the stance, not the name: the title block
+      // already states the name on every screen.
       await expect(
         page.getByRole("heading", {
           level: 1,
-          name: "Nathan Cole Summers",
+          name: "AI removes the toil. Humans keep the judgment.",
         }),
       ).toBeVisible();
       await expect(
