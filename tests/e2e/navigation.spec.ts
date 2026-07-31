@@ -83,9 +83,21 @@ test.describe("Navigation", () => {
       await expect(
         page.getByRole("heading", { level: 2, name: "Figure index" }),
       ).toBeVisible();
+      // The sheet's foot names its off-sheet references rather than asking to
+      // be contacted, and each row shows the address before it is followed.
       await expect(
-        page.getByRole("heading", { level: 2, name: "Get In Touch" }),
+        page.getByRole("heading", { level: 2, name: "Off-sheet references" }),
       ).toBeVisible();
+      const references = page.locator("#contact");
+      await expect(
+        references.getByRole("link", { name: "GitHub profile", exact: true }),
+      ).toContainText("github.com/ncolesummers");
+      await expect(
+        references.getByRole("link", {
+          name: "Email nate@ncolesummers.com",
+          exact: true,
+        }),
+      ).toHaveAttribute("href", "mailto:nate@ncolesummers.com");
 
       const titleBlock = page.getByRole("banner");
       const primary = titleBlock.getByRole("navigation", { name: "Primary" });

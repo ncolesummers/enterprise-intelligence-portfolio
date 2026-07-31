@@ -1,12 +1,7 @@
-// This file contains the constants used throughout the application.
-// It includes the site metadata, navigation links, and social media links.
-// Site metadata
-export const siteMetadata = {
-  title: "N. Cole Summers",
-  description:
-    "Welcome to my personal website where I share my projects and thoughts.",
-  author: "Nathan Cole Summers",
-};
+// Navigation, off-sheet references, and the title block's sheet designators.
+
+export const contactEmail = "nate@ncolesummers.com";
+
 // Navigation links
 export const navigation = [
   {
@@ -19,7 +14,7 @@ export const navigation = [
   },
   {
     name: "Contact",
-    href: "mailto:nate@ncolesummers.com",
+    href: `mailto:${contactEmail}`,
   },
 ];
 // Title-block sheet designators. The title block carries only true things —
@@ -38,17 +33,24 @@ export function sheetName(pathname: string): string {
   return slug ? slug.replace(/-/g, " ") : "Index";
 }
 
+// Off-sheet references. `handle` is the address as a reader would read it back,
+// for the references block that names each destination rather than showing a
+// bare glyph. It is the href with the scheme and the www dropped, so the two
+// cannot describe different places.
 export const Socials = [
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/n-cole-summers/",
+    handle: "linkedin.com/in/n-cole-summers",
   },
   {
     name: "GitHub",
     href: "https://github.com/ncolesummers",
+    handle: "github.com/ncolesummers",
   },
   {
     name: "Instagram",
     href: "https://www.instagram.com/n__cole__summers/",
+    handle: "instagram.com/n__cole__summers",
   },
 ];
