@@ -1,10 +1,16 @@
+import { expect, type Locator } from "@playwright/test";
+
 /**
  * Contrast math for the theme assertions.
  *
- * The incumbent case-study specs each carry their own copy of this. New specs
- * import it instead; the incumbents can adopt it whenever their specs are being
- * read for another reason, since moving them is a pure deduplication with no
- * behavioural change and no reason to risk it on its own.
+ * `myui-case-study` and `social-icons-accessibility` migrated off their local
+ * copies when the intermittent contrast failure was traced here — their copies
+ * were the ones that threw. Four specs still carry their own:
+ * `myui-index-plate`, `uidaho-index-plate`, `profile-extractor-index-plate`,
+ * and `mikrotik-case-study`. Those read `fill` and `stroke` off SVG rather than
+ * colours across a theme switch, so they have not been seen to lose the race —
+ * but they are exposed to the same one, and should adopt `readComputedColor`
+ * whenever they are being read for another reason.
  *
  * Computed colors arrive in whatever syntax the browser chooses to serialize,
  * which is why every branch below exists.
@@ -20,7 +26,58 @@ const oklabToLuminance = (lightness: number, a: number, b: number) => {
   return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 };
 
+/**
+ * A computed colour that has not resolved yet.
+ *
+ * Two transients produce one: the stylesheet has not applied, so
+ * `background-color: var(--ground)` is invalid at computed-value time and falls
+ * back to the initial `transparent`; or the element was detached between the
+ * locator resolving and the evaluate running, which every engine answers with an
+ * empty string. Under parallel load Firefox is the one that loses these races,
+ * which is what the intermittent contrast failure was.
+ *
+ * Neither may be parsed. A transparent background is not a valid contrast
+ * operand, and widening the parser to accept one would turn a loud throw into a
+ * silently wrong ratio. They are retried instead — see `readComputedColor`.
+ */
+export const isUnresolvedColor = (color: string) =>
+  color.trim() === "" ||
+  color === "transparent" ||
+  /^rgba\(\s*0,\s*0,\s*0,\s*0\s*\)$/.test(color);
+
+/**
+ * Read a computed colour once it has actually resolved.
+ *
+ * `locator.evaluate` snapshots whatever is there at the moment it runs, and
+ * under load that can be a colour the page has not settled on. Polling re-runs
+ * the read against a freshly resolved locator, so a transient costs a retry
+ * rather than the run. It still fails if the colour never resolves, which is
+ * what would make it a product bug rather than a race.
+ */
+export const readComputedColor = async (
+  locator: Locator,
+  property: "color" | "backgroundColor" | "fill" | "stroke" | "borderLeftColor",
+) => {
+  let color = "";
+  await expect
+    .poll(async () => {
+      color = await locator.evaluate(
+        (element, name) => getComputedStyle(element)[name as "color"] as string,
+        property,
+      );
+      return isUnresolvedColor(color);
+    })
+    .toBe(false);
+  return color;
+};
+
 export const relativeLuminance = (color: string) => {
+  if (isUnresolvedColor(color)) {
+    throw new Error(
+      `Computed color has not resolved: "${color}". This is a timing race, not a contrast failure — read it with readComputedColor().`,
+    );
+  }
+
   const channels = color
     .match(/-?[\d.]+/g)
     ?.slice(0, 3)
@@ -44,11 +101,15 @@ export const relativeLuminance = (color: string) => {
     return oklabToLuminance(lightness, a, b);
   }
 
-  const rgb = color.startsWith("rgb(")
-    ? channels.map(channel => channel / 255)
-    : color.startsWith("color(srgb ")
-      ? channels
-      : undefined;
+  // `rgba(` does not start with `rgb(` — index 3 is `a`, not `(` — so the two
+  // are named separately. Missing that is what sent an unresolved
+  // `rgba(0, 0, 0, 0)` down to the "unsupported syntax" throw.
+  const rgb =
+    color.startsWith("rgb(") || color.startsWith("rgba(")
+      ? channels.map(channel => channel / 255)
+      : color.startsWith("color(srgb ")
+        ? channels
+        : undefined;
   if (!rgb) throw new Error(`Unsupported computed color syntax: ${color}`);
 
   const [red, green, blue] = rgb.map(channel =>

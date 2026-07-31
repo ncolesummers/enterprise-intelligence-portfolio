@@ -38,6 +38,21 @@ both produce failures that look like product bugs and are not:
   is correct behavior. Move the pointer off the plate before asserting what
   survived the scroll.
 
+A third hazard applies to any spec that reads a computed colour:
+
+- **A computed colour can be read before it resolves.** `locator.evaluate`
+  snapshots whatever is there when it runs. Two transients produce a colour that
+  cannot be parsed: an unapplied stylesheet makes `background-color: var(--ground)`
+  invalid at computed-value time, so it falls back to `transparent` and serializes
+  as `rgba(0, 0, 0, 0)`; and an element detached between the locator resolving and
+  the evaluate running answers with an empty string in every engine. Under
+  parallel load Firefox is the one that loses these races, which is what the
+  intermittent contrast failure was. Read colours with `readComputedColor` from
+  `tests/fixtures/contrast.ts`, which polls until the value has resolved. Do not
+  widen the parser to accept them — a transparent background is not a valid
+  contrast operand, and parsing one turns a loud throw into a silently wrong
+  ratio.
+
 The suite must prefer role- and name-based locators over styling or DOM-shape
 selectors. Removing a product behavior may remove its test, but surviving
 behavior needs an equally specific assertion; a looser assertion is not a
