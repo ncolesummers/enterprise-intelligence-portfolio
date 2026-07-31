@@ -3,7 +3,7 @@ name: N. Cole Summers
 description: A portfolio drawn as a set of engineering figure sheets.
 ---
 
-<!-- Colors, typography, line weights, and the sheet frame are built and their values here are real. The component inventory is not yet captured; re-run /impeccable document once Phase 2 lands the figures and callouts. -->
+<!-- Every value in this file is built and measured, and the component inventory below is captured. Contrast figures were re-measured in a browser in both media at the close of Phase 5 and match the tables here exactly. -->
 
 # Design System: N. Cole Summers
 
@@ -108,7 +108,25 @@ Every field in the block states something true: drawn-by, the sheet's section na
 
 Content is organized as numbered **figures** rather than cards. The work index is a sheet of figures the visitor can scan at once, not a procession that forces sequence. Visitors arrive under time pressure and compare candidates side by side; making depth mandatory would be a direct cost to them. Depth stays one click away and never in the way.
 
-Spacing follows one rhythm throughout, with more space above a heading than below it, binding each heading to the content it introduces. Exact scale steps are resolved during the first build.
+### Spacing
+
+One rhythm throughout, on Tailwind's `0.25rem` unit: **1 · 2 · 3 · 4 · 6 · 8 · 12 · 16 · 24**. It is a doubling scale with a half-step between each pair, which is what the build converged on independently before it was written down; settling it in Phase 5 meant declaring the spine and correcting the handful of values off it, not imposing a new scale on finished pages.
+
+Where each step belongs:
+
+| Step    | Use                                                              |
+| ------- | ---------------------------------------------------------------- |
+| `1`–`3` | Inside a line: a label to the thing it labels                    |
+| `4`     | Between elements in a group, and inside a ruled panel's list     |
+| `6`     | Panel padding, and the gap between cells in a grid               |
+| `8`     | Below a section heading; between columns of a two-column section |
+| `12`    | Between a figure and the prose that reads it                     |
+| `16`    | Between sections                                                 |
+| `24`    | Between the major regions of a sheet                             |
+
+**More space above a heading than below it**, at a ratio of at least 2:1, binding each heading to the content it introduces rather than letting it float between two blocks. A section at `16` below and `8` under its own heading satisfies this; so does a sheet region at `24` above and `8` under.
+
+The one deliberate exception is the deconstruction band, whose geometry is measured against a real phone viewport rather than composed. Those values answer to the measurement, not to this scale, and changing them to fit the rhythm would break the budget they were derived from.
 
 ## Elevation & Depth
 
@@ -139,6 +157,24 @@ The one curve that belongs is the **callout bubble**: the circle enclosing a ref
 **The mark is CS inside that circle** — Cole Summers, the name he goes by rather than the N he does not. Both letters are constructed: the C is one compass circle with a segment lifted, the S is two arcs meeting at the letter's midpoint, widened to an elliptical rx so it carries the C's optical width. It lives in the title block at roughly 24px and has a second, unframed configuration for places with horizontal room. Unlike the figures, its stroke scales with the mark; a fixed stroke at 24px leaves all stroke and no counter. Any second reading the initials carry stays unstated in code, copy, and alt text.
 
 Boxes are ruled, not filled. Where a region needs bounding, it gets a rule; where it needs emphasis, it gets a heavier rule or hatching.
+
+## Component Inventory
+
+The built vocabulary, as of the close of Phase 5. Anything not here does not exist, and a new surface composes from this list rather than inventing a sibling.
+
+**Sheet chrome** — `SheetFrame` (border rule, margin rule, centering marks; fixed, decorative, pointer-transparent), `TitleBlock` (the persistent lower band: mark, drawn-by, off-sheet references, sheet name, primary navigation, medium control).
+
+**Sheet content** — `Statement` (the index sheet's opening claim), `FigureIndex` and its `Cell` (the scannable plate grid; the whole cell is one link named by the project), `References` (the index sheet's foot: each off-sheet destination named with its address, and on a phone the only route to them).
+
+**Case study** — `CaseStudyHeader` (way back, figure numeral, title, summary, and an optional row of actions), `CaseStudySection` (ruled heading, optional per-section figure, optional `detailView` mapping), `EvidencePanel` / `EvidenceList` / `EvidenceItem` (the ruled panel and its divided list), `LiteralCode` (an identifier copied verbatim out of source). All five case studies build from these; none declares a private copy.
+
+**Figures** — `DeliveryLoopFigure` (FIG. 1 with its numeral table and caption band), its two geometries `DeliveryLoopDrawing` and `DeliveryLoopDrawingTall`, `DeliveryLoopDetail` and `DeliveryLoopDetailInline` (the third, deconstruction geometry), `DeliveryLoopDeconstruction` (the scroll-driven band), `index-plates` (FIGS. 2–6 and the reserved and forthcoming treatments), `parts` (the shared parts inventory and active-part contract).
+
+**Marks** — `Mark` and its unframed configuration, in `marks/monogram`.
+
+**Primitives** — `Button` (ruled label box; `default`, `accent`, `destructive`, `outline`, `secondary`, `ghost`, `link`). It is the only survivor of the incumbent shadcn/ui set. `Card`, `Sheet`, `ContentCard`, `BulletedList`, `Section`, `CodeBlock`, and `Spinner` were removed in Phase 5: each had either no consumer or no boundary once `--card` resolved to `--ground` and the radius and shadow namespaces were cleared.
+
+**States** — `not-found` (a hidden-line reserved area, not a large 404), `loading` (a straightedge traversing a ruled band, not drawn at all under reduced motion), `ErrorBoundary` (a ruled panel stating what did not draw). None of the three apologizes, and none uses an emoji.
 
 ## Do's and Don'ts
 
