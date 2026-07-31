@@ -3,7 +3,6 @@
 import { ErrorInfo, ReactNode } from "react";
 import { Component } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -38,23 +37,27 @@ export class ErrorBoundary extends Component<
         return this.props.fallback;
       }
 
+      // Stated, not apologized for. The emoji this replaced was the one glyph
+      // on the sheet that could not be lettered in Saira, and "something went
+      // wrong" told a reader nothing they could act on.
       return (
-        <Card className="p-6 max-w-md mx-auto">
-          <div className="text-center space-y-4">
-            <div className="text-4xl">⚠️</div>
-            <h2 className="text-lg font-semibold">Something went wrong</h2>
-            <p className="text-sm text-muted-foreground">
-              An unexpected error occurred. Please try refreshing the page.
-            </p>
-            <Button
-              onClick={() => this.setState({ hasError: false })}
-              variant="outline"
-              className="mt-4"
-            >
-              Try again
-            </Button>
-          </div>
-        </Card>
+        <div className="rule-object mx-auto max-w-md p-6" role="alert">
+          <p className="type-label text-line-soft">Sheet incomplete</p>
+          <h2 className="type-title mt-3">
+            This section did not finish drawing.
+          </h2>
+          <p className="type-body text-line-soft mt-3 text-[0.9375rem]">
+            The rest of the page is unaffected. Drawing it again usually works;
+            if it does not, reloading will.
+          </p>
+          <Button
+            onClick={() => this.setState({ hasError: false })}
+            variant="outline"
+            className="mt-6"
+          >
+            Draw it again
+          </Button>
+        </div>
       );
     }
 

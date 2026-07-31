@@ -680,6 +680,28 @@
     }
   }
 
+  /* A sheet being drawn: a straightedge traversing the band, transform only.
+     Not drawn at all under reduced motion — the ruled band and its label are
+     the complete static state, so there is nothing to collapse a duration on. */
+  .sheet-sweep {
+    animation: sheet-sweep 1400ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes sheet-sweep {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(300%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sheet-sweep {
+      display: none;
+    }
+  }
+
   /* The one annotation. A part is vermilion only while it is the active
      callout, which is why exactly one can be active at a time. */
   .fig-callout,
