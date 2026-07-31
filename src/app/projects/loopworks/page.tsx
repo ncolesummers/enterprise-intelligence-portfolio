@@ -1,7 +1,8 @@
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 import {
+  CaseStudyHeader,
   CaseStudySection,
   EvidenceItem,
   EvidenceList,
@@ -140,28 +141,18 @@ const loopStateTables = [
 export default function LoopworksPage() {
   return (
     <main id="main-content" className="sheet">
-      <Link
-        href="/#work"
-        className="type-label text-line-soft hover:text-annotation inline-flex items-center gap-2 transition-colors"
+      <CaseStudyHeader
+        figure={1}
+        title="Loopworks"
+        summary="An agentic software factory. A labeled GitHub issue enters through a signed webhook and leaves as a draft pull request, having passed eight declared stages and two approval gates that no one may bypass."
       >
-        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
-        Return to index
-      </Link>
-
-      <header className="mb-12 flex flex-col items-center text-center">
-        <h1 className="type-display mt-8 mb-6">Loopworks</h1>
-        <p className="type-body text-line-soft measure mb-8">
-          An agentic software factory. A labeled GitHub issue enters through a
-          signed webhook and leaves as a draft pull request, having passed eight
-          declared stages and two approval gates that no one may bypass.
-        </p>
         <Button variant="outline" asChild>
           <Link href={REPOSITORY} target="_blank" rel="noopener noreferrer">
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
             Read the repository
           </Link>
         </Button>
-      </header>
+      </CaseStudyHeader>
 
       {/* The drawing sits above the prose deliberately. A visitor who reads
           only the figure and its numeral table has still had the argument. */}

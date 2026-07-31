@@ -168,6 +168,13 @@ test.describe("Navigation", () => {
             exact: true,
           }),
         ).toBeVisible();
+
+        // The numeral is how the index sends a reader here, so the destination
+        // states it. "Read FIG. 4" previously landed on a page that never
+        // mentioned FIG. 4, which dropped the conceit as it was being followed.
+        await expect(page.getByTestId("case-study-figure")).toHaveText(
+          `FIG. ${project.figure}`,
+        );
       });
 
       test(`serves ${project.path} directly without application 404s`, async ({

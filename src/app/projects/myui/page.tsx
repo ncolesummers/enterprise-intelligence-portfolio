@@ -1,10 +1,15 @@
-import type { ReactNode } from "react";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 
+import {
+  CaseStudyHeader,
+  CaseStudySection,
+  EvidenceItem,
+  EvidenceList,
+  EvidencePanel,
+} from "@/components/case-study";
 import { Button } from "@/components/ui/button";
 import { generatePageMetadata } from "@/lib/metadata";
-import { cn } from "@/lib/utils";
 
 export const metadata = generatePageMetadata({
   title: "MyUI Dashboard - University of Idaho",
@@ -13,69 +18,14 @@ export const metadata = generatePageMetadata({
   path: "/projects/myui",
 });
 
-interface CaseStudySectionProps {
-  children: ReactNode;
-  title: string;
-}
-
-function CaseStudySection({ children, title }: CaseStudySectionProps) {
-  return (
-    <section className="mb-16" data-testid="case-study-section">
-      <div className="mb-8 flex items-center gap-4">
-        <h2 className="type-headline">{title}</h2>
-        <div className="h-px flex-1 bg-rule-leader" aria-hidden="true" />
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function EvidencePanel({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn("rule-leader p-6", className)}
-      data-testid="evidence-panel"
-    >
-      {children}
-    </div>
-  );
-}
-
-function EvidenceList({ children }: { children: ReactNode }) {
-  return (
-    <ul className="type-body text-line-soft divide-y divide-rule-leader">
-      {children}
-    </ul>
-  );
-}
-
-function EvidenceItem({ children }: { children: ReactNode }) {
-  return <li className="py-3 first:pt-0 last:pb-0">{children}</li>;
-}
-
 export default function MyUIPage() {
   return (
     <main id="main-content" className="sheet">
-      <Link
-        href="/#work"
-        className="type-label text-line-soft hover:text-annotation inline-flex items-center gap-2 transition-colors"
+      <CaseStudyHeader
+        figure={3}
+        title="MyUI Dashboard"
+        summary="A live University of Idaho service built by extending the Ellucian Experience platform with custom React components."
       >
-        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
-        Return to index
-      </Link>
-
-      <header className="mb-16 flex flex-col items-center text-center">
-        <h1 className="type-display mt-8 mb-6">MyUI Dashboard</h1>
-        <p className="type-body text-line-soft measure mb-8">
-          A live University of Idaho service built by extending the Ellucian
-          Experience platform with custom React components.
-        </p>
         <Button variant="outline" asChild>
           <Link
             href="https://my.uidaho.edu"
@@ -86,7 +36,7 @@ export default function MyUIPage() {
             Visit MyUI
           </Link>
         </Button>
-      </header>
+      </CaseStudyHeader>
 
       <CaseStudySection title="Introduction">
         <div className="grid gap-8 md:grid-cols-2">

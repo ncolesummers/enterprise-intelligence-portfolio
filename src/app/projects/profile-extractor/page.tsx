@@ -1,9 +1,12 @@
-import type { ReactNode } from "react";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
-
+import {
+  CaseStudyHeader,
+  CaseStudySection,
+  EvidenceItem,
+  EvidenceList,
+  EvidencePanel,
+  LiteralCode,
+} from "@/components/case-study";
 import { generatePageMetadata } from "@/lib/metadata";
-import { cn } from "@/lib/utils";
 
 export const metadata = generatePageMetadata({
   title: "AI Data Extraction Research",
@@ -11,52 +14,6 @@ export const metadata = generatePageMetadata({
     "A feasibility study testing whether foundation models could turn public source pages into structured profiles with LangGraph and a verification step.",
   path: "/projects/profile-extractor",
 });
-
-interface CaseStudySectionProps {
-  children: ReactNode;
-  title: string;
-}
-
-function CaseStudySection({ children, title }: CaseStudySectionProps) {
-  return (
-    <section className="mb-16" data-testid="case-study-section">
-      <div className="mb-8 flex items-center gap-4">
-        <h2 className="type-headline">{title}</h2>
-        <div className="h-px flex-1 bg-rule-leader" aria-hidden="true" />
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function EvidencePanel({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn("rule-leader min-w-0 p-6", className)}
-      data-testid="evidence-panel"
-    >
-      {children}
-    </div>
-  );
-}
-
-function EvidenceList({ children }: { children: ReactNode }) {
-  return (
-    <ul className="type-body text-line-soft divide-y divide-rule-leader">
-      {children}
-    </ul>
-  );
-}
-
-function EvidenceItem({ children }: { children: ReactNode }) {
-  return <li className="py-3 first:pt-0 last:pb-0">{children}</li>;
-}
 
 function CodeEvidence({
   children,
@@ -75,29 +32,14 @@ function CodeEvidence({
   );
 }
 
-function LiteralCode({ children }: { children: ReactNode }) {
-  return <code className="type-code text-line">{children}</code>;
-}
-
 export default function ProfileExtractorPage() {
   return (
     <main id="main-content" className="sheet">
-      <Link
-        href="/#work"
-        className="type-label text-line-soft hover:text-annotation inline-flex items-center gap-2 transition-colors"
-      >
-        <ArrowLeft className="h-3 w-3" aria-hidden="true" />
-        Return to index
-      </Link>
-
-      <header className="mb-16 flex flex-col items-center text-center">
-        <h1 className="type-display mt-8 mb-6">AI Data Extraction Research</h1>
-        <p className="type-body text-line-soft measure mb-8">
-          A research spike that tested whether foundation models could turn
-          public source pages into structured profiles through a LangGraph
-          extraction and verification workflow.
-        </p>
-      </header>
+      <CaseStudyHeader
+        figure={4}
+        title="AI Data Extraction Research"
+        summary="A research spike that tested whether foundation models could turn public source pages into structured profiles through a LangGraph extraction and verification workflow."
+      />
 
       <CaseStudySection title="Introduction">
         <div className="grid gap-8 md:grid-cols-2">
