@@ -53,6 +53,24 @@ A third hazard applies to any spec that reads a computed colour:
   contrast operand, and parsing one turns a loud throw into a silently wrong
   ratio.
 
+Two more, both found in Phase 5 when a layout change shifted timings enough to
+expose races that had been latent:
+
+- **A resolved colour can still be the wrong one.** `readComputedColor` polls
+  until a colour parses, which catches the transients above but not staleness:
+  after the medium switch lands on `html`, a read can sample the ground before
+  the repaint and the foreground after it, pairing blueprint chalk against a
+  paper ground at 1.1:1. A stale colour is fully resolved, so no amount of
+  polling for resolution finds it. Read a ground and the foregrounds measured
+  against it in **one** `evaluate`, wrapped in `readResolved`, so the set comes
+  from a single style recalculation.
+- **An unshown detail view takes no pointer events.** That is deliberate — see
+  `.fig-detail-view:not([data-shown]) *` — but it means a click issued before
+  the scroll has switched views lands on nothing and leaves the previous
+  section's reading standing, which is indistinguishable from the staleness bug
+  such a test is usually written to catch. Wait for `data-shown="true"` on the
+  view before acting on anything inside it.
+
 The suite must prefer role- and name-based locators over styling or DOM-shape
 selectors. Removing a product behavior may remove its test, but surviving
 behavior needs an equally specific assertion; a looser assertion is not a
