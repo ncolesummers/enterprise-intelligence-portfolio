@@ -1,6 +1,6 @@
 # ADR 0001: Constrain Phase 3 to Evidence-First Propagation
 
-- **Status:** Accepted
+- **Status:** Accepted; decision 4 superseded by [ADR 0002](0002-retarget-adlc-redirect-to-loopworks.md)
 - **Date:** 2026-07-28
 - **Decision owner:** @ncolesummers
 
@@ -23,7 +23,7 @@ Phase 3 will follow these boundaries:
 1. Restyle the four surviving existing case studies: University of Idaho website, MyUI, profile extractor, and Mikrotik configuration generator. The standalone ADLC case study retires; a new Loopworks case-study route is not part of this phase.
 2. Edit case-study copy by evidence-first deduplication: remove repetition and generic framework exposition, while preserving substantiated roles, architecture, outcomes, code or visual evidence, and proof links. Do not add or strengthen claims.
 3. Preserve each case study's incumbent composition and spacing. Phase 3 may translate existing surfaces onto the approved figure-sheet primitives, but it will not establish a new spacing scale or redesign page composition.
-4. Permanently redirect `/projects/agent-development-lifecycle` to `/`, because the retired route may already be indexed or linked. Remove it from the sitemap and do not leave it as a 404.
+4. Permanently redirect `/projects/agent-development-lifecycle` to `/`, because the retired route may already be indexed or linked. Remove it from the sitemap and do not leave it as a 404. **Superseded by [ADR 0002](0002-retarget-adlc-redirect-to-loopworks.md):** the destination is now `/projects/loopworks`, once the successor route this decision conditioned its choice on existed. The redirect remains a permanent 308 and the route remains out of the sitemap.
 5. Self-host Saira and Monaspace using English/Latin subsets. Preserve Saira's required variable axes and Monaspace's code ligatures and contextual alternates.
 6. Defer generating `.impeccable/design.json`. Phase 3 may run the scheduled Impeccable context and audit commands, but sidecar generation and design-system polish remain outside this migration slice.
 7. Do not interleave a broad dependency update or package-manager policy change with the migration. Remove only dependencies made unused by an in-scope deletion.

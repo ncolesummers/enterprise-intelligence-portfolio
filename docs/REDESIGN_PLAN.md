@@ -184,7 +184,7 @@ One Phase 5 finding was pulled forward rather than left for the audit, because i
 
 - ~~**Cut the contact form.**~~ Done in Phase 3. CONTACT is a mailto, and the component, hook, mock route, specs, and scripts are gone.
 - ~~**`project-card.tsx`, `tech-stack.tsx`, and `animated-section.tsx` may now be unused.**~~ Confirmed and removed in Phase 3.
-- **Where `/projects/agent-development-lifecycle` should land.** ADR 0001 chose `/` because no replacement route was in scope. One now exists and carries the ADLC substance as lineage, which is the condition the ADR conditioned its choice on. Retargeting the redirect to `/projects/loopworks` was deliberately left out of Phase 4a: it changes an accepted decision, so it wants a superseding record rather than a quiet edit. `adlc-redirect.spec.ts` pins the current destination.
+- ~~**Where `/projects/agent-development-lifecycle` should land.**~~ Settled. It redirects to `/projects/loopworks`, the successor that carries its substance as lineage, per `docs/adr/0002-retarget-adlc-redirect-to-loopworks.md`. ADR 0001 decision 4 is superseded and annotated in place; its other seven boundaries stand. `adlc-redirect.spec.ts` pins the new destination and asserts the successor is not the retired case study restored under a new URL.
 - Whether case studies keep their current length is open; PRODUCT.md does not bind it.
 - The spacing rhythm is still incumbent Tailwind spacing. Composing the index sheet did not force a scale, so this stays open and should be settled in Phase 5 rather than guessed at now.
 - The `.impeccable/design.json` sidecar is not generated yet; it waits on the component inventory in Phase 2.
