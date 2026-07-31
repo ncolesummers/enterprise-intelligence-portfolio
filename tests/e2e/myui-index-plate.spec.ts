@@ -1,54 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const relativeLuminance = (color: string) => {
-  const channels = color
-    .match(/[\d.]+/g)
-    ?.slice(0, 3)
-    .map(Number);
-  if (!channels || channels.length !== 3) {
-    throw new Error(`Expected an RGB color, received ${color}`);
-  }
-
-  if (color.startsWith("oklch(")) {
-    const [lightness, chroma, hue] = channels;
-    const angle = (hue * Math.PI) / 180;
-    const a = chroma * Math.cos(angle);
-    const b = chroma * Math.sin(angle);
-    const l = (lightness + 0.3963377774 * a + 0.2158037573 * b) ** 3;
-    const m = (lightness - 0.1055613458 * a - 0.0638541728 * b) ** 3;
-    const s = (lightness - 0.0894841775 * a - 1.291485548 * b) ** 3;
-    const red = 4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
-    const green = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
-    const blue = -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s;
-    return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
-  }
-
-  const rgb = color.startsWith("rgb(")
-    ? channels.map(channel => channel / 255)
-    : color.startsWith("color(srgb ")
-      ? channels
-      : undefined;
-  if (rgb) {
-    const [red, green, blue] = rgb.map(channel =>
-      channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4,
-    );
-    return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
-  }
-
-  throw new Error(`Unsupported computed color syntax: ${color}`);
-};
-
-const contrastRatio = (foreground: string, background: string) => {
-  const lighter = Math.max(
-    relativeLuminance(foreground),
-    relativeLuminance(background),
-  );
-  const darker = Math.min(
-    relativeLuminance(foreground),
-    relativeLuminance(background),
-  );
-  return (lighter + 0.05) / (darker + 0.05);
-};
+import { contrastRatio, readComputedColor } from "../fixtures/contrast";
 
 test.describe("FIG. 3 MyUI index plate", () => {
   test("states only that custom React components sit inside Ellucian Experience", async ({
@@ -121,16 +73,10 @@ test.describe("FIG. 3 MyUI index plate", () => {
 
     await expect(plate).toBeVisible();
     const readColors = async () => ({
-      ground: await page
-        .locator("body")
-        .evaluate(element => getComputedStyle(element).backgroundColor),
-      label: await plate
-        .locator(".fig-box-label")
-        .evaluate(element => getComputedStyle(element).fill),
-      sublabel: await plate
-        .locator(".fig-box-sub")
-        .evaluate(element => getComputedStyle(element).fill),
-      stroke: await shell.evaluate(element => getComputedStyle(element).stroke),
+      ground: await readComputedColor(page.locator("body"), "backgroundColor"),
+      label: await readComputedColor(plate.locator(".fig-box-label"), "fill"),
+      sublabel: await readComputedColor(plate.locator(".fig-box-sub"), "fill"),
+      stroke: await readComputedColor(shell, "stroke"),
       strokeWidth: await shell.evaluate(element =>
         Number.parseFloat(getComputedStyle(element).strokeWidth),
       ),

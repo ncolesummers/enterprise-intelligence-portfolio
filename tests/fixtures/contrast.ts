@@ -3,14 +3,16 @@ import { expect, type Locator } from "@playwright/test";
 /**
  * Contrast math for the theme assertions.
  *
- * `myui-case-study` and `social-icons-accessibility` migrated off their local
- * copies when the intermittent contrast failure was traced here — their copies
- * were the ones that threw. Four specs still carry their own:
- * `myui-index-plate`, `uidaho-index-plate`, `profile-extractor-index-plate`,
- * and `mikrotik-case-study`. Those read `fill` and `stroke` off SVG rather than
- * colours across a theme switch, so they have not been seen to lose the race —
- * but they are exposed to the same one, and should adopt `readComputedColor`
- * whenever they are being read for another reason.
+ * The single home for this. Six specs used to carry their own copy, which is how
+ * a fixed parser bug stayed live in five places: they all predated the shared
+ * fixture and none of them learned that an unresolved colour is a thing that
+ * happens. They now import from here, so a gap closed once is closed everywhere.
+ *
+ * Two ways to read a colour, and the difference matters. `readComputedColor` is
+ * for a single value. `readResolved` wraps a read that returns several at once,
+ * so the set is consistent with itself — polling each colour separately can
+ * straddle a medium switch and measure a paper foreground against a blueprint
+ * ground, which is a wrong answer rather than a flaky one.
  *
  * Computed colors arrive in whatever syntax the browser chooses to serialize,
  * which is why every branch below exists.
@@ -69,6 +71,30 @@ export const readComputedColor = async (
     })
     .toBe(false);
   return color;
+};
+
+/**
+ * The same retry for a read that returns several colours at once.
+ *
+ * A spec that gathers a whole set — ground, labels, and every stroke on a plate
+ * — wants one poll around the set rather than one per colour, so the set is
+ * consistent with itself: polling each colour separately can straddle a theme
+ * switch and compare a paper label against a blueprint ground.
+ *
+ * `colors` names which strings in the result are colours to check.
+ */
+export const readResolved = async <T>(
+  read: () => Promise<T>,
+  colors: (value: T) => string[],
+) => {
+  let value!: T;
+  await expect
+    .poll(async () => {
+      value = await read();
+      return colors(value).some(isUnresolvedColor);
+    })
+    .toBe(false);
+  return value;
 };
 
 export const relativeLuminance = (color: string) => {
