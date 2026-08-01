@@ -1,6 +1,14 @@
 # Redesign: The Figure Sheet
 
-Working plan for the visual replacement on `feat/figure-sheet-redesign`.
+**Status: closed.** Phases 1–5 all shipped; the last landed 2026-07-30. This is
+a record of how the visual replacement was decided and executed, not a work
+order. It is retained rather than deleted because the Open items section at the
+bottom still holds live commitments — the dependency audit, the unpinned pnpm
+version, and `ci.yml` not dispatching in GitHub Actions. Those are the reason
+this file is here.
+
+Originally the working plan for the visual replacement on
+`feat/figure-sheet-redesign`.
 
 **Authorities:** PRODUCT.md (product truth), DESIGN.md (visual system). This file carries only the plan and the surface strategy. Where they disagree with this file, they win.
 
