@@ -6,11 +6,19 @@ export interface RuntimeHealth {
   sameOriginFailures: string[];
 }
 
+// Engines disagree on how they render the status text in this message:
+// Chromium and Firefox leave the parentheses empty, WebKit fills in the reason
+// phrase ("403 (Forbidden)"). Match the shape rather than one engine's exact
+// wording, or the allowlist silently stops applying on WebKit.
+//
+// Ignoring every 403 here is safe because it only suppresses console noise.
+// A same-origin 403 is still caught independently by the response handler in
+// observeRuntimeHealth and surfaces as a sameOriginFailure.
+const IGNORABLE_EXTERNAL_403 =
+  /^Failed to load resource: the server responded with a status of 403 \(.*\)$/;
+
 export function isIgnorableExternalResourceConsoleError(text: string) {
-  return (
-    text ===
-    "Failed to load resource: the server responded with a status of 403 ()"
-  );
+  return IGNORABLE_EXTERNAL_403.test(text);
 }
 
 export function observeRuntimeHealth(
