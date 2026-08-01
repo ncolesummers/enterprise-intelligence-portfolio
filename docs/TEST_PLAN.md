@@ -9,10 +9,15 @@ are the contracts under test.
 
 ## End-to-End Coverage
 
-Playwright runs against five configurations:
+Playwright runs functional suites against five configurations:
 
 - Chromium, Firefox, and WebKit desktop browsers.
 - Mobile Chrome and Mobile Safari device profiles.
+
+A sixth, focused `axe-chromium` project runs only the automated WCAG gate on
+desktop Chromium. The other five projects exclude that spec, so each
+representative state is scanned once in PAPER and once in BLUEPRINT instead of
+being multiplied across the browser and viewport matrix.
 
 Current suites cover:
 
@@ -23,6 +28,13 @@ Current suites cover:
   viewport.
 - Scroll-driven figures: which parts a scroll position exposes, which shown part
   pointing reads, and that neither input does the other's job.
+- Zero-tolerance axe scans for WCAG 2.1 A/AA across the complete homepage, the
+  scoped MyUI FIG. 3 cell, the Loopworks case study, the not-found sheet, and the
+  exported root loading boundary component in the live application chrome.
+  These supplement rather than replace the semantic, keyboard, reduced-motion,
+  and computed-contrast contracts above. Current routes are all statically
+  prerendered and do not suspend, so the loading scan validates the exact
+  component output without claiming router-integration coverage.
 
 Two hazards are worth knowing before adding to the scroll-driven suites, because
 both produce failures that look like product bugs and are not:
@@ -115,6 +127,9 @@ pnpm test:e2e
 pnpm exec playwright test tests/e2e/contact-link.spec.ts
 pnpm exec playwright test tests/e2e/contact-link.spec.ts --project=chromium
 
+# Focused automated WCAG 2.1 A/AA gate
+pnpm exec playwright test tests/e2e/axe-accessibility.spec.ts --project=axe-chromium --retries=0
+
 # Concurrency diagnosis; repeat from a fresh server and keep retries disabled
 CI=true pnpm exec playwright test --workers=2 --retries=0
 CI=true pnpm exec playwright test --workers=4 --retries=0
@@ -153,5 +168,4 @@ form integration, scheduled email-delivery test, or third-party form endpoint.
 ## Planned Improvements
 
 - Automated visual regression coverage.
-- Automated WCAG checks with axe-playwright.
 - Lighthouse CI for performance budgets.
