@@ -69,7 +69,7 @@ const figures: readonly Figure[] = [
     href: "/projects/profile-extractor",
     plate: <PlateProfileExtractor />,
     plateDescription:
-      "Source pages pass through a LangGraph extraction step into structured profiles, followed by verification. The research spike asked a feasibility question and checked the answer.",
+      "Source pages pass through a LangGraph extraction step into structured profiles, followed by verification against the source. The research spike asked a feasibility question and checked the output.",
   },
   {
     numeral: 5,
