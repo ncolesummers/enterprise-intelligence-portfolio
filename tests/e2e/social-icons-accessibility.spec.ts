@@ -1,6 +1,6 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
-import { contrastRatio, readResolved } from "../fixtures/contrast";
+import { contrastRatio, readSettled } from "../fixtures/contrast";
 import {
   expectReducedMotionTransition,
   expectRuntimeHealthClean,
@@ -80,14 +80,15 @@ async function expectSocialContract(
  * references are sampled after and come back blueprint chalk. Chalk on paper is
  * 1.1:1, so the assertion fails loudly on a pair that never existed on screen.
  * A stale colour is fully resolved, so polling for resolution cannot catch it —
- * only sampling the set together can, which is what `readResolved` is for.
+ * only sampling the set together and waiting for it to settle can, which is
+ * what `readSettled` is for.
  *
  * Selected by `aria-label` inside the evaluate because a Playwright locator
  * cannot cross into it. That is still name-based selection, not DOM shape.
  */
 async function expectSocialContrast(page: Page, surfaces: Locator[]) {
   for (const surface of surfaces) {
-    const sample = await readResolved(
+    const sample = await readSettled(
       () =>
         surface.evaluate(
           (root, names) => ({

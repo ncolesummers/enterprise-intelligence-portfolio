@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { contrastRatio, readComputedColor } from "../fixtures/contrast";
+import { contrastRatio, readSettled } from "../fixtures/contrast";
 import { isIgnorableExternalResourceConsoleError } from "../fixtures/runtime-health";
 
 const route = "/projects/myui";
@@ -195,20 +195,20 @@ test.describe("MyUI case study", () => {
       );
       expect(transitionDuration).toBeLessThanOrEqual(0.001);
 
-      const readContrast = async () => ({
-        background: await readComputedColor(
-          page.locator("body"),
-          "backgroundColor",
-        ),
-        body: await readComputedColor(
-          page
-            .getByTestId("case-study-section")
-            .first()
-            .locator(".type-body")
-            .first(),
-          "color",
-        ),
-      });
+      const readContrast = () =>
+        readSettled(
+          () =>
+            page.locator("body").evaluate(root => {
+              const bodyCopy = root.querySelector(
+                '[data-testid="case-study-section"] .type-body',
+              );
+              return {
+                background: getComputedStyle(root).backgroundColor,
+                body: bodyCopy ? getComputedStyle(bodyCopy).color : "",
+              };
+            }),
+          value => [value.background, value.body],
+        );
 
       await expect(page.locator("html")).not.toHaveClass(/dark/);
       const paper = await readContrast();

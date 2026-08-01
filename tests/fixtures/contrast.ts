@@ -8,11 +8,12 @@ import { expect, type Locator } from "@playwright/test";
  * fixture and none of them learned that an unresolved colour is a thing that
  * happens. They now import from here, so a gap closed once is closed everywhere.
  *
- * Two ways to read a colour, and the difference matters. `readComputedColor` is
- * for a single value. `readResolved` wraps a read that returns several at once,
- * so the set is consistent with itself — polling each colour separately can
- * straddle a medium switch and measure a paper foreground against a blueprint
- * ground, which is a wrong answer rather than a flaky one.
+ * Three ways to read a colour, and the difference matters. `readComputedColor`
+ * is for a single value. `readResolved` wraps a read that returns several at
+ * once, so the set is consistent with itself — polling each colour separately
+ * can straddle a medium switch and measure a paper foreground against a
+ * blueprint ground, which is a wrong answer rather than a flaky one.
+ * `readSettled` adds a stability check for sets read after a medium switch.
  *
  * Computed colors arrive in whatever syntax the browser chooses to serialize,
  * which is why every branch below exists.
@@ -94,6 +95,40 @@ export const readResolved = async <T>(
       return colors(value).some(isUnresolvedColor);
     })
     .toBe(false);
+  return value;
+};
+
+/**
+ * Read a resolved colour set after a medium switch has stopped recalculating.
+ *
+ * Firefox can expose an intermediate style snapshot under parallel load even
+ * when the whole set is read in one evaluate. Requiring two consecutive
+ * identical sets guards against sampling that transition. Keep this separate
+ * from `readResolved`: callers that intentionally change focus while reading
+ * do not have a stable set.
+ */
+export const readSettled = async <T>(
+  read: () => Promise<T>,
+  colors: (value: T) => string[],
+) => {
+  let value!: T;
+  let previousColors: string[] | undefined;
+  await expect
+    .poll(async () => {
+      value = await read();
+      const currentColors = colors(value);
+      if (currentColors.some(isUnresolvedColor)) {
+        previousColors = undefined;
+        return false;
+      }
+
+      const isStable =
+        previousColors?.length === currentColors.length &&
+        previousColors.every((color, index) => color === currentColors[index]);
+      previousColors = currentColors;
+      return isStable;
+    })
+    .toBe(true);
   return value;
 };
 
