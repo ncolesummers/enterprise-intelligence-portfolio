@@ -17,7 +17,7 @@ test.describe("FIG. 4 AI data extraction research index plate", () => {
     ).toBeVisible();
     await expect(
       semanticFigure.getByText(
-        "Source pages pass through a LangGraph extraction step into structured profiles, followed by verification. The research spike asked a feasibility question and checked the answer.",
+        "Source pages pass through a LangGraph extraction step into structured profiles, followed by verification against the source. The research spike asked a feasibility question and checked the output.",
         { exact: true },
       ),
     ).toBeAttached();
@@ -35,11 +35,11 @@ test.describe("FIG. 4 AI data extraction research index plate", () => {
       "Source",
       "pages",
       "LangGraph",
-      "extraction pass",
+      "extraction",
       "Structured",
       "profiles",
       "Verification",
-      "checked answer",
+      "source check",
     ]);
 
     for (const part of [
@@ -77,6 +77,74 @@ test.describe("FIG. 4 AI data extraction research index plate", () => {
     expect(allPlateText).not.toMatch(
       /name|email|phone|student|faculty|staff|production|scale|deployment/i,
     );
+  });
+
+  test("keeps every box description clear of its enclosing rule", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready.then(() => undefined));
+
+    const figure = page
+      .locator("article")
+      .filter({ has: page.getByText("FIG. 4", { exact: true }) });
+    const plate = figure.locator("svg.fig-plate");
+    const boxes = await plate.locator("rect.fig-box").evaluateAll(rects =>
+      rects.map(rect => {
+        const rule = rect.getBoundingClientRect();
+        const halfStroke =
+          Number.parseFloat(getComputedStyle(rect).strokeWidth) / 2;
+        const label = rect.nextElementSibling;
+        const description =
+          label?.nextElementSibling as SVGGraphicsElement | null;
+
+        if (
+          !label?.matches("text.fig-box-label") ||
+          !description?.matches("text.fig-box-sub")
+        ) {
+          throw new Error(
+            "Each FIG. 4 box must be followed by its label and description",
+          );
+        }
+
+        const text = description.getBoundingClientRect();
+
+        return {
+          part: rect.getAttribute("data-part"),
+          halfStroke,
+          rule: {
+            left: rule.left,
+            right: rule.right,
+            top: rule.top,
+            bottom: rule.bottom,
+          },
+          text: {
+            value: description.textContent,
+            left: text.left,
+            right: text.right,
+            top: text.top,
+            bottom: text.bottom,
+          },
+        };
+      }),
+    );
+
+    expect(boxes).toHaveLength(4);
+    for (const box of boxes) {
+      expect
+        .soft(box.text.left, `${box.part}: ${box.text.value} left`)
+        .toBeGreaterThanOrEqual(box.rule.left + box.halfStroke);
+      expect
+        .soft(box.text.right, `${box.part}: ${box.text.value} right`)
+        .toBeLessThanOrEqual(box.rule.right - box.halfStroke);
+      expect
+        .soft(box.text.top, `${box.part}: ${box.text.value} top`)
+        .toBeGreaterThanOrEqual(box.rule.top + box.halfStroke);
+      expect
+        .soft(box.text.bottom, `${box.part}: ${box.text.value} bottom`)
+        .toBeLessThanOrEqual(box.rule.bottom - box.halfStroke);
+    }
   });
 
   test("uses AA-contrast text and reproducible line weights in both media", async ({

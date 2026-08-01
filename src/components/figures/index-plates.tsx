@@ -144,7 +144,7 @@ export const PlateProfileExtractor = () => (
       LangGraph
     </text>
     <text className="fig-box-sub" x={118} y={104}>
-      extraction pass
+      extraction
     </text>
 
     <line className="fig-flow" x1={152} y1={91} x2={159} y2={91} />
@@ -180,7 +180,7 @@ export const PlateProfileExtractor = () => (
       Verification
     </text>
     <text className="fig-box-sub" x={275} y={104}>
-      checked answer
+      source check
     </text>
   </PlateFrame>
 );

@@ -19,9 +19,9 @@ not a diagram of a production system and does not reproduce profile records.
 | Verification | The case study documents a validation step after extraction; `docs/REDESIGN_PLAN.md` requires a verification step and a checked answer. |
 
 The plate orders these parts exactly as the brief states: source pages →
-LangGraph extraction → structured profiles → verification. The words “checked
-answer” state that the question was evaluated; they do not publish a metric or
-claim a production outcome.
+LangGraph extraction → structured profiles → verification. The words “source
+check” state what the verification pass compared the output against; they do
+not publish a metric or claim a production outcome.
 
 ## Deliberately not drawn
 
