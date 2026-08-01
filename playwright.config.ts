@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const axeAccessibilitySpec = /axe-accessibility\.spec\.ts/;
+
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
@@ -28,27 +30,37 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
+      testIgnore: axeAccessibilitySpec,
       use: { ...devices["Desktop Chrome"] },
     },
 
     {
       name: "firefox",
+      testIgnore: axeAccessibilitySpec,
       use: { ...devices["Desktop Firefox"] },
     },
 
     {
       name: "webkit",
+      testIgnore: axeAccessibilitySpec,
       use: { ...devices["Desktop Safari"] },
     },
 
     /* Test against mobile viewports. */
     {
       name: "Mobile Chrome",
+      testIgnore: axeAccessibilitySpec,
       use: { ...devices["Pixel 5"] },
     },
     {
       name: "Mobile Safari",
+      testIgnore: axeAccessibilitySpec,
       use: { ...devices["iPhone 12"] },
+    },
+    {
+      name: "axe-chromium",
+      testMatch: axeAccessibilitySpec,
+      use: { ...devices["Desktop Chrome"] },
     },
   ],
 
