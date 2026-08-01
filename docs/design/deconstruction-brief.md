@@ -1,6 +1,13 @@
 # Brief: the Loopworks deconstruction (Phase 4b)
 
-Working brief for the scroll-driven exploded assembly on `/projects/loopworks`.
+**Status: closed.** Phase 4b shipped as
+`src/components/figures/delivery-loop-deconstruction.tsx`, covered by
+`tests/e2e/loopworks-deconstruction.spec.ts`. Retained as the reasoning behind
+the deconstruction — particularly why the pinned band retreats to `lg` and
+wider — not as work still to do.
+
+Originally the working brief for the scroll-driven exploded assembly on
+`/projects/loopworks`.
 
 **Authorities:** PRODUCT.md, DESIGN.md, `docs/REDESIGN_PLAN.md`. This file carries
 only the shape of 4b. Where they disagree with it, they win.

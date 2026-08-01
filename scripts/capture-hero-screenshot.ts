@@ -1,6 +1,6 @@
 /**
  * Capture hero section screenshot from uidaho.edu explore page
- * For use as project card preview image on homepage
+ * Output lands in src/assets/ for use in the uidaho-website case study
  */
 
 import { chromium, Browser } from "@playwright/test";
