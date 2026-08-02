@@ -158,6 +158,13 @@ export default function AboutPage() {
                 them off and no urgent path around them.
               </p>
               <p>
+                When the work can be public, the plan should be public too.
+                Publishing intent before implementation exposes assumptions and
+                tradeoffs while they can still be challenged. Keeping the
+                decisions and the result inspectable creates a record that is
+                stronger than a claim made after the fact.
+              </p>
+              <p>
                 I believe in blameless postmortems for the same reason. A system
                 that punishes the person who found the failure stops being told
                 about failures.
