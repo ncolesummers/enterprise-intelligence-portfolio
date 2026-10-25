@@ -11,6 +11,26 @@ const nextConfig: NextConfig = {
         destination: "/projects/loopworks",
         permanent: true,
       },
+      // Short links to the AI Symposium companion artifact. Temporary (307) so
+      // the target can move later. Trailing-slash variants reach
+      // these via Next's built-in 308 to the slashless path.
+      {
+        source: "/symposium",
+        destination: "https://claude.ai/artifact/7gmuhExTHzYgXrMZuVp1KR",
+        permanent: false,
+      },
+      {
+        source: "/symposium/delegate",
+        destination:
+          "https://claude.ai/artifact/7gmuhExTHzYgXrMZuVp1KR#delegate",
+        permanent: false,
+      },
+      {
+        source: "/symposium/evaluate",
+        destination:
+          "https://claude.ai/artifact/7gmuhExTHzYgXrMZuVp1KR#evaluate",
+        permanent: false,
+      },
     ];
   },
   images: {
