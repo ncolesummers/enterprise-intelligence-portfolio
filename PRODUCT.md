@@ -50,6 +50,7 @@ The site itself is a work sample. It is built with AI-assisted development, so i
 **Current surfaces**
 
 - Home (`/`) — opening statement, system figure, and project figure index.
+  - Selected talks (`#talks`): a ruled schedule of two University of Idaho AI Symposium sessions, each linked to its slides, companion material, and, where one exists, its repository.
 - About (`/about`) — professional journey, focus areas, philosophy, certifications, personal interests.
 - Four project case studies: `/projects/uidaho-website`, `/projects/profile-extractor`, `/projects/myui`, `/projects/mikrotik-config-gen`.
 
@@ -87,12 +88,13 @@ The site itself is a work sample. It is built with AI-assisted development, so i
 
 ## Evidence on Hand
 
-All four of these are real, checkable, and cleared for use:
+All five of these are real, checkable, and cleared for use:
 
 - **Loopworks** (`github.com/ncolesummers/loopworks`) — public, TypeScript, actively developed. An agentic software factory portal where GitHub Issues are the source of truth for roadmap, planning, milestones, decisions, and execution state, and Vercel is the visibility surface for previews, deployments, and build status. Named execution loops include agent-ready, development, and research. Stack: Next.js App Router, Bun, shadcn/ui, Auth.js GitHub SSO, Postgres + Drizzle, Vitest/Playwright/Storybook, Pino, with Eve, Vercel Workflows, Vercel Sandbox, and AI Gateway integration points. **This system's real structure is documented and inspectable, which makes it legitimate material for explanatory design rather than decoration.**
 - **Other public GitHub repositories** — the ADLC reference architecture (`github.com/ncolesummers/enterprise-agent-development-lifecycle`) and this portfolio's own source. Code is the primary artifact; visitors are expected to click through and read it.
 - **Live production systems** — the University of Idaho website and the MyUI student dashboard, publicly reachable and linkable, subject to the employer boundary below.
 - **Written architecture and research** — the ADLC architecture (including its diagram, `src/assets/adlc-architecture.svg`) and the AI profile-extraction research spike. Substantive documents that show reasoning, not just outcomes.
+- **Talks** at the University of Idaho AI Symposium, 29 October 2026, both 35-minute workshops. "Testing for Failure: Evaluating AI Research Workflows with Inspect" has a public eval repository behind it (`github.com/ncolesummers/symposium-inspect-eval`), which is evidence of building and testing agent systems, not only using them. "Divide and Delegate: A Practical Introduction to AI Subagents" is a no-tools workshop. Both decks are shared publicly with their speaker notes removed and are reached through first-party short links (ADR 0005). No attendance figures, audience quotes, or recordings exist.
 
 **Inbox Idaho — forthcoming, no assets.** An Outlook add-in that uses retrieval-augmented generation to draft email replies to incoming questions. The initial pilot covers financial aid policy and support at the University of Idaho. It has not launched, and **no screenshots, demos, metrics, or interface imagery exist or may be implied.** Any treatment on the site must be honest about it being forthcoming, and must be designed to look intentional rather than like a missing asset. Do not describe outcomes, accuracy, adoption, or time savings — none have been measured.
 
