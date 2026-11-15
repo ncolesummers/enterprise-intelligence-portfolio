@@ -164,7 +164,7 @@ The built vocabulary, as of the close of Phase 5. Anything not here does not exi
 
 **Sheet chrome** — `SheetFrame` (border rule, margin rule, centering marks; fixed, decorative, pointer-transparent), `TitleBlock` (the persistent lower band: mark, drawn-by, off-sheet references, sheet name, primary navigation, medium control).
 
-**Sheet content** — `Statement` (the index sheet's opening claim), `FigureIndex` and its `Cell` (the scannable plate grid; the whole cell is one link named by the project), `References` (the index sheet's foot: each off-sheet destination named with its address, and on a phone the only route to them).
+**Sheet content** — `Statement` (the index sheet's opening claim), `FigureIndex` and its `Cell` (the scannable plate grid; the whole cell is one link named by the project), `References` (the index sheet's foot: each off-sheet destination named with its address, and on a phone the only route to them), `SelectedTalks` (the index sheet's talks schedule, the structural sibling of `References` and not a second figure index: ruled rows keyed by a `time` date column, no numerals or imagery; the title is plain text and each material is its own `type-label` link with an arrow cue, never a ruled tag box, taking the annotation color only on hover and focus).
 
 **Case study** — `CaseStudyHeader` (way back, figure numeral, title, summary, and an optional row of actions), `CaseStudySection` (ruled heading, optional per-section figure, optional `detailView` mapping), `EvidencePanel` / `EvidenceList` / `EvidenceItem` (the ruled panel and its divided list), `LiteralCode` (an identifier copied verbatim out of source). All five case studies build from these; none declares a private copy.
 

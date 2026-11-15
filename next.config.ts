@@ -31,6 +31,20 @@ const nextConfig: NextConfig = {
           "https://claude.ai/artifact/7gmuhExTHzYgXrMZuVp1KR#evaluate",
         permanent: false,
       },
+      // Short links to the two symposium decks, linked from the index sheet's
+      // talks schedule. Temporary for the same reason as above: a deck may
+      // later move to a hosted PDF without changing the published link. See
+      // ADR 0005.
+      {
+        source: "/symposium/evaluate/slides",
+        destination: "https://claude.ai/artifact/4KPbXSGoGRzU6gneb8guMm",
+        permanent: false,
+      },
+      {
+        source: "/symposium/delegate/slides",
+        destination: "https://claude.ai/artifact/GTmfzxdw7PemGBBF3B7usF",
+        permanent: false,
+      },
     ];
   },
   images: {
