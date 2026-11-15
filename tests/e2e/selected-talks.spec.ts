@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { readSettled } from "../fixtures/contrast";
+
 // The fixed order and exact content from issue #54. A new row is one entry here
 // and one in the component.
 const talks = [
@@ -92,25 +94,41 @@ test.describe("selected talks schedule", () => {
     await expect(section).toBeVisible();
     await page.mouse.move(0, 0);
 
-    const annotated = await section.evaluate(root => {
-      const probe = document.createElement("span");
-      probe.style.color = "var(--annotation)";
-      root.append(probe);
-      const annotation = getComputedStyle(probe).color;
-      probe.remove();
+    // One evaluate, so the probes and every element come from a single style
+    // recalculation, settled across two reads (docs/TEST_PLAN.md hazards).
+    const { annotation, line, annotated } = await readSettled(
+      () =>
+        section.evaluate(root => {
+          const probe = (color: string) => {
+            const span = document.createElement("span");
+            span.style.color = color;
+            root.append(span);
+            const value = getComputedStyle(span).color;
+            span.remove();
+            return value;
+          };
+          const annotation = probe("var(--annotation)");
+          const line = probe("var(--line)");
 
-      return [...root.querySelectorAll("*")]
-        .filter(element => {
-          const style = getComputedStyle(element);
-          return [
-            style.color,
-            style.borderTopColor,
-            style.borderBottomColor,
-          ].includes(annotation);
-        })
-        .map(element => element.outerHTML.slice(0, 80));
-    });
+          const annotated = [...root.querySelectorAll("*")]
+            .filter(element => {
+              const style = getComputedStyle(element);
+              return [
+                style.color,
+                style.borderTopColor,
+                style.borderBottomColor,
+              ].includes(annotation);
+            })
+            .map(element => element.outerHTML.slice(0, 80));
 
+          return { annotation, line, annotated };
+        }),
+      value => [value.annotation, value.line],
+    );
+
+    // An unresolved token would make both probes inherit the same ink, and
+    // every element would then match or none would, by accident.
+    expect(annotation).not.toBe(line);
     expect(annotated).toEqual([]);
   });
 });
